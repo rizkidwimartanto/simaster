@@ -1,0 +1,21 @@
+
+.image-login{
+    background-image: url('../img/login.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.image-register{
+    background-image: url('../img/register.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.bg-user{
+    background-color: #08B1F0;
+    font-family: 'Inter', sans-serif;
+}
+.h1-user{
+    font-weight: 900;
+}
+.edit-form-text{
+    font-weight: 400;
+}
