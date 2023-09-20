@@ -1,21 +1,212 @@
-
-.image-login{
-    background-image: url('../img/login.jpg');
-    background-size: cover;
-    background-position: center;
+:root {
+    --primary: #FFF200;
+    --bg: #08B1F0;
 }
-.image-register{
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+.image-login {
     background-image: url('../img/register.jpg');
     background-size: cover;
     background-position: center;
+    height: 600px;
 }
-.bg-user{
-    background-color: #08B1F0;
+
+.bg-user, .body-beranda {
+    background-color: var(--bg);
     font-family: 'Inter', sans-serif;
 }
-.h1-user{
+
+.h1-user {
     font-weight: 900;
 }
-.edit-form-text{
+
+.edit-form-text {
     font-weight: 400;
 }
+
+.card-login {
+    height: 600px;
+}
+input::placeholder {
+    font-size: 14px;
+}
+/*! Navbar Start */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 7%;
+    background-color: var(--primary);
+    border-bottom: 1px solid #866543;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  
+  .navbar .menu-navbar {
+    display: flex;
+  }
+  
+  .navbar .navbar-logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #0C356A;
+    padding-right: 4rem;
+    margin-top: 5px;
+  }
+  
+  .navbar .navbar-logo strong {
+    color: #C70039;
+  }
+  
+  .navbar .navbar-nav a {
+    color: #0C356A;
+    display: inline-block;
+    font-size: 1rem;
+    margin: 0 1rem;
+    margin-top: 0.7rem;
+    font-weight: 700;
+  }
+  
+  .navbar .navbar-nav a:hover {
+    color: #C70039;
+  }
+  
+  .navbar .navbar-nav a::after {
+    content: "";
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.1rem solid #C70039;
+    transform: scaleX(0);
+    transition: 0.2s linear;
+  }
+  
+  .navbar .navbar-nav a:hover::after {
+    transform: scaleX(0.5);
+  }
+  
+  .navbar .navbar-extra a {
+    color: #0C356A;
+    margin: 0 0.5rem;
+  }
+  
+  .navbar .navbar-extra a:hover {
+    color: #C70039;
+  }
+  
+  #hamburger-menu {
+    display: none;
+  }
+  
+  /* ! Footer */
+  footer {
+    background-color: var(--primary);
+    text-align: center;
+    padding: 1rem 0 3rem;
+    margin-top: 3rem;
+    font-size: 1.5rem;
+  }
+  
+  footer .socials {
+    padding: 1rem 0;
+  }
+  
+  footer .socials a {
+    color: #0C356A;
+    margin: 1rem;
+  }
+  
+  footer .socials a:hover,
+  footer .links a:hover {
+    color: var(--bg);
+  }
+  
+  footer .links {
+    margin-bottom: 1.6rem;
+  }
+  
+  footer .links a {
+    color: #0C356A;
+    padding: 0.7rem 1rem;
+  }
+  
+  footer .credit {
+    font-size: 1rem;
+  }
+  
+  footer .credit a {
+    color: var(--bg);
+    font-weight: 700;
+  }
+  
+  /*! Media Queries */
+  
+  /*! Laptop */
+  @media (max-width: 1366px) {
+    html {
+      font-size: 70%;
+    }
+  }
+  
+  /*! Tablet */
+  @media (max-width: 780px) {
+    html {
+      font-size: 62.5%;
+    }
+  
+    /*! Navbar */
+    #hamburger-menu {
+      display: inline-block;
+    }
+  
+    .navbar .navbar-nav {
+      position: absolute;
+      top: 100%;
+      right: -100%;
+      background-color: #fff;
+      width: 20rem;
+      height: 100vh;
+      transition: 0.9s;
+    }
+  
+    .navbar .navbar-nav.active {
+      right: 0;
+    }
+  
+    .navbar .navbar-nav a {
+      color: var(--bg);
+      display: block;
+      margin: 1.5rem;
+      padding: 0.5rem;
+      font-size: 2rem;
+    }
+  
+    .navbar .navbar-nav a::after {
+      transform-origin: 0 0;
+    }
+  
+    .navbar .navbar-nav a:hover::after {
+      transform: scaleX(0.5);
+    }
+  }
+  
+  /*! Mobile */
+  @media (max-width: 450px) {
+    html {
+      font-size: 55%;
+    }
+  }
