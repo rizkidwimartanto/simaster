@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login', ['title' => 'Login']);
 });
-// Route::get('/registrasi', function(){
-//     return view('register', ['title' => 'Registrasi']);
-// });
+Route::get('/beranda', function () {
+    return view('beranda/index', ['title' => 'Beranda']);
+});
