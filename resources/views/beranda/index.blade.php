@@ -1,47 +1,33 @@
-@extends('layout/templateberanda');
+@extends('layout/templateberanda')
 @section('content')
-    <!-- Navbar Start -->
-    <nav class="navbar">
-        <div class="menu-navbar">
-            <a href="#" class="navbar-logo">Inovasi UP3<strong>Demak</strong></a>
-            <div class="navbar-nav">
-                <a href="#home">Peta Pelanggan</a>
-                <a href="#about">Peta Padam</a>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="assets/img/Logo_PLN.png" alt="Logo" width="40" height="40" class="d-inline-block">
+                Inovasi <strong>UP3 Demak</strong>
+              </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Peta Pelanggan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Peta Padam</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Peta Padam</a>
+                    </li>
+                </ul>
+                <div class="navbar-extra">
+                    <a href="#" class="nav-extra" id="search"><i class="fa-solid fa-message"></i> Pesan</a>
+                    <a href="#" class="nav-extra" id="shopping-cart"><i class="fa-solid fa-bell"></i> Notifikasi</a>
+                    <a href="/" class="nav-extra" id="shopping-cart"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                </div>
             </div>
         </div>
-        <div class="navbar-extra">
-            <a href="#" id="search"><i data-feather="inbox"></i></a>
-            <a href="#" id="shopping-cart"><i data-feather="bell"></i></a>
-            <button class="button-logout">Logout</button>
-            <a href="#" id="hamburger-menu"><i data-feather="menu"></i></a>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-    <div id="map"></div>
-    <!-- footer start -->
-
-    {{-- <footer>
-        <div class="row">
-            <div class="socials">
-                <a href="#"><i data-feather="instagram"></i></a>
-                <a href="#"><i data-feather="twitter"></i></a>
-                <a href="#"><i data-feather="facebook"></i></a>
-            </div>
-
-            <div class="links">
-                <a href="#home">Home</a>
-                <a href="#about">Tentang Kami</a>
-                <a href="#menu">Menu</a>
-                <a href="#contact">Kontak Kami</a>
-            </div>
-
-            <div class="credit">
-                <p>Created by <a href="">Rizki Dwi Martanto</a> | &copy; 2023.</p>
-            </div>
-        </div>
-    </footer> --}}
-
-    <!-- footer end -->
-
-    <!-- Landing Page End -->
+    </nav>      
 @endsection
