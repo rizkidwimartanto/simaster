@@ -1,17 +1,13 @@
-<<<<<<< HEAD
-
+:root {
+    --primary: #FFF200;
+    --bg: #08B1F0;
+}
 .image-login{
     background-image: url('../img/login.jpg');
     background-size: cover;
     background-position: center;
     height: 480px;
-=======
-:root {
-    --primary: #FFF200;
-    --bg: #08B1F0;
->>>>>>> 525712d154c7011381b9c8424e16f9de6557491b
 }
-
 html {
     scroll-behavior: smooth;
 }
@@ -25,13 +21,6 @@ html {
     text-decoration: none;
 }
 
-.image-login {
-    background-image: url('../img/register.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 600px;
-}
-
 .bg-user, .body-beranda {
     background-color: var(--bg);
     font-family: 'Inter', sans-serif;
@@ -39,17 +28,17 @@ html {
 
 .h1-user {
     font-weight: 900;
+    font-size: 25px;
 }
 
 .edit-form-text {
     font-weight: 400;
 }
-
-.card-login {
-    height: 600px;
-}
 input::placeholder {
-    font-size: 14px;
+    font-size: 10px;
+}
+a.btn-user{
+  font-size: 18px;
 }
 /*! Navbar Start */
 .navbar {
@@ -57,6 +46,7 @@ input::placeholder {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 7%;
+    padding-bottom: 1.4rem;
     background-color: var(--primary);
     border-bottom: 1px solid #866543;
     position: fixed;
@@ -71,7 +61,7 @@ input::placeholder {
   }
   
   .navbar .navbar-logo {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 900;
     color: #0C356A;
     padding-right: 4rem;
@@ -85,9 +75,9 @@ input::placeholder {
   .navbar .navbar-nav a {
     color: #0C356A;
     display: inline-block;
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin: 0 1rem;
-    margin-top: 0.7rem;
+    margin-top: 0.8rem;
     font-weight: 700;
   }
   
@@ -110,11 +100,33 @@ input::placeholder {
   
   .navbar .navbar-extra a {
     color: #0C356A;
-    margin: 0 0.5rem;
+    margin: 0.5rem;
+    position: relative;
+    top: 0.7rem;
   }
   
   .navbar .navbar-extra a:hover {
     color: #C70039;
+  }
+
+  .button-logout{
+    padding: 5px 10px;
+    border: 3px solid #C70039;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    color: black;
+    cursor: pointer;
+  }
+
+  .button-logout:hover{
+    transition-duration: 0.5s;
+    background-color: #C70039;
+    color: #fff;
+  }
+
+  #map{
+    height: 500px;
   }
   
   #hamburger-menu {
@@ -186,7 +198,7 @@ input::placeholder {
       position: absolute;
       top: 100%;
       right: -100%;
-      background-color: #fff;
+      background-color: var(--primary);
       width: 20rem;
       height: 100vh;
       transition: 0.9s;
