@@ -1,33 +1,19 @@
 @extends('layout/templateberanda')
 @section('content')
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="assets/img/Logo_PLN.png" alt="Logo" width="40" height="40" class="d-inline-block">
-                Inovasi <strong>UP3 Demak</strong>
-              </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Peta Pelanggan</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Peta Padam</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Peta Padam</a>
-                    </li>
-                </ul>
-                <div class="navbar-extra">
-                    <a href="#" class="nav-extra" id="search"><i class="fa-solid fa-message"></i> Pesan</a>
-                    <a href="#" class="nav-extra" id="shopping-cart"><i class="fa-solid fa-bell"></i> Notifikasi</a>
-                    <a href="/" class="nav-extra" id="shopping-cart"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-                </div>
-            </div>
-        </div>
-    </nav>      
+    <div id="map"></div>
+    <script>
+        var map = L.map('map').setView([-6.907715806386257, 110.65193011164361], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var marker = L.marker([-6.90774243377773, 110.65198375582506]).addTo(map);
+        var circle = L.circle([-6.90774243377773, 110.65198375582506], {
+            color: 'red',
+            fillColor: 'rgb(12, 247, 20)',
+            fillOpacity: 0.5,
+            radius: 300
+        }).addTo(map);
+        marker.bindPopup("<b>UP3 Demak</b>").openPopup();
+    </script>
 @endsection
