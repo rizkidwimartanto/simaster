@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\PetaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login', ['title' => 'Login']);
-});
-Route::get('/beranda', function () {
-    return view('beranda/index', ['title' => 'Beranda']);
-});
+Route::get('/', [UserController::class, ('index')]);
+Route::get('/beranda', [PetaController::class, ('index')]);
+Route::get('/inputpelanggan', [PetaController::class, ('input_pelanggan')]);
