@@ -13,9 +13,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Navigation - Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
+    <title>{{ $title }}</title>
+    {{-- Font Awesome Icon --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- CSS files -->
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="assets/img/Logo_PLN.png" type="image/x-icon">
     <link href="assets_template/dist/css/tabler.min.css?1684106062" rel="stylesheet" />
     <link href="assets_template/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
     <link href="assets_template/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />

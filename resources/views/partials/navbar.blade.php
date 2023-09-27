@@ -6,7 +6,7 @@
           </button>
           <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
               <a href=".">
-                  Dashboard
+                  Inovasi UP3 Demak
               </a>
           </h1>
           <div class="navbar-nav flex-row order-md-last">
@@ -176,8 +176,8 @@
           <div class="collapse navbar-collapse" id="navbar-menu">
               <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                   <ul class="navbar-nav">
-                      <li class="nav-item active">
-                          <a class="nav-link" href="assets_template/#">
+                      <li class="nav-item {{($title == 'Peta Pelanggan') ? 'active' : ''}}">
+                          <a class="nav-link" href="/beranda">
                               <span class="nav-link-title">
                                   Peta Pelanggan
                               </span>
@@ -188,7 +188,13 @@
                               <span class="nav-link-title">
                                   Peta Padam
                               </span>
-                              <span class="badge badge-sm bg-red">2</span>
+                          </a>
+                      </li>
+                      <li class="nav-item {{($title == 'Input Pelanggan') ? 'active' : ''}}">
+                          <a class="nav-link" href="/inputpelanggan">
+                              <span class="nav-link-title">
+                                  Input Pelanggan
+                              </span>
                           </a>
                       </li>
                   </ul>
