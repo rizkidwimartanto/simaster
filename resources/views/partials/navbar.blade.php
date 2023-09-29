@@ -1,6 +1,6 @@
  <nav class="navbar navbar-expand-lg">
      <div class="container">
-         <a class="navbar-brand" href="#">
+         <a class="navbar-brand" href="/beranda">
              <img src="assets/img/Logo_PLN.png" alt="Logo" width="40" height="40" class="d-inline-block">
              Inovasi <strong>UP3 Demak</strong>
          </a>
@@ -11,13 +11,13 @@
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Peta Pelanggan</a>
+                     <a class="nav-link" href="/beranda">Peta Pelanggan</a>
                  </li>
                  <li class="nav-item">
                      <a class="nav-link" href="#">Peta Padam</a>
                  </li>
                  <li class="nav-item">
-                     <a class="nav-link" href="#">Peta Padam</a>
+                     <a class="nav-link" href="/inputpelanggan">Input Pelanggan</a>
                  </li>
              </ul>
              <div class="navbar-extra">
