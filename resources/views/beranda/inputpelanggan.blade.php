@@ -9,9 +9,9 @@
         </form>
 
         <div class="col-lg-12">
-            <div class="card">
+            <div class="card p-3">
                 <div class="table-responsive">
-                    <table class="table table-vcenter card-table" id="tabel_data_pelanggan">
+                    <table class="table table-vcenter card-table table-bordered" id="tabel_data_pelanggan">
                         <thead>
                             <tr>
                                 <th>No</th>

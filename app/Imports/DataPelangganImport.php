@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\DataPelangganModel;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class DataPelangganImport implements ToModel
+class DataPelangganImport implements ToModel, WithStartRow
 {
     /**
     * @param array $row
@@ -34,5 +35,10 @@ class DataPelangganImport implements ToModel
             'penyulang' => $row[16], 
             'nama_section' => $row[17], 
         ]);
+    }
+
+    public function startRow(): int
+    {
+        return 2;
     }
 }
