@@ -15,24 +15,11 @@ class DataPelanggan extends Migration
     {
         Schema::create('data_pelanggan', function(Blueprint $table){
             $table->id();
-            $table->string('idpel');
-            $table->string('nama');
-            $table->text('alamat');
-            $table->string('unitup1');
-            $table->string('unitap');
-            $table->string('unitup');
-            $table->string('tarif');
-            $table->string('daya');
-            $table->string('kogol');
-            $table->string('fakmkwh');
-            $table->string('rpbp');
-            $table->string('rpujl');
-            $table->string('pemda');
-            $table->string('nomorkwh');
-            $table->string('statusplg');
-            $table->string('kdpembmeter');
-            $table->string('penyulang')->nullable();
-            $table->string('nama_section')->nullable();
+            $table->string('idpel')->nullable();
+            $table->string('nama')->nullable();
+            $table->text('alamat')->nullable();
+            $table->text('maps')->nullable();
+            $table->text('titik_koordinat')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
         });

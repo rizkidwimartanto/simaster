@@ -11,5 +11,5 @@ class DataPelangganModel extends Model
 
     protected $table = 'data_pelanggan';
     protected $primaryKey = 'id';
-    protected $fillable = ['idpel','nama', 'alamat', 'unitup1', 'unitap', 'unitup', 'tarif', 'daya', 'kogol', 'fakmkwh', 'rpbp', 'rpujl', 'pemda', 'nomorkwh', 'statusplg', 'kdpembmeter', 'penyulang', 'nama_section'];
+    protected $fillable = ['idpel', 'nama', 'alamat', 'maps', 'titik_koordinat'];
 }

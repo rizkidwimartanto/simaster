@@ -67,21 +67,8 @@
                                     <th>ID Pelanggan</th>
                                     <th>Nama</th>
                                     <th>Alamat</th>
-                                    <th>Unit UP1</th>
-                                    <th>Unit AP</th>
-                                    <th>Unit UP</th>
-                                    <th>Tarif</th>
-                                    <th>Daya</th>
-                                    <th>Kogol</th>
-                                    <th>Fakmkwh</th>
-                                    <th>RPBP</th>
-                                    <th>RPUJL</th>
-                                    <th>PEMDA</th>
-                                    <th>Nomor KWH</th>
-                                    <th>Status Pelanggan</th>
-                                    <th>kdpembmeter</th>
-                                    <th>Penyulang</th>
-                                    <th>Nama Section</th>
+                                    <th width="20%">Maps</th>
+                                    <th>Titik Koordinat</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,21 +91,8 @@
                                         <td>{{ $s->idpel }}</td>
                                         <td>{{ $s->nama }}</td>
                                         <td>{{ $s->alamat }}</td>
-                                        <td>{{ $s->unitup1 }}</td>
-                                        <td>{{ $s->unitap }}</td>
-                                        <td>{{ $s->unitup }}</td>
-                                        <td>{{ $s->tarif }}</td>
-                                        <td>{{ $s->daya }}</td>
-                                        <td>{{ $s->kogol }}</td>
-                                        <td>{{ $s->fakmkwh }}</td>
-                                        <td>{{ $s->rpbp }}</td>
-                                        <td>{{ $s->rpujl }}</td>
-                                        <td>{{ $s->pemda }}</td>
-                                        <td>{{ $s->nomorkwh }}</td>
-                                        <td>{{ $s->statusplg }}</td>
-                                        <td>{{ $s->kdpembmeter }}</td>
-                                        <td>{{ $s->penyulang }}</td>
-                                        <td>{{ $s->nama_section }}</td>
+                                        <td>{{ $s->maps }}</td>
+                                        <td>{{ $s->titik_koordinat }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
