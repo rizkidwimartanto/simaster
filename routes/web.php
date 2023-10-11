@@ -20,4 +20,4 @@ Route::get('/beranda', [DataPelangganController::class, ('index')]);
 Route::get('/inputpelanggan', [DataPelangganController::class, ('input_pelanggan')]);
 Route::get('/inputpelanggan/export_excel', [DataPelangganController::class, ('export_excel')]);
 Route::post('/inputpelanggan/import_excel', [DataPelangganController::class, ('import_excel')]);
-Route::get('/inputpelanggan/hapus_pelanggan/{id}', [DataPelangganController::class, ('hapusPelanggan')]);
+Route::get('/inputpelanggan/hapus_pelanggan', [DataPelangganController::class, ('hapusPelanggan')]);
