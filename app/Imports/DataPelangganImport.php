@@ -50,6 +50,6 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
     }
     public function startRow(): int
     {
-        return 2;
+        return 3;
     }
 }

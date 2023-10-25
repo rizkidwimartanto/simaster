@@ -2,7 +2,7 @@
 @section('content')
     <div id="map"></div>
     <script>
-        var map = L.map('map').setView([-6.907715806386257, 110.65193011164361], 13);
+        var map = L.map('map').setView([-6.90774243377773, 110.65198375582506], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
