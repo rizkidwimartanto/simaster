@@ -67,7 +67,7 @@
                                     <th>ID Pelanggan</th>
                                     <th>Nama</th>
                                     <th>Alamat</th>
-                                    <th width="20%">Maps</th>
+                                    <th>Maps</th>
                                     <th>Titik Koordinat</th>
                                 </tr>
                             </thead>
