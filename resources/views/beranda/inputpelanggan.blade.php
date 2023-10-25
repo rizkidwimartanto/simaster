@@ -91,14 +91,14 @@
                                         <td>{{ $s->idpel }}</td>
                                         <td>{{ $s->nama }}</td>
                                         <td>{{ $s->alamat }}</td>
-                                        <td>{{ $s->maps }}</td>
+                                        <td><a href="{{ $s->maps }}" target="_blank">{{ $s->maps }}</a></td>
                                         <td>{{ $s->titik_koordinat }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </form>
                     </div>
-                </form>
             </div>
         </div>
     </div>

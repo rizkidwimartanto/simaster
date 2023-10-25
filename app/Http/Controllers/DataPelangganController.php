@@ -16,7 +16,8 @@ class DataPelangganController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Peta Pelanggan'
+            'title' => 'Peta Pelanggan', 
+            'data_pelanggan' => DataPelangganModel::all()
         ];
         return view('beranda/index', $data);
     }
