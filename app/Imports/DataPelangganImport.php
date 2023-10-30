@@ -32,6 +32,17 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
                 'maps' => $row[3],
                 'latitude' => $row[4],
                 'longtitude' => $row[5],
+                'no_telepon' => $row[6],
+                'unitulp' => $row[7],
+                'tarif' => $row[8],
+                'daya' => $row[9],
+                'kogol' => $row[10],
+                'fakmkwh' => $row[11], 
+                'rpbp' => $row[12], 
+                'rpujl' => $row[13], 
+                'nomor_kwh' => $row[14], 
+                'penyulang' => $row[15], 
+                'nama_section' => $row[16]
             ]);
         }
     }

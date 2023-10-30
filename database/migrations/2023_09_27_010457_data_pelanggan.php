@@ -21,6 +21,17 @@ class DataPelanggan extends Migration
             $table->text('maps')->nullable();
             $table->text('latitude')->nullable();
             $table->text('longtitude')->nullable();
+            $table->text('no_telepon')->nullable();
+            $table->text('unitulp')->nullable();
+            $table->text('tarif')->nullable();
+            $table->text('daya')->nullable();
+            $table->text('kogol')->nullable();
+            $table->text('fakmkwh')->nullable();
+            $table->text('rpbp')->nullable();
+            $table->text('rpujl')->nullable();
+            $table->text('nomor_kwh')->nullable();
+            $table->text('penyulang')->nullable();
+            $table->text('nama_section')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
         });

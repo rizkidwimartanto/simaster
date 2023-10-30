@@ -5,7 +5,7 @@
             {{ csrf_field() }}
             <div class="form-label">Custom File Input</div>
             <input type="file" name="file" class="form-control" />
-            <button type="submit" class="btn btn-primary mt-3 mb-3">Import Excel</button>
+            <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2">Import Excel</button>
         </form>
 
         @if (session('success_hapus'))
@@ -107,10 +107,10 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="#" data-bs-target="#modal-preview" data-bs-toggle="modal">
+                                            <a href="#" data-bs-target="#{{{$s->id}}}" data-bs-toggle="modal">
                                                 <i class="fa-solid fa-pen-to-square fa-lg text-primary"></i>
                                             </a>
-                                            <div class="modal modal-blur fade" id="modal-preview" tabindex="-1"
+                                            <div class="modal modal-blur fade" id="{{$s->id}}" tabindex="-1"
                                                 role="dialog" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                     role="document">
@@ -121,16 +121,91 @@
                                                                 aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo
-                                                                odio, dapibus ac facilisis in, egestas
-                                                                eget quam. Morbi leo risus, porta ac consectetur ac,
-                                                                vestibulum at eros.</p>
+                                                            <div class="row">
+                                                            <div class="mb-3 col-lg-12">
+                                                                <label class="form-label">Nama Pelanggan</label>
+                                                                <div class="input-group input-group-flat">
+                                                                  <input value="{{$s->nama}}" class="form-control" disabled>
+                                                                </div>
+                                                              </div>
+                                                              <div class="mb-3 col-lg-12">
+                                                                  <label class="form-label">Alamat</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->alamat}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">No Telepon</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->no_telepon}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">Unit ULP</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->unitulp}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">Tarif</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->tarif}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">Daya</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->daya}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">KOGOL</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->kogol}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">fakmkwh</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->fakmkwh}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">rpbp</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->rpbp}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">rpujl</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->rpujl}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">nomor_kwh</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->nomor_kwh}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">penyulang</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->penyulang}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                              <div class="mb-3 col-lg-4">
+                                                                  <label class="form-label">nama_section</label>
+                                                                  <div class="input-group input-group-flat">
+                                                                    <input value="{{$s->nama_section}}" class="form-control" disabled>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <button type="button" class="btn me-auto"
+                                                            <button type="button" class="btn btn-danger me-auto"
                                                                 data-bs-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary"
-                                                                data-bs-dismiss="modal">Save changes</button>
+                                                        </div>
                                                         </div>
                                                     </div>
                                                 </div>
