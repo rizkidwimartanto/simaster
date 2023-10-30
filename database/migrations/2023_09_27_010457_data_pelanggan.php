@@ -19,7 +19,8 @@ class DataPelanggan extends Migration
             $table->string('nama')->nullable();
             $table->text('alamat')->nullable();
             $table->text('maps')->nullable();
-            $table->text('titik_koordinat')->nullable();
+            $table->text('latitude')->nullable();
+            $table->text('longtitude')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
         });

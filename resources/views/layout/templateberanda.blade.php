@@ -51,7 +51,7 @@
         }
 
         #map {
-            height: 530px;
+            height: 700px;
         }
     </style>
 </head>

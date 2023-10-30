@@ -21,11 +21,18 @@ class DataPelangganController extends Controller
         ];
         return view('beranda/index', $data);
     }
+    public function entri_padam(){
+        $data = [
+            'title' => 'Entri Padam', 
+            'data_pelanggan' => DataPelangganModel::all()
+        ];
+        return view('beranda/entripadam', $data);
+    }
     public function input_pelanggan()
     {
         $data = [
             'title' => 'Input Pelanggan',
-            'data_pelanggan' => DataPelangganModel::all()
+            'data_pelanggan' => DataPelangganModel::all(),
         ];
         return view('beranda/inputpelanggan', $data);
     }

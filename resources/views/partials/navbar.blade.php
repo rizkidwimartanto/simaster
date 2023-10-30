@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
+            <a href="/beranda">
                 Inovasi UP3 Demak
             </a>
         </h1>
@@ -187,6 +187,13 @@
                         <a class="nav-link" href="assets_template/#">
                             <span class="nav-link-title">
                                 Peta Padam
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item {{ $title == 'Entri Padam' ? 'active' : '' }}">
+                        <a class="nav-link" href="/entripadam">
+                            <span class="nav-link-title">
+                                Entri Padam
                             </span>
                         </a>
                     </li>

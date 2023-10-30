@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, ('index')]);
 Route::get('/beranda', [DataPelangganController::class, ('index')]);
+Route::get('/entripadam', [DataPelangganController::class, ('entri_padam')]);
 Route::get('/inputpelanggan', [DataPelangganController::class, ('input_pelanggan')]);
 Route::get('/inputpelanggan/export_excel', [DataPelangganController::class, ('export_excel')]);
 Route::post('/inputpelanggan/import_excel', [DataPelangganController::class, ('import_excel')]);

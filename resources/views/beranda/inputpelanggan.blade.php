@@ -33,20 +33,41 @@
             <div class="card p-3">
                 <form action="/inputpelanggan/hapus_pelanggan" method="get">
                     <button type="button" class="btn btn-danger mt-2 mb-2 col-2" data-bs-toggle="modal"
-                        data-bs-target="#modal-small">
+                        data-bs-target="#modal-danger">
                         <i class="fa-solid fa-trash fa-lg"></i> Hapus
                     </button>
-                    <div class="modal modal-blur fade" id="modal-small" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal modal-blur fade" id="modal-danger" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                             <div class="modal-content">
-                                <div class="modal-body">
-                                    <div class="modal-title">Are you sure?</div>
-                                    <div>If you proceed, you will lose all your personal data.</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <div class="modal-status bg-danger"></div>
+                                <div class="modal-body text-center py-4">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg"
+                                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
+                                        <path d="M12 9v4" />
+                                        <path d="M12 17h.01" />
+                                    </svg>
+                                    <h3>Are you sure?</h3>
+                                    <div class="text-muted">Hapus Data Pelanggan yang Dipilih</div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-link link-secondary me-auto"
-                                        data-bs-dismiss="modal">Cancel</button>
-                                    <button type="submit" class="btn btn-danger">Yes, delete all my data</button>
+                                    <div class="w-100">
+                                        <div class="row">
+                                            <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                                    Cancel
+                                                </a></div>
+                                            <div class="col"><button type="submit" class="btn btn-danger w-100"
+                                                    data-bs-dismiss="modal">
+                                                    Yes
+                                                </button></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +76,7 @@
                         <table class="table table-vcenter card-table table-bordered" id="tabel_data_pelanggan">
                             <thead>
                                 <tr>
-                                    <th width="5%">
+                                    <th>
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="checklist-pelanggan">
@@ -68,7 +89,8 @@
                                     <th>Nama</th>
                                     <th>Alamat</th>
                                     <th>Maps</th>
-                                    <th>Titik Koordinat</th>
+                                    <th>Latitude</th>
+                                    <th>Longtitude</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -85,22 +107,50 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <i class="fa-solid fa-pen-to-square fa-lg text-primary"></i>
+                                            <a href="#" data-bs-target="#modal-preview" data-bs-toggle="modal">
+                                                <i class="fa-solid fa-pen-to-square fa-lg text-primary"></i>
+                                            </a>
+                                            <div class="modal modal-blur fade" id="modal-preview" tabindex="-1"
+                                                role="dialog" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                    role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">{{$s->nama}}</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Cras mattis consectetur purus sit amet fermentum. Cras justo
+                                                                odio, dapibus ac facilisis in, egestas
+                                                                eget quam. Morbi leo risus, porta ac consectetur ac,
+                                                                vestibulum at eros.</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn me-auto"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-bs-dismiss="modal">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $s->idpel }}</td>
                                         <td>{{ $s->nama }}</td>
                                         <td>{{ $s->alamat }}</td>
                                         <td><a href="{{ $s->maps }}" target="_blank">{{ $s->maps }}</a></td>
-                                        <td>{{ $s->titik_koordinat }}</td>
+                                        <td>{{ $s->latitude }}</td>
+                                        <td>{{ $s->longtitude }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    </form>
-                    </div>
+                </form>
             </div>
         </div>
+    </div>
     </div>
     <script>
         $(document).ready(function() {

@@ -30,7 +30,8 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
                 'nama' => $row[1],
                 'alamat' => $row[2],
                 'maps' => $row[3],
-                'titik_koordinat' => $row[4],
+                'latitude' => $row[4],
+                'longtitude' => $row[5],
             ]);
         }
     }
@@ -45,11 +46,11 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
     }
     public function sheets(): array{
         return[
-            'KUBIKEL' => new DataPelangganImport()
+            'Agustus 2023' => new DataPelangganImport()
         ];
     }
     public function startRow(): int
     {
-        return 3;
+        return 2;
     }
 }
