@@ -31,6 +31,8 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     {{-- DataTable --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    {{-- My CSS --}}
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
@@ -48,10 +50,6 @@
 
         body {
             font-feature-settings: "cv03", "cv04", "cv11";
-        }
-
-        #map {
-            height: 700px;
         }
     </style>
 </head>

@@ -3,76 +3,10 @@
     --bg: #08B1F0;
     --text_color: #0C356A;
   }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    outline: none;
-    border: none;
-    box-sizing: border-box;
-    text-decoration: none;
-  }
-  
-  .image-login {
-    background-image: url('../img/register.jpg');
-    background-size: cover;
-    background-position: center;
-    height: 600px;
-  }
-  
-  .bg-user, .body-beranda {
-    background-color: var(--bg);
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .h1-user {
-    font-weight: 900;
-  }
-  
-  .edit-form-text {
-    font-weight: 400;
-  }
-  
-  .card-login {
-    height: 600px;
-  }
-  
-  input::placeholder {
-    font-size: 14px;
-  }
-  
-  nav.navbar {
-    background-color: var(--primary);
-    font-size: 17px;
-  }
-  
-  a.navbar-brand {
-    font-weight: 900;
-  }
-  
-  a.nav-link {
-    font-weight: 700;
-  }
-  
-  a.navbar-brand strong {
-    color: #C70039;
-  }
-  
-  a.navbar-brand, a.nav-link, a.nav-extra {
-    color: var(--text_color);
-  }
-  
-  a.nav-link:hover, a.nav-extra:hover {
-    color: #353535;
-  }
-  a.nav-extra{
-    text-decoration: none;
-    margin-right: 10px;
-  }
   #map{
-    height: 900px;
+    height: 700px;
+  }
+  p.detail_pelanggan{
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
   }
