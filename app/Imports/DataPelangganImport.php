@@ -40,9 +40,11 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
                 'fakmkwh' => $row[11], 
                 'rpbp' => $row[12], 
                 'rpujl' => $row[13], 
-                'nomor_kwh' => $row[14], 
-                'penyulang' => $row[15], 
-                'nama_section' => $row[16]
+                'pemda' => $row[14],
+                'nomor_kwh' => $row[15],  
+                'penyulang' => $row[16], 
+                'nama_section' => $row[17],
+                'tipe_kubikel' => $row[18],
             ]);
         }
     }

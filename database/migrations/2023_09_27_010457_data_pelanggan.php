@@ -32,6 +32,7 @@ class DataPelanggan extends Migration
             $table->text('nomor_kwh')->nullable();
             $table->text('penyulang')->nullable();
             $table->text('nama_section')->nullable();
+            $table->text('tipe_kubikel')->nullable();
             $table->date('created_at');
             $table->date('updated_at');
         });

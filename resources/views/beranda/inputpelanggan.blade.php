@@ -125,79 +125,79 @@
                                                             <div class="mb-3 col-lg-12">
                                                                 <label class="form-label">Nama Pelanggan</label>
                                                                 <div class="input-group input-group-flat">
-                                                                  <input value="{{$s->nama}}" class="form-control" disabled>
+                                                                  <input value="{{$s->nama}}" class="form-control" readonly>
                                                                 </div>
                                                               </div>
                                                               <div class="mb-3 col-lg-12">
                                                                   <label class="form-label">Alamat</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->alamat}}" class="form-control" disabled>
+                                                                    <input value="{{$s->alamat}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">No Telepon</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->no_telepon}}" class="form-control" disabled>
+                                                                    <input value="{{$s->no_telepon}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">Unit ULP</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->unitulp}}" class="form-control" disabled>
+                                                                    <input value="{{$s->unitulp}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">Tarif</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->tarif}}" class="form-control" disabled>
+                                                                    <input value="{{$s->tarif}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">Daya</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->daya}}" class="form-control" disabled>
+                                                                    <input value="{{$s->daya}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">KOGOL</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->kogol}}" class="form-control" disabled>
+                                                                    <input value="{{$s->kogol}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">fakmkwh</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->fakmkwh}}" class="form-control" disabled>
+                                                                    <input value="{{$s->fakmkwh}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">rpbp</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->rpbp}}" class="form-control" disabled>
+                                                                    <input value="{{$s->rpbp}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">rpujl</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->rpujl}}" class="form-control" disabled>
+                                                                    <input value="{{$s->rpujl}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">nomor_kwh</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->nomor_kwh}}" class="form-control" disabled>
+                                                                    <input value="{{$s->nomor_kwh}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">penyulang</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->penyulang}}" class="form-control" disabled>
+                                                                    <input value="{{$s->penyulang}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                               <div class="mb-3 col-lg-4">
                                                                   <label class="form-label">nama_section</label>
                                                                   <div class="input-group input-group-flat">
-                                                                    <input value="{{$s->nama_section}}" class="form-control" disabled>
+                                                                    <input value="{{$s->nama_section}}" class="form-control" readonly>
                                                                   </div>
                                                                 </div>
                                                             </div>
