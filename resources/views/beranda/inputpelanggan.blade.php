@@ -32,6 +32,7 @@
         <div class="col-lg-12">
             <div class="card p-3">
                 <form action="/inputpelanggan/hapus_pelanggan" method="get">
+                    @csrf
                     <button type="button" class="btn btn-danger mt-2 mb-2 col-2" data-bs-toggle="modal"
                         data-bs-target="#modal-danger">
                         <i class="fa-solid fa-trash fa-lg"></i> Hapus
@@ -230,7 +231,8 @@
     <script>
         $(document).ready(function() {
             $('#tabel_data_pelanggan').DataTable({
-                scrollX: true
+                scrollX: true,
+                "paging": false
             });
         });
     </script>

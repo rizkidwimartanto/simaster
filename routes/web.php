@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DataPelangganController;
+use App\Http\Controllers\EntriPadamController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,8 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserController::class, ('index')]);
 Route::get('/beranda', [DataPelangganController::class, ('index')]);
+Route::get('/petapadam', [EntriPadamController::class, ('index')]);
 Route::get('/entripadam', [DataPelangganController::class, ('entri_padam')]);
 Route::get('/inputpelanggan', [DataPelangganController::class, ('input_pelanggan')]);
 Route::get('/inputpelanggan/export_excel', [DataPelangganController::class, ('export_excel')]);
 Route::post('/inputpelanggan/import_excel', [DataPelangganController::class, ('import_excel')]);
 Route::get('/inputpelanggan/hapus_pelanggan', [DataPelangganController::class, ('hapusPelanggan')]);
+Route::post('/entripadam/insertentripadam', [EntriPadamController::class, ('insertEntriPadam')]);

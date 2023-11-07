@@ -183,8 +183,8 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="assets_template/#">
+                    <li class="nav-item {{$title == 'Peta Padam' ? 'active' : ''}}">
+                        <a class="nav-link" href="/petapadam">
                             <span class="nav-link-title">
                                 Peta Padam
                             </span>
