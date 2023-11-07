@@ -23,5 +23,6 @@ Route::get('/entripadam', [DataPelangganController::class, ('entri_padam')]);
 Route::get('/inputpelanggan', [DataPelangganController::class, ('input_pelanggan')]);
 Route::get('/inputpelanggan/export_excel', [DataPelangganController::class, ('export_excel')]);
 Route::post('/inputpelanggan/import_excel', [DataPelangganController::class, ('import_excel')]);
-Route::get('/inputpelanggan/hapus_pelanggan', [DataPelangganController::class, ('hapusPelanggan')]);
 Route::post('/entripadam/insertentripadam', [EntriPadamController::class, ('insertEntriPadam')]);
+Route::get('/inputpelanggan/hapus_pelanggan', [DataPelangganController::class, ('hapusPelanggan')]);
+Route::get('/petapadam/hapus_entri', [EntriPadamController::class, ('hapusEntriPadam')]);

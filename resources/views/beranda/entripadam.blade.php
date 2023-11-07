@@ -5,7 +5,7 @@
             <div class="card p-3 mt-4">
                 <h2>Form Entri Padam</h2>
                 <form action="/entripadam/insertentripadam" method="post">
-                    @csrf
+                    {{ csrf_field() }}
                     <div class="mb-3">
                         <div class="form-label">Penyulang</div>
                         <select class="form-select" id="penyulang" name="penyulang">
@@ -23,15 +23,14 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jam Padam</label>
-                        <input type="time" class="form-control" name="jam_padam"
-                            placeholder="Input placeholder">
+                        <input type="time" class="form-control" name="jam_padam" placeholder="Input placeholder">
                     </div>
                     <div class="mb-3">
                         <div class="form-label">Penyebab Padam</div>
-                        <select class="form-select" name="jam_padam" id="jam_padam">
+                        <select class="form-select" name="penyebab_padam" id="penyebab_padam">
                             <option disabled selected>--- Pilih Penyebab Padam ---</option>
-                            <option value="1">Pemeliharaan</option>
-                            <option value="2">Gangguan</option>
+                            <option value="Pemeliharaan">Pemeliharaan</option>
+                            <option value="Gangguan">Gangguan</option>
                         </select>
                     </div>
                     <input type="hidden" name="status" id="status" value="1">
@@ -45,14 +44,14 @@
     <script>
         var sectionA = ['A1 Penyulang', 'A2 Penyulang', 'A3 Penyulang'];
 
-        document.getElementById('penyulang').addEventListener('change', function(){
+        document.getElementById('penyulang').addEventListener('change', function() {
             var selectedPenyulang = this.value;
-            var sectionDropdown = document.getElementById('section'); 
+            var sectionDropdown = document.getElementById('section');
 
             sectionDropdown.innerHTML = "<option value='' disabled>--- Pilih Section ---</option>";
 
-            if(selectedPenyulang === 'A Penyulang'){
-                sectionA.forEach(function(section){
+            if (selectedPenyulang === 'A Penyulang') {
+                sectionA.forEach(function(section) {
                     var option = document.createElement('option');
                     option.value = section;
                     option.textContent = section;

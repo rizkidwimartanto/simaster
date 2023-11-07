@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\EntriPadamModel;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class EntriPadamController extends Controller
@@ -22,7 +23,21 @@ class EntriPadamController extends Controller
             'penyebab_padam' => $request->penyebab_padam,
             'status' => $request->status,
         ]);
-
-        return redirect('/beranda');
+        Session::flash('success_tambah', 'Data berhasil ditambah');
+        return redirect('/petapadam');
+    }
+    public function hapusEntriPadam(){
+        $hapus_entri = request('check');
+        if($hapus_entri){
+            foreach ($hapus_entri as $hapus) {
+                $padam = EntriPadamModel::find($hapus);
+                $padam->delete();
+            }
+            Session::flash('success_hapus', 'Data berhasil dihapus');
+            return redirect('/petapadam');
+        }else{
+            Session::flash('success_hapus', 'Data berhasil dihapus');
+            return redirect('/petapadam');
+        }
     }
 }
