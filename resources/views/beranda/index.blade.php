@@ -29,23 +29,34 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        // Tambahkan marker untuk setiap pelanggan
-        var customers = @json($data_pelanggan); // Konversi data pelanggan dari PHP ke JavaScript
+        var customers = @json($data_pelanggan);
+        var padams = @json($data_padam);
         customers.forEach(function(customer) {
-            var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-            var circle = L.circle([customer.latitude, customer.longtitude], {
-                color: 'black',
-                fillColor: '#353535',
-                fillOpacity: 0.5,
-                radius: 300
-            }).addTo(map);
-            marker.bindTooltip(customer.nama).openTooltip();
-            marker.on('click', function() {
-                $('#' + customer.id).modal('show');
-
-                $('#customerName').text(customer.nama);
-                $('#customerDetails').text('Alamat: ' + customer.alamat);
-            });
+            padams.forEach(function(padam){
+                var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
+                if(padam.penyulang === customer.penyulang && padam.status == '1'){
+                    var circle = L.circle([customer.latitude, customer.longtitude], {
+                        color: 'red',
+                        fillColor: 'red',
+                        fillOpacity: 0.5,
+                        radius: 100
+                    }).addTo(map);
+                }else{
+                    var circle = L.circle([customer.latitude, customer.longtitude], {
+                        color: 'black',
+                        fillColor: 'black',
+                        fillOpacity: 0.5,
+                        radius: 100
+                    }).addTo(map);
+                }
+                marker.bindTooltip(customer.nama).openTooltip();
+                marker.on('click', function() {
+                    $('#' + customer.id).modal('show');
+    
+                    $('#customerName').text(customer.nama);
+                    $('#customerDetails').text('Alamat: ' + customer.alamat);
+                });
+            })
         });
     </script>
 @endsection

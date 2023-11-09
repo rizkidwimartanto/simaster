@@ -26,3 +26,4 @@ Route::post('/inputpelanggan/import_excel', [DataPelangganController::class, ('i
 Route::post('/entripadam/insertentripadam', [EntriPadamController::class, ('insertEntriPadam')]);
 Route::get('/inputpelanggan/hapus_pelanggan', [DataPelangganController::class, ('hapusPelanggan')]);
 Route::get('/petapadam/hapus_entri', [EntriPadamController::class, ('hapusEntriPadam')]);
+Route::post('/petapadam/edit_status_padam', [EntriPadamController::class, ('editStatusPadam')]);

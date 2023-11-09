@@ -81,6 +81,7 @@
                                 <th>Jam Padam</th>
                                 <th>Penyebab Padam</th>
                                 <th>Status</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -96,17 +97,27 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $s->penyulang }}</td>
-                                    <td>{{ $s->section }}</td>
-                                    <td>{{ $s->jam_padam }}</td>
-                                    <td>{{ $s->penyebab_padam }}</td>
-                                    <td>{{ $s->status }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 </form>
+                <td>{{ $i++ }}</td>
+                <td>{{ $s->penyulang }}</td>
+                <td>{{ $s->section }}</td>
+                <td>{{ $s->jam_padam }}</td>
+                <td>{{ $s->penyebab_padam }}</td>
+                <td>{{ $s->status }}</td>
+                <form action="/petapadam/edit_status_padam" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id" id="id" value="{{ $s->id }}">
+                    <input type="hidden" value="0" name="status" id="status">
+                    @if ($s->status == 1)
+                        <td><button type="submit" class="btn btn-success">Hidupkan</button></td>
+                    @else
+                        <td><button type="submit" class="btn btn-danger" disabled>Hidupkan</button></td>
+                    @endif
+                </form>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganImport;
 use App\Models\DataPelangganModel;
+use App\Models\EntriPadamModel;
 use Illuminate\Support\Facades\Session;
 
 
@@ -17,7 +18,8 @@ class DataPelangganController extends Controller
     {
         $data = [
             'title' => 'Peta Pelanggan', 
-            'data_pelanggan' => DataPelangganModel::all()
+            'data_pelanggan' => DataPelangganModel::all(),
+            'data_padam' => EntriPadamModel::all()
         ];
         return view('beranda/index', $data);
     }

@@ -40,4 +40,11 @@ class EntriPadamController extends Controller
             return redirect('/petapadam');
         }
     }
+    public function editStatusPadam(Request $request){
+        $editStatus = EntriPadamModel::where('id', $request->id)->update([
+            'status' => $request->status
+        ]);
+        Session::flash('success_status', 'Pelanggan sudah nyala');
+        return redirect('/petapadam');
+    }
 }

@@ -10,16 +10,15 @@
                         <div class="form-label">Penyulang</div>
                         <select class="form-select" id="penyulang" name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
-                            <option value="A Penyulang">A</option>
-                            <option value="B Penyulang">B</option>
-                            <option value="C Penyulang">C</option>
+                            <option value="KDS21">KDS21</option>
+                            <option value="SYG14">SYG14</option>
+                            <option value="SYG09">SYG09</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div id="section-container">
                         <div class="form-label">Section</div>
-                        <select class="form-select" id="section" name="section">
-                            <option disabled selected value="">--- Pilih Section ---</option>
-                        </select>
+                        <div id="section-list">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jam Padam</label>
@@ -42,21 +41,33 @@
         </div>
     </div>
     <script>
-        var sectionA = ['A1 Penyulang', 'A2 Penyulang', 'A3 Penyulang'];
+        var sectionKDS21 = ['52.KDS.F21.Z02.S06', '52.KDS.F03.Z02.S04', '52.KDS.F21.Z02.S03', '52.KDS.F21.Z02.S04'];
 
         document.getElementById('penyulang').addEventListener('change', function() {
             var selectedPenyulang = this.value;
-            var sectionDropdown = document.getElementById('section');
+            var sectionContainer = document.getElementById('section-container');
+            var sectionChecklist = document.getElementById('section-list');
 
-            sectionDropdown.innerHTML = "<option value='' disabled>--- Pilih Section ---</option>";
+            sectionChecklist.innerHTML = "";
 
-            if (selectedPenyulang === 'A Penyulang') {
-                sectionA.forEach(function(section) {
-                    var option = document.createElement('option');
-                    option.value = section;
-                    option.textContent = section;
-                    sectionDropdown.appendChild(option);
-                })
+            if (selectedPenyulang === "KDS21") {
+                sectionKDS21.forEach(function(section) {
+                    var checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = "section[]";
+                    checkbox.value = section;
+                    checkbox.classList.add("form-check-input");
+                    var label = document.createElement("label");
+                    label.classList.add("form-check-label");
+                    var checkboxContainer = document.createElement("label");
+                    checkboxContainer.classList.add("form-check");
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(section));
+                    sectionChecklist.appendChild(label);
+                });
+                sectionChecklist.appendChild(checkboxContainer);
+            } else {
+                sectionContainer.style.display = "none";
             }
         })
     </script>
