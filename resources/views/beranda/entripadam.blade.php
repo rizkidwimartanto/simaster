@@ -15,10 +15,13 @@
                             <option value="SYG09">SYG09</option>
                         </select>
                     </div>
-                    <div id="section-container">
+                    <div id="section-container" class="mb-3">
                         <div class="form-label">Section</div>
-                        <div id="section-list">
-                        </div>
+                        <label class="form-check">
+                            <div id="section-list">
+
+                            </div>
+                        </label>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Jam Padam</label>
@@ -57,7 +60,7 @@
                     checkbox.name = "section[]";
                     checkbox.value = section;
                     checkbox.classList.add("form-check-input");
-                    var label = document.createElement("label");
+                    var label = document.createElement("span");
                     label.classList.add("form-check-label");
                     var checkboxContainer = document.createElement("label");
                     checkboxContainer.classList.add("form-check");
@@ -70,5 +73,32 @@
                 sectionContainer.style.display = "none";
             }
         })
+    </script>
+    <script>
+        $("#simpan-button").click(function() {
+            var selectedSections = [];
+
+            // Mengambil semua checkbox yang dicentang
+            $(".form-check-input:checked").each(function() {
+                selectedSections.push($(this).val());
+            });
+
+            // Mengirim data menggunakan AJAX
+            $.ajax({
+                url: '/entripadam/insertentripadam',
+                type: 'POST',
+                data: {
+                    section: selectedSections
+                },
+                success: function(response) {
+                    console.log(response.message);
+                    // Di sini Anda dapat menangani respons atau memberikan pesan sukses kepada pengguna
+                },
+                error: function() {
+                    console.log('Terjadi kesalahan dalam pengiriman data.');
+                    // Di sini Anda dapat menangani kesalahan jika terjadi
+                }
+            });
+        });
     </script>
 @endsection
