@@ -23,6 +23,9 @@
         @endif
         <div class="col-lg-12">
             <div class="card p-3">
+                <canvas id="donutChart" width="100" height="50"></canvas>
+            </div>
+            <div class="card p-3">
                 <form action="/petapadam/edit_status_padam" method="post">
                     {{ csrf_field() }}
                     <input type="hidden" value="0" name="status" id="status">
@@ -91,6 +94,35 @@
                     });
                 });
             });
+        });
+    </script>
+    <script>
+        // Ambil elemen canvas
+        var ctx = document.getElementById('donutChart').getContext('2d');
+
+        // Data chart
+        var data = {
+            labels: ['Label 1', 'Label 2', 'Label 3'],
+            datasets: [{
+                data: [30, 40, 30],
+                backgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
+                hoverBackgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
+            }]
+        };
+
+        // Konfigurasi chart
+        var options = {
+            // cutoutPercentage: 50, // Menentukan seberapa besar lubang pada chart
+            responsive: true,
+            height: 100 // Ukuran tinggi chart
+            // maintainAspectRatio: false
+        };
+
+        // Buat chart donut
+        var donutChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: data,
+            options: options
         });
     </script>
 @endsection

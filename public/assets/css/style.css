@@ -3,6 +3,10 @@
     --bg: #08B1F0;
     --text_color: #0C356A;
   }
+  body {
+    padding: 0;
+    margin: 0;
+}
   #map{
     height: 700px;
   }

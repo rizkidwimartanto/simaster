@@ -23,40 +23,90 @@
         </div>
     @endforeach
     <script>
-        var map = L.map('map').setView([-6.90774243377773, 110.65198375582506], 10);
+        var map = L.map('map', {
+            fullscreenControl: true,
+            // OR
+            fullscreenControl: {
+                pseudoFullscreen: false // if true, fullscreen to page width and height
+            }
+        }).setView([-6.90774243377773, 110.65198375582506], 10);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        L.control.locate({
+            position: 'topleft',
+            drawCircle: true,
+            follow: true,
+            setView: 'untilPan',
+            keepCurrentZoomLevel: true,
+            stopFollowingOnDrag: false,
+            markerStyle: {
+                weight: 1,
+                opacity: 0.8,
+                fillOpacity: 0.8
+            },
+            circleStyle: {
+                weight: 1,
+                clickable: false
+            },
+            icon: 'fa fa-location-arrow',
+            metric: false,
+            strings: {
+                title: "Temukan Lokasi Anda",
+                popup: "You are within {distance} {unit} from this point",
+                outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+            },
+            locateOptions: {
+                maxZoom: 16
+            }
         }).addTo(map);
 
         var customers = @json($data_pelanggan);
         var padams = @json($data_padam);
         customers.forEach(function(customer) {
-            padams.forEach(function(padam){
+            if (padams == "") {
                 var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-                if(padam.penyulang === customer.penyulang && padam.status == '1'){
-                    var circle = L.circle([customer.latitude, customer.longtitude], {
-                        color: 'red',
-                        fillColor: 'red',
-                        fillOpacity: 0.5,
-                        radius: 100
-                    }).addTo(map);
-                }else{
-                    var circle = L.circle([customer.latitude, customer.longtitude], {
-                        color: 'black',
-                        fillColor: 'black',
-                        fillOpacity: 0.5,
-                        radius: 100
-                    }).addTo(map);
-                }
+                var circle = L.circle([customer.latitude, customer.longtitude], {
+                    color: 'black',
+                    fillColor: 'black',
+                    fillOpacity: 0.5,
+                    radius: 100
+                }).addTo(map);
                 marker.bindTooltip(customer.nama).openTooltip();
                 marker.on('click', function() {
                     $('#' + customer.id).modal('show');
-    
+
                     $('#customerName').text(customer.nama);
                     $('#customerDetails').text('Alamat: ' + customer.alamat);
                 });
-            })
+            } else {
+                padams.forEach(function(padam) {
+                    var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
+                    if (padam.penyulang === customer.penyulang && padam.status == '1') {
+                        var circle = L.circle([customer.latitude, customer.longtitude], {
+                            color: 'red',
+                            fillColor: 'red',
+                            fillOpacity: 0.5,
+                            radius: 100
+                        }).addTo(map);
+                    } else {
+                        var circle = L.circle([customer.latitude, customer.longtitude], {
+                            color: 'black',
+                            fillColor: 'black',
+                            fillOpacity: 0.5,
+                            radius: 100
+                        }).addTo(map);
+                    }
+                    marker.bindTooltip(customer.nama).openTooltip();
+                    marker.on('click', function() {
+                        $('#' + customer.id).modal('show');
+
+                        $('#customerName').text(customer.nama);
+                        $('#customerDetails').text('Alamat: ' + customer.alamat);
+                    });
+                })
+            }
         });
     </script>
 @endsection
