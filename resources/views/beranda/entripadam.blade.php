@@ -31,8 +31,8 @@
                             <option value="Gangguan">Gangguan</option>
                         </select>
                     </div>
-                    <?php $d=mktime(11, 14, 54, 8, 12, 2014); ?>
-                    <input type="hidden" name="jam_padam" id="jam_padam" value="{{date("Y-m-d h:i:sa", $d)}}">
+                    <?php date_default_timezone_set('Asia/Jakarta'); ?>
+                    <input type="hidden" name="jam_padam" id="jam_padam" value="{{date("Y-m-d h:i:sa")}}">
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
                         <textarea class="form-control" data-bs-toggle="autosize" rows="5" name="keterangan" id="keterangan"
