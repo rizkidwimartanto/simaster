@@ -21,10 +21,10 @@
                 {{ session('error_nyala') }}
             </div>
         @endif
+        <div class="card p-3 mb-3">
+            <canvas id="myChart" style="width:100%;max-width:550px"></canvas>
+        </div>
         <div class="col-lg-12">
-            <div class="card p-3 mb-3">
-                <canvas id="myChart" style="width:50%;max-width:500px"></canvas>
-            </div>
             <div class="card p-3">
                 <form action="/petapadam/edit_status_padam" method="post">
                     {{ csrf_field() }}
@@ -42,8 +42,9 @@
                                 </th>
                                 <th>Penyulang</th>
                                 <th>Section</th>
-                                <th>Jam Padam</th>
                                 <th>Penyebab Padam</th>
+                                <th>Jam Padam</th>
+                                <th>Keterangan</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -62,8 +63,9 @@
                                     </td>
                                     <td>{{ $s->penyulang }}</td>
                                     <td>{{ $s->section }}</td>
-                                    <td>{{ $s->jam_padam }}</td>
                                     <td>{{ $s->penyebab_padam }}</td>
+                                    <td>{{ $s->jam_padam }}</td>
+                                    <td>{{ $s->keterangan }}</td>
                                     <td>{{ $s->status }}</td>
                                 </tr>
                             @endforeach
@@ -97,14 +99,13 @@
         });
     </script>
     <script>
-        var xValues = ["KDS1", "France", "Spain", "USA", "Argentina"];
-        var yValues = [55, 49, 44, 24, 15];
+        var KDS21 = @json($jumlah_KDS21);
+        var SYG14 = @json($jumlah_SYG14);
+        var xValues = ["KDS21", "SYG14"];
+        var yValues = [KDS21, SYG14];
         var barColors = [
             "#b91d47",
             "#00aba9",
-            "#2b5797",
-            "#e8c3b9",
-            "#1e7145"
         ];
 
         new Chart("myChart", {
@@ -119,7 +120,7 @@
             options: {
                 title: {
                     display: true,
-                    text: "Jumlah Padam UP3 Demak"
+                    text: "Jumlah Padam Demak"
                 }
             }
         });

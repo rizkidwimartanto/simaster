@@ -24,16 +24,19 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Jam Padam</label>
-                        <input type="time" class="form-control" name="jam_padam" placeholder="Input placeholder">
-                    </div>
-                    <div class="mb-3">
                         <div class="form-label">Penyebab Padam</div>
                         <select class="form-select" name="penyebab_padam" id="penyebab_padam">
                             <option disabled selected>--- Pilih Penyebab Padam ---</option>
                             <option value="Pemeliharaan">Pemeliharaan</option>
                             <option value="Gangguan">Gangguan</option>
                         </select>
+                    </div>
+                    <?php $d=mktime(11, 14, 54, 8, 12, 2014); ?>
+                    <input type="hidden" name="jam_padam" id="jam_padam" value="{{date("Y-m-d h:i:sa", $d)}}">
+                    <div class="mb-3">
+                        <label class="form-label">Keterangan</label>
+                        <textarea class="form-control" data-bs-toggle="autosize" rows="5" name="keterangan" id="keterangan"
+                            placeholder="Masukkan Keterangan"></textarea>
                     </div>
                     <input type="hidden" name="status" id="status" value="1">
                     <div class="mb-3">
@@ -45,6 +48,7 @@
     </div>
     <script>
         var sectionKDS21 = ['52.KDS.F21.Z02.S06', '52.KDS.F03.Z02.S04', '52.KDS.F21.Z02.S03', '52.KDS.F21.Z02.S04'];
+        var sectionSYG14 = ['52.SYG.F14.Z03.S04', '52.SYG.F14.Z03.S05'];
 
         document.getElementById('penyulang').addEventListener('change', function() {
             var selectedPenyulang = this.value;
@@ -55,6 +59,22 @@
 
             if (selectedPenyulang === "KDS21") {
                 sectionKDS21.forEach(function(section) {
+                    var checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = "section[]";
+                    checkbox.value = section;
+                    checkbox.classList.add("form-check-input");
+                    var label = document.createElement("span");
+                    label.classList.add("form-check-label");
+                    var checkboxContainer = document.createElement("label");
+                    checkboxContainer.classList.add("form-check");
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(section));
+                    sectionChecklist.appendChild(label);
+                });
+                sectionChecklist.appendChild(checkboxContainer);
+            } else if (selectedPenyulang == 'SYG14') {
+                sectionSYG14.forEach(function(section) {
                     var checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
                     checkbox.name = "section[]";

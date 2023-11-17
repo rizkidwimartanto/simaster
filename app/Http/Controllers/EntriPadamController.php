@@ -15,6 +15,8 @@ class EntriPadamController extends Controller
         $data = [
             'title' => 'Peta Padam',
             'data_padam' => EntriPadamModel::all(),
+            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'KDS21')->count() ,
+            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG14')->count() ,
             'id' => DB::table('entri_padam')->select('id')->get()
         ];
         return view('beranda/petapadam', $data);
@@ -27,8 +29,9 @@ class EntriPadamController extends Controller
                 EntriPadamModel::create([
                     'section' => $section,
                     'penyulang' => $request->penyulang,
-                    'jam_padam' => $request->jam_padam,
                     'penyebab_padam' => $request->penyebab_padam,
+                    'jam_padam' => $request->jam_padam,
+                    'keterangan' => $request->keterangan,
                     'status' => $request->status,
                 ]);
             }

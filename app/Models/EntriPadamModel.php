@@ -11,5 +11,5 @@ class EntriPadamModel extends Model
 
     protected $table = 'entri_padam';
     protected $primaryKey = 'id';
-    protected $fillable = ['penyulang', 'section', 'jam_padam', 'penyebab_padam', 'status'];
+    protected $fillable = ['penyulang', 'section', 'penyebab_padam', 'jam_padam' ,'keterangan', 'status'];
 }

@@ -105,7 +105,7 @@
                                 </td>
                                 <td>
                                     <a href="#" data-bs-target="#{{{$s->id}}}" data-bs-toggle="modal">
-                                        <i class="fa-solid fa-pen-to-square fa-lg text-primary"></i>
+                                        <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                     </a>
                                     <div class="modal modal-blur fade" id="{{$s->id}}" tabindex="-1"
                                         role="dialog" aria-hidden="true">
@@ -152,7 +152,17 @@
                                                         <div class="mb-3 col-lg-4">
                                                             <label class="form-label">Unit ULP</label>
                                                             <div class="input-group input-group-flat">
-                                                            <input value="{{$s->unitulp}}" class="form-control" readonly>
+                                                                <?php if ($s->unitulp == 52550) : ?>
+                                                                <input value="UP3 Demak" class="form-control" readonly>
+                                                                <?php elseif($s->unitulp == 52551) : ?>
+                                                                <input value="ULP Demak" class="form-control" readonly>
+                                                                <?php elseif($s->unitulp == 52552) : ?>
+                                                                <input value="ULP Tegowanu" class="form-control" readonly>
+                                                                <?php elseif($s->unitulp == 52553) : ?>
+                                                                <input value="ULP Purwodadi" class="form-control" readonly>
+                                                                <?php elseif($s->unitulp == 52554) : ?>
+                                                                <input value="ULP Wirosari" class="form-control" readonly>
+                                                                <?php endif; ?>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-lg-4">
