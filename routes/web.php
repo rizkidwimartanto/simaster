@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\DataPelangganController;
 use App\Http\Controllers\EntriPadamController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Auth\Middleware\Authenticate;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [UserController::class, ('index')]);
+Route::get('/register', [UserController::class, ('register')]);
+Route::post('/prosesregister', [UserController::class, ('prosesregister')]);
+Route::post('/proseslogin', [UserController::class, ('authenticate')])->name('authenticate');
 Route::get('/beranda', [DataPelangganController::class, ('index')]);
+Route::get('/logout', [UserController::class, ('logout')])->middleware('auth');
 Route::get('/petapadam', [EntriPadamController::class, ('index')]);
 Route::get('/entripadam', [DataPelangganController::class, ('entri_padam')]);
 Route::get('/inputpelanggan', [DataPelangganController::class, ('input_pelanggan')]);

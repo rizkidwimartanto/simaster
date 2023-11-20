@@ -32,7 +32,7 @@
                         </select>
                     </div>
                     <?php date_default_timezone_set('Asia/Jakarta'); ?>
-                    <input type="hidden" name="jam_padam" id="jam_padam" value="{{date("Y-m-d h:i:sa")}}">
+                    <input type="hidden" name="jam_padam" id="jam_padam" value="{{date("d-m-Y h:i:sa")}}">
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
                         <textarea class="form-control" data-bs-toggle="autosize" rows="5" name="keterangan" id="keterangan"

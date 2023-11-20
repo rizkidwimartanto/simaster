@@ -87,7 +87,7 @@
                             <th>ID Pelanggan</th>
                             <th>Nama</th>
                             <th>Alamat</th>
-                            <th width="10%">Maps</th>
+                            <th>Maps</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -97,7 +97,7 @@
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
-                                            <input class="form-check-input" style="position: relative; right: 10px;"
+                                            <input class="form-check-input" 
                                                 type="checkbox" value="{{ $s->id }}" id="flexCheckDefault"
                                                 name="check[]">
                                         </div>
@@ -231,8 +231,8 @@
                                     </div>
                                 </td>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $s->idpel }}</td>
                                 <td>{{ $s->nama }}</td>
+                                <td>{{ $s->idpel }}</td>
                                 <td>{{ $s->alamat }}</td>
                                 <td><a href="{{ $s->maps }}" target="_blank">{{ $s->maps }}</a></td>
                             </tr>
