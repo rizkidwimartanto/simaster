@@ -160,8 +160,7 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
-                    <span class="avatar avatar-sm"
-                        style="background-image: url(assets_template/static/avatars/000f.jpg)"></span>
+                    <span>{{auth()->user()->name}}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="#" class="dropdown-item">Status</a>
@@ -169,7 +168,10 @@
                     <a href="#" class="dropdown-item">Feedback</a>
                     <div class="dropdown-divider"></div>
                     <a href="assets_template/settings.html" class="dropdown-item">Settings</a>
-                    <a href="/" class="dropdown-item">Logout</a>
+                    <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" href="/" class="dropdown-item">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -183,7 +185,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item {{$title == 'Peta Padam' ? 'active' : ''}}">
+                    <li class="nav-item {{ $title == 'Peta Padam' ? 'active' : '' }}">
                         <a class="nav-link" href="/petapadam">
                             <span class="nav-link-title">
                                 Peta Padam

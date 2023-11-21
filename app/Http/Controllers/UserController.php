@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -24,15 +26,34 @@ class UserController extends Controller
     }
     public function authenticate(Request $request)
     {
-        $data = [
-            'username' => $request->input('username'),
-            'password' => $request->input('password')
-        ];
+        $data = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
         if (Auth::attempt($data)) {
-            // $request->session()->regenerate();
-            return redirect()->intended('/beranda');
+            $request->session()->regenerate();
+            return redirect('/beranda');
         } else {
-            return "Login gagal";
+            Session::flash('error_login', 'Login Failed');
+            return redirect('/');
         }
+    }
+    public function store(Request $request)
+    {
+        $validateData = $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email:dns',
+            'password' => 'required|min:5|max:255'
+        ]);
+        $validateData['password'] = Hash::make($validateData['password']);
+        User::create($validateData);
+        return redirect('/');
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

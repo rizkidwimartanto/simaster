@@ -5,7 +5,7 @@
             <div class="card p-3 mt-4">
                 <h2>Form Entri Padam</h2>
                 <form action="/entripadam/insertentripadam" method="post">
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="mb-3">
                         <div class="form-label">Penyulang</div>
                         <select class="form-select" id="penyulang" name="penyulang">

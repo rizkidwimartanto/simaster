@@ -21,10 +21,10 @@ use Illuminate\Auth\Middleware\Authenticate;
 
 Route::get('/', [UserController::class, ('index')]);
 Route::get('/register', [UserController::class, ('register')]);
-Route::post('/prosesregister', [UserController::class, ('prosesregister')]);
+Route::post('/store', [UserController::class, ('store')]);
 Route::post('/proseslogin', [UserController::class, ('authenticate')])->name('authenticate');
 Route::get('/beranda', [DataPelangganController::class, ('index')]);
-Route::get('/logout', [UserController::class, ('logout')])->middleware('auth');
+Route::post('/logout', [UserController::class, ('logout')])->middleware('auth');
 Route::get('/petapadam', [EntriPadamController::class, ('index')]);
 Route::get('/entripadam', [DataPelangganController::class, ('entri_padam')]);
 Route::get('/inputpelanggan', [DataPelangganController::class, ('input_pelanggan')]);
