@@ -19,18 +19,24 @@ use Illuminate\Auth\Middleware\Authenticate;
 |
 */
 
-Route::get('/', [UserController::class, ('index')]);
-Route::get('/register', [UserController::class, ('register')]);
-Route::post('/store', [UserController::class, ('store')]);
-Route::post('/proseslogin', [UserController::class, ('authenticate')])->name('authenticate');
-Route::get('/beranda', [DataPelangganController::class, ('index')]);
-Route::post('/logout', [UserController::class, ('logout')])->middleware('auth');
-Route::get('/petapadam', [EntriPadamController::class, ('index')]);
-Route::get('/entripadam', [DataPelangganController::class, ('entri_padam')]);
-Route::get('/inputpelanggan', [DataPelangganController::class, ('input_pelanggan')]);
-Route::get('/inputpelanggan/export_excel', [DataPelangganController::class, ('export_excel')]);
-Route::post('/inputpelanggan/import_excel', [DataPelangganController::class, ('import_excel')]);
-Route::post('/entripadam/insertentripadam', [EntriPadamController::class, ('insertEntriPadam')]);
-Route::get('/inputpelanggan/hapus_pelanggan', [DataPelangganController::class, ('hapusPelanggan')]);
-Route::get('/petapadam/hapus_entri', [EntriPadamController::class, ('hapusEntriPadam')]);
-Route::post('/petapadam/edit_status_padam', [EntriPadamController::class, ('editStatusPadam')]);
+Route::controller(UserController::class)->group(function () {
+    Route::get('/', 'index')->name('login');
+    Route::get('/register', 'register');
+    Route::post('/store', 'store');
+    Route::post('/proseslogin', 'authenticate')->name('authenticate');
+    Route::post('/logout', 'logout')->name('authenticate');
+});
+Route::controller(DataPelangganController::class)->group(function () {
+    Route::get('/beranda', 'index')->middleware('auth');
+    Route::get('/entripadam', 'entri_padam')->middleware('auth');
+    Route::get('/inputpelanggan', 'input_pelanggan');
+    Route::get('/inputpelanggan/export_excel', 'export_excel');
+    Route::post('/inputpelanggan/import_excel', 'import_excel');
+    Route::get('/inputpelanggan/hapus_pelanggan', 'hapusPelanggan');
+});
+Route::controller(EntriPadamController::class)->group(function () {
+    Route::get('/petapadam', 'index');
+    Route::post('/entripadam/insertentripadam', 'insertEntriPadam');
+    Route::get('/petapadam/hapus_entri', 'hapusEntriPadam');
+    Route::post('/petapadam/edit_status_padam', 'editStatusPadam');
+});
