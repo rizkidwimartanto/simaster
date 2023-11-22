@@ -192,6 +192,13 @@
                             </span>
                         </a>
                     </li>
+                    <li class="nav-item {{ $title == 'Transaksi Padam' ? 'active' : '' }}">
+                        <a class="nav-link" href="/transaksipadam">
+                            <span class="nav-link-title">
+                                Transaksi Padam
+                            </span>
+                        </a>
+                    </li>
                     <li class="nav-item {{ $title == 'Entri Padam' ? 'active' : '' }}">
                         <a class="nav-link" href="/entripadam">
                             <span class="nav-link-title">

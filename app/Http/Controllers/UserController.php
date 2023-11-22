@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class UserController extends Controller
 {
@@ -49,13 +50,14 @@ class UserController extends Controller
             'required' => ':attribute harus diisi',
             'max' => ':attribute maximal 255 kata',
             'min' => ':attribute minimal 2 kata',
+            'email' => ':attribute tidak valid',
         ];
         $validateData = $request->validate([
             'name' => 'required|max:255|min:2',
-            'email' => 'required|email:dns',
-            'password' => 'required|min:5|max:255'
-            
+            'email' => 'required|email:dns|unique:App\Models\User,email',
+            'password' => 'required|min:5|max:255|confirmed',
         ], $message);
+        // event(new Registered($validateData));
         $validateData['password'] = Hash::make($validateData['password']);
         User::create($validateData);
         return redirect('/');

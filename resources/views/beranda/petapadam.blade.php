@@ -1,128 +1,87 @@
 @extends('layout/templateberanda')
 @section('content')
-    <div class="container-fluid mt-3">
-        @if (session('success_nyala'))
-            <div class="alert alert-success">
-                {{ session('success_nyala') }}
-            </div>
-        @endif
-        @if (session('success_tambah'))
-            <div class="alert alert-success">
-                {{ session('success_tambah') }}
-            </div>
-        @endif
-        @if (session('error_tambah'))
-            <div class="alert alert-danger">
-                {{ session('error_tambah') }}
-            </div>
-        @endif
-        @if (session('error_nyala'))
-            <div class="alert alert-danger">
-                {{ session('error_nyala') }}
-            </div>
-        @endif
-        <div class="card p-3 mb-3">
-            <canvas id="myChart" style="width:100%;max-width:550px"></canvas>
-        </div>
-        <div class="col-lg-12">
-            <div class="card p-3">
-                <form action="/petapadam/edit_status_padam" method="post">
-                    {{ csrf_field() }}
-                    <input type="hidden" value="0" name="status" id="status">
-                    <button type="submit" class="btn btn-success col-12 mb-3">Hidupkan</button>
-                    <table class="table table-vcenter card-table table-bordered" id="tabel_data_padam">
-                        <thead>
-                            <tr>
-                                <th width="5%">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="checklist-padam">
-                                        </div>
-                                    </div>
-                                </th>
-                                <th>Penyulang</th>
-                                <th>Section</th>
-                                <th>Penyebab Padam</th>
-                                <th>Jam Padam</th>
-                                <th>Keterangan</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            @foreach ($data_padam as $s)
-                                <tr>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" style="position: relative; right: 10px;"
-                                                    type="checkbox" value="{{ $s->id }}" id="flexCheckDefault"
-                                                    name="check[]">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>{{ $s->penyulang }}</td>
-                                    <td>{{ $s->section }}</td>
-                                    <td>{{ $s->penyebab_padam }}</td>
-                                    <td>{{ $s->jam_padam }}</td>
-                                    <td>{{ $s->keterangan }}</td>
-                                    <td>{{ $s->status }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </form>
+    <div id="map"></div>
+    @foreach ($data_pelanggan as $data)
+        <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ $data->nama }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama }} </p>
+                        <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
+                        <p class="detail_pelanggan">No Telepon : {{ $data->no_telepon }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    @endforeach
     <script>
-        $(document).ready(function() {
-            $('#tabel_data_padam').DataTable({
-                scrollX: true,
-            });
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var checkboxGroups = [{
-                checklistAll: document.getElementById("checklist-padam"),
-                checkboxes: document.querySelectorAll('input[name="check[]"]')
-            }, ];
-
-            checkboxGroups.forEach(function(group) {
-                group.checklistAll.addEventListener("change", function() {
-                    group.checkboxes.forEach(function(checkbox) {
-                        checkbox.checked = group.checklistAll.checked;
-                    });
-                });
-            });
-        });
-    </script>
-    <script>
-        var KDS21 = @json($jumlah_KDS21);
-        var SYG14 = @json($jumlah_SYG14);
-        var xValues = ["KDS21", "SYG14"];
-        var yValues = [KDS21, SYG14];
-        var barColors = [
-            "#b91d47",
-            "#00aba9",
-        ];
-
-        new Chart("myChart", {
-            type: "pie",
-            data: {
-                labels: xValues,
-                datasets: [{
-                    backgroundColor: barColors,
-                    data: yValues
-                }]
-            },
-            options: {
-                title: {
-                    display: true,
-                    text: "Jumlah Padam Demak"
-                }
+        var map = L.map('map', {
+            fullscreenControl: true,
+            // OR
+            fullscreenControl: {
+                pseudoFullscreen: false // if true, fullscreen to page width and height
             }
+        }).setView([-6.90774243377773, 110.65198375582506], 10);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        L.control.locate({
+            position: 'topleft',
+            drawCircle: true,
+            follow: true,
+            setView: 'untilPan',
+            keepCurrentZoomLevel: true,
+            stopFollowingOnDrag: false,
+            markerStyle: {
+                weight: 1,
+                opacity: 0.8,
+                fillOpacity: 0.8
+            },
+            circleStyle: {
+                weight: 1,
+                clickable: false
+            },
+            icon: 'fa fa-location-arrow',
+            metric: false,
+            strings: {
+                title: "Temukan Lokasi Anda",
+                popup: "You are within {distance} {unit} from this point",
+                outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+            },
+            locateOptions: {
+                maxZoom: 16
+            }
+        }).addTo(map);
+
+        var customers = @json($data_pelanggan);
+        var padams = @json($data_padam);
+        customers.forEach(function(customer) {
+            padams.forEach(function(padam) {
+                if (padam.penyulang == customer.penyulang && padam.status == '1') {
+                    var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
+                    var circle = L.circle([customer.latitude, customer.longtitude], {
+                        color: 'red',
+                        fillColor: 'red',
+                        fillOpacity: 0.5,
+                        radius: 100
+                    }).addTo(map);
+                    marker.bindTooltip(customer.nama).openTooltip();
+                    marker.on('click', function() {
+                        $('#' + customer.id).modal('show');
+
+                        $('#customerName').text(customer.nama);
+                        $('#customerDetails').text('Alamat: ' + customer.alamat);
+                    });
+                }
+            })
         });
     </script>
 @endsection

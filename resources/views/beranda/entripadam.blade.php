@@ -7,7 +7,7 @@
                 <form action="/entripadam/insertentripadam" method="post">
                     @csrf
                     <div class="mb-3">
-                        <div class="form-label">Penyulang</div>
+                        <div class="form-label required">Penyulang</div>
                         <select class="form-select" id="penyulang" name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
                             <option value="KDS21">KDS21</option>
@@ -16,7 +16,7 @@
                         </select>
                     </div>
                     <div id="section-container" class="mb-3">
-                        <div class="form-label">Section</div>
+                        <div class="form-label required">Section</div>
                         <label class="form-check">
                             <div id="section-list">
 
@@ -24,15 +24,17 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                        <div class="form-label">Penyebab Padam</div>
+                        <div class="form-label required">Penyebab Padam</div>
                         <select class="form-select" name="penyebab_padam" id="penyebab_padam">
                             <option disabled selected>--- Pilih Penyebab Padam ---</option>
                             <option value="Pemeliharaan">Pemeliharaan</option>
                             <option value="Gangguan">Gangguan</option>
                         </select>
                     </div>
-                    <?php date_default_timezone_set('Asia/Jakarta'); ?>
-                    <input type="hidden" name="jam_padam" id="jam_padam" value="{{date("d-m-Y h:i:sa")}}">
+                    <div class="mb-3">
+                        <label class="form-label required">Jam Padam</label>
+                        <input type="datetime-local" class="form-control" name="jam_padam" id="jam_padam">
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
                         <textarea class="form-control" data-bs-toggle="autosize" rows="5" name="keterangan" id="keterangan"

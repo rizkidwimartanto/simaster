@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\DataPelangganController;
 use App\Http\Controllers\EntriPadamController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\Authenticate;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 
 /*
@@ -20,6 +21,19 @@ use Illuminate\Auth\Middleware\Authenticate;
 */
 
 Route::controller(UserController::class)->group(function () {
+    // Route::get('/email/verify', function () {
+    //     return view('auth.verify-email');
+    // })->middleware('auth')->name('verification.notice');
+    // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    //     $request->fulfill();
+     
+    //     return redirect('/');
+    // })->middleware(['auth', 'signed'])->name('verification.verify');
+    // Route::post('/email/verification-notification', function (Request $request) {
+    //     $request->user()->sendEmailVerificationNotification();
+     
+    //     return back()->with('message', 'Verification link sent!');
+    // })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
     Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');
     Route::post('/store', 'store');
@@ -35,8 +49,9 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/inputpelanggan/hapus_pelanggan', 'hapusPelanggan');
 });
 Route::controller(EntriPadamController::class)->group(function () {
-    Route::get('/petapadam', 'index');
+    Route::get('/petapadam', 'petapadam');
+    Route::get('/transaksipadam', 'index');
     Route::post('/entripadam/insertentripadam', 'insertEntriPadam');
-    Route::get('/petapadam/hapus_entri', 'hapusEntriPadam');
-    Route::post('/petapadam/edit_status_padam', 'editStatusPadam');
+    Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
+    Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');
 });
