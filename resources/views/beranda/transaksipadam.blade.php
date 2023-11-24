@@ -26,10 +26,57 @@
         </div>
         <div class="col-lg-12">
             <div class="card p-3">
-                <form action="/petapadam/edit_status_padam" method="post">
-                    {{ csrf_field() }}
+                <form action="/transaksipadam/edit_status_padam" method="post">
+                    @csrf
                     <input type="hidden" value="0" name="status" id="status">
-                    <button type="submit" class="btn btn-success col-12 mb-3">Hidupkan</button>
+                    <a href="#" class="btn btn-success col-12 mb-3" data-bs-toggle="modal"
+                        data-bs-target="#modal-report">
+                        Hidupkan
+                    </a>
+                    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Update</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Jam Nyala</label>
+                                                <input type="datetime-local" class="form-control @error('jam_nyala') is-invalid @enderror" name="jam_nyala"
+                                                    id="jam_nyala">
+                                                    @error('jam_nyala')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Penyebab Fix</label>
+                                                <textarea class="form-control @error('penyebab_fix') is-invalid @enderror" rows="3" name="penyebab_fix" id="penyebab_fix"></textarea>
+                                                @error('penyebab_fix')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
+                                    <button type="submit" class="btn btn-success ms-auto">
+                                        <i class="fa-solid fa-power-off" style="margin-right: 5px"></i> Hidupkan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table table-vcenter card-table table-bordered" id="tabel_data_padam">
                         <thead>
                             <tr>
@@ -43,7 +90,9 @@
                                 <th>Penyulang</th>
                                 <th>Section</th>
                                 <th>Penyebab Padam</th>
+                                <th>Penyebab Fix</th>
                                 <th>Jam Padam</th>
+                                <th>Jam Nyala</th>
                                 <th>Keterangan</th>
                                 <th>Status</th>
                             </tr>
@@ -64,7 +113,9 @@
                                     <td>{{ $s->penyulang }}</td>
                                     <td>{{ $s->section }}</td>
                                     <td>{{ $s->penyebab_padam }}</td>
-                                    <td>{{ date("d-m-Y H:i", strtotime(str_replace('T', ' ', $s->jam_padam))) }}</td>
+                                    <td>{{ $s->penyebab_fix }}</td>
+                                    <td>{{ $s->jam_padam }}</td>
+                                    <td>{{ $s->jam_nyala }}</td>
                                     <td>{{ $s->keterangan }}</td>
                                     <td>{{ $s->status }}</td>
                                 </tr>

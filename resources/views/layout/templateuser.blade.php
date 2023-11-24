@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{$title}}</title>
     <!-- CSS files -->
+    <link rel="shortcut icon" href="assets/img/Logo_PLN.png" type="image/x-icon">
     <link href="assets_template/dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
     <link href="assets_template/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
     <link href="assets_template/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>

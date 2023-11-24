@@ -18,12 +18,23 @@ class EntriPadamController extends Controller
             'data_padam' => EntriPadamModel::all(),
             'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'KDS21')->count() ,
             'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG14')->count() ,
-            'id' => DB::table('entri_padam')->select('id')->get()
         ];
         return view('beranda/transaksipadam', $data);
     }
     public function insertEntriPadam(Request $request)
     {
+        $message = [
+            'required' => ':attribute harus diisi',
+            'max' => ':attribute maximal 255 kata',
+            'min' => ':attribute minimal 2 kata',
+            'email' => ':attribute tidak valid',
+        ];
+        $validateData = $request->validate([
+            'penyulang' => 'required',
+            'section' => 'required',
+            'penyebab_padam' => 'required',
+            'jam_padam' => 'required',
+        ], $message);
         if ($request->has('section')) {
             $sections = $request->input('section');
             foreach ($sections as $section) {
@@ -34,6 +45,7 @@ class EntriPadamController extends Controller
                     'jam_padam' => date("d-m-Y H:i", strtotime(str_replace('T', ' ', $request->jam_padam))),
                     'keterangan' => $request->keterangan,
                     'status' => $request->status,
+                    $validateData
                 ]);
             }
             Session::flash('success_tambah', 'Data berhasil ditambah');
@@ -59,13 +71,27 @@ class EntriPadamController extends Controller
     }
     public function editStatusPadam(Request $request)
     {
+        $message = [
+            'required' => ':attribute harus diisi',
+            'max' => ':attribute maximal 255 kata',
+            'min' => ':attribute minimal 2 kata',
+            'email' => ':attribute tidak valid',
+        ];
+        $validateData = $request->validate([
+            'jam_nyala' => 'required',
+            'penyebab_fix' => 'required',
+        ], $message);
         $update_status = request('check');
+        $penyebab_fix = $request->input('penyebab_fix');
+        $jam_nyala = date("d-m-Y H:i", strtotime(str_replace('T', ' ', $request->input('jam_nyala'))));
         if ($update_status) {
             foreach ($update_status as $status) {
                 $status_update = EntriPadamModel::where('id', $status);
                 $status_update->update([
                     'status' => $request->status,
-                    'jam_nyala' => $request->jam_nyala
+                    'jam_nyala' => $jam_nyala,
+                    'penyebab_fix' => $penyebab_fix,
+                    $validateData
                 ]);
             }
             Session::flash('success_nyala', 'Section berhasil dinyalakan');

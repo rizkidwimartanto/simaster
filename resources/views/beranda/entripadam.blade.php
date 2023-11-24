@@ -8,12 +8,17 @@
                     @csrf
                     <div class="mb-3">
                         <div class="form-label required">Penyulang</div>
-                        <select class="form-select" id="penyulang" name="penyulang">
+                        <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang" name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
                             <option value="KDS21">KDS21</option>
                             <option value="SYG14">SYG14</option>
                             <option value="SYG09">SYG09</option>
                         </select>
+                        @error('penyulang')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div id="section-container" class="mb-3">
                         <div class="form-label required">Section</div>
@@ -25,15 +30,27 @@
                     </div>
                     <div class="mb-3">
                         <div class="form-label required">Penyebab Padam</div>
-                        <select class="form-select" name="penyebab_padam" id="penyebab_padam">
+                        <select class="form-select @error('penyebab_padam') is-invalid @enderror" name="penyebab_padam"
+                            id="penyebab_padam">
                             <option disabled selected>--- Pilih Penyebab Padam ---</option>
                             <option value="Pemeliharaan">Pemeliharaan</option>
                             <option value="Gangguan">Gangguan</option>
                         </select>
+                        @error('penyebab_padam')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label required">Jam Padam</label>
-                        <input type="datetime-local" class="form-control" name="jam_padam" id="jam_padam">
+                        <input type="datetime-local" class="form-control @error('jam_padam') is-invalid @enderror"
+                            name="jam_padam" id="jam_padam">
+                        @error('jam_padam')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
