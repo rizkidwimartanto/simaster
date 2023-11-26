@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganImport;
 use App\Models\DataPelangganModel;
 use App\Models\EntriPadamModel;
+use App\Models\PenyulangModel;
+use App\Models\SectionModel;
 use Illuminate\Support\Facades\Session;
 
 
@@ -26,7 +28,12 @@ class DataPelangganController extends Controller
     public function entri_padam(){
         $data = [
             'title' => 'Entri Padam', 
-            'data_pelanggan' => DataPelangganModel::all()
+            'data_pelanggan' => DataPelangganModel::all(),
+            'data_penyulang' => PenyulangModel::all(),
+            'data_section' => PenyulangModel::all(),
+            'SYG01' => SectionModel::where('penyulang', 'SYG01')->pluck('id_apkt'),
+            'SYG02' => SectionModel::where('penyulang', 'SYG02')->pluck('id_apkt'),
+            'SYG03' => SectionModel::where('penyulang', 'SYG03')->pluck('id_apkt'),
         ];
         return view('beranda/entripadam', $data);
     }

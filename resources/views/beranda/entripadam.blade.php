@@ -10,9 +10,9 @@
                         <div class="form-label required">Penyulang</div>
                         <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang" name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
-                            <option value="KDS21">KDS21</option>
-                            <option value="SYG14">SYG14</option>
-                            <option value="SYG09">SYG09</option>
+                            @foreach ($data_penyulang as $penyulang)
+                                <option value="{{ $penyulang->penyulang }}">{{ $penyulang->penyulang }}</option>
+                            @endforeach
                         </select>
                         @error('penyulang')
                             <div class="invalid-feedback">
@@ -66,18 +66,25 @@
         </div>
     </div>
     <script>
-        var sectionKDS21 = ['52.KDS.F21.Z02.S06', '52.KDS.F03.Z02.S04', '52.KDS.F21.Z02.S03', '52.KDS.F21.Z02.S04'];
-        var sectionSYG14 = ['52.SYG.F14.Z03.S04', '52.SYG.F14.Z03.S05'];
+        var syg01 = @json($SYG01);
+        var syg02 = @json($SYG02);
+        var syg03 = @json($SYG03);
 
         document.getElementById('penyulang').addEventListener('change', function() {
+            var sectionMapping = {
+                "SYG01": syg01,
+                "SYG02": syg02,
+                "SYG03": syg03,
+            };
             var selectedPenyulang = this.value;
+            var selectedSections = sectionMapping[selectedPenyulang] || [];
             var sectionContainer = document.getElementById('section-container');
             var sectionChecklist = document.getElementById('section-list');
 
             sectionChecklist.innerHTML = "";
 
-            if (selectedPenyulang === "KDS21") {
-                sectionKDS21.forEach(function(section) {
+            if (selectedSections.length > 0) {
+                selectedSections.forEach(function(section) {
                     var checkbox = document.createElement("input");
                     checkbox.type = "checkbox";
                     checkbox.name = "section[]";
@@ -92,23 +99,7 @@
                     sectionChecklist.appendChild(label);
                 });
                 sectionChecklist.appendChild(checkboxContainer);
-            } else if (selectedPenyulang == 'SYG14') {
-                sectionSYG14.forEach(function(section) {
-                    var checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.name = "section[]";
-                    checkbox.value = section;
-                    checkbox.classList.add("form-check-input");
-                    var label = document.createElement("span");
-                    label.classList.add("form-check-label");
-                    var checkboxContainer = document.createElement("label");
-                    checkboxContainer.classList.add("form-check");
-                    label.appendChild(checkbox);
-                    label.appendChild(document.createTextNode(section));
-                    sectionChecklist.appendChild(label);
-                });
-                sectionChecklist.appendChild(checkboxContainer);
-            } else {
+            }else {
                 sectionContainer.style.display = "none";
             }
         })

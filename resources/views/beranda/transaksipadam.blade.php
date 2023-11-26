@@ -46,9 +46,10 @@
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Jam Nyala</label>
-                                                <input type="datetime-local" class="form-control @error('jam_nyala') is-invalid @enderror" name="jam_nyala"
-                                                    id="jam_nyala">
-                                                    @error('jam_nyala')
+                                                <input type="datetime-local"
+                                                    class="form-control @error('jam_nyala') is-invalid @enderror"
+                                                    name="jam_nyala" id="jam_nyala">
+                                                @error('jam_nyala')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -58,12 +59,13 @@
                                         <div class="col-lg-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Penyebab Fix</label>
-                                                <textarea class="form-control @error('penyebab_fix') is-invalid @enderror" rows="3" name="penyebab_fix" id="penyebab_fix"></textarea>
+                                                <textarea class="form-control @error('penyebab_fix') is-invalid @enderror" rows="3" name="penyebab_fix"
+                                                    id="penyebab_fix"></textarea>
                                                 @error('penyebab_fix')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
                                         </div>
                                     </div>

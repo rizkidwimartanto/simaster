@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EntriPadamModel;
 use App\Models\DataPelangganModel;
+use App\Models\PenyulangModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Section;
@@ -16,8 +17,8 @@ class EntriPadamController extends Controller
         $data = [
             'title' => 'Transaksi Padam',
             'data_padam' => EntriPadamModel::all(),
-            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'KDS21')->count() ,
-            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG14')->count() ,
+            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'SYG01')->count() ,
+            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG02')->count() ,
         ];
         return view('beranda/transaksipadam', $data);
     }
@@ -91,7 +92,7 @@ class EntriPadamController extends Controller
                     'status' => $request->status,
                     'jam_nyala' => $jam_nyala,
                     'penyebab_fix' => $penyebab_fix,
-                    $validateData
+                    // $validateData
                 ]);
             }
             Session::flash('success_nyala', 'Section berhasil dinyalakan');
