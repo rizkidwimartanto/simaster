@@ -26,14 +26,17 @@ class DataPelangganController extends Controller
         return view('beranda/index', $data);
     }
     public function entri_padam(){
+        $data_penyulang = SectionModel::pluck('penyulang');
+        $data = [];
+        foreach($data_penyulang as $penyulang){
+            $data[$penyulang] = SectionModel::where('penyulang', $penyulang)->pluck('section');
+        }
         $data = [
             'title' => 'Entri Padam', 
+            'section' => $data,
             'data_pelanggan' => DataPelangganModel::all(),
-            'data_penyulang' => PenyulangModel::all(),
+            'data_penyulang' => SectionModel::pluck('penyulang'),
             'data_section' => PenyulangModel::all(),
-            'SYG01' => SectionModel::where('penyulang', 'SYG01')->pluck('id_apkt'),
-            'SYG02' => SectionModel::where('penyulang', 'SYG02')->pluck('id_apkt'),
-            'SYG03' => SectionModel::where('penyulang', 'SYG03')->pluck('id_apkt'),
         ];
         return view('beranda/entripadam', $data);
     }
