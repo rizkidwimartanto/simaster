@@ -66,16 +66,8 @@
         </div>
     </div>
     <script>
-        var syg01 = @json($SYG01);
-        var syg02 = @json($SYG02);
-        var syg03 = @json($SYG03);
-
         document.getElementById('penyulang').addEventListener('change', function() {
-            var sectionMapping = {
-                "SYG01": syg01,
-                "SYG02": syg02,
-                "SYG03": syg03,
-            };
+            var sectionMapping = @json($sectionData);
             var selectedPenyulang = this.value;
             var selectedSections = sectionMapping[selectedPenyulang] || [];
             var sectionContainer = document.getElementById('section-container');
@@ -103,32 +95,5 @@
                 sectionContainer.style.display = "none";
             }
         })
-    </script>
-    <script>
-        $("#simpan-button").click(function() {
-            var selectedSections = [];
-
-            // Mengambil semua checkbox yang dicentang
-            $(".form-check-input:checked").each(function() {
-                selectedSections.push($(this).val());
-            });
-
-            // Mengirim data menggunakan AJAX
-            $.ajax({
-                url: '/entripadam/insertentripadam',
-                type: 'POST',
-                data: {
-                    section: selectedSections
-                },
-                success: function(response) {
-                    console.log(response.message);
-                    // Di sini Anda dapat menangani respons atau memberikan pesan sukses kepada pengguna
-                },
-                error: function() {
-                    console.log('Terjadi kesalahan dalam pengiriman data.');
-                    // Di sini Anda dapat menangani kesalahan jika terjadi
-                }
-            });
-        });
     </script>
 @endsection
