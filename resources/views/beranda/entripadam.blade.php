@@ -68,7 +68,9 @@
     <script>
         document.getElementById('penyulang').addEventListener('change', function() {
             var sectionMapping = @json($sectionData);
+            var sectionMapping = @json($section);
             var selectedPenyulang = this.value;
+            // selectedPenyulang = selectedPenyulang.replace(/\s/g, '');
             var selectedSections = sectionMapping[selectedPenyulang] || [];
             var sectionContainer = document.getElementById('section-container');
             var sectionChecklist = document.getElementById('section-list');
@@ -84,6 +86,7 @@
                     checkbox.classList.add("form-check-input");
                     var label = document.createElement("span");
                     label.classList.add("form-check-label");
+                    label.classList.add("mb-2");
                     var checkboxContainer = document.createElement("label");
                     checkboxContainer.classList.add("form-check");
                     label.appendChild(checkbox);
@@ -91,7 +94,7 @@
                     sectionChecklist.appendChild(label);
                 });
                 sectionChecklist.appendChild(checkboxContainer);
-            }else {
+            } else {
                 sectionContainer.style.display = "none";
             }
         })
