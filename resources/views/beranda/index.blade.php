@@ -1,7 +1,6 @@
 @extends('layout/templateberanda')
 @section('content')
     <div id="map"></div>
-    
     @foreach ($data_pelanggan as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">

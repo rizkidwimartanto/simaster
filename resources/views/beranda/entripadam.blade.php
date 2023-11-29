@@ -10,8 +10,8 @@
                         <div class="form-label required">Penyulang</div>
                         <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang" name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
-                            @foreach ($data_penyulang as $penyulang)
-                                <option value="{{ $penyulang->penyulang }}">{{ $penyulang->penyulang }}</option>
+                            @foreach ($data_penyulang->unique() as $penyulang)
+                                <option value="{{ $penyulang }}">{{ $penyulang }}</option>
                             @endforeach
                         </select>
                         @error('penyulang')
@@ -67,10 +67,8 @@
     </div>
     <script>
         document.getElementById('penyulang').addEventListener('change', function() {
-            var sectionMapping = @json($sectionData);
             var sectionMapping = @json($section);
             var selectedPenyulang = this.value;
-            // selectedPenyulang = selectedPenyulang.replace(/\s/g, '');
             var selectedSections = sectionMapping[selectedPenyulang] || [];
             var sectionContainer = document.getElementById('section-container');
             var sectionChecklist = document.getElementById('section-list');

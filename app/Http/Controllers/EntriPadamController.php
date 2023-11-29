@@ -17,8 +17,8 @@ class EntriPadamController extends Controller
         $data = [
             'title' => 'Transaksi Padam',
             'data_padam' => EntriPadamModel::all(),
-            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'SYG01')->count() ,
-            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG02')->count() ,
+            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'SYG01')->count(),
+            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG02')->count(),
         ];
         return view('beranda/transaksipadam', $data);
     }
@@ -51,7 +51,7 @@ class EntriPadamController extends Controller
             }
             Session::flash('success_tambah', 'Data berhasil ditambah');
             return redirect('/transaksipadam');
-        }else{
+        } else {
             return redirect('/entripadam');
         }
     }
@@ -102,13 +102,14 @@ class EntriPadamController extends Controller
             return redirect('/transaksipadam');
         }
     }
-    public function petapadam(){
+    public function petapadam()
+    {
         $data = [
             'title' => 'Peta Padam',
             'data_padam' => EntriPadamModel::all(),
             'data_pelanggan' => DataPelangganModel::all(),
-            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'KDS21')->count() ,
-            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG14')->count() ,
+            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'KDS21')->count(),
+            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG14')->count(),
             'id' => DB::table('entri_padam')->select('id')->get(),
         ];
         return view('beranda/petapadam', $data);

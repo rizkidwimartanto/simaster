@@ -19,20 +19,21 @@ class DataPelangganController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Peta Pelanggan', 
+            'title' => 'Peta Pelanggan',
             'data_pelanggan' => DataPelangganModel::all(),
             'data_padam' => EntriPadamModel::all()
         ];
         return view('beranda/index', $data);
     }
-    public function entri_padam(){
+    public function entri_padam()
+    {
         $data_penyulang = SectionModel::pluck('penyulang');
         $penyulangs = [];
-        foreach($data_penyulang as $penyulang){
+        foreach ($data_penyulang as $penyulang) {
             $penyulangs[$penyulang] = SectionModel::where('penyulang', $penyulang)->pluck('id_apkt');
         }
         $data = [
-            'title' => 'Entri Padam', 
+            'title' => 'Entri Padam',
             'section' => $penyulangs,
             'data_pelanggan' => DataPelangganModel::all(),
             'data_penyulang' => SectionModel::pluck('penyulang'),
@@ -64,16 +65,17 @@ class DataPelangganController extends Controller
 
         return redirect('/inputpelanggan');
     }
-    public function hapusPelanggan(){
+    public function hapusPelanggan()
+    {
         $hapus_items = request('check');
-        if($hapus_items){
-            foreach($hapus_items as $hapus){
+        if ($hapus_items) {
+            foreach ($hapus_items as $hapus) {
                 $pelanggan = DataPelangganModel::find($hapus);
                 $pelanggan->delete();
             }
             Session::flash('success_hapus', 'Data berhasil dihapus');
             return redirect('/inputpelanggan');
-        }else{
+        } else {
             Session::flash('error_hapus', 'Data gagal dihapus');
             return redirect('/inputpelanggan');
         }

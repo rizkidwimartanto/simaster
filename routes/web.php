@@ -30,14 +30,14 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth');
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
-    Route::get('/inputpelanggan', 'input_pelanggan');
+    Route::get('/inputpelanggan', 'input_pelanggan')->middleware('auth');
     Route::get('/inputpelanggan/export_excel', 'export_excel');
     Route::post('/inputpelanggan/import_excel', 'import_excel');
     Route::get('/inputpelanggan/hapus_pelanggan', 'hapusPelanggan');
 });
 Route::controller(EntriPadamController::class)->group(function () {
-    Route::get('/petapadam', 'petapadam');
-    Route::get('/transaksipadam', 'index');
+    Route::get('/petapadam', 'petapadam')->middleware('auth');
+    Route::get('/transaksipadam', 'index')->middleware('auth');
     Route::post('/entripadam/insertentripadam', 'insertEntriPadam');
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');

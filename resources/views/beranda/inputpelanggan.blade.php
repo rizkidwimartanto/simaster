@@ -32,7 +32,7 @@
         <div class="card p-3">
             <form action="/inputpelanggan/hapus_pelanggan" method="get">
                 @csrf
-                <button type="button" class="btn btn-danger mt-2 mb-2 col-4" data-bs-toggle="modal"
+                {{-- <button type="button" class="btn btn-danger mt-2 mb-2 col-4" data-bs-toggle="modal"
                     data-bs-target="#modal-danger">
                     <i class="fa-solid fa-trash fa-lg"></i> Hapus
                 </button>
@@ -71,19 +71,19 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <table class="table table-vcenter card-table table-bordered" id="tabel_data_pelanggan">
                     <thead>
                         <tr>
-                            <th>
+                            {{-- <th>
                                 <div class="d-flex justify-content-center">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" id="checklist-pelanggan">
                                     </div>
                                 </div>
-                            </th>
+                            </th> --}}
                             <th>Aksi</th>
-                            <th>No</th>
+                            {{-- <th>No</th> --}}
                             <th>ID Pelanggan</th>
                             <th>Nama</th>
                             <th>Alamat</th>
@@ -94,7 +94,7 @@
                         <?php $i = 1; ?>
                         @foreach ($data_pelanggan as $s)
                             <tr>
-                                <td>
+                                {{-- <td>
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
                                             <input class="form-check-input" 
@@ -102,7 +102,7 @@
                                                 name="check[]">
                                         </div>
                                     </div>
-                                </td>
+                                </td> --}}
                                 <td>
                                     <a href="#" data-bs-target="#{{{$s->id}}}" data-bs-toggle="modal">
                                         <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
@@ -230,7 +230,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $i++ }}</td>
+                                {{-- <td>{{ $i++ }}</td> --}}
                                 <td>{{ $s->nama }}</td>
                                 <td>{{ $s->idpel }}</td>
                                 <td>{{ $s->alamat }}</td>
