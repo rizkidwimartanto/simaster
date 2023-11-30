@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Section;
 use Illuminate\Support\Facades\DB;
+use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Http;
+
 
 class EntriPadamController extends Controller
 {
@@ -55,6 +58,21 @@ class EntriPadamController extends Controller
             return redirect('/entripadam');
         }
     }
+    // Fungsi untuk mengirim pesan WhatsApp
+public function kirimPesanWhatsApp($nomorPonsel, $pesan)
+{
+    $twilio = new Client(config('services.twilio.sid'), config('services.twilio.token'));
+
+    foreach ($nomorPonsel as $nomor) {
+        $message = $twilio->messages
+            ->create("whatsapp:" . $nomor,
+                [
+                    "from" => "whatsapp:" . config('services.twilio.whatsapp_number'),
+                    "body" => $pesan,
+                ]
+            );
+    }
+}
     public function hapusEntriPadam()
     {
         $hapus_entri = request('check');

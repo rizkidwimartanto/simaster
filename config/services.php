@@ -29,5 +29,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
-
+    'twilio' => [
+        'sid' => env('AC2012d29d75db2ed14b5e2c86524bff0a'),
+        'token' => env('3c8ae894c91211efce88c9741fbd4478'),
+        'whatsapp_number' => env('+6289531584234'),
+    ],
 ];
