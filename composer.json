@@ -15,7 +15,8 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.4",
         "maatwebsite/excel": "*",
-        "nesbot/carbon": "^2.71"
+        "nesbot/carbon": "^2.71",
+        "twilio/sdk": "^7.12"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -62,6 +62,7 @@
                         <button type="submit" class="btn btn-outline-success col-12">Entri Padam</button>
                     </div>
                 </form>
+                <a href="/kirimwhatsapp" class="btn btn-primary">Kirim Whatsapp</a>
             </div>
         </div>
     </div>

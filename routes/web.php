@@ -30,6 +30,7 @@ Route::controller(UserController::class)->group(function () {
 Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth');
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
+    Route::get('/kirimwhatsapp', 'sendWhatsAppMessage');
     Route::get('/inputpelanggan', 'input_pelanggan')->middleware('auth');
     Route::get('/inputpelanggan/export_excel', 'export_excel');
     Route::post('/inputpelanggan/import_excel', 'import_excel');

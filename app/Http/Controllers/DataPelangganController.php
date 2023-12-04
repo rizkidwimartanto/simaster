@@ -12,6 +12,7 @@ use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
 use App\Models\SectionModel;
 use Illuminate\Support\Facades\Session;
+use Twilio\Rest\Client;
 
 
 class DataPelangganController extends Controller
@@ -40,6 +41,21 @@ class DataPelangganController extends Controller
             'data_section' => PenyulangModel::all(),
         ];
         return view('beranda/entripadam', $data);
+    }
+    public function sendWhatsAppMessage()
+    {
+        $sid    = "AC2012d29d75db2ed14b5e2c86524bff0a";
+        $token  = "90761ad2049194cb8e51695b4185ccbf";
+        $twilio = new Client($sid, $token);
+
+        $message = $twilio->messages
+        ->create("whatsapp:+6289531584234", // to
+          array(
+            "from" => "whatsapp:+6289668969721",
+            "body" => 'Your appointment is coming up on July 21 at 3PM'
+          )
+        );
+        print($message->sid);
     }
     public function input_pelanggan()
     {
