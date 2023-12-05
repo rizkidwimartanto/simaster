@@ -30,8 +30,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'twilio' => [
-        'sid' => env('SKdd7e44f65c9252019dcc21985baa005d'),
-        'token' => env('ohJtMDOAnX2mGXDHmqauBY4jeiRrQnW4'),
-        'whatsapp_number' => env('TWILIO_WHATSAPP_NUMBER'),
+        'sid' => env('AC2012d29d75db2ed14b5e2c86524bff0a'),
+        'token' => env('90761ad2049194cb8e51695b4185ccbf'),
+        'whatsapp_number' => env('6289531584234'),
     ],
 ];

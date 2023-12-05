@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\EntriPadamModel;
 use App\Models\DataPelangganModel;
-use App\Models\PenyulangModel;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Section;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+
 
 class EntriPadamController extends Controller
 {
