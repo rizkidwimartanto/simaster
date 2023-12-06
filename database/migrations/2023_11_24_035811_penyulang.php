@@ -17,7 +17,7 @@ class Penyulang extends Migration
             $table->id('id_penyulang');
             $table->text('gi')->nullable();
             $table->text('penyulang')->nullable();
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

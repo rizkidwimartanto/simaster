@@ -22,7 +22,7 @@ class EntriPadam extends Migration
             $table->text('jam_padam')->nullable();
             $table->text('jam_nyala')->nullable();
             $table->text('keterangan')->nullable();
-            $table->boolean('status')->nullable();
+            $table->text('status')->nullable();
             $table->timestamps(true);
         });
     }

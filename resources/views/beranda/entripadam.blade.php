@@ -1,6 +1,18 @@
 @extends('layout/templateberanda')
 @section('content')
-    <div class="container">
+    <div class="container-fluid mt-3">
+        <div class="col-lg-12">
+            <div class="card p-3 mt-4">
+                <form method="post" action="/entripadam/import_excel_penyulangsection" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="form-label"><b>Upload File Penyulang</b></div>
+                    <input type="file" name="file_penyulang" class="form-control" />
+                    <div class="form-label mt-2"><b>Upload File Section</b></div>
+                    <input type="file" name="file_section" class="form-control" />
+                    <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2">Import Excel</button>
+                </form>
+            </div>
+        </div>
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
                 <h2>Form Entri Padam</h2>
@@ -8,7 +20,8 @@
                     @csrf
                     <div class="mb-3">
                         <div class="form-label required">Penyulang</div>
-                        <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang" name="penyulang">
+                        <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang"
+                            name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
                             @foreach ($data_penyulang->unique() as $penyulang)
                                 <option value="{{ $penyulang }}">{{ $penyulang }}</option>
@@ -57,9 +70,9 @@
                         <textarea class="form-control" data-bs-toggle="autosize" rows="5" name="keterangan" id="keterangan"
                             placeholder="Masukkan Keterangan"></textarea>
                     </div>
-                    <input type="hidden" name="status" id="status" value="1">
+                    <input type="hidden" name="status" id="status" value="Padam">
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-outline-success col-12">Entri Padam</button>
+                        <button type="submit" class="btn btn-success col-12">Entri Padam</button>
                     </div>
                 </form>
                 <a href="/kirimwhatsapp" class="btn btn-primary">Kirim Whatsapp</a>

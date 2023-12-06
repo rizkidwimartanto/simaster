@@ -16,11 +16,11 @@ class Section extends Migration
         Schema::create('section', function (Blueprint $table) {
             $table->id('id_section');
             $table->text('penyulang')->nullable();
-            $table->text('section')->nullable();
+            $table->text('nama_section')->nullable();
             $table->text('id_vsld')->nullable();
             $table->text('id_apkt')->nullable();
             $table->text('unit')->nullable();
-            // $table->timestamps();
+            $table->timestamps();
         });
     }
 

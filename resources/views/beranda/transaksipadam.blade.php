@@ -28,7 +28,7 @@
             <div class="card p-3">
                 <form action="/transaksipadam/edit_status_padam" method="post">
                     @csrf
-                    <input type="hidden" value="0" name="status" id="status">
+                    <input type="hidden" value="Menyala" name="status" id="status">
                     <a href="#" class="btn btn-success col-12 mb-3" data-bs-toggle="modal"
                         data-bs-target="#modal-report">
                         Hidupkan
@@ -79,9 +79,10 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-vcenter card-table table-bordered" id="tabel_data_padam">
+                    <table class="table table-vcenter table-bordered" id="tabel_data_padam">
                         <thead>
                             <tr>
+                                <th width="1%">No</th>
                                 <th width="5%">
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
@@ -102,7 +103,22 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($data_padam as $s)
+                                @if ($s->status == "Menyala")
+                                    <tr style="visibility: hidden; position:absolute">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @else
                                 <tr>
+                                    <td>{{ $i }}</td>
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check">
@@ -121,6 +137,7 @@
                                     <td>{{ $s->keterangan }}</td>
                                     <td>{{ $s->status }}</td>
                                 </tr>
+                                @endif
                             @endforeach
                         </tbody>
                     </table>

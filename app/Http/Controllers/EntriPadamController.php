@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\EntriPadamModel;
 use App\Models\DataPelangganModel;
 use Illuminate\Support\Facades\Session;
+use App\Imports\DataPelangganImport;
+use App\Imports\PenyulangImport;
+use App\Imports\SectionImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Section;
 use Illuminate\Support\Facades\DB;
@@ -114,5 +118,22 @@ class EntriPadamController extends Controller
             'id' => DB::table('entri_padam')->select('id')->get(),
         ];
         return view('beranda/petapadam', $data);
+    }
+    public function import_excel_penyulangsection(Request $request)
+    {
+        $this->validate($request, [
+            'file_penyulang' => 'required|mimes:csv,xls,xlsx',
+            'file_section' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file_penyulang = $request->file('file_penyulang');
+        $file_section = $request->file('file_section');
+        $nama_file_penyulang = rand() . $file_penyulang->getClientOriginalName();
+        $nama_file_section = rand() . $file_section->getClientOriginalName();
+        $file_penyulang->move('file_penyulang', $nama_file_penyulang);
+        $file_section->move('file_section', $nama_file_section);
+        Excel::import(new PenyulangImport, public_path('/file_penyulang/' . $nama_file_penyulang));
+        Excel::import(new SectionImport, public_path('/file_section/' . $nama_file_section));
+
+        return redirect('/entripadam');
     }
 }
