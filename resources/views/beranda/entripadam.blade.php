@@ -1,22 +1,33 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
+        @if (session('success_import'))
+            <div class="alert alert-success">
+                {{ session('success_import') }}
+            </div>
+        @endif
+        @if (session('error_import'))
+            <div class="alert alert-danger">
+                {{ session('error_import') }}
+            </div>
+        @endif
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
                 <form method="post" action="/entripadam/import_excel_penyulangsection" enctype="multipart/form-data">
-                    {{ csrf_field() }}
+                    @csrf
                     <div class="form-label"><b>Upload File Penyulang</b></div>
-                    <input type="file" name="file_penyulang" class="form-control" />
+                    <input type="file" name="file_penyulang" class="form-control" required />
                     <div class="form-label mt-2"><b>Upload File Section</b></div>
-                    <input type="file" name="file_section" class="form-control" />
-                    <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2">Import Excel</button>
+                    <input type="file" name="file_section" class="form-control" required />
+                    <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i
+                            class="fa-solid fa-file-import fa-lg" style="margin-right: 5px"></i>Import Excel</button>
                 </form>
             </div>
         </div>
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
                 <h2>Form Entri Padam</h2>
-                <form action="/entripadam/insertentripadam" method="post">
+                <form action="/entripadam/insertentripadam" method="post" id="entriPadamForm">
                     @csrf
                     <div class="mb-3">
                         <div class="form-label required">Penyulang</div>
@@ -72,10 +83,11 @@
                     </div>
                     <input type="hidden" name="status" id="status" value="Padam">
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-success col-12">Entri Padam</button>
+                        <a href="www.facebook.com" target="_blank">
+                            <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-arrow-up-from-bracket fa-lg" style="margin-right: 5px;"></i>Entri Padam</button>
+                        </a>
                     </div>
                 </form>
-                <a href="/kirimwhatsapp" class="btn btn-primary">Kirim Whatsapp</a>
             </div>
         </div>
     </div>
@@ -110,5 +122,25 @@
                 sectionContainer.style.display = "none";
             }
         })
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#entriPadamForm").submit(function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Perform any necessary form validation here
+
+                // Open Facebook link in a new tab
+                window.open("https://www.facebook.com", "_blank");
+
+                // Continue with form submission after a delay
+                setTimeout(function() {
+                    // Submit the form
+                    $("#entriPadamForm").unbind('submit').submit();
+                }, 1000); // Delay for 1 second (adjust as needed)
+            });
+        });
     </script>
 @endsection

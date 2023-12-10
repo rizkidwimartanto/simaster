@@ -21,16 +21,16 @@
                 {{ session('error_nyala') }}
             </div>
         @endif
-        <div class="card p-3 mb-3">
+        {{-- <div class="card p-3 mb-3">
             <canvas id="myChart" style="width:100%;max-width:550px"></canvas>
-        </div>
+        </div> --}}
         <div class="col-lg-12">
             <div class="card p-3">
                 <form action="/transaksipadam/edit_status_padam" method="post">
                     @csrf
                     <input type="hidden" value="Menyala" name="status" id="status">
                     <a href="#" class="btn btn-success col-12 mb-3" data-bs-toggle="modal"
-                        data-bs-target="#modal-report">
+                        data-bs-target="#modal-report"><i class="fa-solid fa-power-off fa-lg" style="margin-right: 5px;"></i>
                         Hidupkan
                     </a>
                     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
@@ -73,13 +73,13 @@
                                 <div class="modal-footer">
                                     <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
                                     <button type="submit" class="btn btn-success ms-auto">
-                                        <i class="fa-solid fa-power-off" style="margin-right: 5px"></i> Hidupkan
+                                        <i class="fa-solid fa-power-off"></i> Hidupkan
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <table class="table table-vcenter table-bordered" id="tabel_data_padam">
+                    <table class="table table-vcenter table-bordered">
                         <thead>
                             <tr>
                                 <th width="1%">No</th>
@@ -93,9 +93,7 @@
                                 <th>Penyulang</th>
                                 <th>Section</th>
                                 <th>Penyebab Padam</th>
-                                <th>Penyebab Fix</th>
                                 <th>Jam Padam</th>
-                                <th>Jam Nyala</th>
                                 <th>Keterangan</th>
                                 <th>Status</th>
                             </tr>
@@ -103,10 +101,8 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($data_padam as $s)
-                                @if ($s->status == "Menyala")
-                                    <tr style="visibility: hidden; position:absolute">
-                                        <td></td>
-                                        <td></td>
+                                @if ($s->status == 'Menyala')
+                                    <tr style="visibility:hidden; position:absolute;">
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -117,17 +113,53 @@
                                         <td></td>
                                     </tr>
                                 @else
-                                <tr>
-                                    <td>{{ $i }}</td>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" style="position: relative; right: 10px;"
-                                                    type="checkbox" value="{{ $s->id }}" id="flexCheckDefault"
-                                                    name="check[]">
+                                    <tr>
+                                        <td>{{ $i++ }}</td>
+                                        <td>
+                                            <div class="d-flex justify-content-center">
+                                                <div class="form-check">
+                                                    <input class="form-check-input"
+                                                        type="checkbox" value="{{ $s->id }}" id="flexCheckDefault"
+                                                        name="check[]">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        <td>{{ $s->penyulang }}</td>
+                                        <td>{{ $s->section }}</td>
+                                        <td>{{ $s->penyebab_padam }}</td>
+                                        <td>{{ $s->jam_padam }}</td>
+                                        <td>{{ $s->keterangan }}</td>
+                                        <td>{{ $s->status }}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="card p-3 mt-4">
+                <table class="table table-vcenter table-bordered" id="tabel_data_padam">
+                    <thead>
+                        <tr>
+                            <th width="1%">No</th>
+                            <th>Penyulang</th>
+                            <th>Section</th>
+                            <th>Penyebab Padam</th>
+                            <th>Penyebab Fix</th>
+                            <th>Jam Padam</th>
+                            <th>Jam Nyala</th>
+                            <th>Keterangan</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; ?>
+                        @foreach ($data_padam as $s)
+                            @if ($s->status == 'Menyala')
+                                <tr>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $s->penyulang }}</td>
                                     <td>{{ $s->section }}</td>
                                     <td>{{ $s->penyebab_padam }}</td>
@@ -137,11 +169,10 @@
                                     <td>{{ $s->keterangan }}</td>
                                     <td>{{ $s->status }}</td>
                                 </tr>
-                                @endif
-                            @endforeach
-                        </tbody>
-                    </table>
-                </form>
+                            @endif
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

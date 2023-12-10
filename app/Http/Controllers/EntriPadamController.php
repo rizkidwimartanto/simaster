@@ -83,7 +83,7 @@ class EntriPadamController extends Controller
             'min' => ':attribute minimal 2 kata',
             'email' => ':attribute tidak valid',
         ];
-        $validateData = $request->validate([
+        $request->validate([
             'jam_nyala' => 'required',
             'penyebab_fix' => 'required',
         ], $message);

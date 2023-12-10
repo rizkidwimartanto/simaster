@@ -1,17 +1,6 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
-        <form method="post" action="/inputpelanggan/import_excel" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-label">Custom File Input</div>
-            <input type="file" name="file" class="form-control" />
-            <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2">Import Excel</button>
-        </form>
-        @if (session('success_hapus'))
-            <div class="alert alert-success">
-                {{ session('success_hapus') }}
-            </div>
-        @endif
         @if (session('success_import'))
             <div class="alert alert-success">
                 {{ session('success_import') }}
@@ -22,11 +11,17 @@
                 {{ session('error_import') }}
             </div>
         @endif
-        @if (session('error_hapus'))
+        @if (session('validate_file'))
             <div class="alert alert-danger">
-                {{ session('error_hapus') }}
+                {{ session('validate_file') }}
             </div>
         @endif
+        <form method="post" action="/inputpelanggan/import_excel" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form-label">Custom File Input</div>
+            <input type="file" name="file" class="form-control" required />
+            <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-file-import fa-lg" style="margin-right: 5px"></i>Import Excel</button>
+        </form>
 
         <div class="col-lg-12">
             <div class="card p-3">

@@ -17,7 +17,10 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return view('auth.login');
+        $data = [
+            'title' => 'Login'
+        ];
+        return view('auth.login', $data);
     }
 
     /**
@@ -32,7 +35,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect('/beranda');
     }
 
     /**

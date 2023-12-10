@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DataPelangganController;
 use App\Http\Controllers\EntriPadamController;
 use App\Http\Controllers\UserController;
@@ -19,7 +21,15 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::controller(AuthenticatedSessionController::class)->group(function(){
+//     Route::get('/', 'create')->name('login');
+//     Route::post('/store', 'store');
+//     Route::get('/destroy', 'destroy');
+// });
+// Route::controller(RegisteredUserController::class)->group(function(){
+//     Route::get('/create', 'create')->name('register');
+//     Route::get('/store', 'store')->name('store');
+// });
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');
