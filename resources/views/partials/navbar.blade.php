@@ -168,7 +168,7 @@
                     <a href="#" class="dropdown-item">Feedback</a>
                     <div class="dropdown-divider"></div>
                     <a href="assets_template/settings.html" class="dropdown-item">Settings</a>
-                    <form action="/destroy" method="get">
+                    <form action="/logout" method="get">
                         @csrf
                         <button type="submit" href="/" class="dropdown-item">Logout</button>
                     </form>

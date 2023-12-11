@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +30,17 @@ use Illuminate\Http\Request;
 //     Route::get('/create', 'create')->name('register');
 //     Route::get('/store', 'store')->name('store');
 // });
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');
     Route::post('/store', 'store');
     Route::post('/proseslogin', 'authenticate')->name('authenticate');
-    Route::post('/logout', 'logout')->name('authenticate');
+    Route::get('/logout', 'logout')->name('authenticate');
 });
 Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth');
@@ -54,3 +59,5 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');
 });
+// Auth::routes();
+// Auth::routes(['verify' => true]);

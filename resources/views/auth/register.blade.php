@@ -1,62 +1,80 @@
-{{-- <x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+{{-- @extends('layouts.app')
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required  />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout> --}}
+        </div>
+    </div>
+</div>
+@endsection --}}
 @extends('layout.templateuser')
 @section('content')
     <script src="./dist/js/demo-theme.min.js?1684106062"></script>
@@ -66,14 +84,14 @@
                 <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
                         alt=""></a>
             </div>
-            <form class="card card-md" action="/store" method="post" novalidate>
+            <form class="card card-md" action="/store" method="post" autocomplete="off" novalidate>
                 @csrf
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Create new account</h2>
                     <div class="mb-3">
                         <label class="form-label required">Name</label>
-                        <input type="text" name="name" id="name" value="{{ old('name') }}"
-                            class="form-control @error('name') is-invalid @enderror" placeholder="Enter Name">
+                        <input type="text" name="name" id="name" value="{{old('name')}}"
+                            class="form-control @error('name') is-invalid @enderror" placeholder="Enter Name" autocomplete="name" autofocus>
                         @error('name')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -81,9 +99,9 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label required" for="email">Email Address</label>
-                        <input type="email" name="email" id="email" value="{{ old('email') }}"
-                            class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email">
+                        <label class="form-label required">Email Address</label>
+                        <input type="email" name="email" id="email" value="{{old('email')}}"
+                            class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email" autocomplete="email">
                         @error('email')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -93,10 +111,10 @@
                     <div class="mb-3">
                         <label class="form-label required">Password</label>
                         {{-- <div class="input-group input-group-flat"> --}}
-                        <input type="password" name="password" id="password"
-                            class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                            autocomplete="off">
-                        {{-- <span class="input-group-text">
+                            <input type="password" name="password" id="password"
+                                class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                autocomplete="off">
+                            {{-- <span class="input-group-text">
                                     <a href="#" class="link-secondary" title="Show password"
                                         data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -109,20 +127,20 @@
                                         </svg>
                                     </a>
                                 </span> --}}
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         {{-- </div> --}}
                     </div>
                     <div class="mb-3">
                         <label class="form-label required">Confirm Password</label>
                         {{-- <div class="input-group input-group-flat"> --}}
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            class="form-control @error('password') is-invalid @enderror" placeholder="Password"
-                            autocomplete="off">
-                        {{-- <span class="input-group-text">
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                autocomplete="off">
+                            {{-- <span class="input-group-text">
                                     <a href="#" class="link-secondary" title="Show password"
                                         data-bs-toggle="tooltip"><!-- Download SVG icon from http://tabler-icons.io/i/eye -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -135,11 +153,11 @@
                                         </svg>
                                     </a>
                                 </span> --}}
-                        @error('password')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                            @error('password')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         {{-- </div> --}}
                     </div>
                     {{-- <div class="mb-3">

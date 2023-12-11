@@ -13,6 +13,8 @@
                         <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama }} </p>
                         <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
                         <p class="detail_pelanggan">No Telepon : {{ $data->no_telepon }}</p>
+                        <p class="detail_pelanggan">Maps : <a href="{{ $data->maps }}"
+                                target="_blank">{{ $data->maps }}</a></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -24,9 +26,8 @@
     <script>
         var map = L.map('map', {
             fullscreenControl: true,
-            // OR
             fullscreenControl: {
-                pseudoFullscreen: false // if true, fullscreen to page width and height
+                pseudoFullscreen: false
             }
         }).setView([-6.90774243377773, 110.65198375582506], 10);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -65,8 +66,10 @@
         var padams = @json($data_padam);
         customers.forEach(function(customer) {
             padams.forEach(function(padam) {
-                if (padam.penyulang == customer.penyulang && padam.status == '1') {
-                    var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
+                if (padam.penyulang == customer.penyulang && padam.status == 'Padam') {
+                    var marker = L.marker([customer.latitude, customer.longtitude], {
+                        title: customer.nama
+                    }).addTo(map);
                     var circle = L.circle([customer.latitude, customer.longtitude], {
                         color: 'red',
                         fillColor: 'red',

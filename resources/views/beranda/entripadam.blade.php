@@ -133,7 +133,7 @@
                 // Perform any necessary form validation here
 
                 // Open Facebook link in a new tab
-                window.open("https://www.facebook.com", "_blank");
+                window.open("https://app.whacenter.com/blast", "_blank");
 
                 // Continue with form submission after a delay
                 setTimeout(function() {

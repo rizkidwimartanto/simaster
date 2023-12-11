@@ -151,7 +151,7 @@
                                                         <input value="{{$s->penyulang}}" class="form-control" readonly>
                                                         </div>
                                                     </div>
-                                                    <div class="mb-3 col-lg-4">
+                                                    <div class="mb-3 col-lg-12">
                                                         <label class="form-label">nama_section</label>
                                                         <div class="input-group input-group-flat">
                                                         <input value="{{$s->nama_section}}" class="form-control" readonly>

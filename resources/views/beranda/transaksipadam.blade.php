@@ -86,7 +86,7 @@
                                 <th width="5%">
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="checklist-padam">
+                                            <input class="form-check-input mt-2" type="checkbox" id="checklist-padam">
                                         </div>
                                     </div>
                                 </th>
