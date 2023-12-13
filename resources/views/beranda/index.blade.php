@@ -69,8 +69,8 @@
             if (padams == "") {
                 var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
                 var circle = L.circle([customer.latitude, customer.longtitude], {
-                    color: 'black',
-                    fillColor: 'black',
+                    color: 'green',
+                    fillColor: 'green',
                     fillOpacity: 0.5,
                     radius: 100
                 }).addTo(map);
@@ -93,8 +93,8 @@
                         }).addTo(map);
                     } else {
                         var circle = L.circle([customer.latitude, customer.longtitude], {
-                            color: 'black',
-                            fillColor: 'black',
+                            color: 'green',
+                            fillColor: 'green',
                             fillOpacity: 0.5,
                             radius: 100
                         }).addTo(map);

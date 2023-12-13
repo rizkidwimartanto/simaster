@@ -37,18 +37,17 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
                 'maps' => $row[8],
                 'latitude' => $row[9],
                 'longtitude' => $row[10],
-                'no_telepon' => $row[11],
-                'unitulp' => $row[12],
-                'tarif' => $row[13],
-                'daya' => $row[14],
-                'kogol' => $row[15],
-                'fakmkwh' => $row[16], 
-                'rpbp' => $row[17], 
-                'rpujl' => $row[18], 
-                'nomor_kwh' => $row[19],  
-                'penyulang' => $row[20], 
-                'nama_section' => $row[21],
-                'tipe_kubikel' => $row[22],
+                'unitulp' => $row[11],
+                'tarif' => $row[12],
+                'daya' => $row[13],
+                'kogol' => $row[14],
+                'fakmkwh' => $row[15], 
+                'rpbp' => $row[16], 
+                'rpujl' => $row[17], 
+                'nomor_kwh' => $row[18],  
+                'penyulang' => $row[19], 
+                'nama_section' => $row[20],
+                'tipe_kubikel' => $row[21],
             ]);
         }
     }
@@ -63,7 +62,7 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
     }
     public function sheets(): array{
         return[
-            'Agustus 2023' => new DataPelangganImport()
+            'Data Pelanggan TM' => new DataPelangganImport()
         ];
     }
     public function startRow(): int

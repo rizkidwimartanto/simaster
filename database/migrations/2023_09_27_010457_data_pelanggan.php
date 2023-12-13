@@ -21,7 +21,6 @@ class DataPelanggan extends Migration
             $table->text('maps')->nullable();
             $table->text('latitude')->nullable();
             $table->text('longtitude')->nullable();
-            $table->text('no_telepon')->nullable();
             $table->text('unitulp')->nullable();
             $table->text('tarif')->nullable();
             $table->text('daya')->nullable();

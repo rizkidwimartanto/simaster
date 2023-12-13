@@ -30,9 +30,6 @@ use Illuminate\Support\Facades\Auth;
 //     Route::get('/create', 'create')->name('register');
 //     Route::get('/store', 'store')->name('store');
 // });
-Route::get('/email/verify', function(){
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');

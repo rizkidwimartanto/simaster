@@ -21,16 +21,17 @@
                 {{ session('error_nyala') }}
             </div>
         @endif
-        {{-- <div class="card p-3 mb-3">
+        <div class="card p-3 mb-3">
             <canvas id="myChart" style="width:100%;max-width:550px"></canvas>
-        </div> --}}
+        </div>
         <div class="col-lg-12">
             <div class="card p-3">
                 <form action="/transaksipadam/edit_status_padam" method="post">
                     @csrf
                     <input type="hidden" value="Menyala" name="status" id="status">
                     <a href="#" class="btn btn-success col-12 mb-3" data-bs-toggle="modal"
-                        data-bs-target="#modal-report"><i class="fa-solid fa-power-off fa-lg" style="margin-right: 5px;"></i>
+                        data-bs-target="#modal-report"><i class="fa-solid fa-power-off fa-lg"
+                            style="margin-right: 5px;"></i>
                         Hidupkan
                     </a>
                     <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
@@ -79,7 +80,10 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-vcenter table-bordered">
+                    @foreach ($sections as $section)
+                      <p>{{ $section->count }}</p>
+                    @endforeach
+                    <table class="table table-vcenter table-bordered" id="tabel_data_padam">
                         <thead>
                             <tr>
                                 <th width="1%">No</th>
@@ -118,9 +122,8 @@
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <div class="form-check">
-                                                    <input class="form-check-input"
-                                                        type="checkbox" value="{{ $s->id }}" id="flexCheckDefault"
-                                                        name="check[]">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        value="{{ $s->id }}" id="flexCheckDefault" name="check[]">
                                                 </div>
                                             </div>
                                         </td>
@@ -140,7 +143,7 @@
         </div>
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
-                <table class="table table-vcenter table-bordered" id="tabel_data_padam">
+                <table class="table table-vcenter table-bordered" id="tabel_data_menyala">
                     <thead>
                         <tr>
                             <th width="1%">No</th>
@@ -180,6 +183,13 @@
         $(document).ready(function() {
             $('#tabel_data_padam').DataTable({
                 scrollX: true,
+                'pageLength': 500,
+                'lengthMenu': [10, 25, 50, 100, 200, 500]
+            });
+        });
+        $(document).ready(function() {
+            $('#tabel_data_menyala').DataTable({
+                scrollX: true,
             });
         });
     </script>
@@ -200,8 +210,6 @@
         });
     </script>
     <script>
-        var KDS21 = @json($jumlah_KDS21);
-        var SYG14 = @json($jumlah_SYG14);
         var xValues = ["KDS21", "SYG14"];
         var yValues = [KDS21, SYG14];
         var barColors = [

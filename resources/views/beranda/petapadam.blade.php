@@ -66,7 +66,7 @@
         var padams = @json($data_padam);
         customers.forEach(function(customer) {
             padams.forEach(function(padam) {
-                if (padam.penyulang == customer.penyulang && padam.status == 'Padam') {
+                if (padam.section == customer.nama_section && padam.status == 'Padam') {
                     var marker = L.marker([customer.latitude, customer.longtitude], {
                         title: customer.nama
                     }).addTo(map);

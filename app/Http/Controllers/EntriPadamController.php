@@ -11,6 +11,7 @@ use App\Imports\SectionImport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Section;
+use EntriPadam;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
@@ -19,11 +20,14 @@ class EntriPadamController extends Controller
 {
     public function index()
     {
+        $sections = EntriPadamModel::groupBy('section')
+            ->select('section', DB::raw('count(*) as count'))
+            ->get();
         $data = [
             'title' => 'Transaksi Padam',
             'data_padam' => EntriPadamModel::all(),
-            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'SYG01')->count(),
-            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG02')->count(),
+            'nama_pelanggan' => DataPelangganModel::pluck('nama'),
+            'sections' => $sections
         ];
         return view('beranda/transaksipadam', $data);
     }
@@ -113,8 +117,6 @@ class EntriPadamController extends Controller
             'title' => 'Peta Padam',
             'data_padam' => EntriPadamModel::all(),
             'data_pelanggan' => DataPelangganModel::all(),
-            'jumlah_KDS21' => EntriPadamModel::where('penyulang', 'KDS21')->count(),
-            'jumlah_SYG14' => EntriPadamModel::where('penyulang', 'SYG14')->count(),
             'id' => DB::table('entri_padam')->select('id')->get(),
         ];
         return view('beranda/petapadam', $data);
