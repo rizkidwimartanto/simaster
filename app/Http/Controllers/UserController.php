@@ -60,9 +60,9 @@ class UserController extends Controller
         // event(new Registered($validateData));
         $validateData['password'] = Hash::make($validateData['password']);
         $user = User::create($validateData);
-        event(new Registered($user));
-        Auth::login($user);
-        return redirect('/');
+        // event(new Registered($user));
+        // Auth::login($user);
+        return redirect('/email/verify');
     }
     public function logout(Request $request)
     {

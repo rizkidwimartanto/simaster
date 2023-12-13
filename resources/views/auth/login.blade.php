@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="text-center text-muted mt-3">
-                            Don't have account yet? <a href="/create" tabindex="-1">Sign up</a>
+                            Don't have account yet? <a href="/register" tabindex="-1">Sign up</a>
                         </div>
                     </div>
                 </div>

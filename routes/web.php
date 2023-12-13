@@ -30,11 +30,9 @@ use Illuminate\Support\Facades\Auth;
 //     Route::get('/create', 'create')->name('register');
 //     Route::get('/store', 'store')->name('store');
 // });
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-
-    return redirect('/');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('/email/verify', function(){
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');
@@ -59,5 +57,3 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');
 });
-// Auth::routes();
-// Auth::routes(['verify' => true]);
