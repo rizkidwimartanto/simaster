@@ -1,5 +1,16 @@
 @extends('layout/templateberanda')
 @section('content')
+    @php
+        $uniqueSections = array_unique($sections);
+        $uniqueSectionPelanggan = array_unique($data_section);
+    @endphp
+
+    @foreach ($uniqueSections as $section)
+        @foreach ($uniqueSectionPelanggan as $item_section)
+            <p>{{ $item_section }} : {{ $section }}</p>
+        @endforeach
+    @endforeach
+
     <div class="container-fluid mt-3">
         @if (session('success_nyala'))
             <div class="alert alert-success">
@@ -74,15 +85,12 @@
                                 <div class="modal-footer">
                                     <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">Cancel</a>
                                     <button type="submit" class="btn btn-success ms-auto">
-                                        <i class="fa-solid fa-power-off"></i> Hidupkan
+                                        <i class="fa-solid fa-power-off" style="margin-right: 5px;"></i> Hidupkan
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @foreach ($sections as $section)
-                      <p>{{ $section->count }}</p>
-                    @endforeach
                     <table class="table table-vcenter table-bordered" id="tabel_data_padam">
                         <thead>
                             <tr>

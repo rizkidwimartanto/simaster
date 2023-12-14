@@ -20,13 +20,15 @@ class EntriPadamController extends Controller
 {
     public function index()
     {
-        $sections = EntriPadamModel::groupBy('section')
-            ->select('section', DB::raw('count(*) as count'))
-            ->get();
+        $data_section = EntriPadamModel::pluck('section');
+        $sections = [];
+        foreach ($data_section as $section) {
+            $sections[$section] = EntriPadamModel::where('section', $section)->count();
+        }
         $data = [
             'title' => 'Transaksi Padam',
             'data_padam' => EntriPadamModel::all(),
-            'nama_pelanggan' => DataPelangganModel::pluck('nama'),
+            'data_section' => $data_section,
             'sections' => $sections
         ];
         return view('beranda/transaksipadam', $data);
