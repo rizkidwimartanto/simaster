@@ -20,17 +20,36 @@ class EntriPadamController extends Controller
 {
     public function index()
     {
-        $data_section = EntriPadamModel::pluck('section');
-        $sections = [];
-        foreach ($data_section as $section) {
-            $sections[$section] = EntriPadamModel::where('section', $section)->count();
+        $jumlahPerSection = DB::table('entri_padam')
+            ->select('section', DB::raw('COUNT(*) as jumlah'))
+            ->groupBy('section')
+            ->get();
+        // Misalnya, ambil jumlah untuk section dengan indeks 0
+        $jumlahSectionIndeks0 = $jumlahPerSection[0]->jumlah;
+        $data_padam = EntriPadamModel::all();
+        $data_menyala = DB::table('entri_padam')
+            ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
+            ->select('entri_padam.*', 'data_pelanggan.nama')
+            ->where('entri_padam.status', '=', 'Menyala')
+            ->get();
+
+        $unique_nama = [];
+        $filtered_data_menyala = [];
+
+        foreach ($data_menyala as $s) {
+            if (!in_array($s->nama, $unique_nama)) {
+                $filtered_data_menyala[] = $s;
+                $unique_nama[] = $s->nama;
+            }
         }
+
         $data = [
             'title' => 'Transaksi Padam',
-            'data_padam' => EntriPadamModel::all(),
-            'data_section' => $data_section,
-            'sections' => $sections
+            'data_padam' => $data_padam,
+            'data_menyala' => $data_menyala,
+            'jumlah_section_indeks_0' => $jumlahSectionIndeks0,
         ];
+
         return view('beranda/transaksipadam', $data);
     }
     public function insertEntriPadam(Request $request)

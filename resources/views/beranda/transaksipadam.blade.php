@@ -1,16 +1,5 @@
 @extends('layout/templateberanda')
 @section('content')
-    @php
-        $uniqueSections = array_unique($sections);
-        $uniqueSectionPelanggan = array_unique($data_section);
-    @endphp
-
-    @foreach ($uniqueSections as $section)
-        @foreach ($uniqueSectionPelanggan as $item_section)
-            <p>{{ $item_section }} : {{ $section }}</p>
-        @endforeach
-    @endforeach
-
     <div class="container-fluid mt-3">
         @if (session('success_nyala'))
             <div class="alert alert-success">
@@ -155,6 +144,8 @@
                     <thead>
                         <tr>
                             <th width="1%">No</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Kali Padam</th>
                             <th>Penyulang</th>
                             <th>Section</th>
                             <th>Penyebab Padam</th>
@@ -167,20 +158,20 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($data_padam as $s)
-                            @if ($s->status == 'Menyala')
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $s->penyulang }}</td>
-                                    <td>{{ $s->section }}</td>
-                                    <td>{{ $s->penyebab_padam }}</td>
-                                    <td>{{ $s->penyebab_fix }}</td>
-                                    <td>{{ $s->jam_padam }}</td>
-                                    <td>{{ $s->jam_nyala }}</td>
-                                    <td>{{ $s->keterangan }}</td>
-                                    <td>{{ $s->status }}</td>
-                                </tr>
-                            @endif
+                        @foreach ($data_menyala as $s)
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $s->nama }}</td>
+                                <td>{{$jumlah_section_indeks_0}}</td>
+                                <td>{{ $s->penyulang }}</td>
+                                <td>{{ $s->section }}</td>
+                                <td>{{ $s->penyebab_padam }}</td>
+                                <td>{{ $s->penyebab_fix }}</td>
+                                <td>{{ $s->jam_padam }}</td>
+                                <td>{{ $s->jam_nyala }}</td>
+                                <td>{{ $s->keterangan }}</td>
+                                <td>{{ $s->status }}</td>
+                            </tr>
                         @endforeach
                     </tbody>
                 </table>
