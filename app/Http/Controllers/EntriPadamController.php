@@ -20,37 +20,25 @@ class EntriPadamController extends Controller
 {
     public function index()
     {
-        $jumlahPerSection = DB::table('entri_padam')
-            ->select('section', DB::raw('COUNT(*) as jumlah'))
-            ->groupBy('section')
-            ->get();
-        // Misalnya, ambil jumlah untuk section dengan indeks 0
-        $jumlahSectionIndeks0 = $jumlahPerSection[0]->jumlah;
         $data_padam = EntriPadamModel::all();
-        $data_menyala = DB::table('entri_padam')
+        $rekap_pelanggan = DB::table('entri_padam')
             ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
-            ->select('entri_padam.*', 'data_pelanggan.nama')
-            ->where('entri_padam.status', '=', 'Menyala')
+            ->select('data_pelanggan.nama', 'entri_padam.section', DB::raw('COUNT(*) as jumlah_entri'))
+            ->groupBy('data_pelanggan.nama', 'entri_padam.section')
+            ->where(function ($query) {
+                $query->where('entri_padam.status', '=', 'Menyala')
+                    ->orWhere('entri_padam.status', '=', 'Padam');
+            })
             ->get();
-
-        $unique_nama = [];
-        $filtered_data_menyala = [];
-
-        foreach ($data_menyala as $s) {
-            if (!in_array($s->nama, $unique_nama)) {
-                $filtered_data_menyala[] = $s;
-                $unique_nama[] = $s->nama;
-            }
-        }
 
         $data = [
             'title' => 'Transaksi Padam',
             'data_padam' => $data_padam,
-            'data_menyala' => $data_menyala,
-            'jumlah_section_indeks_0' => $jumlahSectionIndeks0,
+            'rekap_pelanggan' => $rekap_pelanggan,
         ];
 
         return view('beranda/transaksipadam', $data);
+        return response()->json($data);
     }
     public function insertEntriPadam(Request $request)
     {

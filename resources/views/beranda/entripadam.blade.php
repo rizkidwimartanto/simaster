@@ -20,7 +20,7 @@
                     <div class="form-label mt-2"><b>Upload File Section</b></div>
                     <input type="file" name="file_section" class="form-control" required />
                     <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i
-                            class="fa-solid fa-file-import fa-lg" style="margin-right: 5px"></i>Import Excel</button>
+                            class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import Excel</button>
                 </form>
             </div>
         </div>
@@ -84,7 +84,7 @@
                     <input type="hidden" name="status" id="status" value="Padam">
                     <div class="mb-3">
                         <a href="www.facebook.com" target="_blank">
-                            <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-arrow-up-from-bracket fa-lg" style="margin-right: 5px;"></i>Entri Padam</button>
+                            <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-plus fa-lg" style="margin-right: 5px;"></i>Entri Padam</button>
                         </a>
                     </div>
                 </form>

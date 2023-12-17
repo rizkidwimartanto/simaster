@@ -27,6 +27,7 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "chart.js": "^4.4.1",
         "leaflet-search": "^4.0.0",
         "leaflet.pinsearch": "^1.0.4"
     }

@@ -52,7 +52,7 @@ class DataPelangganController extends Controller
     }
     public function export_excel()
     {
-        return Excel::download(new DataPelangganExport, 'PELANGGAN TM UP3 DEMAK AGT 23.xlsx');
+        return Excel::download(new DataPelangganExport, 'PELANGGAN TM UP3 DEMAK.xlsx');
     }
     public function import_excel(Request $request)
     {

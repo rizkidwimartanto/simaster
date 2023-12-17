@@ -22,7 +22,27 @@
             </div>
         @endif
         <div class="card p-3 mb-3">
-            <canvas id="myChart" style="width:100%;max-width:550px"></canvas>
+            <canvas id="myChart" style="width:100%; height:450px;"></canvas>
+        </div>
+        <div class="card p-3 mb-3">
+            <table class="table table-vcenter table-bordered" id="tabel_rekap_pelanggan">
+                <thead>
+                    <tr>
+                        <th width="70%">Nama Pelanggan</th>
+                        <th width="30%">Section</th>
+                        <th>Kali Padam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($rekap_pelanggan as $item_rekap)
+                        <tr>
+                            <td>{{ $item_rekap->nama }}</td>
+                            <td>{{ $item_rekap->section }}</td>
+                            <td>{{ $item_rekap->jumlah_entri }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
         <div class="col-lg-12">
             <div class="card p-3">
@@ -144,8 +164,6 @@
                     <thead>
                         <tr>
                             <th width="1%">No</th>
-                            <th>Nama Pelanggan</th>
-                            <th>Kali Padam</th>
                             <th>Penyulang</th>
                             <th>Section</th>
                             <th>Penyebab Padam</th>
@@ -158,20 +176,20 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($data_menyala as $s)
-                            <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $s->nama }}</td>
-                                <td>{{$jumlah_section_indeks_0}}</td>
-                                <td>{{ $s->penyulang }}</td>
-                                <td>{{ $s->section }}</td>
-                                <td>{{ $s->penyebab_padam }}</td>
-                                <td>{{ $s->penyebab_fix }}</td>
-                                <td>{{ $s->jam_padam }}</td>
-                                <td>{{ $s->jam_nyala }}</td>
-                                <td>{{ $s->keterangan }}</td>
-                                <td>{{ $s->status }}</td>
-                            </tr>
+                        @foreach ($data_padam as $s)
+                            @if ($s->status == 'Menyala')
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $s->penyulang }}</td>
+                                    <td>{{ $s->section }}</td>
+                                    <td>{{ $s->penyebab_padam }}</td>
+                                    <td>{{ $s->penyebab_fix }}</td>
+                                    <td>{{ $s->jam_padam }}</td>
+                                    <td>{{ $s->jam_nyala }}</td>
+                                    <td>{{ $s->keterangan }}</td>
+                                    <td>{{ $s->status }}</td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -180,6 +198,11 @@
     </div>
     <script>
         $(document).ready(function() {
+            $('#tabel_rekap_pelanggan').DataTable({
+                scrollX: true,
+            })
+        })
+        $(document).ready(function() {
             $('#tabel_data_padam').DataTable({
                 scrollX: true,
                 'pageLength': 500,
@@ -187,9 +210,7 @@
             });
         });
         $(document).ready(function() {
-            $('#tabel_data_menyala').DataTable({
-                scrollX: true,
-            });
+            $('#tabel_data_menyala').DataTable({});
         });
     </script>
     <script>
@@ -209,26 +230,36 @@
         });
     </script>
     <script>
-        var xValues = ["KDS21", "SYG14"];
-        var yValues = [KDS21, SYG14];
-        var barColors = [
-            "#b91d47",
-            "#00aba9",
-        ];
+        var namaPelanggan = @json($rekap_pelanggan);
+        var xValues = [];
+        var yValues = [];
+
+        namaPelanggan.forEach(function(pelanggan) {
+            xValues.push(pelanggan.nama);
+            yValues.push(pelanggan.jumlah_entri);
+        });
 
         new Chart("myChart", {
-            type: "pie",
+            type: "line",
             data: {
                 labels: xValues,
                 datasets: [{
-                    backgroundColor: barColors,
+                    label: 'Jumlah Entri Padam',
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
                     data: yValues
                 }]
             },
             options: {
-                title: {
-                    display: true,
-                    text: "Jumlah Padam Demak"
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Jumlah Entri Padam Tiap Pelanggan'
+                    }
                 }
             }
         });
