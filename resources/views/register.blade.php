@@ -22,6 +22,16 @@
                         @enderror
                     </div>
                     <div class="mb-3">
+                        <label class="form-label required">Username</label>
+                        <input type="text" name="username" id="username" value="{{old('username')}}"
+                            class="form-control @error('username') is-invalid @enderror" placeholder="Enter Username" autocomplete="username" autofocus>
+                        @error('username')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label required">Email Address</label>
                         <input type="email" name="email" id="email" value="{{old('email')}}"
                             class="form-control @error('email') is-invalid @enderror" placeholder="Enter Email">

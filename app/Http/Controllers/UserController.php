@@ -33,7 +33,7 @@ class UserController extends Controller
             'min' => ':attribute minimal 2 kata',
         ];
         $data = $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required'
         ], $message);
         if (Auth::attempt($data)) {
@@ -54,6 +54,7 @@ class UserController extends Controller
         ];
         $validateData = $request->validate([
             'name' => 'required|max:255|min:2',
+            'username' => 'required|max:255|min:5',
             'email' => 'required|email:dns|unique:App\Models\User,email',
             'password' => 'required|min:5|max:255|confirmed',
         ], $message);
