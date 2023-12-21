@@ -55,7 +55,8 @@ class DataPelangganController extends Controller
     }
     public function export_excel()
     {
-        return Excel::download(new DataPelangganExport, 'PELANGGAN TM UP3 DEMAK.xlsx');
+        date_default_timezone_set('Asia/Jakarta');
+        return Excel::download(new DataPelangganExport, 'PELANGGAN TM UP3 DEMAK '  . date('d-m-Y') . '.xlsx');
     }
     public function import_excel(Request $request)
     {

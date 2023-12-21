@@ -31,7 +31,8 @@
                     @csrf
                     <div class="mb-3">
                         <div class="form-label required">Penyulang</div>
-                        <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang" name="penyulang">
+                        <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang"
+                            name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
                             @foreach ($data_penyulang->unique() as $penyulang)
                                 <option value="{{ $penyulang }}">{{ $penyulang }}</option>
@@ -62,11 +63,11 @@
                             </div>
                         @enderror
                     </div>
-                    
+
                     <div class="mb-3">
                         <label class="form-label required">Jam Padam</label>
-                        <input type="datetime-local" class="form-control @error('jam_padam') is-invalid @enderror" name="jam_padam"
-                            id="jam_padam" style="display: none;">
+                        <input type="datetime-local" class="form-control @error('jam_padam') is-invalid @enderror"
+                            name="jam_padam" id="jam_padam" style="display: none;">
                         @error('jam_padam')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -96,87 +97,87 @@
         var penyebabPadamState = {};
         var jamPadamState = {};
         var keteranganState = {};
-    
+
         document.getElementById('penyulang').addEventListener('change', function() {
             var sectionMapping = @json($section);
             var selectedPenyulang = this.value;
             var selectedSections = sectionMapping[selectedPenyulang] || [];
-        var sectionContainer = document.getElementById('section-container');
-        var sectionChecklist = document.getElementById('section-list');
+            var sectionContainer = document.getElementById('section-container');
+            var sectionChecklist = document.getElementById('section-list');
             var penyebabPadamSelect = document.getElementById('penyebab_padam');
             var jamPadamInput = document.getElementById('jam_padam');
             var keteranganTextarea = document.getElementById('keterangan');
-    
-        // Membersihkan daftar section yang sebelumnya ditampilkan
-        sectionChecklist.innerHTML = "";
 
-        if (selectedSections.length > 0) {
-            selectedSections.forEach(function(section) {
-                var checkbox = document.createElement("input");
-                checkbox.type = "checkbox";
-                checkbox.name = "section[]";
-                checkbox.value = section;
-                checkbox.classList.add("form-check-input");
-                // Memeriksa apakah section sebelumnya telah dicentang
-                if (checkedSectionsState[section]) {
-                    checkbox.checked = true;
-                }
+            // Membersihkan daftar section yang sebelumnya ditampilkan
+            sectionChecklist.innerHTML = "";
 
-                var label = document.createElement("span");
-                label.classList.add("form-check-label");
-                label.classList.add("mb-2");
+            if (selectedSections.length > 0) {
+                selectedSections.forEach(function(section) {
+                    var checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = "section[]";
+                    checkbox.value = section;
+                    checkbox.classList.add("form-check-input");
+                    // Memeriksa apakah section sebelumnya telah dicentang
+                    if (checkedSectionsState[section]) {
+                        checkbox.checked = true;
+                    }
 
-                var checkboxContainer = document.createElement("label");
-                checkboxContainer.classList.add("form-check");
+                    var label = document.createElement("span");
+                    label.classList.add("form-check-label");
+                    label.classList.add("mb-2");
 
-                label.appendChild(checkbox);
-                label.appendChild(document.createTextNode(section));
-                checkboxContainer.appendChild(label);
-                sectionChecklist.appendChild(checkboxContainer);
-            });
+                    var checkboxContainer = document.createElement("label");
+                    checkboxContainer.classList.add("form-check");
 
-            // Menampilkan daftar section
-            sectionContainer.style.display = "block";
-        } else {
-            // Menyembunyikan daftar section jika tidak ada yang dipilih
-            sectionContainer.style.display = "none";
-        }
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(section));
+                    checkboxContainer.appendChild(label);
+                    sectionChecklist.appendChild(checkboxContainer);
+                });
+
+                // Menampilkan daftar section
+                sectionContainer.style.display = "block";
+            } else {
+                // Menyembunyikan daftar section jika tidak ada yang dipilih
+                sectionContainer.style.display = "none";
+            }
 
             // Memperbarui opsi "penyebab padam" tanpa menyembunyikan elemen
             updatePenyebabPadamOptions();
             // Mengembalikan nilai "penyebab padam", "jam padam", dan "keterangan" yang telah dipilih sebelumnya
             restoreFormState(selectedPenyulang);
-    
+
             // Menampilkan atau menyembunyikan elemen formulir berdasarkan pilihan penyulang
             updateFormElementsVisibility(selectedPenyulang);
         });
         // Listener untuk menyimpan state checklist saat checkbox berubah
         document.addEventListener('change', function(event) {
-        var checkbox = event.target;
-        if (checkbox.type === 'checkbox' && checkbox.name === 'section[]') {
-            var sectionName = checkbox.value;
-            checkedSectionsState[sectionName] = checkbox.checked;
-        }
-    });
+            var checkbox = event.target;
+            if (checkbox.type === 'checkbox' && checkbox.name === 'section[]') {
+                var sectionName = checkbox.value;
+                checkedSectionsState[sectionName] = checkbox.checked;
+            }
+        });
         document.getElementById('penyebab_padam').addEventListener('change', function() {
             // Menyimpan nilai "penyebab padam" yang dipilih
             penyebabPadamState[getCurrentPenyulang()] = this.value;
         });
-    
+
         document.getElementById('jam_padam').addEventListener('change', function() {
             // Menyimpan nilai "jam padam" yang dipilih
             jamPadamState[getCurrentPenyulang()] = this.value;
         });
-    
+
         document.getElementById('keterangan').addEventListener('input', function() {
             // Menyimpan nilai "keterangan" yang dimasukkan
             keteranganState[getCurrentPenyulang()] = this.value;
         });
-    
+
         function updatePenyebabPadamOptions() {
             var penyebabPadamSelect = document.getElementById('penyebab_padam');
             penyebabPadamSelect.innerHTML = "";
-    
+
             // Menambahkan opsi "penyebab padam"
             var options = ['Pemeliharaan', 'Gangguan'];
             options.forEach(function(option) {
@@ -186,31 +187,31 @@
                 penyebabPadamSelect.appendChild(optionElement);
             });
         }
-    
+
         function restoreFormState(selectedPenyulang) {
             // Mengembalikan nilai "penyebab padam", "jam padam", dan "keterangan" yang telah dipilih sebelumnya
             document.getElementById('penyebab_padam').value = penyebabPadamState[selectedPenyulang] || '';
             document.getElementById('jam_padam').value = jamPadamState[selectedPenyulang] || '';
             document.getElementById('keterangan').value = keteranganState[selectedPenyulang] || '';
         }
-    
+
         function getCurrentPenyulang() {
             // Mendapatkan nilai penyulang yang saat ini dipilih
             return document.getElementById('penyulang').value;
         }
-    
+
         function updateFormElementsVisibility(selectedPenyulang) {
             var penyebabPadam = document.getElementById('penyebab_padam');
             var jamPadam = document.getElementById('jam_padam');
             var keterangan = document.getElementById('keterangan');
-    
+
             // Menampilkan elemen formulir jika penyulang dipilih
             penyebabPadam.style.display = "block";
             jamPadam.style.display = "block";
             keterangan.style.display = "block";
         }
     </script>
-    
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         $(document).ready(function() {

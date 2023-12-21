@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PelangganPadamExport;
 use App\Exports\SectionExport;
 use App\Models\EntriPadamModel;
 use App\Models\DataPelangganModel;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Imports\DataPelangganImport;
 use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
+use App\Models\PelangganPadamModel;
 use App\Models\RekapKaliPadamModel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
@@ -54,15 +56,15 @@ class EntriPadamController extends Controller
     public function transaksiaktif()
     {
         $data_padam = EntriPadamModel::all();
+        // ->where(function ($query) {
+        //     $query->where('entri_padam.status', '=', 'Menyala')
+        //         ->orWhere('entri_padam.status', '=', 'Padam');
+        // })
         $rekap_pelanggan = DB::table('entri_padam')
             ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
-            ->select('data_pelanggan.idpel','data_pelanggan.nama', 'data_pelanggan.alamat', 'entri_padam.section')
-            ->groupBy('data_pelanggan.idpel','data_pelanggan.nama', 'data_pelanggan.alamat', 'entri_padam.section')
+            ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'entri_padam.section')
+            ->groupBy('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'entri_padam.section')
             ->where('entri_padam.status', '=', 'Padam')
-            // ->where(function ($query) {
-            //     $query->where('entri_padam.status', '=', 'Menyala')
-            //         ->orWhere('entri_padam.status', '=', 'Padam');
-            // })
             ->get();
         $data = [
             'title' => 'Transaksi Aktif',
@@ -181,6 +183,14 @@ class EntriPadamController extends Controller
     {
         $rekapKaliPadamModel = new RekapKaliPadamModel();
         $rekapkaliPadam = $rekapKaliPadamModel->getRekapSection();
-        return Excel::download(new SectionExport($rekapkaliPadam), 'Section_Jumlah_Padam.xlsx');
+        date_default_timezone_set('Asia/Jakarta');
+        return Excel::download(new SectionExport($rekapkaliPadam), 'Section_Jumlah_Padam '  . date('d-m-Y') . '.xlsx');
+    }
+    public function export_pelanggan_padam()
+    {
+        $pelangganPadamModel = new PelangganPadamModel();
+        $pelangganPadam = $pelangganPadamModel->getPelangganModel();
+        date_default_timezone_set('Asia/Jakarta');
+        return Excel::download(new PelangganPadamExport($pelangganPadam), 'Pelanggan_Padam ' . date('d-m-Y') . '.xlsx');
     }
 }

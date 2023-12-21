@@ -37,7 +37,6 @@
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>Maps</th>
-                            <th>Kali Padam</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -175,6 +174,18 @@
                                                                     class="form-control" readonly>
                                                             </div>
                                                         </div>
+                                                        <div class="mb-3 col-lg-12">
+                                                            <label class="form-label">Kali Padam</label>
+                                                            <div class="input-group input-group-flat">
+                                                                @if ($s->entriPadam)
+                                                                    <input value="{{ $s->entriPadam->kalipadam }}"
+                                                                        class="form-control" readonly>
+                                                                @else
+                                                                    <input value="{{ 0 }}"
+                                                                        class="form-control" readonly>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
@@ -189,13 +200,6 @@
                                 <td>{{ $s->nama }}</td>
                                 <td>{{ $s->alamat }}</td>
                                 <td><a href="{{ $s->maps }}" target="_blank">{{ $s->maps }}</a></td>
-                                <td>
-                                    @if ($s->entriPadam)
-                                        {{ $s->entriPadam->kalipadam }}
-                                    @else
-                                        {{0}}
-                                    @endif
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -65,7 +65,8 @@
                                 <th width="5%">
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
-                                            <input class="form-check-input mt-2" type="checkbox" id="checklist-padam">
+                                            <input class="form-check-input mt-2" style="position:relative; left:10px;"
+                                                type="checkbox" id="checklist-padam">
                                         </div>
                                     </div>
                                 </th>
@@ -81,19 +82,7 @@
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($data_padam as $s)
-                                @if ($s->status == 'Menyala')
-                                    <tr style="visibility:hidden; position:absolute;">
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                @else
+                                @if ($s->status == 'Padam')
                                     <tr>
                                         <td>{{ $i++ }}</td>
                                         <td>
@@ -129,8 +118,8 @@
         </div> --}}
             <div class="card p-3 mb-3 mt-3">
                 <h2>Pelanggan Padam</h2>
-                <a href="/transaksipadam/export_kali_padam" class="btn btn-warning mb-3 col-lg-2"><i
-                    class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
+                <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2"><i
+                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
                 <table class="table table-vcenter table-bordered" id="tabel_rekap_pelanggan">
                     <thead>
                         <tr>

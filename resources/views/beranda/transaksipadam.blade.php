@@ -29,8 +29,8 @@
                 <thead>
                     <tr>
                         <th width="5%">No</th>
-                        <th width="70%">Section</th>
-                        <th width="20%">Nomor Tiang</th>
+                        <th width="40%">Section</th>
+                        <th width="40%">Nomor Tiang</th>
                         <th width="5%">Kali Padam</th>
                     </tr>
                 </thead>
