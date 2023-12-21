@@ -22,8 +22,8 @@
             <input type="file" name="file" class="form-control" required />
             <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
                     style="margin-right: 5px"></i>Import Excel</button>
-                    <a href="/inputpelanggan/export_excel" class="btn btn-warning mt-3 mb-3 col-lg-2"><i class="fa-solid fa-download fa-lg"
-                        style="margin-right: 5px"></i>Export Excel</a>
+            <a href="/inputpelanggan/export_excel" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
+                    class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
         </form>
 
         <div class="col-lg-12">
@@ -37,7 +37,7 @@
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>Maps</th>
-                            <th>Catatan</th>
+                            <th>Kali Padam</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -189,7 +189,13 @@
                                 <td>{{ $s->nama }}</td>
                                 <td>{{ $s->alamat }}</td>
                                 <td><a href="{{ $s->maps }}" target="_blank">{{ $s->maps }}</a></td>
-                                <td>Catatan</td>
+                                <td>
+                                    @if ($s->entriPadam)
+                                        {{ $s->entriPadam->kalipadam }}
+                                    @else
+                                        {{0}}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

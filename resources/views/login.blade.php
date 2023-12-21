@@ -26,7 +26,7 @@
                                         <label class="form-label">Username</label>
                                         <input type="text" name="username" id="username"
                                             class="form-control @error('username') is-invalid @enderror"
-                                            placeholder="Enter Username" autocomplete="off">
+                                            placeholder="Enter Username" autocomplete="on">
                                         @error('username')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

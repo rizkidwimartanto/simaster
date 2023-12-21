@@ -1,0 +1,35 @@
+    <!-- <script>
+        var namaPelanggan = @json($rekap_pelanggan);
+        var xValues = [];
+        var yValues = [];
+
+        namaPelanggan.forEach(function(pelanggan) {
+            xValues.push(pelanggan.nama);
+            yValues.push(pelanggan.jumlah_entri);
+        });
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    label: 'Jumlah Entri Padam',
+                    backgroundColor: "rgba(0,0,255,1.0)",
+                    borderColor: "rgba(0,0,255,0.1)",
+                    data: yValues
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Jumlah Entri Padam Tiap Pelanggan'
+                    }
+                }
+            }
+        });
+    </script> -->

@@ -49,7 +49,9 @@ Route::controller(DataPelangganController::class)->group(function () {
 Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/petapadam', 'petapadam')->middleware('auth');
     Route::get('/transaksipadam', 'index')->middleware('auth');
+    Route::get('/transaksiaktif', 'transaksiaktif')->middleware('auth');
     Route::post('/entripadam/insertentripadam', 'insertEntriPadam');
+    Route::get('/transaksipadam/export_kali_padam', 'export_kali_padam');
     Route::post('/entripadam/import_excel_penyulangsection', 'import_excel_penyulangsection');
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');

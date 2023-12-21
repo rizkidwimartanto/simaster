@@ -21,8 +21,10 @@ class EntriPadam extends Migration
             $table->text('penyebab_fix')->nullable();
             $table->text('jam_padam')->nullable();
             $table->text('jam_nyala')->nullable();
+            $table->text('durasi_padam')->nullable();
             $table->text('keterangan')->nullable();
             $table->text('status')->nullable();
+            $table->text('kalipadam')->nullable();
             $table->timestamps(true);
         });
     }

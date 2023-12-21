@@ -160,7 +160,7 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                     aria-label="Open user menu">
-                    <span>{{auth()->user()->name}}</span>
+                    <span>{{ auth()->user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="#" class="dropdown-item">Status</a>
@@ -192,12 +192,26 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item {{ $title == 'Transaksi Padam' ? 'active' : '' }}">
-                        <a class="nav-link" href="/transaksipadam">
-                            <span class="nav-link-title">
-                                Transaksi Padam
+                    <li
+                        class="nav-item {{ $title == 'Transaksi Padam' ? 'active' : ($title == 'Transaksi Aktif' ? 'active' : '') }} dropdown">
+                        <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            <span class="nav-link">
+                                Transaksi
                             </span>
                         </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <a class="dropdown-item" href="/transaksiaktif">
+                                        Transaksi Aktif
+                                    </a>
+                                    <a class="dropdown-item" href="/transaksipadam">
+                                        Transaksi Padam
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item {{ $title == 'Entri Padam' ? 'active' : '' }}">
                         <a class="nav-link" href="/entripadam">

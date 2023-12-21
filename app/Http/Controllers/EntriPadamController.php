@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SectionExport;
 use App\Models\EntriPadamModel;
 use App\Models\DataPelangganModel;
 use Illuminate\Support\Facades\Session;
 use App\Imports\DataPelangganImport;
 use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
+use App\Models\RekapKaliPadamModel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Section;
@@ -21,24 +23,53 @@ class EntriPadamController extends Controller
     public function index()
     {
         $data_padam = EntriPadamModel::all();
-        $rekap_pelanggan = DB::table('entri_padam')
-            ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
-            ->select('data_pelanggan.nama', 'entri_padam.section', DB::raw('COUNT(*) as jumlah_entri'))
-            ->groupBy('data_pelanggan.nama', 'entri_padam.section')
-            ->where(function ($query) {
-                $query->where('entri_padam.status', '=', 'Menyala')
-                    ->orWhere('entri_padam.status', '=', 'Padam');
-            })
+        $rekap_section = DB::table('entri_padam')
+            ->leftJoin('section', 'entri_padam.section', '=', 'section.id_apkt')
+            ->select('section.nama_section', 'entri_padam.section', DB::raw('COUNT(*) as jumlah_entri'))
+            ->groupBy('section.nama_section', 'entri_padam.section')
             ->get();
+        foreach ($data_padam as $data) {
+            $waktuPadam = strtotime($data->jam_padam);
+            $waktuNyala = strtotime($data->jam_nyala);
+            $durasiDetik = $waktuNyala - $waktuPadam;
+
+            $durasiJam = floor($durasiDetik / (60 * 60));
+            EntriPadamModel::where('id', $data->id)->update(['durasi_padam' => $durasiJam]);
+        }
+        foreach ($rekap_section as $item_section) {
+            DB::table('entri_padam')
+                ->where('section', $item_section->section)
+                ->update(['kalipadam' => $item_section->jumlah_entri]);
+        }
 
         $data = [
             'title' => 'Transaksi Padam',
             'data_padam' => $data_padam,
-            'rekap_pelanggan' => $rekap_pelanggan,
+            'rekap_section' => $rekap_section,
         ];
 
         return view('beranda/transaksipadam', $data);
-        return response()->json($data);
+        // return response()->json($data);
+    }
+    public function transaksiaktif()
+    {
+        $data_padam = EntriPadamModel::all();
+        $rekap_pelanggan = DB::table('entri_padam')
+            ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
+            ->select('data_pelanggan.idpel','data_pelanggan.nama', 'data_pelanggan.alamat', 'entri_padam.section')
+            ->groupBy('data_pelanggan.idpel','data_pelanggan.nama', 'data_pelanggan.alamat', 'entri_padam.section')
+            ->where('entri_padam.status', '=', 'Padam')
+            // ->where(function ($query) {
+            //     $query->where('entri_padam.status', '=', 'Menyala')
+            //         ->orWhere('entri_padam.status', '=', 'Padam');
+            // })
+            ->get();
+        $data = [
+            'title' => 'Transaksi Aktif',
+            'data_padam' => $data_padam,
+            'rekap_pelanggan' => $rekap_pelanggan
+        ];
+        return view('beranda/transaksiaktif', $data);
     }
     public function insertEntriPadam(Request $request)
     {
@@ -68,7 +99,7 @@ class EntriPadamController extends Controller
                 ]);
             }
             Session::flash('success_tambah', 'Data berhasil ditambah');
-            return redirect('/transaksipadam');
+            return redirect('/transaksiaktif');
         } else {
             return redirect('/entripadam');
         }
@@ -110,7 +141,6 @@ class EntriPadamController extends Controller
                     'status' => $request->status,
                     'jam_nyala' => $jam_nyala,
                     'penyebab_fix' => $penyebab_fix,
-                    // $validateData
                 ]);
             }
             Session::flash('success_nyala', 'Section berhasil dinyalakan');
@@ -146,5 +176,11 @@ class EntriPadamController extends Controller
         Excel::import(new SectionImport, public_path('/file_section/' . $nama_file_section));
 
         return redirect('/entripadam');
+    }
+    public function export_kali_padam()
+    {
+        $rekapKaliPadamModel = new RekapKaliPadamModel();
+        $rekapkaliPadam = $rekapKaliPadamModel->getRekapSection();
+        return Excel::download(new SectionExport($rekapkaliPadam), 'Section_Jumlah_Padam.xlsx');
     }
 }

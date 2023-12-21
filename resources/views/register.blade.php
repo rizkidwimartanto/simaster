@@ -24,7 +24,7 @@
                     <div class="mb-3">
                         <label class="form-label required">Username</label>
                         <input type="text" name="username" id="username" value="{{old('username')}}"
-                            class="form-control @error('username') is-invalid @enderror" placeholder="Enter Username" autocomplete="username" autofocus>
+                            class="form-control @error('username') is-invalid @enderror" placeholder="Enter Username" autocomplete="username">
                         @error('username')
                             <div class="invalid-feedback">
                                 {{ $message }}

@@ -12,4 +12,8 @@ class DataPelangganModel extends Model
     protected $table = 'data_pelanggan';
     protected $primaryKey = 'id';
     protected $fillable = ['idpel', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'no_telepon', 'unitulp','tarif','daya','kogol','fakmkwh', 'rpbp', 'rpujl', 'nomor_kwh', 'penyulang', 'nama_section', 'tipe_kubikel'];
+    public function entriPadam()
+    {
+        return $this->belongsTo(EntriPadamModel::class, 'nama_section', 'section');
+    }
 }

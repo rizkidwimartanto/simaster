@@ -11,6 +11,7 @@ use App\Models\DataPelangganModel;
 use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
 use App\Models\SectionModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
 
@@ -44,9 +45,11 @@ class DataPelangganController extends Controller
     }
     public function input_pelanggan()
     {
+        $data_pelanggan = DataPelangganModel::all();
+
         $data = [
             'title' => 'Input Pelanggan',
-            'data_pelanggan' => DataPelangganModel::all(),
+            'data_pelanggan' => $data_pelanggan,
         ];
         return view('beranda/inputpelanggan', $data);
     }
