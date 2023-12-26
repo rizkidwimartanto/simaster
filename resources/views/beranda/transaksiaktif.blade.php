@@ -124,9 +124,9 @@
                     <thead>
                         <tr>
                             <th width="5%">No</th>
-                            <th width="10%">ID Pelanggan</th>
-                            <th width="15%">Nama Pelanggan</th>
-                            <th width="20%">Alamat</th>
+                            <th width="20%">ID Pelanggan</th>
+                            <th width="30%">Nama Pelanggan</th>
+                            <th width="40%">Alamat</th>
                             <th width="5%">Aksi</th>
                         </tr>
                     </thead>
@@ -173,7 +173,7 @@
             $('#tabel_data_padam').DataTable({
                 scrollX: true,
                 'pageLength': 500,
-                'lengthMenu': [10, 25, 50, 100, 200, 500]
+                'lengthMenu': [10, 25, 50, 100, 200, 500],
             });
         });
     </script>
@@ -181,6 +181,12 @@
         $(document).ready(function() {
             $('#tabel_rekap_pelanggan').DataTable({
                 scrollX: true,
+                "columnDefs": [{
+                    "width": "20%",
+                    "targets": 0
+                }],
+                scrollCollapse: true,
+                fixedColumns: true,
             });
         });
     </script>
