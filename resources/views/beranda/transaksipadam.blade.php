@@ -80,8 +80,16 @@
                                     <td>{{ $s->jam_padam }}</td>
                                     <td>{{ $s->jam_nyala }}</td>
                                     <td>
-                                        {{ $s->durasi_padam . ' jam' }}
-                                    </td>
+                                        @php
+                                            $waktuPadam = strtotime($s->jam_padam);
+                                            $waktuNyala = strtotime($s->jam_nyala);
+                                            $durasiDetik = $waktuNyala - $waktuPadam;
+
+                                            $durasiJam = floor($durasiDetik / (60 * 60));
+                                            $durasiMenit = floor(($durasiDetik % (60 * 60)) / 60);
+                                            $durasiPadam = $durasiJam . ' jam ' . $durasiMenit . ' menit';
+                                        @endphp
+                                        {{ $durasiPadam}}</td>
                                     <td>{{ $s->keterangan }}</td>
                                     <td>{{ $s->status }}</td>
                                 </tr>

@@ -123,20 +123,15 @@
                 <table class="table table-vcenter table-bordered" id="tabel_rekap_pelanggan">
                     <thead>
                         <tr>
-                            <th width="5%">No</th>
-                            <th width="20%">ID Pelanggan</th>
+                            <th width="25%">ID Pelanggan</th>
                             <th width="30%">Nama Pelanggan</th>
                             <th width="40%">Alamat</th>
                             <th width="5%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $no = 1;
-                        @endphp
                         @foreach ($rekap_pelanggan as $item_rekap)
                             <tr>
-                                <td>{{ $no++ }}</td>
                                 <td>{{ $item_rekap->idpel }}</td>
                                 <td>{{ $item_rekap->nama }}</td>
                                 <td>{{ $item_rekap->alamat }}</td>

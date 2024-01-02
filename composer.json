@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "aloha/twilio": "^5.0",
         "felipedamacenoteodoro/laravel-whatsapp-notification-channel": "^1.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
@@ -13,7 +14,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "maatwebsite/excel": "*",
-        "nesbot/carbon": "^2.71"
+        "nesbot/carbon": "^2.71",
+        "twilio/sdk": "^6.44"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Twilio\Rest\Client;
 use App\Exports\PelangganPadamExport;
 use App\Exports\SectionExport;
 use App\Models\EntriPadamModel;
@@ -30,18 +31,20 @@ class EntriPadamController extends Controller
             ->select('section.nama_section', 'entri_padam.section', DB::raw('COUNT(*) as jumlah_entri'))
             ->groupBy('section.nama_section', 'entri_padam.section')
             ->get();
+        foreach ($rekap_section as $item_section) {
+            DB::table('entri_padam')
+                ->where('section', $item_section->section)
+                ->update(['kalipadam' => $item_section->jumlah_entri]);
+        }
         foreach ($data_padam as $data) {
             $waktuPadam = strtotime($data->jam_padam);
             $waktuNyala = strtotime($data->jam_nyala);
             $durasiDetik = $waktuNyala - $waktuPadam;
 
             $durasiJam = floor($durasiDetik / (60 * 60));
-            EntriPadamModel::where('id', $data->id)->update(['durasi_padam' => $durasiJam]);
-        }
-        foreach ($rekap_section as $item_section) {
-            DB::table('entri_padam')
-                ->where('section', $item_section->section)
-                ->update(['kalipadam' => $item_section->jumlah_entri]);
+            $durasiMenit = floor(($durasiDetik % (60 * 60)) / 60);
+            $durasiPadam = $durasiJam . ' jam ' . $durasiMenit . ' menit';
+            EntriPadamModel::where('id', $data->id)->update(['durasi_padam' => $durasiPadam]);
         }
 
         $data = [
@@ -75,6 +78,9 @@ class EntriPadamController extends Controller
     }
     public function insertEntriPadam(Request $request)
     {
+        // $sid    = "AC2012d29d75db2ed14b5e2c86524bff0a";
+        // $token  = "9bd3947099e72f5b9f78a420174e837a";
+        // $twilio = new Client($sid, $token);
         $message = [
             'required' => ':attribute harus diisi',
             'max' => ':attribute maximal 255 kata',
@@ -100,8 +106,15 @@ class EntriPadamController extends Controller
                     $validateData
                 ]);
             }
+            // $twilio->messages
+            // ->create("whatsapp:+6289531584234", // to
+            //   array(
+            //     "from" => "whatsapp:+14155238886",
+            //     "body" => 'Hello World'
+            //   )
+            // );
             Session::flash('success_tambah', 'Data berhasil ditambah');
-            return redirect('/transaksiaktif');
+            return redirect('/entripadam');
         } else {
             return redirect('/entripadam');
         }
