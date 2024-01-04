@@ -20,10 +20,22 @@ class DataPelangganController extends Controller
 {
     public function index()
     {
+        // $data_padam = DB::table('data_pelanggan')
+        // ->leftJoin('entri_padam', 'data_pelanggan.nama_section' , '=', 'entri_padam.section')
+        // ->select('data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'entri_padam.section', 'entri_padam.id', 'entri_padam.status')
+        // ->where('entri_padam.status', '=', 'Padam')
+        // ->get();
+        $data_peta = DB::table('data_pelanggan')
+        ->select('data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude')
+        ->get();
+        $data_padam = DB::table('entri_padam')
+        ->select('entri_padam.status', 'entri_padam.section')
+        ->get();
         $data = [
             'title' => 'Peta Pelanggan',
+            'data_padam' => $data_padam,
+            'data_peta' => $data_peta,
             'data_pelanggan' => DataPelangganModel::all(),
-            'data_padam' => EntriPadamModel::all()
         ];
         return view('beranda/index', $data);
     }

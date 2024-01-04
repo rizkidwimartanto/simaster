@@ -63,7 +63,7 @@
             }
         }).addTo(map);
 
-        var customers = @json($data_pelanggan);
+        var customers = @json($data_peta);
         var padams = @json($data_padam);
         customers.forEach(function(customer) {
             if (padams == "") {
@@ -84,7 +84,7 @@
             } else {
                 padams.forEach(function(padam) {
                     var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-                    if (padam.penyulang === customer.penyulang && padam.status == 'Padam') {
+                    if (padam.section === customer.nama_section && padam.status == 'Padam') {
                         var circle = L.circle([customer.latitude, customer.longtitude], {
                             color: 'red',
                             fillColor: 'red',
