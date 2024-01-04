@@ -1,7 +1,7 @@
 @extends('layout/templateberanda')
 @section('content')
     <div id="map"></div>
-    @foreach ($data_pelanggan as $data)
+    @foreach ($padam as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -66,29 +66,24 @@
             }
         }).addTo(map);
 
-        var customers = @json($data_pelanggan);
-        var padams = @json($data_padam);
-        customers.forEach(function(customer) {
-            padams.forEach(function(padam) {
-                if (padam.section == customer.nama_section && padam.status == 'Padam') {
-                    var marker = L.marker([customer.latitude, customer.longtitude], {
-                        title: customer.nama
-                    }).addTo(map);
-                    var circle = L.circle([customer.latitude, customer.longtitude], {
-                        color: 'red',
-                        fillColor: 'red',
-                        fillOpacity: 0.5,
-                        radius: 100
-                    }).addTo(map);
-                    marker.bindTooltip(customer.nama).openTooltip();
-                    marker.on('click', function() {
-                        $('#' + customer.id).modal('show');
+        var padams = @json($padam);
+        padams.forEach(function(padam) {
+            var marker = L.marker([padam.latitude, padam.longtitude], {
+                title: padam.nama
+            }).addTo(map);
+            var circle = L.circle([padam.latitude, padam.longtitude], {
+                color: 'red',
+                fillColor: 'red',
+                fillOpacity: 0.5,
+                radius: 100
+            }).addTo(map);
+            marker.bindTooltip(padam.nama).openTooltip();
+            marker.on('click', function() {
+                $('#' + padam.id).modal('show');
 
-                        $('#customerName').text(customer.nama);
-                        $('#customerDetails').text('Alamat: ' + customer.alamat);
-                    });
-                }
-            })
+                $('#customerName').text(padam.nama);
+                $('#customerDetails').text('Alamat: ' + padam.alamat);
+            });
         });
     </script>
 @endsection
