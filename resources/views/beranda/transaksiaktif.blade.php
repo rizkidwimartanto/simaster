@@ -2,6 +2,26 @@
 @section('content')
     <div class="container-fluid">
         <div class="col-lg-12 mt-2">
+            @if (session('success_nyala'))
+                <div class="alert alert-success">
+                    {{ session('success_nyala') }}
+                </div>
+            @endif
+            @if (session('success_tambah'))
+                <div class="alert alert-success">
+                    {{ session('success_tambah') }}
+                </div>
+            @endif
+            @if (session('error_tambah'))
+                <div class="alert alert-danger">
+                    {{ session('error_tambah') }}
+                </div>
+            @endif
+            @if (session('error_nyala'))
+                <div class="alert alert-danger">
+                    {{ session('error_nyala') }}
+                </div>
+            @endif
             <div class="card p-3">
                 <h2>Data Padam Saat Ini</h2>
                 <form action="/transaksipadam/edit_status_padam" method="post">

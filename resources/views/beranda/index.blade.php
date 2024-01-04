@@ -1,7 +1,7 @@
 @extends('layout/templateberanda')
 @section('content')
     <div id="map"></div>
-    @foreach ($data_pelanggan as $data)
+    @foreach ($data_peta as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -12,7 +12,7 @@
                     <div class="modal-body">
                         <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama }} </p>
                         <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
-                        <p class="detail_pelanggan">No Telepon : {{ $data->no_telepon }}</p>
+                        {{-- <p class="detail_pelanggan">No Telepon : {{ $data->no_telepon }}</p> --}}
                         <p class="detail_pelanggan">Maps : <a href="{{ $data->maps }}"
                                 target="_blank">{{ $data->maps }}</a></p>
                     </div>
@@ -32,7 +32,7 @@
             }
         }).setView([-6.90774243377773, 110.65198375582506], 10);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
+            maxZoom: 25,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
         L.control.locate({
@@ -63,17 +63,11 @@
             }
         }).addTo(map);
 
-        var customers = @json($data_peta);
-        var padams = @json($data_padam);
-        customers.forEach(function(customer) {
-            if (padams == "") {
+        var data_peta = @json($data_peta);
+        var data_padam = @json($data_padam);
+        data_peta.forEach(function(customer) {
+            if (data_padam == "") {
                 var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-                var circle = L.circle([customer.latitude, customer.longtitude], {
-                    color: 'green',
-                    fillColor: 'green',
-                    fillOpacity: 0.5,
-                    radius: 100
-                }).addTo(map);
                 marker.bindTooltip(customer.nama).openTooltip();
                 marker.on('click', function() {
                     $('#' + customer.id).modal('show');
@@ -82,19 +76,12 @@
                     $('#customerDetails').text('Alamat: ' + customer.alamat);
                 });
             } else {
-                padams.forEach(function(padam) {
+                data_padam.forEach(function(padam) {
                     var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
                     if (padam.section === customer.nama_section && padam.status == 'Padam') {
                         var circle = L.circle([customer.latitude, customer.longtitude], {
                             color: 'red',
                             fillColor: 'red',
-                            fillOpacity: 0.5,
-                            radius: 100
-                        }).addTo(map);
-                    } else {
-                        var circle = L.circle([customer.latitude, customer.longtitude], {
-                            color: 'green',
-                            fillColor: 'green',
                             fillOpacity: 0.5,
                             radius: 100
                         }).addTo(map);

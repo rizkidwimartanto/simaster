@@ -162,7 +162,7 @@ class EntriPadamController extends Controller
             return redirect('/transaksipadam');
         } else {
             Session::flash('error_nyala', 'Section gagal dinyalakan');
-            return redirect('/transaksipadam');
+            return redirect('/transaksiaktif');
         }
     }
     public function petapadam()

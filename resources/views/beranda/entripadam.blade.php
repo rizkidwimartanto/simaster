@@ -213,7 +213,7 @@
     </script>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             $("#entriPadamForm").submit(function(event) {
                 // Prevent the default form submission
@@ -231,5 +231,5 @@
                 }, 1000); // Delay for 1 second (adjust as needed)
             });
         });
-    </script>
+    </script> --}}
 @endsection
