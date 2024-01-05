@@ -116,6 +116,7 @@ class EntriPadamController extends Controller
             Session::flash('success_tambah', 'Data berhasil ditambah');
             return redirect('/entripadam');
         } else {
+            Session::flash('error_tambah', 'Data berhasil ditambah');
             return redirect('/entripadam');
         }
     }

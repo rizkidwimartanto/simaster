@@ -26,15 +26,16 @@
     <script>
         var map = L.map('map', {
             fullscreenControl: true,
-            // OR
             fullscreenControl: {
-                pseudoFullscreen: false // if true, fullscreen to page width and height
+                pseudoFullscreen: false
             }
         }).setView([-6.90774243377773, 110.65198375582506], 10);
+
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 25,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
+
         L.control.locate({
             position: 'topleft',
             drawCircle: true,
@@ -65,36 +66,33 @@
 
         var data_peta = @json($data_peta);
         var data_padam = @json($data_padam);
+
         data_peta.forEach(function(customer) {
-            if (data_padam == "") {
-                var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-                marker.bindTooltip(customer.nama).openTooltip();
-                marker.on('click', function() {
-                    $('#' + customer.id).modal('show');
+            var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
 
-                    $('#customerName').text(customer.nama);
-                    $('#customerDetails').text('Alamat: ' + customer.alamat);
-                });
+            if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
+                var circle = L.circle([customer.latitude, customer.longtitude], {
+                    color: 'red',
+                    fillColor: 'red',
+                    fillOpacity: 0.5,
+                    radius: 100
+                }).addTo(map);
             } else {
-                data_padam.forEach(function(padam) {
-                    var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-                    if (padam.section === customer.nama_section && padam.status == 'Padam') {
-                        var circle = L.circle([customer.latitude, customer.longtitude], {
-                            color: 'red',
-                            fillColor: 'red',
-                            fillOpacity: 0.5,
-                            radius: 100
-                        }).addTo(map);
-                    }
-                    marker.bindTooltip(customer.nama).openTooltip();
-                    marker.on('click', function() {
-                        $('#' + customer.id).modal('show');
-
-                        $('#customerName').text(customer.nama);
-                        $('#customerDetails').text('Alamat: ' + customer.alamat);
-                    });
-                })
+                var circle = L.circle([customer.latitude, customer.longtitude], {
+                    color: 'green',
+                    fillColor: 'green',
+                    fillOpacity: 0.5,
+                    radius: 100
+                }).addTo(map);
             }
+
+            marker.bindTooltip(customer.nama).openTooltip();
+
+            marker.on('click', function() {
+                $('#' + customer.id).modal('show');
+                $('#customerName').text(customer.nama);
+                $('#customerDetails').text('Alamat: ' + customer.alamat);
+            });
         });
     </script>
 @endsection

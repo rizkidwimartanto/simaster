@@ -11,6 +11,11 @@
                 {{ session('error_import') }}
             </div>
         @endif
+        @if (session('success_tambah'))
+            <div class="alert alert-success">
+                {{ session('success_tambah') }}
+            </div>
+        @endif
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
                 <form method="post" action="/entripadam/import_excel_penyulangsection" enctype="multipart/form-data">
@@ -48,14 +53,17 @@
                         <div class="form-label required">Section</div>
                         <label class="form-check">
                             <div id="section-list">
+
                             </div>
                         </label>
                     </div>
                     <div class="mb-3">
                         <div class="form-label required">Penyebab Padam</div>
                         <select class="form-select @error('penyebab_padam') is-invalid @enderror" name="penyebab_padam"
-                            id="penyebab_padam" style="display: none;">
-                            <!-- Opsi akan ditambahkan melalui JavaScript -->
+                            id="penyebab_padam">
+                            <option disabled selected>--- Pilih Penyebab Padam ---</option>
+                            <option value="Pemeliharaan">Pemeliharaan</option>
+                            <option value="Gangguan">Gangguan</option>
                         </select>
                         @error('penyebab_padam')
                             <div class="invalid-feedback">
@@ -63,11 +71,10 @@
                             </div>
                         @enderror
                     </div>
-
                     <div class="mb-3">
                         <label class="form-label required">Jam Padam</label>
                         <input type="datetime-local" class="form-control @error('jam_padam') is-invalid @enderror"
-                            name="jam_padam" id="jam_padam" style="display: none;">
+                            name="jam_padam" id="jam_padam">
                         @error('jam_padam')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -77,38 +84,39 @@
                     <div class="mb-3">
                         <label class="form-label">Keterangan</label>
                         <textarea class="form-control" data-bs-toggle="autosize" rows="5" name="keterangan" id="keterangan"
-                            placeholder="Masukkan Keterangan" style="display: none;"></textarea>
+                            placeholder="Masukkan Keterangan"></textarea>
                     </div>
                     <input type="hidden" name="status" id="status" value="Padam">
                     <div class="mb-3">
-                        <a href="www.facebook.com" target="_blank">
-                            <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-plus fa-lg"
-                                    style="margin-right: 5px;"></i>Entri Padam</button>
-                        </a>
+                        <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-plus fa-lg"
+                                style="margin-right: 5px;"></i>Entri Padam</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <script>
-        // Variabel untuk menyimpan state pilihan penyulang, penyebab padam, jam padam, dan keterangan
-        var checkedSectionsState = {};
-        var selectedPenyulangState = {};
-        var penyebabPadamState = {};
-        var jamPadamState = {};
-        var keteranganState = {};
+    <button onclick="openFacebookLinks()">Buka Facebook Links</button>
 
+    <script>
+        function openFacebookLinks() {
+            var links = [
+                'https://www.facebook.com/dikma.adityan',
+                'https://www.facebook.com/achmad.n.utama'
+            ];
+    
+            links.forEach(function(link) {
+                window.open(link, '_blank');
+            });
+        }
+    </script>
+    <script>
         document.getElementById('penyulang').addEventListener('change', function() {
             var sectionMapping = @json($section);
             var selectedPenyulang = this.value;
             var selectedSections = sectionMapping[selectedPenyulang] || [];
             var sectionContainer = document.getElementById('section-container');
             var sectionChecklist = document.getElementById('section-list');
-            var penyebabPadamSelect = document.getElementById('penyebab_padam');
-            var jamPadamInput = document.getElementById('jam_padam');
-            var keteranganTextarea = document.getElementById('keterangan');
 
-            // Membersihkan daftar section yang sebelumnya ditampilkan
             sectionChecklist.innerHTML = "";
 
             if (selectedSections.length > 0) {
@@ -118,101 +126,21 @@
                     checkbox.name = "section[]";
                     checkbox.value = section;
                     checkbox.classList.add("form-check-input");
-                    // Memeriksa apakah section sebelumnya telah dicentang
-                    if (checkedSectionsState[section]) {
-                        checkbox.checked = true;
-                    }
-
                     var label = document.createElement("span");
                     label.classList.add("form-check-label");
                     label.classList.add("mb-2");
-
                     var checkboxContainer = document.createElement("label");
                     checkboxContainer.classList.add("form-check");
-
                     label.appendChild(checkbox);
                     label.appendChild(document.createTextNode(section));
-                    checkboxContainer.appendChild(label);
-                    sectionChecklist.appendChild(checkboxContainer);
+                    sectionChecklist.appendChild(label);
                 });
-
-                // Menampilkan daftar section
-                sectionContainer.style.display = "block";
+                sectionChecklist.appendChild(checkboxContainer);
             } else {
-                // Menyembunyikan daftar section jika tidak ada yang dipilih
                 sectionContainer.style.display = "none";
             }
-
-            // Memperbarui opsi "penyebab padam" tanpa menyembunyikan elemen
-            updatePenyebabPadamOptions();
-            // Mengembalikan nilai "penyebab padam", "jam padam", dan "keterangan" yang telah dipilih sebelumnya
-            restoreFormState(selectedPenyulang);
-
-            // Menampilkan atau menyembunyikan elemen formulir berdasarkan pilihan penyulang
-            updateFormElementsVisibility(selectedPenyulang);
-        });
-        // Listener untuk menyimpan state checklist saat checkbox berubah
-        document.addEventListener('change', function(event) {
-            var checkbox = event.target;
-            if (checkbox.type === 'checkbox' && checkbox.name === 'section[]') {
-                var sectionName = checkbox.value;
-                checkedSectionsState[sectionName] = checkbox.checked;
-            }
-        });
-        document.getElementById('penyebab_padam').addEventListener('change', function() {
-            // Menyimpan nilai "penyebab padam" yang dipilih
-            penyebabPadamState[getCurrentPenyulang()] = this.value;
-        });
-
-        document.getElementById('jam_padam').addEventListener('change', function() {
-            // Menyimpan nilai "jam padam" yang dipilih
-            jamPadamState[getCurrentPenyulang()] = this.value;
-        });
-
-        document.getElementById('keterangan').addEventListener('input', function() {
-            // Menyimpan nilai "keterangan" yang dimasukkan
-            keteranganState[getCurrentPenyulang()] = this.value;
-        });
-
-        function updatePenyebabPadamOptions() {
-            var penyebabPadamSelect = document.getElementById('penyebab_padam');
-            penyebabPadamSelect.innerHTML = "";
-
-            // Menambahkan opsi "penyebab padam"
-            var options = ['Pemeliharaan', 'Gangguan'];
-            options.forEach(function(option) {
-                var optionElement = document.createElement("option");
-                optionElement.value = option;
-                optionElement.text = option;
-                penyebabPadamSelect.appendChild(optionElement);
-            });
-        }
-
-        function restoreFormState(selectedPenyulang) {
-            // Mengembalikan nilai "penyebab padam", "jam padam", dan "keterangan" yang telah dipilih sebelumnya
-            document.getElementById('penyebab_padam').value = penyebabPadamState[selectedPenyulang] || '';
-            document.getElementById('jam_padam').value = jamPadamState[selectedPenyulang] || '';
-            document.getElementById('keterangan').value = keteranganState[selectedPenyulang] || '';
-        }
-
-        function getCurrentPenyulang() {
-            // Mendapatkan nilai penyulang yang saat ini dipilih
-            return document.getElementById('penyulang').value;
-        }
-
-        function updateFormElementsVisibility(selectedPenyulang) {
-            var penyebabPadam = document.getElementById('penyebab_padam');
-            var jamPadam = document.getElementById('jam_padam');
-            var keterangan = document.getElementById('keterangan');
-
-            // Menampilkan elemen formulir jika penyulang dipilih
-            penyebabPadam.style.display = "block";
-            jamPadam.style.display = "block";
-            keterangan.style.display = "block";
-        }
+        })
     </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     {{-- <script>
         $(document).ready(function() {
             $("#entriPadamForm").submit(function(event) {
@@ -232,4 +160,5 @@
             });
         });
     </script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 @endsection
