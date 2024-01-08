@@ -25,7 +25,7 @@
             <h2>Jumlah Kali Padam</h2>
             <a href="/transaksipadam/export_kali_padam" class="btn btn-warning mb-3 col-lg-2"><i
                     class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-            <table class="table table-vcenter table-bordered" id="tabel_rekap_pelanggan">
+            <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan">
                 <thead>
                     <tr>
                         <th width="5%">No</th>
@@ -52,7 +52,7 @@
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
                 <h2>Rekap Data Padam</h2>
-                <table class="table table-vcenter table-bordered" id="tabel_data_menyala">
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_data_menyala">
                     <thead>
                         <tr>
                             <th width="1%">No</th>

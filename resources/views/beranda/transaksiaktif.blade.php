@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-vcenter table-bordered" id="tabel_data_padam">
+                    <table class="table table-vcenter table-bordered table-hover" id="tabel_data_padam">
                         <thead>
                             <tr>
                                 <th width="1%">No</th>
@@ -140,7 +140,7 @@
                 <h2>Pelanggan Padam</h2>
                 <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2"><i
                         class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-                <table class="table table-vcenter table-bordered" id="tabel_rekap_pelanggan">
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan">
                     <thead>
                         <tr>
                             <th width="25%">ID Pelanggan</th>

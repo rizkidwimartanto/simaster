@@ -28,7 +28,7 @@
 
         <div class="col-lg-12">
             <div class="card p-3">
-                <table class="table table-vcenter table-bordered" id="tabel_data_pelanggan">
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_data_pelanggan">
                     <thead>
                         <tr>
                             <th width="1%">No</th>

@@ -95,20 +95,6 @@
             </div>
         </div>
     </div>
-    <button onclick="openFacebookLinks()">Buka Facebook Links</button>
-
-    <script>
-        function openFacebookLinks() {
-            var links = [
-                'https://www.facebook.com/dikma.adityan',
-                'https://www.facebook.com/achmad.n.utama'
-            ];
-    
-            links.forEach(function(link) {
-                window.open(link, '_blank');
-            });
-        }
-    </script>
     <script>
         document.getElementById('penyulang').addEventListener('change', function() {
             var sectionMapping = @json($section);
