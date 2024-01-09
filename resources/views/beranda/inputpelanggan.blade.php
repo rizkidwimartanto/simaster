@@ -28,15 +28,15 @@
 
         <div class="col-lg-12">
             <div class="card p-3">
-                <table class="table table-vcenter table-bordered table-hover" id="tabel_data_pelanggan">
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_data_pelanggan" style="width: 100%">
                     <thead>
                         <tr>
-                            <th width="1%">No</th>
-                            <th width="1%">Aksi</th>
-                            <th>ID Pelanggan</th>
-                            <th>Nama</th>
-                            <th>Alamat</th>
-                            <th>Maps</th>
+                            <th width="5%">No</th>
+                            <th width="5%">Aksi</th>
+                            <th width="20%">ID Pelanggan</th>
+                            <th width="20%">Nama</th>
+                            <th width="25%">Alamat</th>
+                            <th width="25%">Maps</th>
                         </tr>
                     </thead>
                     <tbody>

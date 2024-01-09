@@ -25,12 +25,12 @@
             <h2>Jumlah Kali Padam</h2>
             <a href="/transaksipadam/export_kali_padam" class="btn btn-warning mb-3 col-lg-2"><i
                     class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-            <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan">
+            <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan" style="width: 100%">
                 <thead>
                     <tr>
                         <th width="5%">No</th>
-                        <th width="40%">Section</th>
-                        <th width="40%">Nomor Tiang</th>
+                        <th width="45%">Section</th>
+                        <th width="45%">Nomor Tiang</th>
                         <th width="5%">Kali Padam</th>
                     </tr>
                 </thead>

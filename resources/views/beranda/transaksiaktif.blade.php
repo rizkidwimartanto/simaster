@@ -140,7 +140,7 @@
                 <h2>Pelanggan Padam</h2>
                 <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2"><i
                         class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-                <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan">
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan" style="width: 100%">
                     <thead>
                         <tr>
                             <th width="25%">ID Pelanggan</th>
