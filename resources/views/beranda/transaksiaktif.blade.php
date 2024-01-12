@@ -138,28 +138,48 @@
         </div> --}}
             <div class="card p-3 mb-3 mt-3">
                 <h2>Pelanggan Padam</h2>
-                <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2"><i
-                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-                <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan" style="width: 100%">
+                <div class="row">
+                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2"><i
+                            class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
+                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-success mb-3 col-lg-2"
+                        style="position: relative; left:10px;"><i class="fa-brands fa-whatsapp fa-lg"
+                            style="margin-right: 5px;"></i>Kirim Whatsapp</a>
+                </div>
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan"
+                    style="width: 100%">
                     <thead>
                         <tr>
-                            <th width="25%">ID Pelanggan</th>
+                            <th width="2%">
+                                <div class="d-flex justify-content-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input mt-2" style="position:relative; left:10px;"
+                                            type="checkbox" id="checklist-whatsapp">
+                                    </div>
+                                </div>
+                            </th>
+                            <th width="28%">ID Pelanggan</th>
                             <th width="30%">Nama Pelanggan</th>
                             <th width="40%">Alamat</th>
-                            <th width="5%">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($rekap_pelanggan as $item_rekap)
                             <tr>
+                                <td>
+                                    {{-- <a href="https://wa.me/6289668969721?text=Halo." target="_blank">
+                                        <i class="fa-brands fa-whatsapp fa-lg"></i>
+                                    </a> --}}
+                                    <div class="d-flex justify-content-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                value="{{ $item_rekap->idpel }}" id="flexCheckDefault"
+                                                name="checkWhatsapp[]">
+                                        </div>
+                                    </div>
+                                </td>
                                 <td>{{ $item_rekap->idpel }}</td>
                                 <td>{{ $item_rekap->nama }}</td>
                                 <td>{{ $item_rekap->alamat }}</td>
-                                <td>
-                                    <a href="https://wa.me/6289668969721?text=Halo." target="_blink">
-                                        <i class="fa-brands fa-whatsapp fa-lg"></i>
-                                    </a>
-                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -181,6 +201,38 @@
                     });
                 });
             });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            var checkboxGroups = [{
+                checklistAll: document.getElementById("checklist-whatsapp"),
+                checkboxes: document.querySelectorAll('input[name="checkWhatsapp[]"]')
+            }, ];
+
+            checkboxGroups.forEach(function(group) {
+                group.checklistAll.addEventListener("change", function() {
+                    group.checkboxes.forEach(function(checkbox) {
+                        checkbox.checked = group.checklistAll.checked;
+                        klikWhatsapp();
+                    });
+                });
+            });
+
+            function klikWhatsapp() {
+                var url = "/transaksiaktif";
+                $.ajax({
+                    url: url,
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    dataType: "text",
+                    success: function(result) {
+                        alert(result);
+                        // console.log(result);return
+                        getDataEvent();
+                    },
+                });
+            }
         });
     </script>
     <script>
