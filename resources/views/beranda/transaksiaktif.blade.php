@@ -139,11 +139,13 @@
             <div class="card p-3 mb-3 mt-3">
                 <h2>Pelanggan Padam</h2>
                 <div class="row">
-                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2"><i
-                            class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-success mb-3 col-lg-2"
-                        style="position: relative; left:10px;"><i class="fa-brands fa-whatsapp fa-lg"
-                            style="margin-right: 5px;"></i>Kirim Whatsapp</a>
+                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2">
+                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel
+                    </a>
+                    <button id="kirimWhatsapp" onclick="kirimWhatsapp()" class="btn btn-success mb-3 col-lg-2"
+                        style="position: relative; left:10px;">
+                        <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
+                    </button>
                 </div>
                 <table class="table table-vcenter table-bordered table-hover" id="tabel_rekap_pelanggan"
                     style="width: 100%">
@@ -153,33 +155,33 @@
                                 <div class="d-flex justify-content-center">
                                     <div class="form-check">
                                         <input class="form-check-input mt-2" style="position:relative; left:10px;"
-                                            type="checkbox" id="checklist-whatsapp">
+                                            type="checkbox" id="checklist-whatsapp" onclick="checkAll()">
                                     </div>
                                 </div>
                             </th>
                             <th width="28%">ID Pelanggan</th>
                             <th width="30%">Nama Pelanggan</th>
                             <th width="40%">Alamat</th>
+                            <th width="0%" style="display:none;">Nomor HP</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($rekap_pelanggan as $item_rekap)
                             <tr>
                                 <td>
-                                    {{-- <a href="https://wa.me/6289668969721?text=Halo." target="_blank">
-                                        <i class="fa-brands fa-whatsapp fa-lg"></i>
-                                    </a> --}}
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
                                                 value="{{ $item_rekap->idpel }}" id="flexCheckDefault"
-                                                name="checkWhatsapp[]">
+                                                name="checkWhatsapp[]"
+                                                data-nomorhp="{{ $item_rekap->nohp_stakeholder }}">
                                         </div>
                                     </div>
                                 </td>
                                 <td>{{ $item_rekap->idpel }}</td>
                                 <td>{{ $item_rekap->nama }}</td>
                                 <td>{{ $item_rekap->alamat }}</td>
+                                <td style="display:none;">{{ $item_rekap->nohp_stakeholder }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -187,6 +189,28 @@
             </div>
         </div>
     </div>
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function checkAll() {
+            var checklistWhatsapp = document.getElementById('checklist-whatsapp');
+            var checkboxes = document.getElementsByName('checkWhatsapp[]');
+
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = checklistWhatsapp.checked;
+            });
+        }
+
+        function kirimWhatsapp() {
+            var checkboxes = document.querySelectorAll('input[name="checkWhatsapp[]"]:checked');
+
+            checkboxes.forEach(function(checkbox) {
+                var nomorhp = checkbox.getAttribute('data-nomorhp');
+                var whatsappLink = 'https://api.whatsapp.com/send?phone=' + nomorhp + '&text=%20' + 'Halo';
+                window.open(whatsappLink, '_blank');
+            });
+        }
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             var checkboxGroups = [{
@@ -201,38 +225,6 @@
                     });
                 });
             });
-        });
-        document.addEventListener("DOMContentLoaded", function() {
-            var checkboxGroups = [{
-                checklistAll: document.getElementById("checklist-whatsapp"),
-                checkboxes: document.querySelectorAll('input[name="checkWhatsapp[]"]')
-            }, ];
-
-            checkboxGroups.forEach(function(group) {
-                group.checklistAll.addEventListener("change", function() {
-                    group.checkboxes.forEach(function(checkbox) {
-                        checkbox.checked = group.checklistAll.checked;
-                        klikWhatsapp();
-                    });
-                });
-            });
-
-            function klikWhatsapp() {
-                var url = "/transaksiaktif";
-                $.ajax({
-                    url: url,
-                    type: "post",
-                    data: {
-                        id: id
-                    },
-                    dataType: "text",
-                    success: function(result) {
-                        alert(result);
-                        // console.log(result);return
-                        getDataEvent();
-                    },
-                });
-            }
         });
     </script>
     <script>

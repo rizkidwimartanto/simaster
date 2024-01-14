@@ -74,6 +74,20 @@
                                                                     readonly>
                                                             </div>
                                                         </div>
+                                                        <div class="mb-3 col-lg-12">
+                                                            <label class="form-label">No HP StakeHolder</label>
+                                                            <div class="input-group input-group-flat">
+                                                                <input value="{{ $s->nohp_stakeholder }}" class="form-control"
+                                                                    readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3 col-lg-12">
+                                                            <label class="form-label">No HP StakeHolder</label>
+                                                            <div class="input-group input-group-flat">
+                                                                <input value="{{ $s->nohp_piclapangan }}" class="form-control"
+                                                                    readonly>
+                                                            </div>
+                                                        </div>
                                                         <div class="mb-3 col-lg-4">
                                                             <label class="form-label">Latitude</label>
                                                             <div class="input-group input-group-flat">
@@ -85,13 +99,6 @@
                                                             <label class="form-label">Longtitude</label>
                                                             <div class="input-group input-group-flat">
                                                                 <input value="{{ $s->longtitude }}" class="form-control"
-                                                                    readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 col-lg-4">
-                                                            <label class="form-label">No Telepon</label>
-                                                            <div class="input-group input-group-flat">
-                                                                <input value="{{ $s->no_telepon }}" class="form-control"
                                                                     readonly>
                                                             </div>
                                                         </div>

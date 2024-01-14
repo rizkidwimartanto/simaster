@@ -17,6 +17,11 @@ class DataPelanggan extends Migration
             $table->id();
             $table->string('idpel')->nullable();
             $table->string('nama')->nullable();
+            $table->string('nama_stakeholder')->nullable();
+            $table->string('jenis_stakeholder')->nullable();
+            $table->string('nohp_stakeholder')->nullable();
+            $table->string('namapic_lapangan')->nullable();
+            $table->string('nohp_piclapangan')->nullable();
             $table->text('alamat')->nullable();
             $table->text('maps')->nullable();
             $table->text('latitude')->nullable();
