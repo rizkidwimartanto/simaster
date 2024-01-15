@@ -40,7 +40,9 @@
                             name="penyulang">
                             <option disabled selected>--- Pilih Penyulang ---</option>
                             @foreach ($data_penyulang->unique() as $penyulang)
-                                <option value="{{ $penyulang }}">{{ $penyulang }}</option>
+                                <option value="{{ $penyulang }}" {{ old('penyulang') == $penyulang ? 'selected' : '' }}>
+                                    {{ $penyulang }}
+                                </option>
                             @endforeach
                         </select>
                         @error('penyulang')
@@ -62,8 +64,10 @@
                         <select class="form-select @error('penyebab_padam') is-invalid @enderror" name="penyebab_padam"
                             id="penyebab_padam">
                             <option disabled selected>--- Pilih Penyebab Padam ---</option>
-                            <option value="Pemeliharaan">Pemeliharaan</option>
-                            <option value="Gangguan">Gangguan</option>
+                            <option value="Pemeliharaan" {{ old('penyebab_padam') == 'Pemeliharaan' ? 'selected' : '' }}>
+                                Pemeliharaan</option>
+                            <option value="Gangguan" {{ old('penyebab_padam') == 'Gangguan' ? 'selected' : '' }}>Gangguan
+                            </option>
                         </select>
                         @error('penyebab_padam')
                             <div class="invalid-feedback">
@@ -74,7 +78,7 @@
                     <div class="mb-3">
                         <label class="form-label required">Jam Padam</label>
                         <input type="datetime-local" class="form-control @error('jam_padam') is-invalid @enderror"
-                            name="jam_padam" id="jam_padam">
+                            name="jam_padam" id="jam_padam" value="{{ old('jam_padam') }}">
                         @error('jam_padam')
                             <div class="invalid-feedback">
                                 {{ $message }}
@@ -82,9 +86,14 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Keterangan</label>
-                        <textarea class="form-control" data-bs-toggle="autosize" rows="5" name="keterangan" id="keterangan"
-                            placeholder="Masukkan Keterangan"></textarea>
+                        <label class="form-label required">Keterangan</label>
+                        <textarea class="form-control @error('keterangan') is-invalid @enderror" data-bs-toggle="autosize" rows="5"
+                            name="keterangan" id="keterangan" placeholder="Masukkan Keterangan" required>{{ old('keterangan') }}</textarea>
+                        @error('keterangan')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
                     <input type="hidden" name="status" id="status" value="Padam">
                     <div class="mb-3">
@@ -96,36 +105,53 @@
         </div>
     </div>
     <script>
-        document.getElementById('penyulang').addEventListener('change', function() {
-            var sectionMapping = @json($section);
-            var selectedPenyulang = this.value;
-            var selectedSections = sectionMapping[selectedPenyulang] || [];
-            var sectionContainer = document.getElementById('section-container');
-            var sectionChecklist = document.getElementById('section-list');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil nilai lama dari input dengan nama 'penyulang'
+            var oldPenyulang = "{{ old('penyulang') }}";
 
-            sectionChecklist.innerHTML = "";
-
-            if (selectedSections.length > 0) {
-                selectedSections.forEach(function(section) {
-                    var checkbox = document.createElement("input");
-                    checkbox.type = "checkbox";
-                    checkbox.name = "section[]";
-                    checkbox.value = section;
-                    checkbox.classList.add("form-check-input");
-                    var label = document.createElement("span");
-                    label.classList.add("form-check-label");
-                    label.classList.add("mb-2");
-                    var checkboxContainer = document.createElement("label");
-                    checkboxContainer.classList.add("form-check");
-                    label.appendChild(checkbox);
-                    label.appendChild(document.createTextNode(section));
-                    sectionChecklist.appendChild(label);
-                });
-                sectionChecklist.appendChild(checkboxContainer);
-            } else {
-                sectionContainer.style.display = "none";
+            // Jika ada nilai lama, panggil fungsi untuk menampilkan pilihan section
+            if (oldPenyulang) {
+                displaySections(oldPenyulang);
             }
-        })
+
+            // Tambahkan event listener pada perubahan nilai 'penyulang'
+            document.getElementById('penyulang').addEventListener('change', function() {
+                var selectedPenyulang = this.value;
+                displaySections(selectedPenyulang);
+            });
+
+            // Fungsi untuk menampilkan pilihan section
+            function displaySections(selectedPenyulang) {
+                var sectionMapping = @json($section);
+                var selectedSections = sectionMapping[selectedPenyulang] || [];
+                var sectionContainer = document.getElementById('section-container');
+                var sectionChecklist = document.getElementById('section-list');
+
+                sectionChecklist.innerHTML = "";
+
+                if (selectedSections.length > 0) {
+                    selectedSections.forEach(function(section) {
+                        var checkbox = document.createElement("input");
+                        checkbox.type = "checkbox";
+                        checkbox.name = "section[]";
+                        checkbox.value = section;
+                        checkbox.classList.add("form-check-input");
+                        var label = document.createElement("span");
+                        label.classList.add("form-check-label");
+                        label.classList.add("mb-2");
+                        var checkboxContainer = document.createElement("label");
+                        checkboxContainer.classList.add("form-check");
+                        label.appendChild(checkbox);
+                        label.appendChild(document.createTextNode(section));
+                        sectionChecklist.appendChild(label);
+                    });
+                    sectionChecklist.appendChild(checkboxContainer);
+                    sectionContainer.style.display = "block"; // Tampilkan container section
+                } else {
+                    sectionContainer.style.display = "none";
+                }
+            }
+        });
     </script>
     {{-- <script>
         $(document).ready(function() {

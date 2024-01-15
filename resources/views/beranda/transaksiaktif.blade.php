@@ -47,7 +47,7 @@
                                                 <label class="form-label">Jam Nyala</label>
                                                 <input type="datetime-local"
                                                     class="form-control @error('jam_nyala') is-invalid @enderror"
-                                                    name="jam_nyala" id="jam_nyala">
+                                                    name="jam_nyala" id="jam_nyala" value="{{old('jam_nyala')}}">
                                                 @error('jam_nyala')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -59,7 +59,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Penyebab Fix</label>
                                                 <textarea class="form-control @error('penyebab_fix') is-invalid @enderror" rows="3" name="penyebab_fix"
-                                                    id="penyebab_fix"></textarea>
+                                                    id="penyebab_fix">{{old('penyebab_fix')}}</textarea>
                                                 @error('penyebab_fix')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -159,9 +159,10 @@
                                     </div>
                                 </div>
                             </th>
-                            <th width="28%">ID Pelanggan</th>
+                            <th width="26%">ID Pelanggan</th>
                             <th width="30%">Nama Pelanggan</th>
                             <th width="40%">Alamat</th>
+                            <th width="2%">Aksi</th>
                             <th width="0%" style="display:none;">Nomor HP</th>
                         </tr>
                     </thead>
@@ -173,14 +174,24 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
                                                 value="{{ $item_rekap->idpel }}" id="flexCheckDefault"
-                                                name="checkWhatsapp[]"
-                                                data-nomorhp="{{ $item_rekap->nohp_stakeholder }}">
+                                                name="checkWhatsapp[]" data-nomorhp="{{ $item_rekap->nohp_stakeholder }}"
+                                                data-penyebab_padam="{{ $item_rekap->penyebab_padam }}"
+                                                data-keterangan_padam="{{ $item_rekap->keterangan }}">
                                         </div>
                                     </div>
                                 </td>
                                 <td>{{ $item_rekap->idpel }}</td>
                                 <td>{{ $item_rekap->nama }}</td>
                                 <td>{{ $item_rekap->alamat }}</td>
+                                <td>
+                                    @php
+                                        $pesanWhatsapp = urlencode("Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan")
+                                    @endphp
+                                    <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}?text={{$pesanWhatsapp}}"
+                                        target="_blank">
+                                        <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
+                                    </a>
+                                </td>
                                 <td style="display:none;">{{ $item_rekap->nohp_stakeholder }}</td>
                             </tr>
                         @endforeach
@@ -204,9 +215,12 @@
         function kirimWhatsapp() {
             var checkboxes = document.querySelectorAll('input[name="checkWhatsapp[]"]:checked');
 
-            checkboxes.forEach(function(checkbox) {
+            checkboxes.forEach(function(checkbox) { 
                 var nomorhp = checkbox.getAttribute('data-nomorhp');
-                var whatsappLink = 'https://api.whatsapp.com/send?phone=' + nomorhp + '&text=%20' + 'Halo';
+                var penyebab_padam = checkbox.getAttribute('data-penyebab_padam');
+                var keterangan_padam = checkbox.getAttribute('data-keterangan_padam');
+                var pesanWhatsapp = encodeURI("Halo, saya rizki. Untuk saat ini mengalami " + penyebab_padam + " karena " + keterangan_padam);
+                var whatsappLink = 'https://wa.me/' + nomorhp + '?text=' + pesanWhatsapp;
                 window.open(whatsappLink, '_blank');
             });
         }
@@ -240,12 +254,10 @@
         $(document).ready(function() {
             $('#tabel_rekap_pelanggan').DataTable({
                 scrollX: true,
-                "columnDefs": [{
-                    "width": "20%",
-                    "targets": 0
-                }],
                 scrollCollapse: true,
                 fixedColumns: true,
+                'pageLength': 500,
+                'lengthMenu': [10, 25, 50, 100, 200, 500],
             });
         });
     </script>
