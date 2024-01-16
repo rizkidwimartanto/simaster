@@ -106,10 +106,8 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Ambil nilai lama dari input dengan nama 'penyulang'
             var oldPenyulang = "{{ old('penyulang') }}";
 
-            // Jika ada nilai lama, panggil fungsi untuk menampilkan pilihan section
             if (oldPenyulang) {
                 displaySections(oldPenyulang);
             }

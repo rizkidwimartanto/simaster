@@ -159,7 +159,7 @@
                                     </div>
                                 </div>
                             </th>
-                            <th width="26%">ID Pelanggan</th>
+                            <th width="26%">Nomor Telepon</th>
                             <th width="30%">Nama Pelanggan</th>
                             <th width="40%">Alamat</th>
                             <th width="2%">Aksi</th>
@@ -180,7 +180,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $item_rekap->idpel }}</td>
+                                <td>{{ $item_rekap->nohp_stakeholder }}</td>
                                 <td>{{ $item_rekap->nama }}</td>
                                 <td>{{ $item_rekap->alamat }}</td>
                                 <td>

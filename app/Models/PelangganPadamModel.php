@@ -13,8 +13,8 @@ class PelangganPadamModel extends Model
     public function getPelangganModel()
     {
         return $this->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
-            ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat')
-            ->groupBy('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat')
+            ->select('data_pelanggan.nohp_stakeholder', 'data_pelanggan.nama', 'data_pelanggan.alamat')
+            ->groupBy('data_pelanggan.nohp_stakeholder', 'data_pelanggan.nama', 'data_pelanggan.alamat')
             ->get();
     }
 }
