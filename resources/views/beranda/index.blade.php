@@ -65,34 +65,34 @@
         }).addTo(map);
 
         var data_peta = @json($data_peta);
-        // var data_padam = @json($data_padam);
+        var data_padam = @json($data_padam);
 
         data_peta.forEach(function(customer) {
             var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-
-            // if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
-            //     var circle = L.circle([customer.latitude, customer.longtitude], {
-            //         color: 'red',
-            //         fillColor: 'red',
-            //         fillOpacity: 0.5,
-            //         radius: 100
-            //     }).addTo(map);
-            // } else {
+            console.log(customer.latitude + ',' + customer.longtitude);
+            if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
+                var circle = L.circle([customer.latitude, customer.longtitude], {
+                    color: 'red',
+                    fillColor: 'red',
+                    fillOpacity: 0.5,
+                    radius: 100
+                }).addTo(map);
+            } else {
                 var circle = L.circle([customer.latitude, customer.longtitude], {
                     color: 'green',
                     fillColor: 'green',
                     fillOpacity: 0.5,
                     radius: 100
                 }).addTo(map);
-            // }
+            }
 
-            // marker.bindTooltip(customer.nama).openTooltip();
+            marker.bindTooltip(customer.nama).openTooltip();
 
-            // marker.on('click', function() {
-            //     $('#' + customer.id).modal('show');
-            //     $('#customerName').text(customer.nama);
-            //     $('#customerDetails').text('Alamat: ' + customer.alamat);
-            // });
+            marker.on('click', function() {
+                $('#' + customer.id).modal('show');
+                $('#customerName').text(customer.nama);
+                $('#customerDetails').text('Alamat: ' + customer.alamat);
+            });
         });
     </script>
 @endsection

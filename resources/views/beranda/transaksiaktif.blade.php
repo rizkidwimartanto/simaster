@@ -140,10 +140,13 @@
                 <h2>Pelanggan Padam</h2>
                 <div class="row">
                     <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2">
-                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel
+                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (xlsx)
+                    </a>
+                    <a href="/transaksiaktif/export_pelanggan_padam_csv" class="btn btn-warning mb-3 col-lg-2" style="position: relative; left:10px;">
+                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (csv)
                     </a>
                     <button id="kirimWhatsapp" onclick="kirimWhatsapp()" class="btn btn-success mb-3 col-lg-2"
-                        style="position: relative; left:10px;">
+                        style="position: relative; left:20px;">
                         <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
                     </button>
                 </div>

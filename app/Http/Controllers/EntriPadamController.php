@@ -215,4 +215,11 @@ class EntriPadamController extends Controller
         date_default_timezone_set('Asia/Jakarta');
         return Excel::download(new PelangganPadamExport($pelangganPadam), 'Pelanggan_Padam ' . date('d-m-Y') . '.xlsx');
     }
+    public function export_pelanggan_padam_csv()
+    {
+        $pelangganPadamModel = new PelangganPadamModel();
+        $pelangganPadam = $pelangganPadamModel->getPelangganModel();
+        date_default_timezone_set('Asia/Jakarta');
+        return Excel::download(new PelangganPadamExport($pelangganPadam), 'Pelanggan_Padam ' . date('d-m-Y') . '.csv');
+    }
 }
