@@ -21,9 +21,10 @@ class PelangganPadamExport implements FromCollection, WithHeadings
     }
     public function headings(): array{
         return [
-            'ID Pelanggan',
+            'Nomor Telepon',
             'Nama Pelanggan', 
-            'Alamat', 
+            'Penyebab Padam', 
+            'Keterangan'
         ];
     }
 }
