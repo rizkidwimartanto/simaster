@@ -82,7 +82,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-lg-12">
-                                                            <label class="form-label">No HP StakeHolder</label>
+                                                            <label class="form-label">No HP PIC Lapangan</label>
                                                             <div class="input-group input-group-flat">
                                                                 <input value="{{ $s->nohp_piclapangan }}" class="form-control"
                                                                     readonly>

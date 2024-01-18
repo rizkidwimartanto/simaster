@@ -68,8 +68,7 @@
         var data_padam = @json($data_padam);
 
         data_peta.forEach(function(customer) {
-            var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map);
-            console.log(customer.latitude + ',' + customer.longtitude);
+            var marker = L.marker([customer.latitude, customer.longtitude]).addTo(map); 
             if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
                 var circle = L.circle([customer.latitude, customer.longtitude], {
                     color: 'red',
