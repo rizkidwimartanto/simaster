@@ -30,8 +30,6 @@ class DataPelangganController extends Controller
             'title' => 'Peta Pelanggan',
             'data_padam' => $data_padam,
             'data_peta' => $data_peta,
-            // 'data_pelanggan' => DataPelangganModel::all(),
-            // 'data_entri' => EntriPadamModel::all()
         ];
         return view('beranda/index', $data);
     }

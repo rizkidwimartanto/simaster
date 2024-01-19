@@ -20,23 +20,36 @@ class PenyulangImport implements ToModel, WithStartRow, WithMultipleSheets
 
     public function model(array $row)
     {
-        if ($this->isDuplicate($row)) {
-            Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
-            return null;
-        } else {
-            Session::flash('success_import', 'File Excel Berhasil Diimport');
-            return new PenyulangModel([
-                'id_penyulang' => $row[0],
-                'gi' => $row[1],
+        $existingData = PenyulangModel::where('id_penyulang', $row[0])
+        ->where('gi', $row[1])
+        ->first();
+
+        if ($existingData) {
+            $existingData->update([
                 'penyulang' => $row[2],
             ]);
+
+            Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
+        } else {
+            if ($this->isDuplicate($row)) {
+                Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
+            } else {
+                Session::flash('success_import', 'File Excel Berhasil Diimport');
+                return new PenyulangModel([
+                    'id_penyulang' => $row[0],
+                    'gi' => $row[1],
+                    'penyulang' => $row[2],
+                ]);
+            }
         }
+
+        return null;
     }
 
     private function isDuplicate(array $data)
     {
-        $existingData = PenyulangModel::where('id_penyulang', $data['0'])
-            ->where('gi', $data['1'])
+        $existingData = PenyulangModel::where('id_penyulang', $data[0])
+            ->where('gi', $data[1])
             ->first();
 
         return $existingData !== null;

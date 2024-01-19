@@ -1,17 +1,57 @@
 :root {
-    --primary: #FFF200;
-    --bg: #08B1F0;
-    --text_color: #0C356A;
-  }
-  body {
+    --primary: #fff200;
+    --bg: #08b1f0;
+    --text_color: #0c356a;
+}
+body {
     padding: 0;
     margin: 0;
 }
-  #map{
+#map {
     height: 700px;
-  }
-  p.detail_pelanggan{
+}
+p.detail_pelanggan {
     border-bottom: 1px solid black;
     color: #353535;
     padding-bottom: 10px;
-  }
+}
+div.search_customer {
+    position: absolute;
+    top: 55px;
+    right: 10px;
+    z-index: 9999;
+}
+#suggestionList {
+    position: relative;
+    display: block;
+    max-height: 150px; /* Sesuaikan dengan tinggi maksimum yang diinginkan */
+    overflow-y: auto;
+    border: 1px solid #ced4da; /* Tambahkan border untuk tampilan yang lebih baik */
+    border-radius: 4px;
+}
+
+#suggestionList ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: white;
+}
+
+#suggestionList li {
+    cursor: pointer;
+    padding: 8px;
+    border-bottom: 1px solid #ced4da; /* Garis pemisah antar item */
+}
+
+#suggestionList li:last-child {
+    border-bottom: none; /* Hapus garis pemisah pada item terakhir */
+}
+#suggestionList .selected {
+    background-color: #007bff;
+    color: #ffffff;
+}
+@media (max-width: 360px) {
+    div.search_customer {
+        width: 70%;
+    }
+}
