@@ -183,7 +183,7 @@
             if (currentMarker) {
                 map.removeLayer(currentMarker);
             }
-            map.setView([customer.latitude, customer.longtitude], 18);
+            map.setView([customer.latitude, customer.longtitude], 19);
             currentMarker.bindTooltip(customer.nama).openTooltip();
             currentMarker.on('click', function() {
                 $('#' + customer.id).modal('show');

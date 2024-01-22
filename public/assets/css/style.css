@@ -8,7 +8,10 @@ body {
     margin: 0;
 }
 #map {
+    position: relative;
+    bottom: 70px;
     height: 700px;
+    z-index: 0;
 }
 p.detail_pelanggan {
     border-bottom: 1px solid black;
@@ -16,14 +19,15 @@ p.detail_pelanggan {
     padding-bottom: 10px;
 }
 div.search_customer {
-    position: absolute;
-    top: 55px;
-    right: 10px;
-    z-index: 9999;
+    position: relative;
+    margin-left: 50%;
+    width: 50%;
+    z-index: 1;
 }
 #suggestionList {
-    position: relative;
+    position: absolute;
     display: block;
+    width: 96%;
     max-height: 150px; /* Sesuaikan dengan tinggi maksimum yang diinginkan */
     overflow-y: auto;
     border: 1px solid #ced4da; /* Tambahkan border untuk tampilan yang lebih baik */
@@ -49,9 +53,4 @@ div.search_customer {
 #suggestionList .selected {
     background-color: #007bff;
     color: #ffffff;
-}
-@media (max-width: 360px) {
-    div.search_customer {
-        width: 70%;
-    }
 }
