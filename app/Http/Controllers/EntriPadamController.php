@@ -54,15 +54,10 @@ class EntriPadamController extends Controller
         ];
 
         return view('beranda/transaksipadam', $data);
-        // return response()->json($data);
     }
     public function transaksiaktif()
     {
         $data_padam = EntriPadamModel::all();
-        // ->where(function ($query) {
-        //     $query->where('entri_padam.status', '=', 'Menyala')
-        //         ->orWhere('entri_padam.status', '=', 'Padam');
-        // })
         $rekap_pelanggan = DB::table('entri_padam')
             ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
             ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section')
@@ -78,9 +73,6 @@ class EntriPadamController extends Controller
     }
     public function insertEntriPadam(Request $request)
     {
-        // $sid    = "AC2012d29d75db2ed14b5e2c86524bff0a";
-        // $token  = "9bd3947099e72f5b9f78a420174e837a";
-        // $twilio = new Client($sid, $token);
         $message = [
             'required' => ':attribute harus diisi',
             'max' => ':attribute maximal 255 kata',
@@ -107,13 +99,6 @@ class EntriPadamController extends Controller
                     $validateData
                 ]);
             }
-            // $twilio->messages
-            // ->create("whatsapp:+6289531584234", // to
-            //   array(
-            //     "from" => "whatsapp:+14155238886",
-            //     "body" => 'Hello World'
-            //   )
-            // );
             Session::flash('success_tambah', 'Data berhasil ditambah');
             return redirect('/entripadam');
         } else {
@@ -171,7 +156,7 @@ class EntriPadamController extends Controller
     {
         $padam = DB::table('data_pelanggan')
         ->leftJoin('entri_padam', 'data_pelanggan.nama_section' , '=', 'entri_padam.section')
-        ->select('data_pelanggan.nama', 'data_pelanggan.id', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'entri_padam.section')
+        ->select('data_pelanggan.nama', 'data_pelanggan.id', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nohp_stakeholder', 'entri_padam.section')
         ->where('entri_padam.status', '=', 'Padam')
         ->get();
 

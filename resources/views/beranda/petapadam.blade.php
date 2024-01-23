@@ -38,8 +38,8 @@
                         <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama }} </p>
                         <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
                         <p class="detail_pelanggan">No Telepon :
-                            <a href="https://wa.me/6289668969721?text=Halo." target="_blank">
-                                +62 896-6896-9721
+                            <a href="https://wa.me/{{ $data->nohp_stakeholder }}?text=Halo." target="_blank">
+                                {{ $data->nohp_stakeholder }}
                             </a>
                         </p>
                         <p class="detail_pelanggan">Maps : <a href="{{ $data->maps }}"

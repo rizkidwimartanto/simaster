@@ -21,7 +21,7 @@ class DataPelangganController extends Controller
     public function index()
     {
         $data_peta = DB::table('data_pelanggan')
-        ->select('data_pelanggan.id','data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nama_section')
+        ->select('data_pelanggan.id','data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nama_section', 'data_pelanggan.nohp_stakeholder')
         ->get();
         $data_padam = DB::table('entri_padam')
         ->select('entri_padam.status', 'entri_padam.section')

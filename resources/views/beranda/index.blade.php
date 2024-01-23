@@ -37,7 +37,11 @@
                     <div class="modal-body">
                         <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama }} </p>
                         <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
-                        {{-- <p class="detail_pelanggan">No Telepon : {{ $data->no_telepon }}</p> --}}
+                        <p class="detail_pelanggan">No Telepon :
+                            <a href="https://wa.me/{{ $data->nohp_stakeholder }}?text=Halo." target="_blank">
+                                {{ $data->nohp_stakeholder }}
+                            </a>
+                        </p>
                         <p class="detail_pelanggan">Maps : <a href="{{ $data->maps }}"
                                 target="_blank">{{ $data->maps }}</a></p>
                     </div>
