@@ -47,7 +47,7 @@
                                                 <label class="form-label">Jam Nyala</label>
                                                 <input type="datetime-local"
                                                     class="form-control @error('jam_nyala') is-invalid @enderror"
-                                                    name="jam_nyala" id="jam_nyala" value="{{old('jam_nyala')}}">
+                                                    name="jam_nyala" id="jam_nyala" value="{{ old('jam_nyala') }}">
                                                 @error('jam_nyala')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -59,7 +59,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Penyebab Fix</label>
                                                 <textarea class="form-control @error('penyebab_fix') is-invalid @enderror" rows="3" name="penyebab_fix"
-                                                    id="penyebab_fix">{{old('penyebab_fix')}}</textarea>
+                                                    id="penyebab_fix">{{ old('penyebab_fix') }}</textarea>
                                                 @error('penyebab_fix')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -139,14 +139,13 @@
             <div class="card p-3 mb-3 mt-3">
                 <h2>Pelanggan Padam</h2>
                 <div class="row">
-                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 col-lg-2">
+                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 m-1 col-lg-2">
                         <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (xlsx)
                     </a>
-                    <a href="/transaksiaktif/export_pelanggan_padam_csv" class="btn btn-warning mb-3 col-lg-2" style="position: relative; left:10px;">
+                    <a href="/transaksiaktif/export_pelanggan_padam_csv" class="btn btn-warning mb-3 m-1 col-lg-2">
                         <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (csv)
                     </a>
-                    <button id="kirimWhatsapp" onclick="kirimWhatsapp()" class="btn btn-success mb-3 col-lg-2"
-                        style="position: relative; left:20px;">
+                    <button id="kirimWhatsapp" onclick="kirimWhatsapp()" class="btn btn-success mb-3 m-1 col-lg-2">
                         <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
                     </button>
                 </div>
@@ -188,9 +187,9 @@
                                 <td>{{ $item_rekap->alamat }}</td>
                                 <td>
                                     @php
-                                        $pesanWhatsapp = urlencode("Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan")
+                                        $pesanWhatsapp = urlencode("Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan");
                                     @endphp
-                                    <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}?text={{$pesanWhatsapp}}"
+                                    <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}?text={{ $pesanWhatsapp }}"
                                         target="_blank">
                                         <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
                                     </a>
@@ -218,11 +217,12 @@
         function kirimWhatsapp() {
             var checkboxes = document.querySelectorAll('input[name="checkWhatsapp[]"]:checked');
 
-            checkboxes.forEach(function(checkbox) { 
+            checkboxes.forEach(function(checkbox) {
                 var nomorhp = checkbox.getAttribute('data-nomorhp');
                 var penyebab_padam = checkbox.getAttribute('data-penyebab_padam');
                 var keterangan_padam = checkbox.getAttribute('data-keterangan_padam');
-                var pesanWhatsapp = encodeURI("Halo, saya rizki. Untuk saat ini mengalami " + penyebab_padam + " karena " + keterangan_padam);
+                var pesanWhatsapp = encodeURI("Halo, saya rizki. Untuk saat ini mengalami " + penyebab_padam +
+                    " karena " + keterangan_padam);
                 var whatsappLink = 'https://wa.me/' + nomorhp + '?text=' + pesanWhatsapp;
                 window.open(whatsappLink, '_blank');
             });

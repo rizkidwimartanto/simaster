@@ -52,7 +52,7 @@
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
                 <h2>Rekap Data Padam</h2>
-                <table class="table table-vcenter table-bordered table-hover" id="tabel_data_menyala">
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_data_menyala" style="width: 100%">
                     <thead>
                         <tr>
                             <th width="1%">No</th>
@@ -89,7 +89,7 @@
                                             $durasiMenit = floor(($durasiDetik % (60 * 60)) / 60);
                                             $durasiPadam = $durasiJam . ' jam ' . $durasiMenit . ' menit';
                                         @endphp
-                                        {{ $durasiPadam}}</td>
+                                        {{ $durasiPadam }}</td>
                                     <td>{{ $s->keterangan }}</td>
                                     <td>{{ $s->status }}</td>
                                 </tr>
@@ -107,7 +107,9 @@
             })
         })
         $(document).ready(function() {
-            $('#tabel_data_menyala').DataTable({});
+            $('#tabel_data_menyala').DataTable({
+                scrollX: true,
+            });
         });
     </script>
 @endsection
