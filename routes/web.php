@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\DataPegawaiController;
 use App\Http\Controllers\DataPelangganController;
 use App\Http\Controllers\EntriPadamController;
 use App\Http\Controllers\UserController;
@@ -57,4 +58,7 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::post('/entripadam/import_excel_penyulangsection', 'import_excel_penyulangsection');
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');
+});
+Route::controller(DataPegawaiController::class)->group(function(){
+    Route::post('/tambah_pegawai', 'tambah_pegawai');
 });

@@ -58,6 +58,7 @@ class EntriPadamController extends Controller
     public function transaksiaktif()
     {
         $data_padam = EntriPadamModel::all();
+        $data_pegawai = DataPelangganModel::all();
         $rekap_pelanggan = DB::table('entri_padam')
             ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
             ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
@@ -67,6 +68,7 @@ class EntriPadamController extends Controller
         $data = [
             'title' => 'Transaksi Aktif',
             'data_padam' => $data_padam,
+            'data_pegawai' => $data_pegawai,
             'rekap_pelanggan' => $rekap_pelanggan
         ];
         return view('beranda/transaksiaktif', $data);
@@ -75,9 +77,6 @@ class EntriPadamController extends Controller
     {
         $message = [
             'required' => ':attribute harus diisi',
-            'max' => ':attribute maximal 255 kata',
-            'min' => ':attribute minimal 2 kata',
-            'email' => ':attribute tidak valid',
         ];
         $validateData = $request->validate([
             'penyulang' => 'required',
@@ -125,9 +124,6 @@ class EntriPadamController extends Controller
     {
         $message = [
             'required' => ':attribute harus diisi',
-            'max' => ':attribute maximal 255 kata',
-            'min' => ':attribute minimal 2 kata',
-            'email' => ':attribute tidak valid',
         ];
         $request->validate([
             'jam_nyala' => 'required',
@@ -155,10 +151,10 @@ class EntriPadamController extends Controller
     public function petapadam()
     {
         $padam = DB::table('data_pelanggan')
-        ->leftJoin('entri_padam', 'data_pelanggan.nama_section' , '=', 'entri_padam.section')
-        ->select('data_pelanggan.nama', 'data_pelanggan.id', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nohp_stakeholder', 'entri_padam.section')
-        ->where('entri_padam.status', '=', 'Padam')
-        ->get();
+            ->leftJoin('entri_padam', 'data_pelanggan.nama_section', '=', 'entri_padam.section')
+            ->select('data_pelanggan.nama', 'data_pelanggan.id', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nohp_stakeholder', 'entri_padam.section')
+            ->where('entri_padam.status', '=', 'Padam')
+            ->get();
 
         $data = [
             'title' => 'Peta Padam',

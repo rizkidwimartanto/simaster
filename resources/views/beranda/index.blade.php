@@ -5,27 +5,21 @@
             <div class="row g-2">
                 <div class="col">
                     <input type="text" class="form-control" id="searchInput" placeholder="Cari customer..."
-                        onkeypress="handleKeyPress(event)" oninput="showSuggestions()">
+                        onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
                     <div id="suggestionList" class="dropdown">
                         <ul class="list-group"></ul>
                     </div>
                 </div>
                 <div class="col-auto">
-                    <button href="#" onclick="searchCustomer()" class="btn btn-icon" aria-label="Button">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                            <path d="M21 21l-6 -6" />
-                        </svg>
+                    <button href="#" onclick="hapusPencarian()" class="btn btn-icon button_hapus_pencarian"
+                        aria-label="Button">
+                        <i class="fa-solid fa-x fa-lg"></i>
                     </button>
                 </div>
             </div>
         </div>
     </div>
-    <div id="map"></div>
+    <div id="map" onclick="click_map()"></div>
     @foreach ($data_peta as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -146,21 +140,22 @@
             }
         }
 
-        function searchCustomer() {
-            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            data_peta.forEach(function(customer) {
-                if (customer.nama.toLowerCase() === searchTerm) {
-                    showMarker(customer);
-                    return;
-                }
-            });
+        function hapusPencarian() {
+            document.getElementById('searchInput').value = "";
         }
 
+        function click_map() {
+            document.getElementById('suggestionList').style.display = "none";
+        }
+
+        function click_customer() {
+            document.getElementById('suggestionList').style.display = "block";
+        }
         function showSuggestions() {
             var searchTerm = document.getElementById('searchInput').value.toLowerCase();
             var suggestionList = document.getElementById('suggestionList');
             var listGroup = suggestionList.querySelector('ul');
-            listGroup.innerHTML = ''; // Kosongkan daftar setiap kali ada perubahan input
+            listGroup.innerHTML = '';
 
             data_peta.forEach(function(customer) {
                 if (customer.nama.toLowerCase().includes(searchTerm)) {
@@ -177,9 +172,9 @@
             });
 
             if (listGroup.childElementCount > 0) {
-                suggestionList.style.display = 'block'; // Tampilkan daftar jika ada pilihan
+                suggestionList.style.display = 'block';
             } else {
-                suggestionList.style.display = 'none'; // Sembunyikan daftar jika tidak ada pilihan
+                suggestionList.style.display = 'none';
             }
         }
 

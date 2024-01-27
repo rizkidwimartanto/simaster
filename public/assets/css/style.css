@@ -30,7 +30,7 @@ div.search_customer {
     width: 96%;
     max-height: 150px; /* Sesuaikan dengan tinggi maksimum yang diinginkan */
     overflow-y: auto;
-    border: 1px solid #ced4da; /* Tambahkan border untuk tampilan yang lebih baik */
+
     border-radius: 4px;
 }
 
@@ -44,7 +44,7 @@ div.search_customer {
 #suggestionList li {
     cursor: pointer;
     padding: 8px;
-    border-bottom: 1px solid #ced4da; /* Garis pemisah antar item */
+    border-bottom: 1px solid #ced4da; 
 }
 
 #suggestionList li:last-child {
@@ -53,4 +53,8 @@ div.search_customer {
 #suggestionList .selected {
     background-color: #007bff;
     color: #ffffff;
+}
+button.button_hapus_pencarian{
+    position: relative;
+    right: 43px;
 }

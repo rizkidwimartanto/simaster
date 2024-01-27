@@ -133,10 +133,64 @@
                     </table>
                 </form>
             </div>
-            {{-- <div class="card p-3 mb-3">
-            <canvas id="myChart" style="width:100%; height:450px;"></canvas>
-        </div> --}}
             <div class="card p-3 mb-3 mt-3">
+                <h2>Data Pegawai</h2>
+                <div class="row">
+                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 m-1 col-lg-2">
+                        <i class="fa-solid fa-user-plus fa-lg" style="margin-right: 5px"></i> Tambah Pegawai
+                    </a>
+                </div>
+                <table class="table table-vcenter table-bordered table-hover" id="tabel_data_pegawai" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th width="2%">
+                                <div class="d-flex justify-content-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input mt-2" style="position:relative; left:10px;"
+                                            type="checkbox" id="checklist-whatsapp" onclick="checkAll()">
+                                    </div>
+                                </div>
+                            </th>
+                            <th width="26%">Nama Pegawai</th>
+                            <th width="30%">Jabatan Pegawai</th>
+                            <th width="40%">Unit Pegawai</th>
+                            <th width="40%">Nomor Telepon Pegawai</th>
+                            <th width="2%">Aksi</th>
+                            <th width="0%" style="display:none;">Nomor HP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($data_pegawai as $pegawai)
+                            <tr>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="form-check">
+                                            {{-- <input class="form-check-input" type="checkbox"
+                                                value="{{ $pegawai->idpel }}" id="flexCheckDefault"
+                                                name="checkWhatsapp[]" data-nomorhp="{{ $pegawai->nohp_stakeholder }}"
+                                                data-penyebab_padam="{{ $pegawai->penyebab_padam }}"
+                                                data-keterangan_padam="{{ $pegawai->keterangan }}"> --}}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ $pegawai->nama_pegawai }}</td>
+                                <td>{{ $pegawai->jabatan_pegawai }}</td>
+                                <td>{{ $pegawai->unit_pegawai }}</td>
+                                <td>{{ $pegawai->nomortelepon_pegawai }}</td>
+                                <td>
+                                    {{-- @php
+                                        $pesanWhatsapp = urlencode("Halo, saya rizki. Untuk saat ini mengalami $pegawai->penyebab_padam karena $pegawai->keterangan");
+                                    @endphp
+                                    <a href="https://wa.me/{{ $pegawai->nohp_stakeholder }}?text={{ $pesanWhatsapp }}"
+                                        target="_blank">
+                                        <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
+                                    </a> --}}
+                                </td>
+                                <td style="display:none;">{{ $pegawai->nohp_stakeholder }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 <h2>Pelanggan Padam</h2>
                 <div class="row">
                     <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 m-1 col-lg-2">
@@ -202,7 +256,6 @@
             </div>
         </div>
     </div>
-    <!-- Include jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function checkAll() {
@@ -252,8 +305,6 @@
                 'lengthMenu': [10, 25, 50, 100, 200, 500],
             });
         });
-    </script>
-    <script>
         $(document).ready(function() {
             $('#tabel_rekap_pelanggan').DataTable({
                 scrollX: true,
@@ -263,5 +314,14 @@
                 'lengthMenu': [10, 25, 50, 100, 200, 500],
             });
         });
+        $(document).ready(function() {
+            $('#tabel_data_pegawai').DataTable({
+                scrollX: true,
+                scrollCollapse: true,
+                fixedColumns: true,
+                'pageLength': 500,
+                'lengthMenu': [10, 25, 50, 100, 200, 500],
+            })
+        })
     </script>
 @endsection
