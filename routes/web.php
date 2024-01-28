@@ -61,4 +61,6 @@ Route::controller(EntriPadamController::class)->group(function () {
 });
 Route::controller(DataPegawaiController::class)->group(function(){
     Route::post('/tambah_pegawai', 'tambah_pegawai');
+    Route::post('/edit_pegawai/{id}', 'edit_pegawai');
+    Route::get('/hapus_pegawai', 'hapus_pegawai');
 });

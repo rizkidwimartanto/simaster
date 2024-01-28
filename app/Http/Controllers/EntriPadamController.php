@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Twilio\Rest\Client;
 use App\Exports\PelangganPadamExport;
 use App\Exports\SectionExport;
 use App\Models\EntriPadamModel;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use App\Imports\DataPelangganImport;
 use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
+use App\Models\DataPegawaiModel;
 use App\Models\PelangganPadamModel;
 use App\Models\RekapKaliPadamModel;
 use Maatwebsite\Excel\Facades\Excel;
@@ -58,7 +58,7 @@ class EntriPadamController extends Controller
     public function transaksiaktif()
     {
         $data_padam = EntriPadamModel::all();
-        $data_pegawai = DataPelangganModel::all();
+        $data_pegawai = DataPegawaiModel::all();
         $rekap_pelanggan = DB::table('entri_padam')
             ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
             ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
