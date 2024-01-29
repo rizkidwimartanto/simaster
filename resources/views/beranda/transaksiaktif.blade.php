@@ -166,9 +166,9 @@
             <div class="card p-3 mb-3 mt-3">
                 <h2>Data Pegawai</h2>
                 <div class="row">
-                    <a href="/hapus_pegawai" class="btn btn-danger col-lg-2 m-1 mb-3"><i class="fa-solid fa-trash fa-lg"
+                    {{-- <a href="/hapus_pegawai" class="btn btn-danger col-lg-2 m-1 mb-3"><i class="fa-solid fa-trash fa-lg"
                             style="margin-right: 5px"></i> Hapus Pegawai
-                    </a>
+                    </a> --}}
                     <a href="#" class="btn btn-success col-lg-2 m-1 mb-3" data-bs-toggle="modal"
                         data-bs-target="#modal-pegawai"> <i class="fa-solid fa-user-plus fa-lg"
                             style="margin-right: 5px"></i> Tambah Pegawai
@@ -477,14 +477,14 @@
         }
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
+        document.addEventListener("DOMContentLoaded", function() {
             var checkboxGroups = [{
                 checklistAll: document.getElementById("checklist-pegawai"),
                 checkboxes: document.querySelectorAll('input[name="checkPegawai[]"]')
             }]
-            checkboxGroups.forEach(function(group){
-                group.checklistAll.addEventListener('change', function(){
-                    group.checkboxes.forEach(function(checkbox){
+            checkboxGroups.forEach(function(group) {
+                group.checklistAll.addEventListener('change', function() {
+                    group.checkboxes.forEach(function(checkbox) {
                         checkbox.checked = group.checklistAll.checked;
                     })
                 })
