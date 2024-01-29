@@ -57,7 +57,7 @@ class DataPegawaiController extends Controller
             return redirect('/transaksiaktif');
         }
     }
-    public function hapus_pegawai(Request $request, $id)
+    public function hapus_pegawai(Request $request)
     {
         $checklist = $request->input('checkPegawai');
         if ($checklist) {

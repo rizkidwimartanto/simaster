@@ -54,7 +54,8 @@ div.search_customer {
     background-color: #007bff;
     color: #ffffff;
 }
-button.button_hapus_pencarian{
-    position: relative;
-    right: 43px;
+@media(max-width: 575px){
+    button.button-delete-pegawai{
+        width: 100%;
+    }
 }

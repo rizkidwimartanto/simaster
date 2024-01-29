@@ -105,21 +105,6 @@ class EntriPadamController extends Controller
             return redirect('/entripadam');
         }
     }
-    public function hapusEntriPadam()
-    {
-        $hapus_entri = request('check');
-        if ($hapus_entri) {
-            foreach ($hapus_entri as $hapus) {
-                $padam = EntriPadamModel::find($hapus);
-                $padam->delete();
-            }
-            Session::flash('success_hapus', 'Data berhasil dihapus');
-            return redirect('/transaksipadam');
-        } else {
-            Session::flash('success_hapus', 'Data berhasil dihapus');
-            return redirect('/transaksipadam');
-        }
-    }
     public function editStatusPadam(Request $request)
     {
         $message = [
@@ -129,7 +114,7 @@ class EntriPadamController extends Controller
             'jam_nyala' => 'required',
             'penyebab_fix' => 'required',
         ], $message);
-        $update_status = request('check');
+        $update_status = request('checkPadam');
         $penyebab_fix = $request->input('penyebab_fix');
         $jam_nyala = date("d-m-Y H:i", strtotime(str_replace('T', ' ', $request->input('jam_nyala'))));
         if ($update_status) {
