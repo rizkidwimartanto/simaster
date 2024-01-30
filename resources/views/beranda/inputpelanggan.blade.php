@@ -67,11 +67,10 @@
                                                                     readonly>
                                                             </div>
                                                         </div>
-                                                        <div class="mb-3 col-lg-12">
+                                                        <div class="mb-3">
                                                             <label class="form-label">Alamat</label>
                                                             <div class="input-group input-group-flat">
-                                                                <input value="{{ $s->alamat }}" class="form-control"
-                                                                    readonly>
+                                                                <textarea class="form-control" name="alamat" rows="5" readonly>{{ $s->alamat }}</textarea>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-lg-12">
@@ -177,8 +176,7 @@
                                                         <div class="mb-3 col-lg-12">
                                                             <label class="form-label">nama_section</label>
                                                             <div class="input-group input-group-flat">
-                                                                <input value="{{ $s->nama_section }}"
-                                                                    class="form-control" readonly>
+                                                                <textarea class="form-control" name="nama_section" rows="3" readonly>{{ $s->nama_section }}</textarea>
                                                             </div>
                                                         </div>
                                                         <div class="mb-3 col-lg-12">

@@ -10,7 +10,7 @@ body {
 #map {
     position: relative;
     bottom: 70px;
-    height: 700px;
+    height: 730px;
     z-index: 0;
 }
 p.detail_pelanggan {
@@ -55,7 +55,7 @@ div.search_customer {
     color: #ffffff;
 }
 @media(max-width: 575px){
-    button.button-delete-pegawai{
+    a.button-delete-pegawai{
         width: 100%;
     }
 }

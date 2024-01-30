@@ -139,7 +139,8 @@
                                             <div class="d-flex justify-content-center">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox"
-                                                        value="{{ $s->id }}" id="flexCheckDefault" name="checkPadam[]">
+                                                        value="{{ $s->id }}" id="flexCheckDefault"
+                                                        name="checkPadam[]">
                                                 </div>
                                             </div>
                                         </td>
@@ -162,6 +163,71 @@
                         </tbody>
                     </table>
                 </form>
+            </div>
+            <div class="card p-3 mb-3 mt-3">
+                <h2>Pelanggan Padam</h2>
+                <div class="row">
+                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 m-1 col-lg-2">
+                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (xlsx)
+                    </a>
+                    <a href="/transaksiaktif/export_pelanggan_padam_csv" class="btn btn-warning mb-3 m-1 col-lg-2">
+                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (csv)
+                    </a>
+                    <button id="kirimWhatsappPelanggan" onclick="kirimWhatsappPelanggan()"
+                        class="btn btn-success mb-3 m-1 col-lg-2">
+                        <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
+                    </button>
+                </div>
+                <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_rekap_pelanggan"
+                    style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th width="2%">
+                                <div class="d-flex justify-content-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input mt-2" style="position:relative; left:10px;"
+                                            type="checkbox" id="checklist-whatsapp" onclick="checkAllPelanggan()">
+                                    </div>
+                                </div>
+                            </th>
+                            <th width="26%">Nomor Telepon</th>
+                            <th width="30%">Nama Pelanggan</th>
+                            <th width="40%">Alamat</th>
+                            <th width="2%">Aksi</th>
+                            <th width="0%" style="display:none;">Nomor HP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($rekap_pelanggan as $item_rekap)
+                            <tr>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                value="{{ $item_rekap->idpel }}" id="flexCheckDefault"
+                                                name="checkWhatsapp[]" data-nomorhp="{{ $item_rekap->nohp_stakeholder }}"
+                                                data-penyebab_padam="{{ $item_rekap->penyebab_padam }}"
+                                                data-keterangan_padam="{{ $item_rekap->keterangan }}">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ $item_rekap->nohp_stakeholder }}</td>
+                                <td>{{ $item_rekap->nama }}</td>
+                                <td>{{ $item_rekap->alamat }}</td>
+                                <td>
+                                    @php
+                                        $pesanWhatsapp = urlencode("Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan");
+                                    @endphp
+                                    <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}?text={{ $pesanWhatsapp }}"
+                                        target="_blank">
+                                        <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
+                                    </a>
+                                </td>
+                                <td style="display:none;">{{ $item_rekap->nohp_stakeholder }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
             <div class="card p-3 mb-3 mt-3">
                 <h2>Data Pegawai</h2>
@@ -260,8 +326,49 @@
                 <form action="/hapus_pegawai" method="post">
                     @csrf
                     @method('delete')
-                    <button type="submit" class="btn btn-danger mb-2 col-sm-4 button-delete-pegawai"><i
-                            class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pegawai</button>
+                    <a href="#" class="btn btn-danger col-sm-4 mb-2 button-delete-pegawai" data-bs-toggle="modal"
+                        data-bs-target="#modal-delete-pegawai">
+                        <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pegawai
+                    </a>
+                    <div class="modal modal-blur fade" id="modal-delete-pegawai" tabindex="-1" role="dialog"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                <div class="modal-status bg-danger"></div>
+                                <div class="modal-body text-center py-4">
+                                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg"
+                                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                        stroke="currentColor" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
+                                        <path d="M12 9v4" />
+                                        <path d="M12 17h.01" />
+                                    </svg>
+                                    <h3>Apakah anda yakin?</h3>
+                                    <div class="text-muted">Untuk menghapus pegawai tersebut</div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="w-100">
+                                        <div class="row">
+                                            <div class="col"><a href="#" class="btn w-100"
+                                                    data-bs-dismiss="modal">
+                                                    Cancel
+                                                </a></div>
+                                            <div class="col"><button type="submit" class="btn btn-danger w-100"
+                                                    data-bs-dismiss="modal">
+                                                    Delete
+                                                </button></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table class="table table-vcenter table-bordered table-hover table-info" id="tabel_data_pegawai"
                         style="width: 100%">
                         <thead>
@@ -289,8 +396,9 @@
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox"
-                                                    value="{{ $pegawai->id }}" id="flexCheckDefault"
-                                                    name="checkPegawai[]">
+                                                    value="{{ $pegawai->id }}"
+                                                    data-nomorhp="{{ $pegawai->nomortelepon_pegawai }}"
+                                                    id="flexCheckDefault" name="checkPegawai[]">
                                             </div>
                                         </div>
                                     </td>
@@ -393,70 +501,6 @@
                 </tbody>
                 </table>
             </div>
-            <div class="card p-3 mb-3 mt-3">
-                <h2>Pelanggan Padam</h2>
-                <div class="row">
-                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 m-1 col-lg-2">
-                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (xlsx)
-                    </a>
-                    <a href="/transaksiaktif/export_pelanggan_padam_csv" class="btn btn-warning mb-3 m-1 col-lg-2">
-                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (csv)
-                    </a>
-                    <button id="kirimWhatsappPelanggan" onclick="kirimWhatsappPelanggan()" class="btn btn-success mb-3 m-1 col-lg-2">
-                        <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
-                    </button>
-                </div>
-                <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_rekap_pelanggan"
-                    style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th width="2%">
-                                <div class="d-flex justify-content-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input mt-2" style="position:relative; left:10px;"
-                                            type="checkbox" id="checklist-whatsapp" onclick="checkAllPelanggan()">
-                                    </div>
-                                </div>
-                            </th>
-                            <th width="26%">Nomor Telepon</th>
-                            <th width="30%">Nama Pelanggan</th>
-                            <th width="40%">Alamat</th>
-                            <th width="2%">Aksi</th>
-                            <th width="0%" style="display:none;">Nomor HP</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($rekap_pelanggan as $item_rekap)
-                            <tr>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"
-                                                value="{{ $item_rekap->idpel }}" id="flexCheckDefault"
-                                                name="checkWhatsapp[]" data-nomorhp="{{ $item_rekap->nohp_stakeholder }}"
-                                                data-penyebab_padam="{{ $item_rekap->penyebab_padam }}"
-                                                data-keterangan_padam="{{ $item_rekap->keterangan }}">
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>{{ $item_rekap->nohp_stakeholder }}</td>
-                                <td>{{ $item_rekap->nama }}</td>
-                                <td>{{ $item_rekap->alamat }}</td>
-                                <td>
-                                    @php
-                                        $pesanWhatsapp = urlencode("Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan");
-                                    @endphp
-                                    <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}?text={{ $pesanWhatsapp }}"
-                                        target="_blank">
-                                        <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
-                                    </a>
-                                </td>
-                                <td style="display:none;">{{ $item_rekap->nohp_stakeholder }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -478,14 +522,16 @@
                 check.checked = checkPegawai.checked;
             });
         }
-        function checkAllPadam(){
+
+        function checkAllPadam() {
             var checkPadam = document.getElementById('checklist-padam');
             var checkboxPadam = document.getElementsByName('checkPadam[]');
 
-            checkboxPadam.forEach(function(check){
+            checkboxPadam.forEach(function(check) {
                 check.checked = checkPadam.checked;
             });
         }
+
         function kirimWhatsappPelanggan() {
             var checkboxes = document.querySelectorAll('input[name="checkWhatsapp[]"]:checked');
 
@@ -498,6 +544,21 @@
                 var whatsappLink = 'https://wa.me/' + nomorhp + '?text=' + pesanWhatsapp;
                 window.open(whatsappLink, '_blank');
             });
+        }
+
+        function kirimWhatsappPegawai() {
+            var checkboxes = document.querySelectorAll('input[name="checkPegawai[]"]:checked');
+
+            checkboxes.forEach(function(checkbox) {
+                var nomorHp = checkbox.getAttribute('data-nomorhp');
+                if (nomorHp.startsWith("08")) {
+                    nomorHp = "628" + nomorHp.slice(2);
+                }
+                var pesanWhatsapp = encodeURI("Halo, saya rizki. Untuk saat ini mengalami");
+                var whatsappLink = 'https://wa.me/' + nomorHp + '?text=' + pesanWhatsapp;
+                window.open(whatsappLink, '_blank');
+            });
+
         }
     </script>
     <script>
