@@ -30,7 +30,7 @@ class DataPelangganController extends Controller
             'title' => 'Peta Pelanggan',
             'data_padam' => $data_padam,
             'data_peta' => $data_peta,
-            'data_unitutlp' => DataPelangganModel::pluck('unitulp')
+            'data_unitulp' => DataPelangganModel::pluck('unitulp')
         ];
         return view('beranda/index', $data);
     }
@@ -77,18 +77,18 @@ class DataPelangganController extends Controller
 
         return redirect('/inputpelanggan');
     }
-    public function hapusPelanggan()
+    public function hapusPelanggan(Request $request)
     {
-        $hapus_items = request('check');
+        $hapus_items = $request->input('checkPelanggan');
         if ($hapus_items) {
             foreach ($hapus_items as $hapus) {
                 $pelanggan = DataPelangganModel::find($hapus);
                 $pelanggan->delete();
             }
-            Session::flash('success_hapus', 'Data berhasil dihapus');
+            Session::flash('success_hapus_pelanggan', 'Data berhasil dihapus');
             return redirect('/inputpelanggan');
         } else {
-            Session::flash('error_hapus', 'Data gagal dihapus');
+            Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
             return redirect('/inputpelanggan');
         }
     }

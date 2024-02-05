@@ -15,81 +15,58 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
 
     public function model(array $row)
     {
-        $existingData = DataPelangganModel::where('idpel', $row[0])
-            ->where('nama', $row[1])
-            ->first();
+        $existingData = DataPelangganModel::where('idpel', $row[0])->first();
 
         if ($existingData) {
-            $existingData->update([
-                'nama_stakeholder' => $row[2],
-                'jenis_stakeholder' => $row[3],
-                'nohp_stakeholder' => $row[4],
-                'namapic_lapangan' => $row[5],
-                'nohp_piclapangan' => $row[6],
-                'alamat' => $row[7],
-                'maps' => $row[8],
-                'latitude' => $row[9],
-                'longtitude' => $row[10],
-                'unitulp' => $row[11],
-                'tarif' => $row[12],
-                'daya' => $row[13],
-                'kogol' => $row[14],
-                'fakmkwh' => $row[15], 
-                'rpbp' => $row[16], 
-                'rpujl' => $row[17], 
-                'nomor_kwh' => $row[18],  
-                'penyulang' => $row[19], 
-                'nama_section' => $row[20],
-                'tipe_kubikel' => $row[21],
-            ]);
-
+            $existingData->update($this->getData($row));
             Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
         } else {
             if ($this->isDuplicate($row)) {
                 Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
             } else {
+                DataPelangganModel::create($this->getData($row));
                 Session::flash('success_import', 'File Excel Berhasil Diimport');
-                return new DataPelangganModel([
-                    'idpel' => $row[0],
-                    'nama' => $row[1],
-                    'nama_stakeholder' => $row[2],
-                    'jenis_stakeholder' => $row[3],
-                    'nohp_stakeholder' => $row[4],
-                    'namapic_lapangan' => $row[5],
-                    'nohp_piclapangan' => $row[6],
-                    'alamat' => $row[7],
-                    'maps' => $row[8],
-                    'latitude' => $row[9],
-                    'longtitude' => $row[10],
-                    'unitulp' => $row[11],
-                    'tarif' => $row[12],
-                    'daya' => $row[13],
-                    'kogol' => $row[14],
-                    'fakmkwh' => $row[15], 
-                    'rpbp' => $row[16], 
-                    'rpujl' => $row[17], 
-                    'nomor_kwh' => $row[18],  
-                    'penyulang' => $row[19], 
-                    'nama_section' => $row[20],
-                    'tipe_kubikel' => $row[21],
-                ]);
             }
         }
 
         return null;
     }
 
+    private function getData(array $row)
+    {
+        return [
+            'idpel' => $row[0],
+            'nama' => $row[1],
+            'nama_stakeholder' => $row[2],
+            'jenis_stakeholder' => $row[3],
+            'nohp_stakeholder' => $row[4],
+            'namapic_lapangan' => $row[5],
+            'nohp_piclapangan' => $row[6],
+            'alamat' => $row[7],
+            'maps' => $row[8],
+            'latitude' => $row[9],
+            'longtitude' => $row[10],
+            'unitulp' => $row[11],
+            'tarif' => $row[12],
+            'daya' => $row[13],
+            'kogol' => $row[14],
+            'fakmkwh' => $row[15],
+            'rpbp' => $row[16],
+            'rpujl' => $row[17],
+            'nomor_kwh' => $row[18],
+            'penyulang' => $row[19],
+            'nama_section' => $row[20],
+            'tipe_kubikel' => $row[21],
+        ];
+    }
     private function isDuplicate(array $data)
     {
-        $existingData = DataPelangganModel::where('idpel', $data['0'])
-            ->where('nama', $data['1'])
-            ->first();
-
-        return $existingData !== null;
+        return DataPelangganModel::where('idpel', $data['0'])->exists();
     }
 
-    public function sheets(): array{
-        return[
+    public function sheets(): array
+    {
+        return [
             'Data Pelanggan TM' => new DataPelangganImport()
         ];
     }

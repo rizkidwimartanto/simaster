@@ -20,9 +20,22 @@
         </div>
     </div>
     <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
-        <option disabled selected>--- Pilih Peta ---</option>
+        <option disabled selected>--- Pilih Area Lokasi ---</option>
         @foreach ($data_unitulp->unique() as $data)
-            <option value="{{ $data }}">{{ $data }}</option>
+            <option value="{{ $data }}">
+                @if ($data == '52551')
+                    {{ $data = 'Demak' }}
+                @endif
+                @if ($data == '52552')
+                    {{ $data = 'Tegowanu' }}
+                @endif
+                @if ($data == '52553')
+                    {{ $data = 'Purwodadi' }}
+                @endif
+                @if ($data == '52554')
+                    {{ $data = 'Wirosari' }}
+                @endif
+            </option>
         @endforeach
     </select>
     <div id="map" onclick="click_map()"></div>
