@@ -19,6 +19,12 @@
             </div>
         </div>
     </div>
+    <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
+        <option disabled selected>--- Pilih Peta ---</option>
+        @foreach ($data_unitutlp->unique() as $data)
+            <option value="{{ $data }}">{{ $data }}</option>
+        @endforeach
+    </select>
     <div id="map" onclick="click_map()"></div>
     @foreach ($data_peta as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -103,6 +109,52 @@
 
         var data_peta = @json($data_peta);
         var data_padam = @json($data_padam);
+        // Menangani perubahan pada elemen select
+        $('#pilih_peta').change(function() {
+            // Menghapus semua marker yang ada pada peta
+            map.eachLayer(function(layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            var selectedUnitulp = $(this).val();
+
+            var filteredDataPeta = data_peta.filter(function(customer) {
+                return customer.unitulp === selectedUnitulp;
+            });
+
+            filteredDataPeta.forEach(function(customer) {
+                var iconPadam = L.icon({
+                    iconUrl: 'assets/img/lokasi_merah.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                });
+                var iconMenyala = L.icon({
+                    iconUrl: 'assets/img/lokasi_hijau.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                });
+                if (data_padam.some(padam => padam.section === customer.nama_section && padam.status ===
+                        'Padam')) {
+                    var marker = L.marker([customer.latitude, customer.longtitude], {
+                        icon: iconPadam
+                    }).addTo(map);
+                } else {
+                    var marker = L.marker([customer.latitude, customer.longtitude], {
+                        icon: iconMenyala
+                    }).addTo(map);
+                }
+
+                marker.bindTooltip(customer.nama).openTooltip();
+
+                marker.on('click', function() {
+                    $('#' + customer.id).modal('show');
+                    $('#customerName').text(customer.nama);
+                    $('#customerDetails').text('Alamat: ' + customer.alamat);
+                });
+            });
+        });
 
         data_peta.forEach(function(customer) {
             var iconPadam = L.icon({
@@ -151,6 +203,7 @@
         function click_customer() {
             document.getElementById('suggestionList').style.display = "block";
         }
+
         function showSuggestions() {
             var searchTerm = document.getElementById('searchInput').value.toLowerCase();
             var suggestionList = document.getElementById('suggestionList');

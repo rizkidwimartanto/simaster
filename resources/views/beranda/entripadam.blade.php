@@ -5,7 +5,7 @@
             <div class="alert alert-success">
                 {{ session('success_import') }}
             </div>
-        @endif
+        @endif 
         @if (session('error_import'))
             <div class="alert alert-danger">
                 {{ session('error_import') }}

@@ -19,6 +19,12 @@
             </div>
         </div>
     </div>
+    <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
+        <option disabled selected>--- Pilih Peta ---</option>
+        @foreach ($data_unitulp->unique() as $data)
+            <option value="{{ $data }}">{{ $data }}</option>
+        @endforeach
+    </select>
     <div id="map" onclick="click_map()"></div>
     @foreach ($padam as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -99,6 +105,40 @@
         }).addTo(map);
 
         var padams = @json($padam);
+        $('#pilih_peta').change(function() {
+            // Menghapus semua marker yang ada pada peta
+            map.eachLayer(function(layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            // Mendapatkan unitulp yang dipilih
+            var selectedUnitulp = $(this).val();
+
+            // Filter data_peta berdasarkan unitulp yang dipilih
+            var filteredDataPeta = padams.filter(function(customer) {
+                return customer.unitulp === selectedUnitulp;
+            });
+
+            // Membuat marker berdasarkan data yang telah difilter
+            filteredDataPeta.forEach(function(padam) {
+                var iconPadam = L.icon({
+                    iconUrl: 'assets/img/lokasi_merah.png',
+                    iconSize: [40, 40],
+                    iconAnchor: [40, 40],
+                });
+                var marker = L.marker([padam.latitude, padam.longtitude], {
+                    icon: iconPadam
+                }).addTo(map);
+                marker.bindTooltip(padam.nama).openTooltip();
+                marker.on('click', function() {
+                    $('#' + padam.id).modal('show');
+                    $('#customerName').text(padam.nama);
+                    $('#customerDetails').text('Alamat: ' + padam.alamat);
+                });
+            });
+        });
         padams.forEach(function(padam) {
             var iconPadam = L.icon({
                 iconUrl: 'assets/img/lokasi_merah.png',

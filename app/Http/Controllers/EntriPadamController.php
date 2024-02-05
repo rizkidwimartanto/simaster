@@ -137,13 +137,14 @@ class EntriPadamController extends Controller
     {
         $padam = DB::table('data_pelanggan')
             ->leftJoin('entri_padam', 'data_pelanggan.nama_section', '=', 'entri_padam.section')
-            ->select('data_pelanggan.nama', 'data_pelanggan.id', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nohp_stakeholder', 'entri_padam.section')
+            ->select('data_pelanggan.nama', 'data_pelanggan.id', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nohp_stakeholder', 'data_pelanggan.unitulp', 'entri_padam.section')
             ->where('entri_padam.status', '=', 'Padam')
             ->get();
 
         $data = [
             'title' => 'Peta Padam',
             'padam' => $padam,
+            'data_unitulp' => DataPelangganModel::pluck('unitulp')
         ];
         return view('beranda/petapadam', $data);
     }
