@@ -88,7 +88,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
                                             <input class="form-check-input mt-2" style="position:relative; left:10px;"
-                                                type="checkbox" id="checklist-pegawai" onclick="checkAllPelanggan()">
+                                                type="checkbox" id="checklist-pelanggan" onclick="checkAllPelanggan()">
                                         </div>
                                     </div>
                                 </th>
@@ -298,12 +298,19 @@
         });
     </script>
     <script>
-        function checkAllPelanggan() {
-            var checklist_pegawai = document.getElementById('checklist-pegawai');
-            var checkAllPelanggan = document.getElementsByName('checkPelanggan[]');
-            checkAllPelanggan.forEach(function(check) {
-                check.checked = checklist_pegawai.checked;
-            })
-        }
+        document.addEventListener("DOMContentLoaded", function() {
+            var checkboxGroups = [{
+                checklistAll: document.getElementById("checklist-pelanggan"),
+                checkboxes: document.querySelectorAll('input[name="checkPelanggan[]"]')
+            }, ];
+
+            checkboxGroups.forEach(function(group) {
+                group.checklistAll.addEventListener("change", function() {
+                    group.checkboxes.forEach(function(checkbox) {
+                        checkbox.checked = group.checklistAll.checked;
+                    });
+                });
+            });
+        });
     </script>
 @endsection

@@ -21,11 +21,11 @@ class DataPelangganController extends Controller
     public function index()
     {
         $data_peta = DB::table('data_pelanggan')
-        ->select('data_pelanggan.id','data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nama_section', 'data_pelanggan.nohp_stakeholder', 'data_pelanggan.unitulp')
-        ->get();
+            ->select('data_pelanggan.id', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nama_section', 'data_pelanggan.nohp_stakeholder', 'data_pelanggan.unitulp')
+            ->get();
         $data_padam = DB::table('entri_padam')
-        ->select('entri_padam.status', 'entri_padam.section')
-        ->get();
+            ->select('entri_padam.status', 'entri_padam.section')
+            ->get();
         $data = [
             'title' => 'Peta Pelanggan',
             'data_padam' => $data_padam,
@@ -86,10 +86,9 @@ class DataPelangganController extends Controller
                 $pelanggan->delete();
             }
             Session::flash('success_hapus_pelanggan', 'Data berhasil dihapus');
-            return redirect('/inputpelanggan');
         } else {
             Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
-            return redirect('/inputpelanggan');
         }
+        return redirect('/inputpelanggan');
     }
 }

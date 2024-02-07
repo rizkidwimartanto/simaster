@@ -514,14 +514,20 @@
             });
         }
 
-        function checkAllPegawai() {
-            var checkPegawai = document.getElementById('checklist-pegawai');
-            var checkboxPegawai = document.getElementsByName('checkPegawai[]');
+        document.addEventListener("DOMContentLoaded", function() {
+            var checkboxGroups = [{
+                checklistAll: document.getElementById("checklist-pegawai"),
+                checkboxes: document.querySelectorAll('input[name="checkPegawai[]"]')
+            }, ];
 
-            checkboxPegawai.forEach(function(check) {
-                check.checked = checkPegawai.checked;
+            checkboxGroups.forEach(function(group) {
+                group.checklistAll.addEventListener("change", function() {
+                    group.checkboxes.forEach(function(checkbox) {
+                        checkbox.checked = group.checklistAll.checked;
+                    });
+                });
             });
-        }
+        });
 
         function checkAllPadam() {
             var checkPadam = document.getElementById('checklist-padam');
