@@ -292,6 +292,7 @@
                 scrollX: true,
                 scrollCollapse: true,
                 fixedColumns: true,
+                "bPaginate": false,
                 'pageLength': 500,
                 'lengthMenu': [10, 25, 50, 100, 200, 500],
             });
