@@ -2,29 +2,36 @@
 
 namespace App\Exports;
 
+use App\Models\PelangganPadamModel;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class PelangganPadamExport implements FromCollection, WithHeadings
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
     protected $pelangganPadamModel;
-    public function __construct($pelangganPadamModel)
+
+    public function __construct()
     {   
-        $this->pelangganPadamModel = $pelangganPadamModel;
+        // Membuat instance dari model PelangganPadamModel
+        $model = new PelangganPadamModel();
+        
+        // Memanggil method getPelangganPadam dari objek model
+        $this->pelangganPadamModel = $model->getPelangganPadam();
     }
+
     public function collection()
     {
         return $this->pelangganPadamModel;
     }
-    public function headings(): array{
+
+    public function headings(): array
+    {
         return [
             'Nomor Telepon',
             'Nama Pelanggan', 
             'Penyebab Padam', 
-            'Keterangan'
+            'Keterangan',
+            'Pesan Whatsapp'
         ];
     }
 }

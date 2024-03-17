@@ -4,41 +4,34 @@
             aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+        <h3 class="mt-3 d-none-navbar-horizontal">
             <a href="/beranda">
-                Inovasi UP3 Demak
+                SIMPELTAS (Sistem Monitoring Pelanggan Prioritas)
             </a>
-        </h1>
-        <div class="navbar-nav flex-row order-md-last">
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
-                    aria-label="Open user menu">
-                    <span>{{ auth()->user()->name }}</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <form action="/logout" method="get">
-                        @csrf
-                        <button type="submit" href="/" class="dropdown-item">Logout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+        </h3>
         <div class="collapse navbar-collapse" id="navbar-menu">
             <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                 <ul class="navbar-nav">
-                    <li class="nav-item {{ $title == 'Peta Pelanggan' ? 'active' : '' }}">
-                        <a class="nav-link" href="/beranda">
-                            <span class="nav-link-title">
-                                Peta Pelanggan
+                    <li
+                        class="nav-item {{ $title == 'Peta Pelanggan' ? 'active' : ($title == 'Peta Padam' ? 'active' : '') }} dropdown">
+                        <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            <span class="nav-link">
+                                Peta
                             </span>
                         </a>
-                    </li>
-                    <li class="nav-item {{ $title == 'Peta Padam' ? 'active' : '' }}">
-                        <a class="nav-link" href="/petapadam">
-                            <span class="nav-link-title">
-                                Peta Padam
-                            </span>
-                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <a class="dropdown-item" href="/">
+                                        Peta Pelanggan
+                                    </a>
+                                    <a class="dropdown-item" href="/petapadam">
+                                        Peta Padam
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li
                         class="nav-item {{ $title == 'Transaksi Padam' ? 'active' : ($title == 'Transaksi Aktif' ? 'active' : '') }} dropdown">
@@ -71,9 +64,30 @@
                     <li class="nav-item {{ $title == 'Input Pelanggan' ? 'active' : '' }}">
                         <a class="nav-link" href="/inputpelanggan">
                             <span class="nav-link-title">
-                                Input Pelanggan
+                                Updating
                             </span>
                         </a>
+                    </li>
+                    <li class="nav-item">
+                        |
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" role="button" aria-expanded="false">
+                            <span class="nav-link">
+                                {{ auth()->user()->name }}
+                            </span>
+                        </a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+                                    <form action="/logout" method="get">
+                                        @csrf
+                                        <button type="submit" href="/" class="dropdown-item">Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

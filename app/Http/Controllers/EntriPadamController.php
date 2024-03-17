@@ -65,6 +65,15 @@ class EntriPadamController extends Controller
             ->groupBy('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
             ->where('entri_padam.status', '=', 'Padam')
             ->get();
+        foreach ($rekap_pelanggan as $pelanggan) {
+            $pesan_whatsapp = 'Yth. Pelanggan ' . $pelanggan->nama .  ' Mohon maaf atas gangguan listrik yang terjadi di persil Anda. Saat ini sedang dalam penanganan petugas PLN. Terima kasih';
+
+            $entriPadam = EntriPadamModel::where('section', $pelanggan->section)->first();
+            if ($entriPadam) {
+                $entriPadam->pesan_whatsapp = $pesan_whatsapp;
+                $entriPadam->save();
+            }
+        }
         $data = [
             'title' => 'Transaksi Aktif',
             'data_padam' => $data_padam,

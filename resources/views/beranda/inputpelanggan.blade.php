@@ -26,6 +26,19 @@
                 {{ session('error_hapus_pelanggan') }}
             </div>
         @endif
+        <div class="col-lg-12">
+            <div class="card p-3 mt-4">
+                <form method="post" action="/entripadam/import_excel_penyulangsection" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-label"><b>Upload File Penyulang</b></div>
+                    <input type="file" name="file_penyulang" class="form-control" required />
+                    <div class="form-label mt-2"><b>Upload File Section</b></div>
+                    <input type="file" name="file_section" class="form-control" required />
+                    <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
+                            style="margin-right: 5px"></i>Import Excel</button>
+                </form>
+            </div>
+        </div>
         <form method="post" action="/inputpelanggan/import_excel" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="form-label">Custom File Input</div>
@@ -48,7 +61,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         <div class="modal-status bg-danger"></div>
                         <div class="modal-body text-center py-4">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">

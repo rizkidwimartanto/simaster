@@ -5,7 +5,7 @@
             <div class="alert alert-success">
                 {{ session('success_import') }}
             </div>
-        @endif 
+        @endif
         @if (session('error_import'))
             <div class="alert alert-danger">
                 {{ session('error_import') }}
@@ -18,23 +18,27 @@
         @endif
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
-                <form method="post" action="/entripadam/import_excel_penyulangsection" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-label"><b>Upload File Penyulang</b></div>
-                    <input type="file" name="file_penyulang" class="form-control" required />
-                    <div class="form-label mt-2"><b>Upload File Section</b></div>
-                    <input type="file" name="file_section" class="form-control" required />
-                    <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
-                            style="margin-right: 5px"></i>Import Excel</button>
-                </form>
-            </div>
-        </div>
-        <div class="col-lg-12">
-            <div class="card p-3 mt-4">
                 <h2>Form Entri Padam</h2>
                 <form action="/entripadam/insertentripadam" method="post" id="entriPadamForm">
                     @csrf
                     <div class="mb-3">
+                        <div class="mb-3">
+                            <div class="form-label required">Penyebab Padam</div>
+                            <select class="form-select @error('penyebab_padam') is-invalid @enderror" name="penyebab_padam"
+                                id="penyebab_padam">
+                                <option disabled selected>--- Pilih Penyebab Padam ---</option>
+                                <option value="Instalasi" {{ old('penyebab_padam') == 'Instalasi' ? 'selected' : '' }}>
+                                    Instalasi</option>
+                                <option value="Gangguan" {{ old('penyebab_padam') == 'Gangguan' ? 'selected' : '' }}>
+                                    Gangguan
+                                </option>
+                            </select>
+                            @error('penyebab_padam')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                         <div class="form-label required">Penyulang</div>
                         <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang"
                             name="penyulang">
@@ -60,22 +64,6 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                        <div class="form-label required">Penyebab Padam</div>
-                        <select class="form-select @error('penyebab_padam') is-invalid @enderror" name="penyebab_padam"
-                            id="penyebab_padam">
-                            <option disabled selected>--- Pilih Penyebab Padam ---</option>
-                            <option value="Pemeliharaan" {{ old('penyebab_padam') == 'Pemeliharaan' ? 'selected' : '' }}>
-                                Pemeliharaan</option>
-                            <option value="Gangguan" {{ old('penyebab_padam') == 'Gangguan' ? 'selected' : '' }}>Gangguan
-                            </option>
-                        </select>
-                        @error('penyebab_padam')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label required">Jam Padam</label>
                         <input type="datetime-local" class="form-control @error('jam_padam') is-invalid @enderror"
                             name="jam_padam" id="jam_padam" value="{{ old('jam_padam') }}">
@@ -86,7 +74,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label required">Keterangan</label>
+                        <label class="form-label required">Keterangan Padam</label>
                         <textarea class="form-control @error('keterangan') is-invalid @enderror" data-bs-toggle="autosize" rows="5"
                             name="keterangan" id="keterangan" placeholder="Masukkan Keterangan" required>{{ old('keterangan') }}</textarea>
                         @error('keterangan')

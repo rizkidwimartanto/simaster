@@ -53,7 +53,7 @@
                 </div>
             @endif
             <div class="card p-3">
-                <h2>Data Padam Saat Ini</h2>
+                <h2>Data Jaringan Padam Saat Ini</h2>
                 <form action="/transaksipadam/edit_status_padam" method="post">
                     @csrf
                     <input type="hidden" value="Menyala" name="status" id="status">
@@ -123,7 +123,7 @@
                                 <th>Penyulang</th>
                                 <th>Section</th>
                                 <th>Nomor Tiang</th>
-                                <th>Penyebab Padam</th>
+                                {{-- <th>Penyebab Padam</th> --}}
                                 <th>Jam Padam</th>
                                 <th>Keterangan</th>
                                 <th>Status</th>
@@ -153,7 +153,7 @@
                                                 {{ 0 }}
                                             @endif
                                         </td>
-                                        <td>{{ $s->penyebab_padam }}</td>
+                                        {{-- <td>{{ $s->penyebab_padam }}</td> --}}
                                         <td>{{ $s->jam_padam }}</td>
                                         <td>{{ $s->keterangan }}</td>
                                         <td>{{ $s->status }}</td>
@@ -165,7 +165,7 @@
                 </form>
             </div>
             <div class="card p-3 mb-3 mt-3">
-                <h2>Pelanggan Padam</h2>
+                <h2>Daftar Pelanggan Padam Saat Ini</h2>
                 <div class="row">
                     <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 m-1 col-lg-2">
                         <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (xlsx)
@@ -173,10 +173,10 @@
                     <a href="/transaksiaktif/export_pelanggan_padam_csv" class="btn btn-warning mb-3 m-1 col-lg-2">
                         <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (csv)
                     </a>
-                    <button id="kirimWhatsappPelanggan" onclick="kirimWhatsappPelanggan()"
+                    {{-- <button id="kirimWhatsappPelanggan" onclick="kirimWhatsappPelanggan()"
                         class="btn btn-success mb-3 m-1 col-lg-2">
                         <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
-                    </button>
+                    </button> --}}
                 </div>
                 <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_rekap_pelanggan"
                     style="width: 100%">

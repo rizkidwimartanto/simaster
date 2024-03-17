@@ -8,7 +8,9 @@ body {
     padding: 0;
     margin: 0;
 }
-
+header.navbar-expand-md{
+    border-bottom: 5px solid rgb(183, 136, 195);
+}
 #map {
     position: relative;
     bottom: 105px;
@@ -34,7 +36,7 @@ select.pilih_peta {
     z-index: 1;
     margin-left: 6%;
     width: 40%;
-    bottom: 8.7%;
+    bottom: 7.2%;
 }
 
 button.cari_peta {
@@ -86,6 +88,9 @@ button.cari_peta {
     select.pilih_peta {
         width: 32%;
         margin-left: 15%;
-        bottom: 10.3%;
+        bottom: 8%;
+    }
+    #navbar-menu{
+        display: block;
     }
 }
