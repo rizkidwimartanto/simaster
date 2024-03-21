@@ -53,6 +53,7 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/transaksipadam', 'index')->middleware('auth');
     Route::get('/transaksiaktif', 'transaksiaktif')->middleware('auth');
     Route::post('/entripadam/insertentripadam', 'insertEntriPadam');
+    Route::post('/entripadam', 'insertPadam');
     Route::get('/transaksipadam/export_kali_padam', 'export_kali_padam');
     Route::get('/transaksiaktif/export_pelanggan_padam', 'export_pelanggan_padam');
     Route::get('/transaksiaktif/export_pelanggan_padam_csv', 'export_pelanggan_padam_csv');

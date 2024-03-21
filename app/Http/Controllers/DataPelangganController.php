@@ -37,6 +37,45 @@ class DataPelangganController extends Controller
     public function entri_padam()
     {
         $data_penyulang = SectionModel::pluck('penyulang');
+        $rekap_pelanggan = DB::table('entri_padam')
+            ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
+            ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
+            ->groupBy('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
+            ->where('entri_padam.status', '=', 'Padam')
+            ->get();
+
+        $target = '';
+        foreach ($rekap_pelanggan as $rekap) {
+            if (!empty($rekap->nohp_stakeholder)) {
+                $target .= $rekap->nohp_stakeholder . ',';
+            }
+        }
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'https://api.fonnte.com/send',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => [
+                'target' => $target,
+                'message' => 'test message',
+                'delay' => '2',
+                'countryCode' => '62', //optional
+            ],
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Z5oA!jnyvg#y7qcSa3B7', //change TOKEN to your actual token
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        echo $response;
+
         $penyulangs = [];
         foreach ($data_penyulang as $penyulang) {
             $penyulangs[$penyulang] = SectionModel::where('penyulang', $penyulang)->pluck('id_apkt');
@@ -46,6 +85,7 @@ class DataPelangganController extends Controller
             'section' => $penyulangs,
             'data_pelanggan' => DataPelangganModel::all(),
             'data_penyulang' => SectionModel::pluck('penyulang'),
+            'rekap_pelanggan' => $rekap_pelanggan,
             'data_section' => PenyulangModel::all(),
         ];
         return view('beranda/entripadam', $data);
@@ -55,7 +95,7 @@ class DataPelangganController extends Controller
         $data_pelanggan = DataPelangganModel::all();
 
         $data = [
-            'title' => 'Input Pelanggan',
+            'title' => 'Updating',
             'data_pelanggan' => $data_pelanggan,
         ];
         return view('beranda/inputpelanggan', $data);

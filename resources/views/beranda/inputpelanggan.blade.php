@@ -30,67 +30,68 @@
             <div class="card p-3 mt-4">
                 <form method="post" action="/entripadam/import_excel_penyulangsection" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-label"><b>Upload File Penyulang</b></div>
+                    <div class="form-label fs-2">Upload File Penyulang</div>
                     <input type="file" name="file_penyulang" class="form-control" required />
-                    <div class="form-label mt-2"><b>Upload File Section</b></div>
+                    <div class="form-label mt-2 fs-2">Upload File Section</div>
                     <input type="file" name="file_section" class="form-control" required />
                     <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
                             style="margin-right: 5px"></i>Import Excel</button>
                 </form>
             </div>
         </div>
-        <form method="post" action="/inputpelanggan/import_excel" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            <div class="form-label">Custom File Input</div>
-            <input type="file" name="file" class="form-control" required />
-            <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
-                    style="margin-right: 5px"></i>Import Excel</button>
-            <a href="/inputpelanggan/export_excel" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
-                    class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-        </form>
-        <form action="/hapus_pelanggan" method="post">
-            @csrf
-            @method('delete')
-            <a href="#" class="btn btn-danger col-sm-4 mb-2 button-delete-pegawai" data-bs-toggle="modal"
-                data-bs-target="#modal-delete-pegawai">
-                <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pelanggan
-            </a>
-            <div class="modal modal-blur fade" id="modal-delete-pegawai" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <div class="modal-status bg-danger"></div>
-                        <div class="modal-body text-center py-4">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
-                                <path d="M12 9v4" />
-                                <path d="M12 17h.01" />
-                            </svg>
-                            <h3>Apakah anda yakin?</h3>
-                            <div class="text-muted">Untuk menghapus pelanggan tersebut</div>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="w-100">
-                                <div class="row">
-                                    <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
-                                            Cancel
-                                        </a></div>
-                                    <div class="col"><button type="submit" class="btn btn-danger w-100"
-                                            data-bs-dismiss="modal">
-                                            Delete
-                                        </button></div>
+        <div class="card p-3 mt-4">
+            <form method="post" action="/inputpelanggan/import_excel" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="form-label fs-2">Upload File Pelanggan</div>
+                <input type="file" name="file" class="form-control" required />
+                <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
+                        style="margin-right: 5px"></i>Import Excel</button>
+                <a href="/inputpelanggan/export_excel" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
+                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
+            </form>
+            <form action="/hapus_pelanggan" method="post">
+                @csrf
+                @method('delete')
+                <a href="#" class="btn btn-danger col-sm-4 mb-2 button-delete-pegawai" data-bs-toggle="modal"
+                    data-bs-target="#modal-delete-pegawai">
+                    <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pelanggan
+                </a>
+                <div class="modal modal-blur fade" id="modal-delete-pegawai" tabindex="-1" role="dialog"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-status bg-danger"></div>
+                            <div class="modal-body text-center py-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
+                                    height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
+                                    <path d="M12 9v4" />
+                                    <path d="M12 17h.01" />
+                                </svg>
+                                <h3>Apakah anda yakin?</h3>
+                                <div class="text-muted">Untuk menghapus pelanggan tersebut</div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="w-100">
+                                    <div class="row">
+                                        <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                                Cancel
+                                            </a></div>
+                                        <div class="col"><button type="submit" class="btn btn-danger w-100"
+                                                data-bs-dismiss="modal">
+                                                Delete
+                                            </button></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="card p-3">
+                <div class="col-lg-12">
                     <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_data_pelanggan"
                         style="width: 100%">
                         <thead>
@@ -119,8 +120,9 @@
                                     <td>
                                         <div class="d-flex justify-content-center">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="{{ $s->id }}"
-                                                    id="flexCheckDefault" name="checkPelanggan[]">
+                                                <input class="form-check-input" type="checkbox"
+                                                    value="{{ $s->id }}" id="flexCheckDefault"
+                                                    name="checkPelanggan[]">
                                             </div>
                                         </div>
                                     </td>
@@ -295,7 +297,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+        </div>
         </form>
     </div>
     <script>

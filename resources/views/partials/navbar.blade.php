@@ -48,7 +48,7 @@
                                         Transaksi Aktif
                                     </a>
                                     <a class="dropdown-item" href="/transaksipadam">
-                                        Transaksi Padam
+                                        Transaksi Histori
                                     </a>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="nav-item {{ $title == 'Input Pelanggan' ? 'active' : '' }}">
+                    <li class="nav-item {{ $title == 'Updating' ? 'active' : '' }}">
                         <a class="nav-link" href="/inputpelanggan">
                             <span class="nav-link-title">
                                 Updating

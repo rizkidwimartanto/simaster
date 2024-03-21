@@ -172,7 +172,7 @@ class EntriPadamController extends Controller
         Excel::import(new PenyulangImport, public_path('/file_penyulang/' . $nama_file_penyulang));
         Excel::import(new SectionImport, public_path('/file_section/' . $nama_file_section));
 
-        return redirect('/entripadam');
+        return redirect('/inputpelanggan');
     }
     public function export_kali_padam()
     {
