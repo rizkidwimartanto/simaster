@@ -111,8 +111,7 @@
                     <table class="table table-vcenter table-bordered table-hover table-warning" id="tabel_data_padam">
                         <thead>
                             <tr>
-                                <th width="1%">No</th>
-                                <th width="5%">
+                                <th width="2%">
                                     <div class="d-flex justify-content-center">
                                         <div class="form-check">
                                             <input class="form-check-input mt-2" style="position:relative; left:10px;"
@@ -120,21 +119,18 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th>Penyulang</th>
-                                <th>Section</th>
-                                <th>Nomor Tiang</th>
-                                {{-- <th>Penyebab Padam</th> --}}
-                                <th>Jam Padam</th>
-                                <th>Keterangan</th>
-                                <th>Status</th>
+                                <th width="10%">Penyulang</th>
+                                <th width="20%">Section</th>
+                                <th width="20%">Nomor Tiang</th>
+                                <th width="20%">Jam Padam</th>
+                                <th width="10%">Keterangan</th>
+                                <th width="8%">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1; ?>
                             @foreach ($data_padam as $s)
                                 @if ($s->status == 'Padam')
                                     <tr>
-                                        <td>{{ $i++ }}</td>
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <div class="form-check">
@@ -166,18 +162,6 @@
             </div>
             <div class="card p-3 mb-3 mt-3">
                 <h2>Daftar Pelanggan Padam Saat Ini</h2>
-                <div class="row">
-                    <a href="/transaksiaktif/export_pelanggan_padam" class="btn btn-warning mb-3 m-1 col-lg-2">
-                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (xlsx)
-                    </a>
-                    <a href="/transaksiaktif/export_pelanggan_padam_csv" class="btn btn-warning mb-3 m-1 col-lg-2">
-                        <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel (csv)
-                    </a>
-                    {{-- <button id="kirimWhatsappPelanggan" onclick="kirimWhatsappPelanggan()"
-                        class="btn btn-success mb-3 m-1 col-lg-2">
-                        <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
-                    </button> --}}
-                </div>
                 <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_rekap_pelanggan"
                     style="width: 100%">
                     <thead>
@@ -216,7 +200,9 @@
                                 <td>{{ $item_rekap->alamat }}</td>
                                 <td>
                                     @php
-                                        $pesanWhatsapp = urlencode("Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan");
+                                        $pesanWhatsapp = urlencode(
+                                            "Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan",
+                                        );
                                     @endphp
                                     <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}?text={{ $pesanWhatsapp }}"
                                         target="_blank">
@@ -227,278 +213,6 @@
                             </tr>
                         @endforeach
                     </tbody>
-                </table>
-            </div>
-            <div class="card p-3 mb-3 mt-3">
-                <h2>Data Pegawai</h2>
-                <div class="row">
-                    <button id="kirimWhatsapp" onclick="kirimWhatsappPegawai()"
-                        class="btn btn-success mb-3 m-1 col-lg-4 col-sm-4">
-                        <i class="fa-brands fa-whatsapp fa-lg" style="margin-right: 5px;"></i>Kirim Whatsapp
-                    </button>
-                    <a href="#" class="btn btn-info mb-3 col-lg-4 col-sm-4 m-1" data-bs-toggle="modal"
-                        data-bs-target="#modal-pegawai">
-                        <i class="fa-solid fa-user-plus fa-lg" style="margin-right: 5px"></i> Tambah Pegawai
-                    </a>
-                    <form action="/tambah_pegawai" method="post">
-                        @csrf
-                        <div class="modal modal-blur fade" id="modal-pegawai" tabindex="-1" role="dialog"
-                            aria-hidden="true">
-                            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Form Tambah Pegawai</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Nama Pegawai</label>
-                                                    <input type="text"
-                                                        class="form-control @error('nama_pegawai') is-invalid @enderror"
-                                                        name="nama_pegawai" id="nama_pegawai"
-                                                        value="{{ old('nama_pegawai') }}">
-                                                    @error('nama_pegawai')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Jabatan Pegawai</label>
-                                                    <input type="text"
-                                                        class="form-control @error('jabatan_pegawai') is-invalid @enderror"
-                                                        name="jabatan_pegawai" id="jabatan_pegawai"
-                                                        value="{{ old('jabatan_pegawai') }}">
-                                                    @error('jabatan_pegawai')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Unit Pegawai</label>
-                                                    <input type="text"
-                                                        class="form-control @error('unit_pegawai') is-invalid @enderror"
-                                                        name="unit_pegawai" id="unit_pegawai"
-                                                        value="{{ old('unit_pegawai') }}">
-                                                    @error('unit_pegawai')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Nomor Telepon</label>
-                                                    <input type="text" inputmode="numeric" pattern="[0-9]*"
-                                                        class="form-control @error('nomortelepon_pegawai') is-invalid @enderror"
-                                                        name="nomortelepon_pegawai" id="nomortelepon_pegawai"
-                                                        value="{{ old('nomortelepon_pegawai') }}">
-                                                    @error('nomortelepon_pegawai')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
-                                                    @enderror
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <a href="#" class="btn btn-link link-secondary"
-                                            data-bs-dismiss="modal">Cancel</a>
-                                        <button type="submit" class="btn btn-success ms-auto">
-                                            Submit
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <form action="/hapus_pegawai" method="post">
-                    @csrf
-                    @method('delete')
-                    <a href="#" class="btn btn-danger col-sm-4 mb-2 button-delete-pegawai" data-bs-toggle="modal"
-                        data-bs-target="#modal-delete-pegawai">
-                        <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pegawai
-                    </a>
-                    <div class="modal modal-blur fade" id="modal-delete-pegawai" tabindex="-1" role="dialog"
-                        aria-hidden="true">
-                        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                                <div class="modal-status bg-danger"></div>
-                                <div class="modal-body text-center py-4">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/alert-triangle -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg"
-                                        width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
-                                        <path d="M12 9v4" />
-                                        <path d="M12 17h.01" />
-                                    </svg>
-                                    <h3>Apakah anda yakin?</h3>
-                                    <div class="text-muted">Untuk menghapus pegawai tersebut</div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="w-100">
-                                        <div class="row">
-                                            <div class="col"><a href="#" class="btn w-100"
-                                                    data-bs-dismiss="modal">
-                                                    Cancel
-                                                </a></div>
-                                            <div class="col"><button type="submit" class="btn btn-danger w-100"
-                                                    data-bs-dismiss="modal">
-                                                    Delete
-                                                </button></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table table-vcenter table-bordered table-hover table-info" id="tabel_data_pegawai"
-                        style="width: 100%">
-                        <thead>
-                            <tr>
-                                <th width="2%">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input mt-2" style="position:relative; left:10px;"
-                                                type="checkbox" id="checklist-pegawai" onclick="checkAllPegawai()">
-                                        </div>
-                                    </div>
-                                </th>
-                                <th width="30%">Nama Pegawai</th>
-                                <th width="20%">Jabatan Pegawai</th>
-                                <th width="20%">Unit Pegawai</th>
-                                <th width="20%">Nomor Telepon Pegawai</th>
-                                <th width="8%">Aksi</th>
-                                {{-- <th width="0%" style="display:none;">Nomor HP</th> --}}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($data_pegawai as $pegawai)
-                                <tr>
-                                    <td>
-                                        <div class="d-flex justify-content-center">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox"
-                                                    value="{{ $pegawai->id }}"
-                                                    data-nomorhp="{{ $pegawai->nomortelepon_pegawai }}"
-                                                    id="flexCheckDefault" name="checkPegawai[]">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>{{ $pegawai->nama_pegawai }}</td>
-                                    <td>{{ $pegawai->jabatan_pegawai }}</td>
-                                    <td>{{ $pegawai->unit_pegawai }}</td>
-                                    <td>{{ $pegawai->nomortelepon_pegawai }}</td>
-                                    <td>
-                                        <a href="#" style="text-decoration: none" class="col-12 mb-3"
-                                            data-bs-toggle="modal" data-bs-target="#modal-pegawai-{{ $pegawai->id }}"><i
-                                                class="fa-solid fa-user-pen fa-lg"></i> Edit
-                                        </a>
-                </form>
-                <div class="modal modal-blur fade" id="modal-pegawai-{{ $pegawai->id }}" tabindex="-1" role="dialog"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                        <form action="/edit_pegawai/{{ $pegawai->id }}" method="post">
-                            @csrf
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Form Edit Pegawai</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Nama Pegawai</label>
-                                                <input type="text"
-                                                    class="form-control @error('nama_pegawai') is-invalid @enderror"
-                                                    name="nama_pegawai" id="nama_pegawai"
-                                                    value="{{ old('nama_pegawai') ? old('nama_pegawai') : $pegawai->nama_pegawai }}">
-                                                @error('nama_pegawai')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Jabatan Pegawai</label>
-                                                <input type="text"
-                                                    class="form-control @error('jabatan_pegawai') is-invalid @enderror"
-                                                    name="jabatan_pegawai" id="jabatan_pegawai"
-                                                    value="{{ old('jabatan_pegawai') ? old('jabatan_pegawai') : $pegawai->jabatan_pegawai }}">
-                                                @error('jabatan_pegawai')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Unit Pegawai</label>
-                                                <input type="text"
-                                                    class="form-control @error('unit_pegawai') is-invalid @enderror"
-                                                    name="unit_pegawai" id="unit_pegawai"
-                                                    value="{{ old('unit_pegawai') ? old('unit_pegawai') : $pegawai->unit_pegawai }}">
-                                                @error('unit_pegawai')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="mb-3">
-                                                <label class="form-label">Nomor Telepon</label>
-                                                <input type="text" inputmode="numeric" pattern="[0-9]*"
-                                                    class="form-control @error('nomortelepon_pegawai') is-invalid @enderror"
-                                                    name="nomortelepon_pegawai" id="nomortelepon_pegawai"
-                                                    value="{{ old('nomortelepon_pegawai') ? old('nomortelepon_pegawai') : $pegawai->nomortelepon_pegawai }}">
-                                                @error('nomortelepon_pegawai')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <a href="#" class="btn btn-link link-secondary"
-                                        data-bs-dismiss="modal">Cancel</a>
-                                    <button type="submit" class="btn btn-success ms-auto">
-                                        Submit
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                </td>
-                {{-- <td style="display:none;">{{ $pegawai->nohp_stakeholder }}</td> --}}
-                </tr>
-                @endforeach
-                </tbody>
                 </table>
             </div>
         </div>

@@ -3,27 +3,27 @@
     <div class="container-fluid mt-3">
         @if (session('success_import'))
             <div class="alert alert-success">
-                {{ session('success_import') }}
+                <h3>{{ session('success_import') }}</h3>
             </div>
         @endif
         @if (session('success_hapus_pelanggan'))
             <div class="alert alert-success">
-                {{ session('success_hapus_pelanggan') }}
+                <h3> {{ session('success_hapus_pelanggan') }}</h3>
             </div>
         @endif
         @if (session('error_import'))
             <div class="alert alert-danger">
-                {{ session('error_import') }}
+                <h3>{{ session('error_import') }}</h3>
             </div>
         @endif
         @if (session('validate_file'))
             <div class="alert alert-danger">
-                {{ session('validate_file') }}
+                <h3>{{ session('validate_file') }}</h3>
             </div>
         @endif
         @if (session('error_hapus_pelanggan'))
             <div class="alert alert-danger">
-                {{ session('error_hapus_pelanggan') }}
+                <h3>{{ session('error_hapus_pelanggan') }}</h3>
             </div>
         @endif
         <div class="col-lg-12">

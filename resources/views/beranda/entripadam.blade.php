@@ -1,24 +1,15 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
-        @if (session('success_import'))
-            <div class="alert alert-success">
-                {{ session('success_import') }}
-            </div>
-        @endif
-        @if (session('error_import'))
-            <div class="alert alert-danger">
-                {{ session('error_import') }}
-            </div>
-        @endif
         @if (session('success_tambah'))
             <div class="alert alert-success">
-                {{ session('success_tambah') }}
+                <h3> {{ session('success_tambah') }} (jika sudah melakukan semua entri, silahkan ke menu transaksi aktif)
+                </h3>
             </div>
         @endif
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
-                <h2>Form Entri Padam</h2>
+                <h2>Form Entri Padam </h2>
                 <form action="/entripadam/insertentripadam" method="post" id="entriPadamForm">
                     @csrf
                     <div class="mb-3">
@@ -39,29 +30,44 @@
                                 </div>
                             @enderror
                         </div>
-                        <div class="form-label required">Penyulang</div>
-                        <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang"
-                            name="penyulang">
-                            <option disabled selected>--- Pilih Penyulang ---</option>
-                            @foreach ($data_penyulang->unique() as $penyulang)
-                                <option value="{{ $penyulang }}" {{ old('penyulang') == $penyulang ? 'selected' : '' }}>
-                                    {{ $penyulang }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('penyulang')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
+                        <div id="pelangganInput" style="display:none;">
+                            <label class="form-label required" for="pelanggan">Pelanggan</label>
+                            <input type="text" class="form-control @error('pelanggan') is-invalid @enderror"
+                                id="pelanggan" name="pelanggan" value="{{ old('pelanggan') }}">
+                            @error('pelanggan')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
+                        <div id="penyulangInput" style="display:none;">
+                            <div class="form-label required">Penyulang</div>
+                            <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang"
+                                name="penyulang">
+                                <option disabled selected>--- Pilih Penyulang ---</option>
+                                @foreach ($data_penyulang->unique() as $penyulang)
+                                    <option value="{{ $penyulang }}"
+                                        {{ old('penyulang') == $penyulang ? 'selected' : '' }}>
+                                        {{ $penyulang }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('penyulang')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                            @enderror
+                        </div>
                     </div>
-                    <div id="section-container" class="mb-3">
-                        <div class="form-label required">Section</div>
-                        <label class="form-check">
-                            <div id="section-list">
+                    <div id="sectionInput" style="display:none;">
+                        <div id="section-container" class="mb-3">
+                            <div class="form-label required">Section</div>
+                            <label class="form-check">
+                                <div id="section-list">
 
-                            </div>
-                        </label>
+                                </div>
+                            </label>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label required">Jam Padam</label>
@@ -87,6 +93,8 @@
                     <div class="mb-3">
                         <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-plus fa-lg"
                                 style="margin-right: 5px;"></i>Entri Padam</button>
+                        <a href="/transaksiaktif" class="btn btn-info col-12 mt-3"><i class="fa-solid fa-arrow-right fa-lg"
+                                style="margin-right: 5px;"></i>Menu Transaksi Aktif</a>
                     </div>
                 </form>
             </div>
@@ -106,7 +114,6 @@
                 displaySections(selectedPenyulang);
             });
 
-            // Fungsi untuk menampilkan pilihan section
             function displaySections(selectedPenyulang) {
                 var sectionMapping = @json($section);
                 var selectedSections = sectionMapping[selectedPenyulang] || [];
@@ -132,31 +139,33 @@
                         sectionChecklist.appendChild(label);
                     });
                     sectionChecklist.appendChild(checkboxContainer);
-                    sectionContainer.style.display = "block"; // Tampilkan container section
+                    sectionContainer.style.display = "block";
                 } else {
                     sectionContainer.style.display = "none";
                 }
             }
         });
     </script>
-    {{-- <script>
-        $(document).ready(function() {
-            $("#entriPadamForm").submit(function(event) {
-                // Prevent the default form submission
-                event.preventDefault();
-
-                // Perform any necessary form validation here
-
-                // Open Facebook link in a new tab
-                window.open("https://app.whacenter.com/blast", "_blank");
-
-                // Continue with form submission after a delay
-                setTimeout(function() {
-                    // Submit the form
-                    $("#entriPadamForm").unbind('submit').submit();
-                }, 1000); // Delay for 1 second (adjust as needed)
-            });
+    <script>
+        document.getElementById('penyebab_padam').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var pelangganInput = document.getElementById('pelangganInput');
+            var penyulangInput = document.getElementById('penyulangInput');
+            var sectionInput = document.getElementById('sectionInput');
+            if (selectedValue === 'Instalasi') {
+                pelangganInput.style.display = 'block';
+                penyulangInput.style.display = 'none';
+                sectionInput.style.display = 'none';
+            } else if (selectedValue === 'Gangguan') {
+                pelangganInput.style.display = 'none';
+                penyulangInput.style.display = 'block';
+                sectionInput.style.display = 'block';
+            } else {
+                pelangganInput.style.display = 'none';
+                penyulangInput.style.display = 'none';
+                sectionInput.style.display = 'none';
+            }
         });
-    </script> --}}
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 @endsection

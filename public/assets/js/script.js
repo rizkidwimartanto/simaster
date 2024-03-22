@@ -1,4 +1,7 @@
 $(document).ready(function () {});
+function hapusTargetNomorHP(){
+    
+}
 function buttonEntriPadam() {
     var penyebab_padam = document.getElementById("penyebab_padam").value;
     var penyulang = document.getElementById("penyulang").value;
