@@ -20,7 +20,7 @@
         </div>
     </div>
     <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
-        <option disabled selected>--- Pilih Area Lokasi ---</option>
+        <option disabled selected>--- Pilih Area Unit ---</option>
         @foreach ($data_unitulp->unique() as $data)
             <option value="{{ $data }}">
                 @if ($data == '52551')

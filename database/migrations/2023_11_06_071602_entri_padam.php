@@ -15,9 +15,10 @@ class EntriPadam extends Migration
     {
         Schema::create('entri_padam', function (Blueprint $table) {
             $table->id();
+            $table->text('penyebab_padam')->nullable();
+            $table->text('nama_pelanggan')->nullable();
             $table->text('penyulang')->nullable();
             $table->text('section')->nullable();
-            $table->text('penyebab_padam')->nullable();
             $table->text('penyebab_fix')->nullable();
             $table->text('jam_padam')->nullable();
             $table->text('jam_nyala')->nullable();

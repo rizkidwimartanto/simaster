@@ -28,8 +28,8 @@ class EntriPadamController extends Controller
         $data_padam = EntriPadamModel::all();
         $rekap_section = DB::table('entri_padam')
             ->leftJoin('section', 'entri_padam.section', '=', 'section.id_apkt')
-            ->select('section.nama_section', 'entri_padam.section', DB::raw('COUNT(*) as jumlah_entri'))
-            ->groupBy('section.nama_section', 'entri_padam.section')
+            ->select('section.nama_section', 'entri_padam.penyebab_padam', 'entri_padam.nama_pelanggan', 'entri_padam.section', DB::raw('COUNT(*) as jumlah_entri'))
+            ->groupBy('section.nama_section', 'entri_padam.penyebab_padam', 'entri_padam.nama_pelanggan', 'entri_padam.section')
             ->get();
         foreach ($rekap_section as $item_section) {
             DB::table('entri_padam')
@@ -58,7 +58,6 @@ class EntriPadamController extends Controller
     public function transaksiaktif()
     {
         $data_padam = EntriPadamModel::all();
-        $data_pegawai = DataPegawaiModel::all();
         $rekap_pelanggan = DB::table('entri_padam')
             ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
             ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
@@ -69,7 +68,6 @@ class EntriPadamController extends Controller
         $data = [
             'title' => 'Transaksi Aktif',
             'data_padam' => $data_padam,
-            'data_pegawai' => $data_pegawai,
             'rekap_pelanggan' => $rekap_pelanggan
         ];
         return view('beranda/transaksiaktif', $data);
@@ -80,15 +78,13 @@ class EntriPadamController extends Controller
             'required' => ':attribute harus diisi',
         ];
         $validateData = $request->validate([
-            'penyulang' => 'required',
-            'section' => 'required',
             'penyebab_padam' => 'required',
             'jam_padam' => 'required',
             'keterangan' => 'required',
         ], $message);
 
         // Insert data EntriPadamModel
-        if ($request->has('section')) {
+        if ($request->penyebab_padam == 'Gangguan' && $request->has('section')) {
             $sections = $request->input('section');
             foreach ($sections as $section) {
                 EntriPadamModel::create([
@@ -112,11 +108,14 @@ class EntriPadamController extends Controller
 
             $target = '';
             $targetMULP = '';
+            $nomorMULP = ['6289531584234', '6285341999397'];
             foreach ($rekap_pelanggan as $rekap) {
                 $target .= $rekap->nohp_stakeholder . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
             }
-            foreach ($rekap_pelanggan as $rekap) {
-                $targetMULP .= '6289531584234' . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
+            foreach ($nomorMULP as $MULP) {
+                foreach ($rekap_pelanggan as $rekap) {
+                    $targetMULP .= $MULP . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
+                }
             }
             // Kirim pesan menggunakan cURL
             $curl = curl_init();
@@ -154,7 +153,7 @@ class EntriPadamController extends Controller
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => [
-                    'target' => '6289531584234',
+                    'target' => $targetMULP,
                     'message' => 'Yth. Pelanggan {name} Mohon maaf atas gangguan listrik yang terjadi di lokasi Anda karena {var1}. Saat ini sedang dalam penanganan petugas PLN. Terimakasih (Ini Pesan Untuk MULP)',
                     'delay' => '2',
                     'countryCode' => '62', //optional
@@ -168,6 +167,16 @@ class EntriPadamController extends Controller
             curl_close($curl);
 
             // Flash message sesuai dengan keberhasilan memasukkan entri
+            Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
+            return redirect('/entripadam');
+        } elseif ($request->penyebab_padam == 'Instalasi' && $request->has('nama_pelanggan')) {
+            EntriPadamModel::create([
+                'nama_pelanggan' => $request->nama_pelanggan,
+                'penyebab_padam' => $request->penyebab_padam,
+                'jam_padam' => date("d-m-Y H:i", strtotime(str_replace('T', ' ', $request->jam_padam))),
+                'keterangan' => $request->keterangan,
+                'status' => $request->status,
+            ]);
             Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
             return redirect('/entripadam');
         } else {
@@ -207,10 +216,16 @@ class EntriPadamController extends Controller
                 ->get();
 
             $target = '';
+            $targetMULP = '';
+            $nomorMULP = ['6289531584234', '6285341999397'];
             foreach ($rekap_pelanggan as $rekap) {
                 $target .= $rekap->nohp_stakeholder . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
             }
-
+            foreach ($nomorMULP as $MULP) {
+                foreach ($rekap_pelanggan as $rekap) {
+                    $targetMULP .= $MULP . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
+                }
+            }
             // Kirim pesan menggunakan cURL
             $curl = curl_init();
             curl_setopt_array($curl, [
@@ -246,7 +261,7 @@ class EntriPadamController extends Controller
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => [
-                    'target' => '628112778903,6289531584234, 628112630236, 6289668969721',
+                    'target' => $targetMULP,
                     'message' => 'Yth. Pelanggan {name}, untuk jaringan listrik sudah kembali normal. Mohon maaf tidak ketidaknyamanan nya (Ini pesan untuk MULP)',
                     'delay' => '2',
                     'countryCode' => '62', //optional

@@ -45,7 +45,7 @@ class DataPelangganController extends Controller
         $data = [
             'title' => 'Entri Padam',
             'section' => $penyulangs,
-            'data_pelanggan' => DataPelangganModel::all(),
+            'nama_pelanggan' => DataPelangganModel::pluck('nama'),
             'data_penyulang' => SectionModel::pluck('penyulang'),
             'data_section' => PenyulangModel::all(),
         ];

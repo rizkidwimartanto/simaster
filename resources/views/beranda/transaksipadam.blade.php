@@ -56,9 +56,10 @@
                     <thead>
                         <tr>
                             <th width="1%">No</th>
+                            <th>Penyebab Padam</th>
+                            <th>Nama Pelanggan</th>
                             <th>Penyulang</th>
                             <th>Section</th>
-                            <th>Penyebab Padam</th>
                             <th>Penyebab Fix</th>
                             <th>Jam Padam</th>
                             <th>Jam Nyala</th>
@@ -73,9 +74,10 @@
                             @if ($s->status == 'Menyala')
                                 <tr>
                                     <td>{{ $i++ }}</td>
+                                    <td>{{ $s->penyebab_padam }}</td>
+                                    <td>{{ $s->nama_pelanggan }}</td>
                                     <td>{{ $s->penyulang }}</td>
                                     <td>{{ $s->section }}</td>
-                                    <td>{{ $s->penyebab_padam }}</td>
                                     <td>{{ $s->penyebab_fix }}</td>
                                     <td>{{ $s->jam_padam }}</td>
                                     <td>{{ $s->jam_nyala }}</td>

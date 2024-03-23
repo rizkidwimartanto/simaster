@@ -12,21 +12,6 @@
                     {{ session('success_tambah') }}
                 </div>
             @endif
-            @if (session('success_tambah_pegawai'))
-                <div class="alert alert-success">
-                    {{ session('success_tambah_pegawai') }}
-                </div>
-            @endif
-            @if (session('success_edit_pegawai'))
-                <div class="alert alert-success">
-                    {{ session('success_edit_pegawai') }}
-                </div>
-            @endif
-            @if (session('success_delete_pegawai'))
-                <div class="alert alert-success">
-                    {{ session('success_delete_pegawai') }}
-                </div>
-            @endif
             @if (session('error_tambah'))
                 <div class="alert alert-danger">
                     {{ session('error_tambah') }}
@@ -35,21 +20,6 @@
             @if (session('error_nyala'))
                 <div class="alert alert-danger">
                     {{ session('error_nyala') }}
-                </div>
-            @endif
-            @if (session('error_tambah_pegawai'))
-                <div class="alert alert-danger">
-                    {{ session('error_tambah_pegawai') }}
-                </div>
-            @endif
-            @if (session('error_edit_pegawai'))
-                <div class="alert alert-danger">
-                    {{ session('error_edit_pegawai') }}
-                </div>
-            @endif
-            @if (session('error_delete_pegawai'))
-                <div class="alert alert-danger">
-                    {{ session('error_delete_pegawai') }}
                 </div>
             @endif
             <div class="card p-3">
@@ -119,8 +89,10 @@
                                         </div>
                                     </div>
                                 </th>
-                                <th width="10%">Penyulang</th>
-                                <th width="20%">Section</th>
+                                <th width="6%">Penyebab Padam</th>
+                                <th width="4%">Nama Pelanggan</th>
+                                <th width="4%">Penyulang</th>
+                                <th width="16%">Section</th>
                                 <th width="20%">Nomor Tiang</th>
                                 <th width="20%">Jam Padam</th>
                                 <th width="10%">Keterangan</th>
@@ -140,13 +112,15 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>{{ $s->penyebab_padam }}</td>
+                                        <td>{{ $s->nama_pelanggan }}</td>
                                         <td>{{ $s->penyulang }}</td>
                                         <td>{{ $s->section }}</td>
                                         <td>
                                             @if ($s->nomorTiang)
                                                 {{ $s->nomorTiang->nama_section }}
                                             @else
-                                                {{ 0 }}
+                                                {{ null }}
                                             @endif
                                         </td>
                                         {{-- <td>{{ $s->penyebab_padam }}</td> --}}
@@ -166,15 +140,7 @@
                     style="width: 100%">
                     <thead>
                         <tr>
-                            <th width="2%">
-                                <div class="d-flex justify-content-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input mt-2" style="position:relative; left:10px;"
-                                            type="checkbox" id="checklist-whatsapp" onclick="checkAllPelanggan()">
-                                    </div>
-                                </div>
-                            </th>
-                            <th width="26%">Nomor Telepon</th>
+                            <th width="28%">Nomor Telepon</th>
                             <th width="30%">Nama Pelanggan</th>
                             <th width="40%">Alamat</th>
                             <th width="2%">Aksi</th>
@@ -184,17 +150,6 @@
                     <tbody>
                         @foreach ($rekap_pelanggan as $item_rekap)
                             <tr>
-                                <td>
-                                    <div class="d-flex justify-content-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"
-                                                value="{{ $item_rekap->idpel }}" id="flexCheckDefault"
-                                                name="checkWhatsapp[]" data-nomorhp="{{ $item_rekap->nohp_stakeholder }}"
-                                                data-penyebab_padam="{{ $item_rekap->penyebab_padam }}"
-                                                data-keterangan_padam="{{ $item_rekap->keterangan }}">
-                                        </div>
-                                    </div>
-                                </td>
                                 <td>{{ $item_rekap->nohp_stakeholder }}</td>
                                 <td>{{ $item_rekap->nama }}</td>
                                 <td>{{ $item_rekap->alamat }}</td>
@@ -228,21 +183,6 @@
             });
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            var checkboxGroups = [{
-                checklistAll: document.getElementById("checklist-pegawai"),
-                checkboxes: document.querySelectorAll('input[name="checkPegawai[]"]')
-            }, ];
-
-            checkboxGroups.forEach(function(group) {
-                group.checklistAll.addEventListener("change", function() {
-                    group.checkboxes.forEach(function(checkbox) {
-                        checkbox.checked = group.checklistAll.checked;
-                    });
-                });
-            });
-        });
-
         function checkAllPadam() {
             var checkPadam = document.getElementById('checklist-padam');
             var checkboxPadam = document.getElementsByName('checkPadam[]');
@@ -250,35 +190,6 @@
             checkboxPadam.forEach(function(check) {
                 check.checked = checkPadam.checked;
             });
-        }
-
-        function kirimWhatsappPelanggan() {
-            var checkboxes = document.querySelectorAll('input[name="checkWhatsapp[]"]:checked');
-
-            checkboxes.forEach(function(checkbox) {
-                var nomorhp = checkbox.getAttribute('data-nomorhp');
-                var penyebab_padam = checkbox.getAttribute('data-penyebab_padam');
-                var keterangan_padam = checkbox.getAttribute('data-keterangan_padam');
-                var pesanWhatsapp = encodeURI("Halo, saya rizki. Untuk saat ini mengalami " + penyebab_padam +
-                    " karena " + keterangan_padam);
-                var whatsappLink = 'https://wa.me/' + nomorhp + '?text=' + pesanWhatsapp;
-                window.open(whatsappLink, '_blank');
-            });
-        }
-
-        function kirimWhatsappPegawai() {
-            var checkboxes = document.querySelectorAll('input[name="checkPegawai[]"]:checked');
-
-            checkboxes.forEach(function(checkbox) {
-                var nomorHp = checkbox.getAttribute('data-nomorhp');
-                if (nomorHp.startsWith("08")) {
-                    nomorHp = "628" + nomorHp.slice(2);
-                }
-                var pesanWhatsapp = encodeURI("Halo, saya rizki. Untuk saat ini mengalami");
-                var whatsappLink = 'https://wa.me/' + nomorHp + '?text=' + pesanWhatsapp;
-                window.open(whatsappLink, '_blank');
-            });
-
         }
     </script>
     <script>
@@ -298,14 +209,5 @@
                 'lengthMenu': [10, 25, 50, 100, 200, 500],
             });
         });
-        $(document).ready(function() {
-            $('#tabel_data_pegawai').DataTable({
-                scrollX: true,
-                scrollCollapse: true,
-                fixedColumns: true,
-                'pageLength': 500,
-                'lengthMenu': [10, 25, 50, 100, 200, 500],
-            })
-        })
     </script>
 @endsection

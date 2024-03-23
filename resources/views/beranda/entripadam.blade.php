@@ -31,10 +31,17 @@
                             @enderror
                         </div>
                         <div id="pelangganInput" style="display:none;">
-                            <label class="form-label required" for="pelanggan">Pelanggan</label>
-                            <input type="text" class="form-control @error('pelanggan') is-invalid @enderror"
-                                id="pelanggan" name="pelanggan" value="{{ old('pelanggan') }}">
-                            @error('pelanggan')
+                            <label class="form-label required" for="nama_pelanggan">Pelanggan</label>
+                            <select name="nama_pelanggan" id="nama_pelanggan"
+                                class="form-select selectNamaPelanggan @error('nama_pelanggan') is-invalid @enderror"
+                                style="width: 100%;">
+                                <option disabled selected>--- Pilih Nama Pelanggan ---</option>
+                                @foreach ($nama_pelanggan as $pelanggan)
+                                    <option value="{{ $pelanggan }}" {{ old('nama_pelanggan') == $pelanggan ? 'selected' : '' }}>
+                                        {{ $pelanggan }}</option>
+                                @endforeach
+                            </select>
+                            @error('nama_pelanggan')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
@@ -42,8 +49,8 @@
                         </div>
                         <div id="penyulangInput" style="display:none;">
                             <div class="form-label required">Penyulang</div>
-                            <select class="form-select @error('penyulang') is-invalid @enderror" id="penyulang"
-                                name="penyulang">
+                            <select class="form-select selectPenyulang @error('penyulang') is-invalid @enderror"
+                                id="penyulang" name="penyulang" style="width: 100%;">
                                 <option disabled selected>--- Pilih Penyulang ---</option>
                                 @foreach ($data_penyulang->unique() as $penyulang)
                                     <option value="{{ $penyulang }}"
@@ -100,52 +107,7 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var oldPenyulang = "{{ old('penyulang') }}";
 
-            if (oldPenyulang) {
-                displaySections(oldPenyulang);
-            }
-
-            // Tambahkan event listener pada perubahan nilai 'penyulang'
-            document.getElementById('penyulang').addEventListener('change', function() {
-                var selectedPenyulang = this.value;
-                displaySections(selectedPenyulang);
-            });
-
-            function displaySections(selectedPenyulang) {
-                var sectionMapping = @json($section);
-                var selectedSections = sectionMapping[selectedPenyulang] || [];
-                var sectionContainer = document.getElementById('section-container');
-                var sectionChecklist = document.getElementById('section-list');
-
-                sectionChecklist.innerHTML = "";
-
-                if (selectedSections.length > 0) {
-                    selectedSections.forEach(function(section) {
-                        var checkbox = document.createElement("input");
-                        checkbox.type = "checkbox";
-                        checkbox.name = "section[]";
-                        checkbox.value = section;
-                        checkbox.classList.add("form-check-input");
-                        var label = document.createElement("span");
-                        label.classList.add("form-check-label");
-                        label.classList.add("mb-2");
-                        var checkboxContainer = document.createElement("label");
-                        checkboxContainer.classList.add("form-check");
-                        label.appendChild(checkbox);
-                        label.appendChild(document.createTextNode(section));
-                        sectionChecklist.appendChild(label);
-                    });
-                    sectionChecklist.appendChild(checkboxContainer);
-                    sectionContainer.style.display = "block";
-                } else {
-                    sectionContainer.style.display = "none";
-                }
-            }
-        });
-    </script>
     <script>
         document.getElementById('penyebab_padam').addEventListener('change', function() {
             var selectedValue = this.value;
@@ -167,5 +129,48 @@
             }
         });
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $('#penyulang').select2({});
+        // Tambahkan event listener untuk perubahan nilai 'penyulang'
+        $('#penyulang').on('select2:select', function (e) {
+            var selectedPenyulang = e.params.data.id;
+            displaySections(selectedPenyulang);
+        });
+
+        function displaySections(selectedPenyulang) {
+            var sectionMapping = @json($section);
+            var selectedSections = sectionMapping[selectedPenyulang] || [];
+            var sectionContainer = document.getElementById('sectionInput');
+
+            if (selectedSections.length > 0) {
+                var sectionChecklist = document.getElementById('section-list');
+                sectionChecklist.innerHTML = "";
+
+                selectedSections.forEach(function(section) {
+                    var checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.name = "section[]";
+                    checkbox.value = section;
+                    checkbox.classList.add("form-check-input");
+
+                    var label = document.createElement("label");
+                    label.classList.add("form-check-label");
+                    label.classList.add("mb-2");
+                    label.appendChild(document.createTextNode(section));
+
+                    var checkboxContainer = document.createElement("div");
+                    checkboxContainer.classList.add("form-check");
+                    checkboxContainer.appendChild(checkbox);
+                    checkboxContainer.appendChild(label);
+
+                    sectionChecklist.appendChild(checkboxContainer);
+                });
+
+                sectionContainer.style.display = "block";
+            } else {
+                sectionContainer.style.display = "none";
+            }
+        }
+        $('.selectNamaPelanggan').select2({});
+    </script>
 @endsection
