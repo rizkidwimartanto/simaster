@@ -4,22 +4,22 @@
         <div class="col-lg-12 mt-2">
             @if (session('success_nyala'))
                 <div class="alert alert-success">
-                    {{ session('success_nyala') }}
+                    <h3>{{ session('success_nyala') }}</h3>
                 </div>
             @endif
             @if (session('success_tambah'))
                 <div class="alert alert-success">
-                    {{ session('success_tambah') }}
+                    <h3>{{ session('success_tambah') }}</h3>
                 </div>
             @endif
             @if (session('error_tambah'))
                 <div class="alert alert-danger">
-                    {{ session('error_tambah') }}
+                    <h3>{{ session('error_tambah') }}</h3>
                 </div>
             @endif
             @if (session('error_nyala'))
                 <div class="alert alert-danger">
-                    {{ session('error_nyala') }}
+                    <h3> {{ session('error_nyala') }}</h3>
                 </div>
             @endif
             <div class="card p-3">
@@ -90,7 +90,7 @@
                                     </div>
                                 </th>
                                 <th width="6%">Penyebab Padam</th>
-                                <th width="4%">Nama Pelanggan</th>
+                                <th width="14%">Nama Pelanggan</th>
                                 <th width="4%">Penyulang</th>
                                 <th width="16%">Section</th>
                                 <th width="20%">Nomor Tiang</th>
@@ -140,32 +140,31 @@
                     style="width: 100%">
                     <thead>
                         <tr>
-                            <th width="28%">Nomor Telepon</th>
+                            <th width="18%">Penyebab Padam</th>
+                            <th width="10%">Nomor Telepon</th>
                             <th width="30%">Nama Pelanggan</th>
                             <th width="40%">Alamat</th>
                             <th width="2%">Aksi</th>
-                            <th width="0%" style="display:none;">Nomor HP</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($rekap_pelanggan as $item_rekap)
-                            <tr>
-                                <td>{{ $item_rekap->nohp_stakeholder }}</td>
-                                <td>{{ $item_rekap->nama }}</td>
-                                <td>{{ $item_rekap->alamat }}</td>
-                                <td>
-                                    @php
-                                        $pesanWhatsapp = urlencode(
-                                            "Halo, saya rizki. Untuk saat ini mengalami $item_rekap->penyebab_padam karena $item_rekap->keterangan",
-                                        );
-                                    @endphp
-                                    <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}?text={{ $pesanWhatsapp }}"
-                                        target="_blank">
-                                        <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
-                                    </a>
-                                </td>
-                                <td style="display:none;">{{ $item_rekap->nohp_stakeholder }}</td>
-                            </tr>
+                        @php
+                            $rekap_gabungan = $rekap_pelanggan->merge($rekap_instalasi);
+                        @endphp
+                        @foreach ($rekap_gabungan as $item_rekap)
+                            @if ($item_rekap->nama !== null)
+                                <tr>
+                                    <td>{{ $item_rekap->penyebab_padam }}</td>
+                                    <td>{{ $item_rekap->nohp_stakeholder }}</td>
+                                    <td>{{ $item_rekap->nama }}</td>
+                                    <td><a href="{{ $item_rekap->maps }}" target="_blank">{{ $item_rekap->maps }}</a></td>
+                                    <td>
+                                        <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}" target="_blank">
+                                            <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

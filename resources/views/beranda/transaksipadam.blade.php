@@ -25,7 +25,8 @@
             <h2>Jumlah Kali Padam</h2>
             <a href="/transaksipadam/export_kali_padam" class="btn btn-warning mb-3 col-lg-2"><i
                     class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
-            <table class="table table-vcenter table-bordered table-hover table-warning" id="tabel_rekap_pelanggan" style="width: 100%">
+            <table class="table table-vcenter table-bordered table-hover table-warning" id="tabel_rekap_pelanggan"
+                style="width: 100%">
                 <thead>
                     <tr>
                         <th width="5%">No</th>
@@ -39,12 +40,14 @@
                         $no = 1;
                     @endphp
                     @foreach ($rekap_section as $item_section)
-                        <tr>
-                            <td>{{ $no++ }}</td>
-                            <td>{{ $item_section->section }}</td>
-                            <td>{{ $item_section->nama_section }}</td>
-                            <td>{{ $item_section->jumlah_entri }}</td>
-                        </tr>
+                        @if ($item_section->penyebab_padam === 'Gangguan')
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $item_section->section }}</td>
+                                <td>{{ $item_section->nama_section }}</td>
+                                <td>{{ $item_section->jumlah_entri }}</td>
+                            </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
@@ -52,7 +55,8 @@
         <div class="col-lg-12">
             <div class="card p-3 mt-4">
                 <h2>Rekap Data Padam</h2>
-                <table class="table table-vcenter table-bordered table-hover table-info" id="tabel_data_menyala" style="width: 100%">
+                <table class="table table-vcenter table-bordered table-hover table-info" id="tabel_data_menyala"
+                    style="width: 100%">
                     <thead>
                         <tr>
                             <th width="1%">No</th>

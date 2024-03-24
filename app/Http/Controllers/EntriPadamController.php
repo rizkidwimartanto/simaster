@@ -60,15 +60,22 @@ class EntriPadamController extends Controller
         $data_padam = EntriPadamModel::all();
         $rekap_pelanggan = DB::table('entri_padam')
             ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
-            ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
-            ->groupBy('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
+            ->select('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
+            ->groupBy('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
+            ->where('entri_padam.status', '=', 'Padam')
+            ->get();
+        $rekap_instalasi = DB::table('entri_padam')
+            ->leftJoin('data_pelanggan', 'entri_padam.nama_pelanggan', '=', 'data_pelanggan.nama')
+            ->select('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
+            ->groupBy('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
             ->where('entri_padam.status', '=', 'Padam')
             ->get();
 
         $data = [
             'title' => 'Transaksi Aktif',
             'data_padam' => $data_padam,
-            'rekap_pelanggan' => $rekap_pelanggan
+            'rekap_pelanggan' => $rekap_pelanggan,
+            'rekap_instalasi' => $rekap_instalasi
         ];
         return view('beranda/transaksiaktif', $data);
     }
@@ -108,12 +115,91 @@ class EntriPadamController extends Controller
 
             $target = '';
             $targetMULP = '';
-            $nomorMULP = ['6289531584234', '6285341999397'];
+            $nomorMULP = ['6289531584234'];
             foreach ($rekap_pelanggan as $rekap) {
                 $target .= $rekap->nohp_stakeholder . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
             }
             foreach ($nomorMULP as $MULP) {
                 foreach ($rekap_pelanggan as $rekap) {
+                    $targetMULP .= $MULP . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
+                }
+            }
+            // // Kirim pesan menggunakan cURL
+            // $curl = curl_init();
+            // curl_setopt_array($curl, [
+            //     CURLOPT_URL => 'https://api.fonnte.com/send',
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => '',
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 0,
+            //     CURLOPT_FOLLOWLOCATION => true,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => 'POST',
+            //     CURLOPT_POSTFIELDS => [
+            //         'target' => $target,
+            //         'message' => 'Yth. Pelanggan {name} Mohon maaf atas gangguan listrik yang terjadi di lokasi Anda karena {var1}. Saat ini sedang dalam penanganan petugas PLN. Terimakasih',
+            //         'delay' => '2',
+            //         'countryCode' => '62', //optional
+            //     ],
+            //     CURLOPT_HTTPHEADER => [
+            //         'Authorization: Z5oA!jnyvg#y7qcSa3B7', //change TOKEN to your actual token
+            //     ],
+            // ]);
+
+            // $response = curl_exec($curl);
+            // curl_close($curl);
+
+            // $curl = curl_init();
+            // curl_setopt_array($curl, [
+            //     CURLOPT_URL => 'https://api.fonnte.com/send',
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => '',
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 0,
+            //     CURLOPT_FOLLOWLOCATION => true,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => 'POST',
+            //     CURLOPT_POSTFIELDS => [
+            //         'target' => $targetMULP,
+            //         'message' => 'Yth. Pelanggan {name} Mohon maaf atas gangguan listrik yang terjadi di lokasi Anda karena {var1}. Saat ini sedang dalam penanganan petugas PLN. Terimakasih (Ini Pesan Untuk MULP)',
+            //         'delay' => '2',
+            //         'countryCode' => '62', //optional
+            //     ],
+            //     CURLOPT_HTTPHEADER => [
+            //         'Authorization: Z5oA!jnyvg#y7qcSa3B7', //change TOKEN to your actual token
+            //     ],
+            // ]);
+
+            // $response = curl_exec($curl);
+            // curl_close($curl);
+
+            // Flash message sesuai dengan keberhasilan memasukkan entri
+            Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
+            return redirect('/entripadam');
+        } elseif ($request->penyebab_padam == 'Instalasi' && $request->has('nama_pelanggan')) {
+            EntriPadamModel::create([
+                'nama_pelanggan' => $request->nama_pelanggan,
+                'penyebab_padam' => $request->penyebab_padam,
+                'jam_padam' => date("d-m-Y H:i", strtotime(str_replace('T', ' ', $request->jam_padam))),
+                'keterangan' => $request->keterangan,
+                'status' => $request->status,
+            ]);
+
+            $rekap_instalasi = DB::table('entri_padam')
+                ->leftJoin('data_pelanggan', 'entri_padam.nama_pelanggan', '=', 'data_pelanggan.nama')
+                ->select('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
+                ->groupBy('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
+                ->where('entri_padam.status', '=', 'Padam')
+                ->get();
+
+            $target = '';
+            $targetMULP = '';
+            $nomorMULP = ['6289531584234'];
+            foreach ($rekap_instalasi as $rekap) {
+                $target .= $rekap->nohp_stakeholder . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
+            }
+            foreach ($nomorMULP as $MULP) {
+                foreach ($rekap_instalasi as $rekap) {
                     $targetMULP .= $MULP . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
                 }
             }
@@ -166,17 +252,6 @@ class EntriPadamController extends Controller
             $response = curl_exec($curl);
             curl_close($curl);
 
-            // Flash message sesuai dengan keberhasilan memasukkan entri
-            Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
-            return redirect('/entripadam');
-        } elseif ($request->penyebab_padam == 'Instalasi' && $request->has('nama_pelanggan')) {
-            EntriPadamModel::create([
-                'nama_pelanggan' => $request->nama_pelanggan,
-                'penyebab_padam' => $request->penyebab_padam,
-                'jam_padam' => date("d-m-Y H:i", strtotime(str_replace('T', ' ', $request->jam_padam))),
-                'keterangan' => $request->keterangan,
-                'status' => $request->status,
-            ]);
             Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
             return redirect('/entripadam');
         } else {
@@ -215,6 +290,13 @@ class EntriPadamController extends Controller
                 ->where('entri_padam.status', '=', 'Menyala')
                 ->get();
 
+            $rekap_instalasi = DB::table('entri_padam')
+                ->leftJoin('data_pelanggan', 'entri_padam.nama_pelanggan', '=', 'data_pelanggan.nama')
+                ->select('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
+                ->groupBy('data_pelanggan.nama', 'data_pelanggan.maps', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'entri_padam.penyebab_padam', 'entri_padam.keterangan')
+                ->where('entri_padam.status', '=', 'Padam')
+                ->get();
+
             $target = '';
             $targetMULP = '';
             $nomorMULP = ['6289531584234', '6285341999397'];
@@ -226,58 +308,58 @@ class EntriPadamController extends Controller
                     $targetMULP .= $MULP . '|' . $rekap->nama . '|' . $rekap->keterangan . ',';
                 }
             }
-            // Kirim pesan menggunakan cURL
-            $curl = curl_init();
-            curl_setopt_array($curl, [
-                CURLOPT_URL => 'https://api.fonnte.com/send',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => [
-                    'target' => $target,
-                    'message' => 'Yth. Pelanggan {name}, untuk jaringan listrik sudah kembali normal. Mohon maaf tidak ketidaknyamanan nya',
-                    'delay' => '2',
-                    'countryCode' => '62', //optional
-                ],
-                CURLOPT_HTTPHEADER => [
-                    'Authorization: Z5oA!jnyvg#y7qcSa3B7', //change TOKEN to your actual token
-                ],
-            ]);
-            $response = curl_exec($curl);
-            curl_close($curl);
+            // // Kirim pesan menggunakan cURL
+            // $curl = curl_init();
+            // curl_setopt_array($curl, [
+            //     CURLOPT_URL => 'https://api.fonnte.com/send',
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => '',
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 0,
+            //     CURLOPT_FOLLOWLOCATION => true,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => 'POST',
+            //     CURLOPT_POSTFIELDS => [
+            //         'target' => $target,
+            //         'message' => 'Yth. Pelanggan {name}, untuk jaringan listrik sudah kembali normal. Mohon maaf tidak ketidaknyamanan nya',
+            //         'delay' => '2',
+            //         'countryCode' => '62', //optional
+            //     ],
+            //     CURLOPT_HTTPHEADER => [
+            //         'Authorization: Z5oA!jnyvg#y7qcSa3B7', //change TOKEN to your actual token
+            //     ],
+            // ]);
+            // $response = curl_exec($curl);
+            // curl_close($curl);
 
-            $curl = curl_init();
-            curl_setopt_array($curl, [
-                CURLOPT_URL => 'https://api.fonnte.com/send',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_ENCODING => '',
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => 'POST',
-                CURLOPT_POSTFIELDS => [
-                    'target' => $targetMULP,
-                    'message' => 'Yth. Pelanggan {name}, untuk jaringan listrik sudah kembali normal. Mohon maaf tidak ketidaknyamanan nya (Ini pesan untuk MULP)',
-                    'delay' => '2',
-                    'countryCode' => '62', //optional
-                ],
-                CURLOPT_HTTPHEADER => [
-                    'Authorization: Z5oA!jnyvg#y7qcSa3B7', //change TOKEN to your actual token
-                ],
-            ]);
+            // $curl = curl_init();
+            // curl_setopt_array($curl, [
+            //     CURLOPT_URL => 'https://api.fonnte.com/send',
+            //     CURLOPT_RETURNTRANSFER => true,
+            //     CURLOPT_ENCODING => '',
+            //     CURLOPT_MAXREDIRS => 10,
+            //     CURLOPT_TIMEOUT => 0,
+            //     CURLOPT_FOLLOWLOCATION => true,
+            //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            //     CURLOPT_CUSTOMREQUEST => 'POST',
+            //     CURLOPT_POSTFIELDS => [
+            //         'target' => $targetMULP,
+            //         'message' => 'Yth. Pelanggan {name}, untuk jaringan listrik sudah kembali normal. Mohon maaf tidak ketidaknyamanan nya (Ini pesan untuk MULP)',
+            //         'delay' => '2',
+            //         'countryCode' => '62', //optional
+            //     ],
+            //     CURLOPT_HTTPHEADER => [
+            //         'Authorization: Z5oA!jnyvg#y7qcSa3B7', //change TOKEN to your actual token
+            //     ],
+            // ]);
 
-            $response = curl_exec($curl);
-            curl_close($curl);
+            // $response = curl_exec($curl);
+            // curl_close($curl);
 
-            Session::flash('success_nyala', 'Section berhasil dinyalakan');
+            Session::flash('success_nyala', 'Jaringan berhasil dinyalakan');
             return redirect('/transaksipadam');
         } else {
-            Session::flash('error_nyala', 'Section gagal dinyalakan');
+            Session::flash('error_nyala', 'Jaringan gagal dinyalakan karena belum dipilih');
             return redirect('/transaksiaktif');
         }
     }
