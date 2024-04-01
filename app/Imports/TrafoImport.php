@@ -1,0 +1,80 @@
+<?php
+
+namespace App\Imports;
+
+use App\Models\TrafoModel;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\Importable;
+use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithMultipleSheets;
+use Maatwebsite\Excel\Concerns\WithStartRow;
+
+class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
+{
+    use Importable;
+
+    public function model(array $row)
+    {
+        $existingData = TrafoModel::where('idpel', $row[0])->first();
+
+        if ($existingData) {
+            $existingData->update($this->getData($row));
+            Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
+        } else {
+            if ($this->isDuplicate($row)) {
+                Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
+            } else {
+                TrafoModel::create($this->getData($row));
+                Session::flash('success_import', 'File Excel Berhasil Diimport');
+            }
+        }
+
+        return null;
+    }
+
+    private function getData(array $row)
+    {
+        return [
+            'idpel' => $row[0],
+            'nama' => $row[1],
+            'nama_stakeholder' => $row[2],
+            'jenis_stakeholder' => $row[3],
+            'nohp_stakeholder' => $row[4],
+            'namapic_lapangan' => $row[5],
+            'nohp_piclapangan' => $row[6],
+            'alamat' => $row[7],
+            'maps' => $row[8],
+            'latitude' => $row[9],
+            'longtitude' => $row[10],
+            'unitulp' => $row[11],
+            'tarif' => $row[12],
+            'daya' => $row[13],
+            'kogol' => $row[14],
+            'fakmkwh' => $row[15],
+            'rpbp' => $row[16],
+            'rpujl' => $row[17],
+            'nomor_kwh' => $row[18],
+            'penyulang' => $row[19],
+            'nama_section' => $row[20],
+            'tipe_kubikel' => $row[21],
+        ];
+    }
+    private function isDuplicate(array $data)
+    {
+        return TrafoModel::where('idpel', $data['0'])->exists();
+    }
+
+    public function sheets(): array
+    {
+        return [
+            'Data Pelanggan TM' => new DataPelangganImport()
+        ];
+    }
+
+    public function startRow(): int
+    {
+        return 2;
+    }
+}

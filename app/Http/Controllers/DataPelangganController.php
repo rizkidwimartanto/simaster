@@ -7,6 +7,7 @@ use App\Exports\DataPelangganExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganImport;
+use App\Imports\TrafoImport;
 use App\Models\DataPelangganModel;
 use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
@@ -75,6 +76,18 @@ class DataPelangganController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_pelanggan', $nama_file);
         Excel::import(new DataPelangganImport, public_path('/file_pelanggan/' . $nama_file));
+
+        return redirect('/inputpelanggan');
+    }
+    public function import_excel_trafo(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_trafo', $nama_file);
+        Excel::import(new TrafoImport, public_path('/file_trafo/' . $nama_file));
 
         return redirect('/inputpelanggan');
     }

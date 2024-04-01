@@ -3,22 +3,22 @@
     <div class="container-fluid mt-3">
         @if (session('success_nyala'))
             <div class="alert alert-success">
-                {{ session('success_nyala') }}
+                <h3>{{ session('success_nyala') }}</h3>
             </div>
         @endif
         @if (session('success_tambah'))
             <div class="alert alert-success">
-                {{ session('success_tambah') }}
+                <h3>{{ session('success_tambah') }}</h3>
             </div>
         @endif
         @if (session('error_tambah'))
             <div class="alert alert-danger">
-                {{ session('error_tambah') }}
+                <h3>{{ session('error_tambah') }}</h3>
             </div>
         @endif
         @if (session('error_nyala'))
             <div class="alert alert-danger">
-                {{ session('error_nyala') }}
+                <h3>{{ session('error_nyala') }}</h3>
             </div>
         @endif
         <div class="card p-3 mb-3">
