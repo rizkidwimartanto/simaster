@@ -29,6 +29,9 @@
                                     <a class="dropdown-item" href="/petapadam">
                                         Peta Padam
                                     </a>
+                                    <a class="dropdown-item" href="/petatrafo">
+                                        Peta Trafo
+                                    </a>
                                 </div>
                             </div>
                         </div>

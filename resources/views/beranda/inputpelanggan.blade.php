@@ -300,7 +300,7 @@
         </div>
         </form>
         <div class="card p-3 mt-4">
-            <form method="post" action="/inputpelanggan/import_excel" enctype="multipart/form-data">
+            <form method="post" action="/inputpelanggan/import_excel_trafo" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="form-label fs-2">Upload File Trafo</div>
                 <input type="file" name="file" class="form-control" required />
@@ -312,7 +312,7 @@
             <form action="/hapus_pelanggan" method="post">
                 @csrf
                 @method('delete')
-                <a href="#" class="btn btn-danger col-sm-4 mb-2 button-delete-pegawai" data-bs-toggle="modal"
+                {{-- <a href="#" class="btn btn-danger col-sm-4 mb-2 button-delete-pegawai" data-bs-toggle="modal"
                     data-bs-target="#modal-delete-pegawai">
                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pelanggan
                 </a>
@@ -351,7 +351,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <div class="col-lg-12">
                     <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_data_trafo"
                         style="width: 100%">
@@ -367,15 +367,15 @@
                                     </div>
                                 </th>
                                 <th width="5%">Aksi</th>
-                                <th width="20%">ID Pelanggan</th>
-                                <th width="18%">Nama</th>
-                                <th width="25%">Alamat</th>
-                                <th width="25%">Maps</th>
+                                <th width="20%">Unit Layanan</th>
+                                <th width="18%">Penyulang</th>
+                                <th width="25%">No Tiang</th>
+                                <th width="25%">Lokasi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
-                            @foreach ($data_pelanggan as $s)
+                            @foreach ($data_trafo as $s)
                                 <tr>
                                     <td>{{ $i++ }}</td>
                                     <td>
@@ -397,7 +397,7 @@
                                                 role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">{{ $s->nama }}</h5>
+                                                        <h5 class="modal-title">{{ $s->penyulang }}</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                                                     </div>
@@ -406,27 +406,27 @@
                                                             <div class="mb-3 col-lg-12">
                                                                 <label class="form-label">Nama Pelanggan</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->nama }}"
+                                                                    <input value="{{ $s->penyulang }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label class="form-label">Alamat</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <textarea class="form-control" name="alamat" rows="5" readonly>{{ $s->alamat }}</textarea>
+                                                                    <textarea class="form-control" name="alamat" rows="5" readonly>{{ $s->no_tiang }}</textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-12">
                                                                 <label class="form-label">No HP StakeHolder</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->nohp_stakeholder }}"
+                                                                    <input value="{{ $s->no_gardu_distribusi }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-12">
                                                                 <label class="form-label">No HP PIC Lapangan</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->nohp_piclapangan }}"
+                                                                    <input value="{{ $s->tipe_belitan_trafo }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
@@ -447,49 +447,37 @@
                                                             <div class="mb-3 col-lg-4">
                                                                 <label class="form-label">Unit ULP</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <?php if ($s->unitulp == 52550) : ?>
-                                                                    <input value="UP3 Demak" class="form-control"
-                                                                        readonly>
-                                                                    <?php elseif($s->unitulp == 52551) : ?>
-                                                                    <input value="ULP Demak" class="form-control"
-                                                                        readonly>
-                                                                    <?php elseif($s->unitulp == 52552) : ?>
-                                                                    <input value="ULP Tegowanu" class="form-control"
-                                                                        readonly>
-                                                                    <?php elseif($s->unitulp == 52553) : ?>
-                                                                    <input value="ULP Purwodadi" class="form-control"
-                                                                        readonly>
-                                                                    <?php elseif($s->unitulp == 52554) : ?>
-                                                                    <input value="ULP Wirosari" class="form-control"
-                                                                        readonly>
-                                                                    <?php endif; ?>
+
+                                                                    <input value="{{ $s->unit_layanan }}"
+                                                                        class="form-control" readonly>
+
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
                                                                 <label class="form-label">Tarif</label>
-                                                                <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->tarif }}"
-                                                                        class="form-control" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">Daya</label>
                                                                 <div class="input-group input-group-flat">
                                                                     <input value="{{ $s->daya }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
+                                                                <label class="form-label">Daya</label>
+                                                                <div class="input-group input-group-flat">
+                                                                    <input value="{{ $s->merk }}"
+                                                                        class="form-control" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 col-lg-4">
                                                                 <label class="form-label">KOGOL</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->kogol }}"
+                                                                    <input value="{{ $s->no_seri }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
                                                                 <label class="form-label">fakmkwh</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->fakmkwh }}"
+                                                                    <input value="{{ $s->tahun_pasang }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
@@ -549,10 +537,10 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{{ $s->idpel }}</td>
-                                    <td>{{ $s->nama }}</td>
-                                    <td>{{ $s->alamat }}</td>
-                                    <td><a href="{{ $s->maps }}" target="_blank">{{ $s->maps }}</a></td>
+                                    <td>{{ $s->unit_layanan }}</td>
+                                    <td>{{ $s->penyulang }}</td>
+                                    <td>{{ $s->no_tiang }}</td>
+                                    <td>{{ $s->lokasi }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -17,19 +17,15 @@ class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
 
     public function model(array $row)
     {
-        $existingData = TrafoModel::where('idpel', $row[0])->first();
+        // $existingData = TrafoModel::where('penyulang', $row[3])->first();
 
-        if ($existingData) {
-            $existingData->update($this->getData($row));
-            Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
-        } else {
-            if ($this->isDuplicate($row)) {
-                Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
-            } else {
-                TrafoModel::create($this->getData($row));
-                Session::flash('success_import', 'File Excel Berhasil Diimport');
-            }
-        }
+        // if ($existingData) {
+        //     $existingData->update($this->getData($row));
+        //     Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
+        // } else {
+            TrafoModel::create($this->getData($row));
+            Session::flash('success_import', 'File Excel Berhasil Diimport');
+        // }
 
         return null;
     }
@@ -37,39 +33,50 @@ class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
     private function getData(array $row)
     {
         return [
-            'idpel' => $row[0],
-            'nama' => $row[1],
-            'nama_stakeholder' => $row[2],
-            'jenis_stakeholder' => $row[3],
-            'nohp_stakeholder' => $row[4],
-            'namapic_lapangan' => $row[5],
-            'nohp_piclapangan' => $row[6],
-            'alamat' => $row[7],
-            'maps' => $row[8],
+            'kategori' => $row[0],
+            'gi' => $row[1],
+            'unit_layanan' => $row[2],
+            'penyulang' => $row[3],
+            'no_tiang' => $row[4],
+            'no_gardu_distribusi' => $row[5],
+            'tipe_belitan_trafo' => $row[6],
+            'jam_padam' => $row[7],
+            'jam_nyala' => $row[8],
             'latitude' => $row[9],
             'longtitude' => $row[10],
-            'unitulp' => $row[11],
-            'tarif' => $row[12],
-            'daya' => $row[13],
-            'kogol' => $row[14],
-            'fakmkwh' => $row[15],
-            'rpbp' => $row[16],
-            'rpujl' => $row[17],
-            'nomor_kwh' => $row[18],
-            'penyulang' => $row[19],
-            'nama_section' => $row[20],
-            'tipe_kubikel' => $row[21],
+            'lama_padam' => $row[11],
+            'daya' => $row[12],
+            'merk' => $row[13],
+            'no_seri' => $row[14],
+            'tahun_pasang' => $row[15],
+            'beban_X1' => $row[16],
+            'beban_X2' => $row[17],
+            'beban_Xo' => $row[18],
+            'lokasi' => $row[19],
+            'penyebab' => $row[20],
+            'no_pk_apkt' => $row[21],
+            'kali_trip' => $row[22],
+            'kva_aset' => $row[23],
+            'waktu_ukur' => $row[24],
+            'jumlah_jurusan' => $row[25],
+            'fasa' => $row[26],
+            'beban_jurusan_X1' => $row[27],
+            'beban_jurusan_N' => $row[28],
+            'perhitungan_beban' => $row[29],
+            'klasifikasi_beban' => $row[30],
+            'beban_ampere' => $row[31],
+            'kesesuaian' => $row[32],
         ];
     }
-    private function isDuplicate(array $data)
-    {
-        return TrafoModel::where('idpel', $data['0'])->exists();
-    }
+    // private function isDuplicate(array $data)
+    // {
+    //     return TrafoModel::where('penyulang', $data['3'])->exists();
+    // }
 
     public function sheets(): array
     {
         return [
-            'Data Pelanggan TM' => new DataPelangganImport()
+            'Data Trafo' => new TrafoImport()
         ];
     }
 

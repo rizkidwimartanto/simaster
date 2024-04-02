@@ -386,6 +386,19 @@ class EntriPadamController extends Controller
         ];
         return view('beranda/petapadam', $data);
     }
+    public function peta_trafo()
+    {
+        $trafo = DB::table('data_trafo')
+            ->select('data_trafo.kategori', 'data_trafo.penyulang', 'data_trafo.unit_layanan', 'data_trafo.no_tiang',  'data_trafo.latitude', 'data_trafo.longtitude')
+            ->get();
+
+        $data = [
+            'title' => 'Peta Trafo',
+            'trafo' => $trafo,
+            'data_unitulp' => DataPelangganModel::pluck('unitulp')
+        ];
+        return view('beranda/petatrafo', $data);
+    }
     public function import_excel_penyulangsection(Request $request)
     {
         $this->validate($request, [

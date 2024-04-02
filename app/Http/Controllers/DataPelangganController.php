@@ -12,6 +12,7 @@ use App\Models\DataPelangganModel;
 use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
 use App\Models\SectionModel;
+use App\Models\TrafoModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
@@ -55,10 +56,12 @@ class DataPelangganController extends Controller
     public function input_pelanggan()
     {
         $data_pelanggan = DataPelangganModel::all();
+        $data_trafo = TrafoModel::all();
 
         $data = [
             'title' => 'Updating',
             'data_pelanggan' => $data_pelanggan,
+            'data_trafo' => $data_trafo,
         ];
         return view('beranda/inputpelanggan', $data);
     }
