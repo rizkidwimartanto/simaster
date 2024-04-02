@@ -388,10 +388,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="#" data-bs-target="#{{ $s->id }}" data-bs-toggle="modal">
+                                        <a href="#" data-bs-target="#trafo-{{ $s->id }}" data-bs-toggle="modal">
                                             <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                         </a>
-                                        <div class="modal modal-blur fade" id="{{ $s->id }}" tabindex="-1"
+                                        <div class="modal modal-blur fade" id="trafo-{{ $s->id }}" tabindex="-1"
                                             role="dialog" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
                                                 role="document">

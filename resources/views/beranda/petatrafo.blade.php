@@ -4,7 +4,7 @@
         <div class="mt-3 mb-3 search_customer">
             <div class="row g-2">
                 <div class="col">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Cari customer..."
+                    <input type="text" class="form-control" id="searchInput" placeholder="Cari pemyulang..."
                         onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
                     <div id="suggestionList" class="dropdown">
                         <ul class="list-group"></ul>
