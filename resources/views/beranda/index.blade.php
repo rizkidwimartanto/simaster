@@ -140,13 +140,13 @@
             filteredDataPeta.forEach(function(customer) {
                 var iconPadam = L.icon({
                     iconUrl: 'assets/img/lokasi_merah.png',
-                    iconSize: [40, 40],
-                    iconAnchor: [40, 40],
+                    iconSize: [20, 20],
+                    iconAnchor: [20, 20],
                 });
                 var iconMenyala = L.icon({
                     iconUrl: 'assets/img/lokasi_hijau.png',
-                    iconSize: [40, 40],
-                    iconAnchor: [40, 40],
+                    iconSize: [20, 20],
+                    iconAnchor: [20, 20],
                 });
                 if (data_padam.some(padam => padam.section === customer.nama_section && padam.status ===
                         'Padam')) {
@@ -172,13 +172,13 @@
         data_peta.forEach(function(customer) {
             var iconPadam = L.icon({
                 iconUrl: 'assets/img/lokasi_merah.png',
-                iconSize: [40, 40],
-                iconAnchor: [40, 40],
+                iconSize: [20, 20],
+                iconAnchor: [20, 20],
             });
             var iconMenyala = L.icon({
                 iconUrl: 'assets/img/lokasi_hijau.png',
-                iconSize: [40, 40],
-                iconAnchor: [40, 40],
+                iconSize: [20, 20],
+                iconAnchor: [20, 20],
             });
             if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
                 var marker = L.marker([customer.latitude, customer.longtitude], {

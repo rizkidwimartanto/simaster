@@ -37,7 +37,7 @@ class Trafo extends Migration
             $table->text('lokasi')->nullable();
             $table->text('penyebab')->nullable();
             $table->text('no_pk_apkt')->nullable();
-            $table->text('kali_trip')->nullable();
+            $table->text('bebanA')->nullable();
             $table->text('kva_aset')->nullable();
             $table->text('waktu_ukur')->nullable();
             $table->text('jumlah_jurusan')->nullable();

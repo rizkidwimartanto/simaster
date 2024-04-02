@@ -13,6 +13,7 @@ use App\Imports\SectionImport;
 use App\Models\DataPegawaiModel;
 use App\Models\PelangganPadamModel;
 use App\Models\RekapKaliPadamModel;
+use App\Models\TrafoModel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Section;
@@ -389,13 +390,13 @@ class EntriPadamController extends Controller
     public function peta_trafo()
     {
         $trafo = DB::table('data_trafo')
-            ->select('data_trafo.kategori', 'data_trafo.penyulang', 'data_trafo.unit_layanan', 'data_trafo.no_tiang',  'data_trafo.latitude', 'data_trafo.longtitude')
+            ->select('data_trafo.id','data_trafo.kategori', 'data_trafo.penyulang', 'data_trafo.unit_layanan', 'data_trafo.no_tiang',  'data_trafo.latitude', 'data_trafo.longtitude')
             ->get();
 
         $data = [
             'title' => 'Peta Trafo',
             'trafo' => $trafo,
-            'data_unitulp' => DataPelangganModel::pluck('unitulp')
+            'unit_layanan' => TrafoModel::pluck('unit_layanan')
         ];
         return view('beranda/petatrafo', $data);
     }

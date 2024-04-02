@@ -1,6 +1,78 @@
 @extends('layout/templateberanda')
 @section('content')
-    <div id="map" style="position: relative; top: 0.5px;" onclick="click_map()"></div>
+    <div class="container">
+        <div class="mt-3 mb-3 search_customer">
+            <div class="row g-2">
+                <div class="col">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Cari customer..."
+                        onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
+                    <div id="suggestionList" class="dropdown">
+                        <ul class="list-group"></ul>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <button href="#" onclick="hapusPencarian()" class="btn btn-icon button_hapus_pencarian"
+                        aria-label="Button">
+                        <i class="fa-solid fa-x fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
+        <option disabled selected>--- Pilih Area Unit ---</option>
+        @foreach ($unit_layanan->unique() as $data)
+            <option value="{{ $data }}">
+                @if ($data == 'Demak')
+                    {{ $data = 'Demak' }}
+                @endif
+                @if ($data == 'Tegowanu')
+                    {{ $data = 'Tegowanu' }}
+                @endif
+                @if ($data == 'Purwodadi')
+                    {{ $data = 'Purwodadi' }}
+                @endif
+                @if ($data == 'Wirosari')
+                    {{ $data = 'Wirosari' }}
+                @endif
+            </option>
+        @endforeach
+    </select>
+    <div id="map" onclick="click_map()"></div>
+    @foreach ($trafo as $data)
+        <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ $data->penyulang }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="detail_pelanggan">Penyulang : {{ $data->penyulang }} </p>
+                        <p class="detail_pelanggan">Unit Layanan : {{ $data->unit_layanan }}</p>
+                        <p class="detail_pelanggan">Nomor Tiang : {{ $data->no_tiang }}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <script src="https://cdn.jsdelivr.net/npm/typeahead.js/dist/typeahead.bundle.min.js"></script>
+    <script>
+        // Menanggapi event klik pada modal untuk menyembunyikan elemen pencarian
+        $('.modal').on('show.bs.modal', function() {
+            // Sembunyikan elemen pencarian
+            $('.search_customer').hide();
+        });
+
+        // Menanggapi event klik pada modal untuk menampilkan kembali elemen pencarian
+        $('.modal').on('hidden.bs.modal', function() {
+            // Tampilkan kembali elemen pencarian
+            $('.search_customer').show();
+        });
+    </script>
     <script>
         var map = L.map('map', {
             fullscreenControl: true,
@@ -41,16 +113,60 @@
         }).addTo(map);
 
         var padams = @json($trafo);
+
+        $('#pilih_peta').change(function() {
+            // Menghapus semua marker yang ada pada peta
+            map.eachLayer(function(layer) {
+                if (layer instanceof L.Marker) {
+                    map.removeLayer(layer);
+                }
+            });
+
+            var selectedunit_layanan = $(this).val();
+
+            var filteredDataPeta = padams.filter(function(customer) {
+                return customer.unit_layanan === selectedunit_layanan;
+            });
+
+            filteredDataPeta.forEach(function(customer) {
+                var iconPadam = L.icon({
+                    iconUrl: 'assets/img/lokasi_merah.png',
+                    iconSize: [20, 20],
+                    iconAnchor: [20, 20],
+                });
+                var iconMenyala = L.icon({
+                    iconUrl: 'assets/img/lokasi_hijau.png',
+                    iconSize: [20, 20],
+                    iconAnchor: [20, 20],
+                });
+                if (customer.kategori === 'Trafo Trip') {
+                    var marker = L.marker([customer.latitude, customer.longtitude], {
+                        icon: iconPadam
+                    }).addTo(map);
+                } else {
+                    var marker = L.marker([customer.latitude, customer.longtitude], {
+                        icon: iconMenyala
+                    }).addTo(map);
+                }
+                marker.bindTooltip(customer.penyulang).openTooltip();
+                marker.on('click', function() {
+                    $('#' + customer.id).modal('show');
+                    $('#customerName').text(customer.penyulang);
+                    $('#customerDetails').text('Alamat: ' + customer.no_tiang);
+                });
+            });
+        });
+
         padams.forEach(function(padam) {
             var iconPadam = L.icon({
                 iconUrl: 'assets/img/lokasi_merah.png',
-                iconSize: [40, 40],
-                iconAnchor: [40, 40],
+                iconSize: [20, 20],
+                iconAnchor: [20, 20],
             });
             var iconMenyala = L.icon({
                 iconUrl: 'assets/img/lokasi_hijau.png',
-                iconSize: [40, 40],
-                iconAnchor: [40, 40],
+                iconSize: [20, 20],
+                iconAnchor: [20, 20],
             });
             if (padam.kategori === 'Trafo Trip') {
                 var marker = L.marker([padam.latitude, padam.longtitude], {
@@ -68,5 +184,71 @@
                 $('#customerDetails').text('Alamat: ' + padam.no_tiang);
             });
         });
+
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                searchCustomer();
+            }
+        }
+
+        function hapusPencarian() {
+            document.getElementById('searchInput').value = "";
+        }
+
+        function click_map() {
+            document.getElementById('suggestionList').style.display = "none";
+        }
+
+        function click_customer() {
+            document.getElementById('suggestionList').style.display = "block";
+        }
+
+        function showSuggestions() {
+            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            var suggestionList = document.getElementById('suggestionList');
+            var listGroup = suggestionList.querySelector('ul');
+            listGroup.innerHTML = '';
+
+            padams.forEach(function(customer) {
+                if (customer.penyulang.toLowerCase().includes(searchTerm)) {
+                    var listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = customer.penyulang;
+                    listItem.onclick = function() {
+                        document.getElementById('searchInput').value = customer.penyulang;
+                        listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
+                        showMarker(customer);
+                    };
+                    listGroup.appendChild(listItem);
+                }
+            });
+
+            if (listGroup.childElementCount > 0) {
+                suggestionList.style.display = 'block';
+            } else {
+                suggestionList.style.display = 'none';
+            }
+        }
+
+        function showMarker(customer) {
+            if (currentMarker) {
+                map.removeLayer(currentMarker);
+            }
+            map.setView([customer.latitude, customer.longtitude], 19);
+            currentMarker.bindTooltip(customer.penyulang).openTooltip();
+            currentMarker.on('click', function() {
+                $('#' + customer.id).modal('show');
+                $('#customerName').text(customer.penyulang);
+                $('#customerDetails').text('Alamat: ' + customer.no_tiang);
+            });
+        }
+
+        document.addEventListener('click', function(event) {
+            var suggestionList = document.getElementById('suggestionList');
+            if (event.target !== suggestionList && !suggestionList.contains(event.target)) {
+                suggestionList.style.display = 'none';
+            }
+        });
+        var currentMarker;
     </script>
 @endsection

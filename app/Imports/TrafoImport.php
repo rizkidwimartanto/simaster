@@ -55,7 +55,7 @@ class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
             'lokasi' => $row[19],
             'penyebab' => $row[20],
             'no_pk_apkt' => $row[21],
-            'kali_trip' => $row[22],
+            'bebanA' => $row[22],
             'kva_aset' => $row[23],
             'waktu_ukur' => $row[24],
             'jumlah_jurusan' => $row[25],

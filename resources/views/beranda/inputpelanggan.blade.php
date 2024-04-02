@@ -403,128 +403,88 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="row">
-                                                            <div class="mb-3 col-lg-12">
-                                                                <label class="form-label">Nama Pelanggan</label>
-                                                                <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->penyulang }}"
-                                                                        class="form-control" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3">
-                                                                <label class="form-label">Alamat</label>
-                                                                <div class="input-group input-group-flat">
-                                                                    <textarea class="form-control" name="alamat" rows="5" readonly>{{ $s->no_tiang }}</textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3 col-lg-12">
-                                                                <label class="form-label">No HP StakeHolder</label>
-                                                                <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->no_gardu_distribusi }}"
-                                                                        class="form-control" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3 col-lg-12">
-                                                                <label class="form-label">No HP PIC Lapangan</label>
-                                                                <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->tipe_belitan_trafo }}"
-                                                                        class="form-control" readonly>
-                                                                </div>
-                                                            </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">Latitude</label>
+                                                                <label class="form-label">Unit Layanan</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->latitude }}"
-                                                                        class="form-control" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">Longtitude</label>
-                                                                <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->longtitude }}"
-                                                                        class="form-control" readonly>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">Unit ULP</label>
-                                                                <div class="input-group input-group-flat">
-
                                                                     <input value="{{ $s->unit_layanan }}"
                                                                         class="form-control" readonly>
-
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">Tarif</label>
+                                                                <label class="form-label">Penyulang</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->daya }}"
+                                                                    <input value="{{ $s->penyulang }}"
+                                                                    class="form-control" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 col-lg-4">
+                                                                <label class="form-label">Nomor Tiang</label>
+                                                                <div class="input-group input-group-flat">
+                                                                    <input value="{{ $s->no_tiang }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
                                                                 <label class="form-label">Daya</label>
                                                                 <div class="input-group input-group-flat">
+                                                                    <input value="{{ $s->daya }}"
+                                                                        class="form-control" readonly>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-3 col-lg-4">
+                                                                <label class="form-label">Merk</label>
+                                                                <div class="input-group input-group-flat">
                                                                     <input value="{{ $s->merk }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">KOGOL</label>
+                                                                <label class="form-label">Beban X1</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->no_seri }}"
+                                                                    <input value="{{ $s->beban_X1 }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">fakmkwh</label>
+                                                                <label class="form-label">Beban X2</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->tahun_pasang }}"
+                                                                    <input value="{{ $s->beban_X2 }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">rpbp</label>
+                                                                <label class="form-label">Beban Xo</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->rpbp }}"
+                                                                    <input value="{{ $s->beban_Xo }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">rpujl</label>
+                                                                <label class="form-label">Lokasi</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->rpujl }}"
+                                                                    <input value="{{ $s->lokasi }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">nomor_kwh</label>
+                                                                <label class="form-label">penyebab</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->nomor_kwh }}"
+                                                                    <input value="{{ $s->penyebab }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3 col-lg-4">
-                                                                <label class="form-label">penyulang</label>
+                                                                <label class="form-label">No APKT</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <input value="{{ $s->penyulang }}"
+                                                                    <input value="{{ $s->no_pk_apkt }}"
                                                                         class="form-control" readonly>
                                                                 </div>
                                                             </div>
-                                                            <div class="mb-3 col-lg-12">
-                                                                <label class="form-label">nama_section</label>
+                                                            <div class="mb-3 col-lg-4">
+                                                                <label class="form-label">Beban (A)</label>
                                                                 <div class="input-group input-group-flat">
-                                                                    <textarea class="form-control" name="nama_section" rows="3" readonly>{{ $s->nama_section }}</textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mb-3 col-lg-12">
-                                                                <label class="form-label">Kali Padam</label>
-                                                                <div class="input-group input-group-flat">
-                                                                    @if ($s->entriPadam)
-                                                                        <input value="{{ $s->entriPadam->kalipadam }}"
-                                                                            class="form-control" readonly>
-                                                                    @else
-                                                                        <input value="{{ 0 }}"
-                                                                            class="form-control" readonly>
-                                                                    @endif
+                                                                    <input value="{{ $s->bebanA }}"
+                                                                        class="form-control" readonly>
                                                                 </div>
                                                             </div>
                                                         </div>
