@@ -390,13 +390,14 @@ class EntriPadamController extends Controller
     public function peta_trafo()
     {
         $trafo = DB::table('data_trafo')
-            ->select('data_trafo.id','data_trafo.kategori', 'data_trafo.penyulang', 'data_trafo.unit_layanan', 'data_trafo.no_tiang',  'data_trafo.latitude', 'data_trafo.longtitude')
+            ->select('id','kategori', 'penyulang', 'unit_layanan', 'no_tiang', 'daya', 'lokasi', 'bebanA',  'latitude', 'longtitude')
             ->get();
 
         $data = [
             'title' => 'Peta Trafo',
             'trafo' => $trafo,
-            'unit_layanan' => TrafoModel::pluck('unit_layanan')
+            'unit_layanan' => TrafoModel::pluck('unit_layanan'),
+            'kategori' => TrafoModel::pluck('kategori')
         ];
         return view('beranda/petatrafo', $data);
     }

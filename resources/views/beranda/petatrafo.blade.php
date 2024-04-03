@@ -21,20 +21,14 @@
     </div>
     <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
         <option disabled selected>--- Pilih Area Unit ---</option>
+        @foreach ($kategori->unique() as $k)
+            <option value="{{ $k }}">
+                {{ $k }}
+            </option>
+        @endforeach
         @foreach ($unit_layanan->unique() as $data)
             <option value="{{ $data }}">
-                @if ($data == 'Demak')
-                    {{ $data = 'Demak' }}
-                @endif
-                @if ($data == 'Tegowanu')
-                    {{ $data = 'Tegowanu' }}
-                @endif
-                @if ($data == 'Purwodadi')
-                    {{ $data = 'Purwodadi' }}
-                @endif
-                @if ($data == 'Wirosari')
-                    {{ $data = 'Wirosari' }}
-                @endif
+                {{ $data }}
             </option>
         @endforeach
     </select>
@@ -51,6 +45,9 @@
                         <p class="detail_pelanggan">Penyulang : {{ $data->penyulang }} </p>
                         <p class="detail_pelanggan">Unit Layanan : {{ $data->unit_layanan }}</p>
                         <p class="detail_pelanggan">Nomor Tiang : {{ $data->no_tiang }}</p>
+                        <p class="detail_pelanggan">Daya : {{ $data->daya }} kVa</p>
+                        <p class="detail_pelanggan">Alamat : {{ $data->lokasi }} </p>
+                        <p class="detail_pelanggan">Beban : {{ $data->bebanA }}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -125,7 +122,8 @@
             var selectedunit_layanan = $(this).val();
 
             var filteredDataPeta = padams.filter(function(customer) {
-                return customer.unit_layanan === selectedunit_layanan;
+                return customer.unit_layanan === selectedunit_layanan || customer.kategori ===
+                    selectedunit_layanan;
             });
 
             filteredDataPeta.forEach(function(customer) {
