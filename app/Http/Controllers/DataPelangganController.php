@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Exports\DataPelangganExport;
+use App\Exports\TrafoExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganImport;
@@ -53,7 +54,7 @@ class DataPelangganController extends Controller
         ];
         return view('beranda/entripadam', $data);
     }
-    public function input_pelanggan()
+    public function updating()
     {
         $data_pelanggan = DataPelangganModel::all();
         $data_trafo = TrafoModel::all();
@@ -65,10 +66,15 @@ class DataPelangganController extends Controller
         ];
         return view('beranda/inputpelanggan', $data);
     }
-    public function export_excel()
+    public function export_excel_pelanggan()
     {
         date_default_timezone_set('Asia/Jakarta');
         return Excel::download(new DataPelangganExport, 'PELANGGAN TM UP3 DEMAK '  . date('d-m-Y') . '.xlsx');
+    }
+    public function export_excel_trafo()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        return Excel::download(new TrafoExport, 'Data Trafo '  . date('d-m-Y') . '.xlsx');
     }
     public function import_excel(Request $request)
     {

@@ -45,9 +45,9 @@
                 <div class="form-label fs-2">Upload File Pelanggan</div>
                 <input type="file" name="file" class="form-control" required />
                 <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
-                        style="margin-right: 5px"></i>Import Excel</button>
-                <a href="/inputpelanggan/export_excel" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
-                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
+                        style="margin-right: 5px"></i>Import Excel Pelanggan</button>
+                <a href="/inputpelanggan/export_excel_pelanggan" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
+                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel Pelanggan</a>
             </form>
             <form action="/hapus_pelanggan" method="post">
                 @csrf
@@ -305,9 +305,9 @@
                 <div class="form-label fs-2">Upload File Trafo</div>
                 <input type="file" name="file" class="form-control" required />
                 <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
-                        style="margin-right: 5px"></i>Import Excel</button>
-                <a href="/inputpelanggan/export_excel" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
-                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
+                        style="margin-right: 5px"></i>Import Excel Trafo</button>
+                {{-- <a href="/inputpelanggan/export_excel_trafo" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
+                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel Trafo</a> --}}
             </form>
             <form action="/hapus_pelanggan" method="post">
                 @csrf

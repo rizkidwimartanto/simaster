@@ -27,6 +27,7 @@
                 <form action="/transaksipadam/edit_status_padam" method="post">
                     @csrf
                     <input type="hidden" value="Menyala" name="status" id="status">
+                    <input type="hidden" value="Sedang Mengirim" name="status_wa" id="status_wa">
                     <a href="#" class="btn btn-success col-12 mb-3" data-bs-toggle="modal"
                         data-bs-target="#modal-report"><i class="fa-solid fa-power-off fa-lg"
                             style="margin-right: 5px;"></i>
