@@ -393,7 +393,10 @@ class EntriPadamController extends Controller
     public function petapadam()
     {
         $padam = DB::table('data_pelanggan')
-            ->leftJoin('entri_padam', 'data_pelanggan.nama_section', '=', 'entri_padam.section')
+            ->leftJoin('entri_padam', function ($join) {
+                $join->on('data_pelanggan.nama_section', '=', 'entri_padam.section')
+                    ->orOn('data_pelanggan.nama', '=', 'entri_padam.nama_pelanggan');
+            })
             ->select('data_pelanggan.nama', 'data_pelanggan.id', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nohp_stakeholder', 'data_pelanggan.unitulp', 'entri_padam.section')
             ->where('entri_padam.status', '=', 'Padam')
             ->get();

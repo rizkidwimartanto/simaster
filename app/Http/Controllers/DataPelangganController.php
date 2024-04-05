@@ -64,7 +64,32 @@ class DataPelangganController extends Controller
             'data_pelanggan' => $data_pelanggan,
             'data_trafo' => $data_trafo,
         ];
-        return view('beranda/inputpelanggan', $data);
+        return view('beranda/updating', $data);
+    }
+    public function edit_pelanggan(Request $request, $id){
+        $message = [
+            'required' => ':attribute harus diisi',
+        ];
+        $request->validate([
+            'idpel' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp_stakeholder' => 'required',
+            'nohp_piclapangan' => 'required',
+            'tarif' => 'required',
+            'daya' => 'required',
+            'kogol' => 'required',
+            'fakmkwh' => 'required',
+            'rpbp' => 'required',
+            'rpujl' => 'required',
+            'nomor_kwh' => 'required',
+            'penyulang' => 'required',
+            'nama_section' => 'required',
+        ], $message);
+        $update_pelanggan = DataPelangganModel::find($id);
+        $update_pelanggan->update($request->all());
+        Session::flash('success_edit_pelanggan', 'Pelanggan berhasil diedit');
+        return redirect('/updating');
     }
     public function export_excel_pelanggan()
     {
@@ -86,7 +111,7 @@ class DataPelangganController extends Controller
         $file->move('file_pelanggan', $nama_file);
         Excel::import(new DataPelangganImport, public_path('/file_pelanggan/' . $nama_file));
 
-        return redirect('/inputpelanggan');
+        return redirect('/updating');
     }
     public function import_excel_trafo(Request $request)
     {
@@ -98,7 +123,7 @@ class DataPelangganController extends Controller
         $file->move('file_trafo', $nama_file);
         Excel::import(new TrafoImport, public_path('/file_trafo/' . $nama_file));
 
-        return redirect('/inputpelanggan');
+        return redirect('/updating');
     }
     public function hapusPelanggan(Request $request)
     {
@@ -112,6 +137,6 @@ class DataPelangganController extends Controller
         } else {
             Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
         }
-        return redirect('/inputpelanggan');
+        return redirect('/updating');
     }
 }

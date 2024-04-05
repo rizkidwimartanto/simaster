@@ -40,7 +40,7 @@
             </ul>
             <form class="d-flex" role="search" action="/logout" method="GET">
                 @csrf
-                <button class="btn btn-danger" type="submit" href="/">Logout</button>
+                <button class="btn btn-danger" type="submit" href="/">{{ auth()->user()->name }} | Logout</button>
             </form>
         </div>
     </div>

@@ -44,11 +44,12 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/kirimwhatsapp', 'sendWhatsAppMessage');
     Route::get('/updating', 'updating')->middleware('auth');
-    Route::get('/inputpelanggan/export_excel_pelanggan', 'export_excel_pelanggan');
-    Route::get('/inputpelanggan/export_excel_trafo', 'export_excel_trafo');
-    Route::post('/inputpelanggan/import_excel', 'import_excel');
-    Route::post('/inputpelanggan/import_excel_trafo', 'import_excel_trafo');
-    Route::get('/inputpelanggan/hapus_pelanggan', 'hapusPelanggan');
+    Route::get('/updating/export_excel_pelanggan', 'export_excel_pelanggan');
+    Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
+    Route::post('/updating/import_excel', 'import_excel');
+    Route::post('/updating/import_excel_trafo', 'import_excel_trafo');
+    Route::post('/updating/edit_pelanggan/$1', 'edit_pelanggan');
+    Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
 });
 Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/petapadam', 'petapadam')->middleware('auth');

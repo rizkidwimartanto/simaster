@@ -8,7 +8,7 @@ body {
     padding: 0;
     margin: 0;
 }
-header.navbar-expand-md{
+header.navbar-expand-md {
     border-bottom: 5px solid rgb(183, 136, 195);
 }
 #map {
@@ -36,14 +36,7 @@ select.pilih_peta {
     z-index: 1;
     margin-left: 6%;
     width: 40%;
-    bottom: 7.2%;
-}
-
-button.cari_peta {
-    position: relative;
-    z-index: 1;
-    margin-left: 81%;
-    bottom: 2.8rem;
+    bottom: 8.8%;
 }
 
 #suggestionList {
@@ -78,19 +71,10 @@ button.cari_peta {
     color: #ffffff;
 }
 
-@media (max-width: 575px) {
-    a.button-delete-pegawai {
-        width: 100%;
-    }
-}
-
 @media (max-width: 1200px) {
     select.pilih_peta {
         width: 32%;
         margin-left: 15%;
-        bottom: 8%;
-    }
-    #navbar-menu{
-        display: block;
+        bottom: 8.8%;
     }
 }
