@@ -43,14 +43,18 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/kirimwhatsapp', 'sendWhatsAppMessage');
-    Route::get('/inputpelanggan', 'input_pelanggan')->middleware('auth');
-    Route::get('/inputpelanggan/export_excel', 'export_excel');
-    Route::post('/inputpelanggan/import_excel', 'import_excel');
-    Route::get('/inputpelanggan/hapus_pelanggan', 'hapusPelanggan');
+    Route::get('/updating', 'updating')->middleware('auth');
+    Route::get('/updating/export_excel_pelanggan', 'export_excel_pelanggan');
+    Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
+    Route::post('/updating/import_excel', 'import_excel');
+    Route::post('/updating/import_excel_trafo', 'import_excel_trafo');
+    Route::post('/updating/edit_pelanggan/$1', 'edit_pelanggan');
+    Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
 });
 Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/petapadam', 'petapadam')->middleware('auth');
-    Route::get('/transaksipadam', 'index')->middleware('auth');
+    Route::get('/petatrafo', 'peta_trafo')->middleware('auth');
+    Route::get('/transaksihistori', 'index')->middleware('auth');
     Route::get('/transaksiaktif', 'transaksiaktif')->middleware('auth');
     Route::post('/entripadam/insertentripadam', 'insertEntriPadam');
     Route::post('/entripadam', 'insertPadam');
@@ -60,9 +64,4 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::post('/entripadam/import_excel_penyulangsection', 'import_excel_penyulangsection');
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');
-});
-Route::controller(DataPegawaiController::class)->group(function(){
-    Route::post('/tambah_pegawai', 'tambah_pegawai');
-    Route::post('/edit_pegawai/{id}', 'edit_pegawai');
-    Route::delete('/hapus_pegawai', 'hapus_pegawai');
 });

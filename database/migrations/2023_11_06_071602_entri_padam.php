@@ -24,7 +24,6 @@ class EntriPadam extends Migration
             $table->text('jam_nyala')->nullable();
             $table->text('durasi_padam')->nullable();
             $table->text('keterangan')->nullable();
-            $table->text('pesan_whatsapp')->nullable();
             $table->text('status')->nullable();
             $table->text('kalipadam')->nullable();
             $table->timestamps(true);

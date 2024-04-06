@@ -4,7 +4,7 @@
         <div class="mt-3 mb-3 search_customer">
             <div class="row g-2">
                 <div class="col">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Cari customer..."
+                    <input type="text" class="form-control" id="searchInput" placeholder="Cari pemyulang..."
                         onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
                     <div id="suggestionList" class="dropdown">
                         <ul class="list-group"></ul>
@@ -21,42 +21,33 @@
     </div>
     <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
         <option disabled selected>--- Pilih Area Unit ---</option>
-        @foreach ($data_unitulp->unique() as $data)
+        @foreach ($kategori->unique() as $k)
+            <option value="{{ $k }}">
+                {{ $k }}
+            </option>
+        @endforeach
+        @foreach ($unit_layanan->unique() as $data)
             <option value="{{ $data }}">
-                @if ($data == '52551')
-                    {{ $data = 'Demak' }}
-                @endif
-                @if ($data == '52552')
-                    {{ $data = 'Tegowanu' }}
-                @endif
-                @if ($data == '52553')
-                    {{ $data = 'Purwodadi' }}
-                @endif
-                @if ($data == '52554')
-                    {{ $data = 'Wirosari' }}
-                @endif
+                {{ $data }}
             </option>
         @endforeach
     </select>
     <div id="map" onclick="click_map()"></div>
-    @foreach ($data_peta as $data)
+    @foreach ($trafo as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ $data->nama }}</h5>
+                        <h5 class="modal-title">{{ $data->penyulang }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama }} </p>
-                        <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
-                        <p class="detail_pelanggan">No Telepon :
-                            <a href="https://wa.me/{{ $data->nohp_stakeholder }}?text=Halo." target="_blank">
-                                {{ $data->nohp_stakeholder }}
-                            </a>
-                        </p>
-                        <p class="detail_pelanggan">Maps : <a href="{{ $data->maps }}"
-                                target="_blank">{{ $data->maps }}</a></p>
+                        <p class="detail_pelanggan">Penyulang : {{ $data->penyulang }} </p>
+                        <p class="detail_pelanggan">Unit Layanan : {{ $data->unit_layanan }}</p>
+                        <p class="detail_pelanggan">Nomor Tiang : {{ $data->no_tiang }}</p>
+                        <p class="detail_pelanggan">Daya : {{ $data->daya }} kVa</p>
+                        <p class="detail_pelanggan">Alamat : {{ $data->lokasi }} </p>
+                        <p class="detail_pelanggan">Beban : {{ $data->bebanA }}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -86,12 +77,10 @@
                 pseudoFullscreen: false
             }
         }).setView([-6.90774243377773, 110.65198375582506], 10);
-
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 25,
+            maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-
         L.control.locate({
             position: 'topleft',
             drawCircle: true,
@@ -120,9 +109,8 @@
             }
         }).addTo(map);
 
-        var data_peta = @json($data_peta);
-        var data_padam = @json($data_padam);
-        // Menangani perubahan pada elemen select
+        var padams = @json($trafo);
+
         $('#pilih_peta').change(function() {
             // Menghapus semua marker yang ada pada peta
             map.eachLayer(function(layer) {
@@ -131,10 +119,11 @@
                 }
             });
 
-            var selectedUnitulp = $(this).val();
+            var selectedunit_layanan = $(this).val();
 
-            var filteredDataPeta = data_peta.filter(function(customer) {
-                return customer.unitulp === selectedUnitulp;
+            var filteredDataPeta = padams.filter(function(customer) {
+                return customer.unit_layanan === selectedunit_layanan || customer.kategori ===
+                    selectedunit_layanan;
             });
 
             filteredDataPeta.forEach(function(customer) {
@@ -148,8 +137,7 @@
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 });
-                if (data_padam.some(padam => padam.section === customer.nama_section && padam.status ===
-                        'Padam')) {
+                if (customer.kategori === 'Trafo Trip') {
                     var marker = L.marker([customer.latitude, customer.longtitude], {
                         icon: iconPadam
                     }).addTo(map);
@@ -158,18 +146,16 @@
                         icon: iconMenyala
                     }).addTo(map);
                 }
-
-                marker.bindTooltip(customer.nama).openTooltip();
-
+                marker.bindTooltip(customer.penyulang).openTooltip();
                 marker.on('click', function() {
                     $('#' + customer.id).modal('show');
-                    $('#customerName').text(customer.nama);
-                    $('#customerDetails').text('Alamat: ' + customer.alamat);
+                    $('#customerName').text(customer.penyulang);
+                    $('#customerDetails').text('Alamat: ' + customer.no_tiang);
                 });
             });
         });
 
-        data_peta.forEach(function(customer) {
+        padams.forEach(function(padam) {
             var iconPadam = L.icon({
                 iconUrl: 'assets/img/lokasi_merah.png',
                 iconSize: [20, 20],
@@ -180,22 +166,20 @@
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             });
-            if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
-                var marker = L.marker([customer.latitude, customer.longtitude], {
+            if (padam.kategori === 'Trafo Trip') {
+                var marker = L.marker([padam.latitude, padam.longtitude], {
                     icon: iconPadam
                 }).addTo(map);
             } else {
-                var marker = L.marker([customer.latitude, customer.longtitude], {
+                var marker = L.marker([padam.latitude, padam.longtitude], {
                     icon: iconMenyala
                 }).addTo(map);
             }
-
-            marker.bindTooltip(customer.nama).openTooltip();
-
+            marker.bindTooltip(padam.penyulang).openTooltip();
             marker.on('click', function() {
-                $('#' + customer.id).modal('show');
-                $('#customerName').text(customer.nama);
-                $('#customerDetails').text('Alamat: ' + customer.alamat);
+                $('#' + padam.id).modal('show');
+                $('#customerName').text(padam.penyulang);
+                $('#customerDetails').text('Alamat: ' + padam.no_tiang);
             });
         });
 
@@ -223,13 +207,13 @@
             var listGroup = suggestionList.querySelector('ul');
             listGroup.innerHTML = '';
 
-            data_peta.forEach(function(customer) {
-                if (customer.nama.toLowerCase().includes(searchTerm)) {
+            padams.forEach(function(customer) {
+                if (customer.penyulang.toLowerCase().includes(searchTerm)) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
-                    listItem.textContent = customer.nama;
+                    listItem.textContent = customer.penyulang;
                     listItem.onclick = function() {
-                        document.getElementById('searchInput').value = customer.nama;
+                        document.getElementById('searchInput').value = customer.penyulang;
                         listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
                         showMarker(customer);
                     };
@@ -249,11 +233,11 @@
                 map.removeLayer(currentMarker);
             }
             map.setView([customer.latitude, customer.longtitude], 19);
-            currentMarker.bindTooltip(customer.nama).openTooltip();
+            currentMarker.bindTooltip(customer.penyulang).openTooltip();
             currentMarker.on('click', function() {
                 $('#' + customer.id).modal('show');
-                $('#customerName').text(customer.nama);
-                $('#customerDetails').text('Alamat: ' + customer.alamat);
+                $('#customerName').text(customer.penyulang);
+                $('#customerDetails').text('Alamat: ' + customer.no_tiang);
             });
         }
 

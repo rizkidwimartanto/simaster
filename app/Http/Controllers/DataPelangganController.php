@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Exports\DataPelangganExport;
+use App\Exports\TrafoExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganImport;
+use App\Imports\TrafoImport;
 use App\Models\DataPelangganModel;
 use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
 use App\Models\SectionModel;
+use App\Models\TrafoModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
@@ -51,20 +54,52 @@ class DataPelangganController extends Controller
         ];
         return view('beranda/entripadam', $data);
     }
-    public function input_pelanggan()
+    public function updating()
     {
         $data_pelanggan = DataPelangganModel::all();
+        $data_trafo = TrafoModel::all();
 
         $data = [
             'title' => 'Updating',
             'data_pelanggan' => $data_pelanggan,
+            'data_trafo' => $data_trafo,
         ];
-        return view('beranda/inputpelanggan', $data);
+        return view('beranda/updating', $data);
     }
-    public function export_excel()
+    public function edit_pelanggan(Request $request, $id){
+        $message = [
+            'required' => ':attribute harus diisi',
+        ];
+        $request->validate([
+            'idpel' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'nohp_stakeholder' => 'required',
+            'nohp_piclapangan' => 'required',
+            'tarif' => 'required',
+            'daya' => 'required',
+            'kogol' => 'required',
+            'fakmkwh' => 'required',
+            'rpbp' => 'required',
+            'rpujl' => 'required',
+            'nomor_kwh' => 'required',
+            'penyulang' => 'required',
+            'nama_section' => 'required',
+        ], $message);
+        $update_pelanggan = DataPelangganModel::find($id);
+        $update_pelanggan->update($request->all());
+        Session::flash('success_edit_pelanggan', 'Pelanggan berhasil diedit');
+        return redirect('/updating');
+    }
+    public function export_excel_pelanggan()
     {
         date_default_timezone_set('Asia/Jakarta');
         return Excel::download(new DataPelangganExport, 'PELANGGAN TM UP3 DEMAK '  . date('d-m-Y') . '.xlsx');
+    }
+    public function export_excel_trafo()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        return Excel::download(new TrafoExport, 'Data Trafo '  . date('d-m-Y') . '.xlsx');
     }
     public function import_excel(Request $request)
     {
@@ -76,7 +111,19 @@ class DataPelangganController extends Controller
         $file->move('file_pelanggan', $nama_file);
         Excel::import(new DataPelangganImport, public_path('/file_pelanggan/' . $nama_file));
 
-        return redirect('/inputpelanggan');
+        return redirect('/updating');
+    }
+    public function import_excel_trafo(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_trafo', $nama_file);
+        Excel::import(new TrafoImport, public_path('/file_trafo/' . $nama_file));
+
+        return redirect('/updating');
     }
     public function hapusPelanggan(Request $request)
     {
@@ -90,6 +137,6 @@ class DataPelangganController extends Controller
         } else {
             Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
         }
-        return redirect('/inputpelanggan');
+        return redirect('/updating');
     }
 }
