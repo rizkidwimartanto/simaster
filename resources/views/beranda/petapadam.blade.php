@@ -1,43 +1,45 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container">
-        <div class="mt-3 mb-3 search_customer">
-            <div class="row g-2">
-                <div class="col">
-                    <input type="text" class="form-control" id="searchInput" placeholder="Cari customer..."
-                        onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
-                    <div id="suggestionList" class="dropdown">
-                        <ul class="list-group"></ul>
+        <div class="d-flex justify-content-around">
+            <div class="mt-3 mb-3 search_customer">
+                <div class="row g-2">
+                    <div class="col">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari customer..."
+                            onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
+                        <div id="suggestionList" class="dropdown">
+                            <ul class="list-group"></ul>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button href="#" onclick="hapusPencarian()" class="btn btn-icon button_hapus_pencarian"
+                            aria-label="Button">
+                            <i class="fa-solid fa-x fa-lg"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <button href="#" onclick="hapusPencarian()" class="btn btn-icon button_hapus_pencarian"
-                        aria-label="Button">
-                        <i class="fa-solid fa-x fa-lg"></i>
-                    </button>
-                </div>
             </div>
+            <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
+                <option disabled selected>--- Pilih Area Unit ---</option>
+                @foreach ($data_unitulp->unique() as $data)
+                    <option value="{{ $data }}">
+                        @if ($data == '52551')
+                            {{ $data = 'Demak' }}
+                        @endif
+                        @if ($data == '52552')
+                            {{ $data = 'Tegowanu' }}
+                        @endif
+                        @if ($data == '52553')
+                            {{ $data = 'Purwodadi' }}
+                        @endif
+                        @if ($data == '52554')
+                            {{ $data = 'Wirosari' }}
+                        @endif
+                    </option>
+                @endforeach
+            </select>
         </div>
     </div>
-    <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
-        <option disabled selected>--- Pilih Area Unit ---</option>
-        @foreach ($data_unitulp->unique() as $data)
-            <option value="{{ $data }}">
-                @if ($data == '52551')
-                    {{ $data = 'Demak' }}
-                @endif
-                @if ($data == '52552')
-                    {{ $data = 'Tegowanu' }}
-                @endif
-                @if ($data == '52553')
-                    {{ $data = 'Purwodadi' }}
-                @endif
-                @if ($data == '52554')
-                    {{ $data = 'Wirosari' }}
-                @endif
-            </option>
-        @endforeach
-    </select>
     <div id="map" onclick="click_map()"></div>
     @foreach ($padam as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">

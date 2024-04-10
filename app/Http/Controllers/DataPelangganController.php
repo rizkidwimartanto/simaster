@@ -66,30 +66,100 @@ class DataPelangganController extends Controller
         ];
         return view('beranda/updating', $data);
     }
-    public function edit_pelanggan(Request $request, $id){
-        $message = [
-            'required' => ':attribute harus diisi',
-        ];
-        $request->validate([
-            'idpel' => 'required',
-            'nama' => 'required',
-            'alamat' => 'required',
-            'nohp_stakeholder' => 'required',
-            'nohp_piclapangan' => 'required',
-            'tarif' => 'required',
-            'daya' => 'required',
-            'kogol' => 'required',
-            'fakmkwh' => 'required',
-            'rpbp' => 'required',
-            'rpujl' => 'required',
-            'nomor_kwh' => 'required',
-            'penyulang' => 'required',
-            'nama_section' => 'required',
-        ], $message);
-        $update_pelanggan = DataPelangganModel::find($id);
-        $update_pelanggan->update($request->all());
-        Session::flash('success_edit_pelanggan', 'Pelanggan berhasil diedit');
-        return redirect('/updating');
+    public function edit_pelanggan(Request $request, $id)
+    {
+        // $message = [
+        //     'required' => ':attribute harus diisi',
+        // ];
+        // $validasiPelanggan = $request->validate([
+        //     'nama' => 'required',
+        //     'alamat' => 'required',
+        //     'nohp_stakeholder' => 'required',
+        //     'nohp_piclapangan' => 'required',
+        //     'latitude' => 'required',
+        //     'longtitude' => 'required',
+        //     'tarif' => 'required',
+        //     'daya' => 'required',
+        //     'kogol' => 'required',
+        //     'fakmkwh' => 'required',
+        //     'rpbp' => 'required',
+        //     'rpujl' => 'required',
+        //     'nomor_kwh' => 'required',
+        //     'penyulang' => 'required',
+        //     'nama_section' => 'required',
+        // ], $message);
+        // if ($validasiPelanggan) {
+            DataPelangganModel::find($id)
+            ->update([
+                'nama' => $request->input('nama'),
+                'alamat' => $request->input('alamat'),
+                'nohp_stakeholder' => $request->input('nohp_stakeholder'),
+                'nohp_piclapangan' => $request->input('nohp_piclapangan'),
+                'latitude' => $request->input('latitude'),
+                'longtitude' => $request->input('longtitude'),
+                'tarif' => $request->input('tarif'),
+                'daya' => $request->input('daya'),
+                'kogol' => $request->input('kogol'),
+                'fakmkwh' => $request->input('fakmkwh'),
+                'rpbp' => $request->input('rpbp'),
+                'rpujl' => $request->input('rpujl'),
+                'nomor_kwh' => $request->input('nomor_kwh'),
+                'penyulang' => $request->input('penyulang'),
+                'nama_section' => $request->input('nama_section'),
+                // $validasiPelanggan
+            ]);
+            Session::flash('success_edit', 'Data berhasil diedit');
+            return redirect('/updating');
+        // } else {
+        //     Session::flash('error_edit', 'Pelanggan berhasil gagal');
+        //     return redirect('/updating');
+        // }
+    }
+    public function edit_trafo(Request $request, $id)
+    {
+        // $message = [
+        //     'required' => ':attribute harus diisi',
+        // ];
+        // $validasiPelanggan = $request->validate([
+        //     'nama' => 'required',
+        //     'alamat' => 'required',
+        //     'nohp_stakeholder' => 'required',
+        //     'nohp_piclapangan' => 'required',
+        //     'latitude' => 'required',
+        //     'longtitude' => 'required',
+        //     'tarif' => 'required',
+        //     'daya' => 'required',
+        //     'kogol' => 'required',
+        //     'fakmkwh' => 'required',
+        //     'rpbp' => 'required',
+        //     'rpujl' => 'required',
+        //     'nomor_kwh' => 'required',
+        //     'penyulang' => 'required',
+        //     'nama_section' => 'required',
+        // ], $message);
+        // if ($validasiPelanggan) {
+            TrafoModel::find($id)
+            ->update([
+                'unit_layanan' => $request->input('unit_layanan'),
+                'penyulang' => $request->input('penyulang'),
+                'no_tiang' => $request->input('no_tiang'),
+                'daya' => $request->input('daya'),
+                'merk' => $request->input('merk'),
+                'beban_X1' => $request->input('beban_X1'),
+                'beban_X2' => $request->input('beban_X2'),
+                'beban_Xo' => $request->input('beban_Xo'),
+                'lokasi' => $request->input('lokasi'),
+                'penyebab' => $request->input('penyebab'),
+                'no_pk_apkt' => $request->input('no_pk_apkt'),
+                'bebanA' => $request->input('bebanA'),
+                // $validasiPelanggan
+            ]);
+            Session::flash('success_edit', 'Data berhasil diedit');
+            return redirect('/updating');
+        // } else {
+        //     Session::flash('error_edit', 'Pelanggan berhasil gagal');
+        //     return redirect('/updating');
+        // }
     }
     public function export_excel_pelanggan()
     {
@@ -133,9 +203,23 @@ class DataPelangganController extends Controller
                 $pelanggan = DataPelangganModel::find($hapus);
                 $pelanggan->delete();
             }
-            Session::flash('success_hapus_pelanggan', 'Data berhasil dihapus');
+            Session::flash('success_hapus', 'Data berhasil dihapus');
         } else {
-            Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
+            Session::flash('error_hapus', 'Data gagal dihapus');
+        }
+        return redirect('/updating');
+    }
+    public function hapusTrafo(Request $request)
+    {
+        $hapus_items = $request->input('checkTrafo');
+        if ($hapus_items) {
+            foreach ($hapus_items as $hapus) {
+                $trafo = TrafoModel::find($hapus);
+                $trafo->delete();
+            }
+            Session::flash('success_hapus', 'Data berhasil dihapus');
+        } else {
+            Session::flash('error_hapus', 'Data gagal dihapus');
         }
         return redirect('/updating');
     }
