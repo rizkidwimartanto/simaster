@@ -11,7 +11,7 @@ class EntriPadamModel extends Model
 
     protected $table = 'entri_padam';
     protected $primaryKey = 'id';
-    protected $fillable = ['penyulang', 'nama_pelanggan', 'section', 'penyebab_padam', 'jam_padam' ,'keterangan', 'status'];
+    protected $fillable = ['penyulang', 'nama_pelanggan', 'section', 'penyebab_padam', 'jam_padam' ,'keterangan', 'status', 'status_wa'];
     public function nomorTiang()
     {
         return $this->belongsTo(SectionModel::class, 'section', 'id_apkt');

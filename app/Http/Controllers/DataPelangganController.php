@@ -44,6 +44,8 @@ class DataPelangganController extends Controller
         $penyulangs = [];
         foreach ($data_penyulang as $penyulang) {
             $penyulangs[$penyulang] = SectionModel::where('penyulang', $penyulang)->pluck('id_apkt');
+            DB::table('entri_padam')
+            ->update(['status_wa' => 'Sudah Terkirim']);
         }
         $data = [
             'title' => 'Entri Padam',
@@ -97,6 +99,7 @@ class DataPelangganController extends Controller
                 'nohp_piclapangan' => $request->input('nohp_piclapangan'),
                 'latitude' => $request->input('latitude'),
                 'longtitude' => $request->input('longtitude'),
+                'unitulp' => $request->input('unitulp'),
                 'tarif' => $request->input('tarif'),
                 'daya' => $request->input('daya'),
                 'kogol' => $request->input('kogol'),

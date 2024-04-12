@@ -376,47 +376,19 @@
                                     <div class="mb-3 col-lg-4">
                                         <label class="form-label">Unit ULP</label>
                                         <div class="input-group input-group-flat">
-                                            <?php if ($s->unitulp == 52550) : ?>
-                                            <input type="text" name="unitulp" id="unitulp" value="UP3 Demak"
+                                            <select name="unitulp" id="unitulp"
                                                 class="form-control @error('unitulp') is-invalid @enderror">
+                                                <option value="52550" {{$s->unitulp == 52550 ? 'selected' : ''}}>UP3 Demak</option>
+                                                <option value="52551" {{$s->unitulp == 52551 ? 'selected' : ''}}>ULP Demak</option>
+                                                <option value="52552" {{$s->unitulp == 52552 ? 'selected' : ''}}>ULP Tegowanu</option>
+                                                <option value="52553" {{$s->unitulp == 52553 ? 'selected' : ''}}>ULP Purwodadi</option>
+                                                <option value="52554" {{$s->unitulp == 52554 ? 'selected' : ''}}>ULP Wirosari</option>
+                                            </select>
                                             @error('unitulp')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
-                                            <?php elseif($s->unitulp == 52551) : ?>
-                                            <input type="text" name="unitulp" id="unitulp" value="ULP Demak"
-                                                class="form-control @error('unitulp') is-invalid @enderror">
-                                            @error('unitulp')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                            <?php elseif($s->unitulp == 52552) : ?>
-                                            <input type="text" name="unitulp" id="unitulp" value="ULP Tegowanu"
-                                                class="form-control @error('unitulp') is-invalid @enderror">
-                                            @error('unitulp')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                            <?php elseif($s->unitulp == 52553) : ?>
-                                            <input type="text" name="unitulp" id="unitulp" value="ULP Purwodadi"
-                                                class="form-control @error('unitulp') is-invalid @enderror">
-                                            @error('unitulp')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                            <?php elseif($s->unitulp == 52554) : ?>
-                                            <input type="text" name="unitulp" id="unitulp" value="ULP Wirosari"
-                                                class="form-control @error('unitulp') is-invalid @enderror">
-                                            @error('unitulp')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                            <?php endif; ?>
                                         </div>
                                     </div>
                                     <div class="mb-3 col-lg-4">
@@ -770,8 +742,18 @@
                                 <div class="mb-3 col-lg-4">
                                     <label class="form-label">Unit Layanan</label>
                                     <div class="input-group input-group-flat">
-                                        <input type="text" name="unit_layanan" id="unit_layanan"
-                                            value="{{ $s->unit_layanan }}" class="form-control">
+                                        <select name="unit_layanan" id="unit_layanan"
+                                        class="form-control @error('unit_layanan') is-invalid @enderror">
+                                        <option value="Demak" {{$s->unit_layanan == 'Demak' ? 'selected' : ''}}>Demak</option>
+                                        <option value="Tegowanu" {{$s->unit_layanan == 'Tegowanu' ? 'selected' : ''}}>Tegowanu</option>
+                                        <option value="Purwodadi" {{$s->unit_layanan == 'Purwodadi' ? 'selected' : ''}}>Purwodadi</option>
+                                        <option value="Wirosari" {{$s->unit_layanan == 'Wirosari' ? 'selected' : ''}}>Wirosari</option>
+                                    </select>
+                                    @error('unit_layanan')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                     </div>
                                 </div>
                                 <div class="mb-3 col-lg-4">
@@ -791,8 +773,8 @@
                                 <div class="mb-3 col-lg-4">
                                     <label class="form-label">Daya</label>
                                     <div class="input-group input-group-flat">
-                                        <input type="text" name="daya" id="daya"
-                                            value="{{ $s->daya }}" class="form-control">
+                                        <input type="text" name="daya" id="daya" value="{{ $s->daya }}"
+                                            class="form-control">
                                     </div>
                                 </div>
                                 <div class="mb-3 col-lg-4">
