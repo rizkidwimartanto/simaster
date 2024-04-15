@@ -3,8 +3,8 @@
     --bg: #08b1f0;
     --text_color: #0c356a;
 }
-
 body {
+    height: 100%;
     padding: 0;
     margin: 0;
 }
@@ -14,7 +14,7 @@ header.navbar-expand-md {
 #map {
     position: relative;
     bottom: 68px;
-    height: 700px;
+    height: 90%;
     z-index: 0;
 }
 
