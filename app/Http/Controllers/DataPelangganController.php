@@ -70,7 +70,7 @@ class DataPelangganController extends Controller
         $message = [
             'required' => ':attribute harus diisi',
         ];
-        $request->validate([
+        $validateData = $request->validate([
             'idpel' => 'required',
             'nama' => 'required',
             'alamat' => 'required',
@@ -86,8 +86,8 @@ class DataPelangganController extends Controller
             'penyulang' => 'required',
             'nama_section' => 'required',
         ], $message);
-        $update_pelanggan = DataPelangganModel::find($id);
-        $update_pelanggan->update($request->all());
+        $update_pelanggan = DataPelangganModel::findOrFail($id);
+        $update_pelanggan->update($validateData);
         Session::flash('success_edit_pelanggan', 'Pelanggan berhasil diedit');
         return redirect('/updating');
     }

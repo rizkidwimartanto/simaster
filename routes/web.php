@@ -48,7 +48,7 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
     Route::post('/updating/import_excel', 'import_excel');
     Route::post('/updating/import_excel_trafo', 'import_excel_trafo');
-    Route::post('/updating/edit_pelanggan/$1', 'edit_pelanggan');
+    Route::post('/updating/edit_pelanggan/{id}', 'edit_pelanggan');
     Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
 });
 Route::controller(EntriPadamController::class)->group(function () {
