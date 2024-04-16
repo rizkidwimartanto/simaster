@@ -22,7 +22,7 @@
                     <h3> {{ session('error_nyala') }}</h3>
                 </div>
             @endif
-            <div class="card p-3">
+            <div class="card border border-info p-3">
                 <h2>Data Jaringan Padam Saat Ini</h2>
                 <form action="/transaksipadam/edit_status_padam" method="post">
                     @csrf
@@ -135,7 +135,7 @@
                     </table>
                 </form>
             </div>
-            <div class="card p-3 mb-3 mt-3">
+            <div class="card border border-info p-3 mb-3 mt-3">
                 <h2>Daftar Pelanggan Padam Saat Ini</h2>
                 <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_rekap_pelanggan"
                     style="width: 100%">

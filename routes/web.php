@@ -49,7 +49,9 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::post('/updating/import_excel', 'import_excel');
     Route::post('/updating/import_excel_trafo', 'import_excel_trafo');
     Route::post('/updating/edit_pelanggan/{id}', 'edit_pelanggan');
+    Route::post('/updating/edit_trafo/{id}', 'edit_trafo');
     Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
+    Route::get('/updating/hapus_trafo', 'hapusTrafo');
 });
 Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/petapadam', 'petapadam')->middleware('auth');

@@ -8,7 +8,7 @@
             </div>
         @endif
         <div class="col-lg-12">
-            <div class="card p-3 mt-4">
+            <div class="card border border-info p-3 mt-4">
                 <h2>Form Entri Padam </h2>
                 <form action="/entripadam/insertentripadam" method="post" id="entriPadamForm">
                     @csrf
@@ -97,6 +97,7 @@
                         @enderror
                     </div>
                     <input type="hidden" name="status" id="status" value="Padam">
+                    <input type="hidden" name="status_wa" id="status_wa" value="Sedang Mengirim">
                     <div class="mb-3">
                         <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-plus fa-lg"
                                 style="margin-right: 5px;"></i>Entri Padam</button>

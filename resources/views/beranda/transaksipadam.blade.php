@@ -21,7 +21,7 @@
                 <h3>{{ session('error_nyala') }}</h3>
             </div>
         @endif
-        <div class="card p-3 mb-3">
+        <div class="card border border-info p-3 mb-3">
             <h2>Jumlah Kali Padam</h2>
             <a href="/transaksipadam/export_kali_padam" class="btn btn-warning mb-3 col-lg-2"><i
                     class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
@@ -53,7 +53,7 @@
             </table>
         </div>
         <div class="col-lg-12">
-            <div class="card p-3 mt-4">
+            <div class="card border border-info p-3 mt-4">
                 <h2>Rekap Data Padam</h2>
                 <table class="table table-vcenter table-bordered table-hover table-info" id="tabel_data_menyala"
                     style="width: 100%">
