@@ -54,9 +54,9 @@
                 {{ csrf_field() }}
                 <div class="form-label fs-2">Upload File Pelanggan</div>
                 <input type="file" name="file" class="form-control" required />
-                <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i class="fa-solid fa-upload fa-lg"
+                <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-3"><i class="fa-solid fa-upload fa-lg"
                         style="margin-right: 5px"></i>Import Excel Pelanggan</button>
-                <a href="/updating/export_excel_pelanggan" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
+                <a href="/updating/export_excel_pelanggan" class="btn btn-warning mt-3 mb-3 col-lg-3"><i
                         class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel Pelanggan</a>
             </form>
             <form action="/updating/hapus_pelanggan" method="get">
@@ -378,11 +378,16 @@
                                         <div class="input-group input-group-flat">
                                             <select name="unitulp" id="unitulp"
                                                 class="form-control @error('unitulp') is-invalid @enderror">
-                                                <option value="52550" {{$s->unitulp == 52550 ? 'selected' : ''}}>UP3 Demak</option>
-                                                <option value="52551" {{$s->unitulp == 52551 ? 'selected' : ''}}>ULP Demak</option>
-                                                <option value="52552" {{$s->unitulp == 52552 ? 'selected' : ''}}>ULP Tegowanu</option>
-                                                <option value="52553" {{$s->unitulp == 52553 ? 'selected' : ''}}>ULP Purwodadi</option>
-                                                <option value="52554" {{$s->unitulp == 52554 ? 'selected' : ''}}>ULP Wirosari</option>
+                                                <option value="52550" {{ $s->unitulp == 52550 ? 'selected' : '' }}>UP3
+                                                    Demak</option>
+                                                <option value="52551" {{ $s->unitulp == 52551 ? 'selected' : '' }}>ULP
+                                                    Demak</option>
+                                                <option value="52552" {{ $s->unitulp == 52552 ? 'selected' : '' }}>ULP
+                                                    Tegowanu</option>
+                                                <option value="52553" {{ $s->unitulp == 52553 ? 'selected' : '' }}>ULP
+                                                    Purwodadi</option>
+                                                <option value="52554" {{ $s->unitulp == 52554 ? 'selected' : '' }}>ULP
+                                                    Wirosari</option>
                                             </select>
                                             @error('unitulp')
                                                 <div class="invalid-feedback">
@@ -743,17 +748,21 @@
                                     <label class="form-label">Unit Layanan</label>
                                     <div class="input-group input-group-flat">
                                         <select name="unit_layanan" id="unit_layanan"
-                                        class="form-control @error('unit_layanan') is-invalid @enderror">
-                                        <option value="Demak" {{$s->unit_layanan == 'Demak' ? 'selected' : ''}}>Demak</option>
-                                        <option value="Tegowanu" {{$s->unit_layanan == 'Tegowanu' ? 'selected' : ''}}>Tegowanu</option>
-                                        <option value="Purwodadi" {{$s->unit_layanan == 'Purwodadi' ? 'selected' : ''}}>Purwodadi</option>
-                                        <option value="Wirosari" {{$s->unit_layanan == 'Wirosari' ? 'selected' : ''}}>Wirosari</option>
-                                    </select>
-                                    @error('unit_layanan')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                            class="form-control @error('unit_layanan') is-invalid @enderror">
+                                            <option value="Demak" {{ $s->unit_layanan == 'Demak' ? 'selected' : '' }}>
+                                                Demak</option>
+                                            <option value="Tegowanu"
+                                                {{ $s->unit_layanan == 'Tegowanu' ? 'selected' : '' }}>Tegowanu</option>
+                                            <option value="Purwodadi"
+                                                {{ $s->unit_layanan == 'Purwodadi' ? 'selected' : '' }}>Purwodadi</option>
+                                            <option value="Wirosari"
+                                                {{ $s->unit_layanan == 'Wirosari' ? 'selected' : '' }}>Wirosari</option>
+                                        </select>
+                                        @error('unit_layanan')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="mb-3 col-lg-4">
@@ -773,8 +782,8 @@
                                 <div class="mb-3 col-lg-4">
                                     <label class="form-label">Daya</label>
                                     <div class="input-group input-group-flat">
-                                        <input type="text" name="daya" id="daya" value="{{ $s->daya }}"
-                                            class="form-control">
+                                        <input type="text" name="daya" id="daya"
+                                            value="{{ $s->daya }}" class="form-control">
                                     </div>
                                 </div>
                                 <div class="mb-3 col-lg-4">

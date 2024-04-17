@@ -140,8 +140,8 @@
             filteredDataPeta.forEach(function(padam) {
                 var iconPadam = L.icon({
                     iconUrl: 'assets/img/lokasi_merah.png',
-                    iconSize: [40, 40],
-                    iconAnchor: [40, 40],
+                    iconSize: [20, 20],
+                    iconAnchor: [20, 20],
                 });
                 var marker = L.marker([padam.latitude, padam.longtitude], {
                     icon: iconPadam
@@ -157,8 +157,8 @@
         padams.forEach(function(padam) {
             var iconPadam = L.icon({
                 iconUrl: 'assets/img/lokasi_merah.png',
-                iconSize: [40, 40],
-                iconAnchor: [40, 40],
+                iconSize: [20, 20],
+                iconAnchor: [20, 20],
             });
             var marker = L.marker([padam.latitude, padam.longtitude], {
                 icon: iconPadam

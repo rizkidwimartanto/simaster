@@ -23,146 +23,54 @@ class DataPelangganController extends Controller
 {
     public function index()
     {
-        $data_peta = DB::table('data_pelanggan')
-            ->select('data_pelanggan.id', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.maps', 'data_pelanggan.latitude', 'data_pelanggan.longtitude', 'data_pelanggan.nama_section', 'data_pelanggan.nohp_stakeholder', 'data_pelanggan.unitulp')
-            ->get();
-        $data_padam = DB::table('entri_padam')
-            ->select('entri_padam.status', 'entri_padam.section')
-            ->get();
         $data = [
             'title' => 'Peta Pelanggan',
-            'data_padam' => $data_padam,
-            'data_peta' => $data_peta,
+            'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
+            'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
             'data_unitulp' => DataPelangganModel::pluck('unitulp')
         ];
         return view('beranda/index', $data);
     }
+
     public function entri_padam()
     {
-        $data_penyulang = SectionModel::pluck('penyulang');
+        $data_penyulang = SectionModel::pluck('penyulang')->unique();
+        $penyulangs = $data_penyulang->mapWithKeys(function ($penyulang) {
+            return [$penyulang => SectionModel::where('penyulang', $penyulang)->pluck('id_apkt')];
+        });
 
-        $penyulangs = [];
-        foreach ($data_penyulang as $penyulang) {
-            $penyulangs[$penyulang] = SectionModel::where('penyulang', $penyulang)->pluck('id_apkt');
-            DB::table('entri_padam')
-            ->update(['status_wa' => 'Sudah Terkirim']);
-        }
+        DB::table('entri_padam')->update(['status_wa' => 'Sudah Terkirim']);
+
         $data = [
             'title' => 'Entri Padam',
             'section' => $penyulangs,
             'nama_pelanggan' => DataPelangganModel::pluck('nama'),
-            'data_penyulang' => SectionModel::pluck('penyulang'),
+            'data_penyulang' => $data_penyulang,
             'data_section' => PenyulangModel::all(),
         ];
         return view('beranda/entripadam', $data);
     }
+
     public function updating()
     {
-        $data_pelanggan = DataPelangganModel::all();
-        $data_trafo = TrafoModel::all();
-
         $data = [
             'title' => 'Updating',
-            'data_pelanggan' => $data_pelanggan,
-            'data_trafo' => $data_trafo,
+            'data_pelanggan' => DataPelangganModel::all(),
+            'data_trafo' => TrafoModel::all(),
         ];
         return view('beranda/updating', $data);
     }
     public function edit_pelanggan(Request $request, $id)
     {
-        // $message = [
-        //     'required' => ':attribute harus diisi',
-        // ];
-        // $validasiPelanggan = $request->validate([
-        //     'nama' => 'required',
-        //     'alamat' => 'required',
-        //     'nohp_stakeholder' => 'required',
-        //     'nohp_piclapangan' => 'required',
-        //     'latitude' => 'required',
-        //     'longtitude' => 'required',
-        //     'tarif' => 'required',
-        //     'daya' => 'required',
-        //     'kogol' => 'required',
-        //     'fakmkwh' => 'required',
-        //     'rpbp' => 'required',
-        //     'rpujl' => 'required',
-        //     'nomor_kwh' => 'required',
-        //     'penyulang' => 'required',
-        //     'nama_section' => 'required',
-        // ], $message);
-        // if ($validasiPelanggan) {
-            DataPelangganModel::find($id)
-            ->update([
-                'nama' => $request->input('nama'),
-                'alamat' => $request->input('alamat'),
-                'nohp_stakeholder' => $request->input('nohp_stakeholder'),
-                'nohp_piclapangan' => $request->input('nohp_piclapangan'),
-                'latitude' => $request->input('latitude'),
-                'longtitude' => $request->input('longtitude'),
-                'unitulp' => $request->input('unitulp'),
-                'tarif' => $request->input('tarif'),
-                'daya' => $request->input('daya'),
-                'kogol' => $request->input('kogol'),
-                'fakmkwh' => $request->input('fakmkwh'),
-                'rpbp' => $request->input('rpbp'),
-                'rpujl' => $request->input('rpujl'),
-                'nomor_kwh' => $request->input('nomor_kwh'),
-                'penyulang' => $request->input('penyulang'),
-                'nama_section' => $request->input('nama_section'),
-                // $validasiPelanggan
-            ]);
-            Session::flash('success_edit', 'Data berhasil diedit');
-            return redirect('/updating');
-        // } else {
-        //     Session::flash('error_edit', 'Pelanggan berhasil gagal');
-        //     return redirect('/updating');
-        // }
+        DataPelangganModel::find($id)->update($request->all());
+        Session::flash('success_edit', 'Data berhasil diedit');
+        return redirect('/updating');
     }
     public function edit_trafo(Request $request, $id)
     {
-        // $message = [
-        //     'required' => ':attribute harus diisi',
-        // ];
-        // $validasiPelanggan = $request->validate([
-        //     'nama' => 'required',
-        //     'alamat' => 'required',
-        //     'nohp_stakeholder' => 'required',
-        //     'nohp_piclapangan' => 'required',
-        //     'latitude' => 'required',
-        //     'longtitude' => 'required',
-        //     'tarif' => 'required',
-        //     'daya' => 'required',
-        //     'kogol' => 'required',
-        //     'fakmkwh' => 'required',
-        //     'rpbp' => 'required',
-        //     'rpujl' => 'required',
-        //     'nomor_kwh' => 'required',
-        //     'penyulang' => 'required',
-        //     'nama_section' => 'required',
-        // ], $message);
-        // if ($validasiPelanggan) {
-            TrafoModel::find($id)
-            ->update([
-                'unit_layanan' => $request->input('unit_layanan'),
-                'penyulang' => $request->input('penyulang'),
-                'no_tiang' => $request->input('no_tiang'),
-                'daya' => $request->input('daya'),
-                'merk' => $request->input('merk'),
-                'beban_X1' => $request->input('beban_X1'),
-                'beban_X2' => $request->input('beban_X2'),
-                'beban_Xo' => $request->input('beban_Xo'),
-                'lokasi' => $request->input('lokasi'),
-                'penyebab' => $request->input('penyebab'),
-                'no_pk_apkt' => $request->input('no_pk_apkt'),
-                'bebanA' => $request->input('bebanA'),
-                // $validasiPelanggan
-            ]);
-            Session::flash('success_edit', 'Data berhasil diedit');
-            return redirect('/updating');
-        // } else {
-        //     Session::flash('error_edit', 'Pelanggan berhasil gagal');
-        //     return redirect('/updating');
-        // }
+        TrafoModel::find($id)->update($request->all());
+        Session::flash('success_edit', 'Data berhasil diedit');
+        return redirect('/updating');
     }
     public function export_excel_pelanggan()
     {

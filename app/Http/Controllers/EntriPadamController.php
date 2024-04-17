@@ -109,7 +109,6 @@ class EntriPadamController extends Controller
                 ]);
             }
 
-            // Ambil data pelanggan dan kirim pesan setelah entri berhasil dimasukkan
             $rekap_pelanggan = DB::table('entri_padam')
                 ->leftJoin('data_pelanggan', 'entri_padam.section', '=', 'data_pelanggan.nama_section')
                 ->select('data_pelanggan.idpel', 'data_pelanggan.nama', 'data_pelanggan.alamat', 'data_pelanggan.nohp_stakeholder', 'data_pelanggan.unitulp', 'entri_padam.penyebab_padam', 'entri_padam.keterangan', 'entri_padam.section', 'entri_padam.penyulang')
@@ -186,7 +185,6 @@ class EntriPadamController extends Controller
             // $response = curl_exec($curl);
             // curl_close($curl);
 
-            // Flash message sesuai dengan keberhasilan memasukkan entri
             Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
             return redirect('/entripadam');
         } elseif ($request->penyebab_padam == 'Instalasi' && $request->has('nama_pelanggan')) {

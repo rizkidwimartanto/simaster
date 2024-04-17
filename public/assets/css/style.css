@@ -61,7 +61,6 @@ select.pilih_peta {
 
 #suggestionList li:last-child {
     border-bottom: none;
-    /* Hapus garis pemisah pada item terakhir */
 }
 
 #suggestionList .selected {
