@@ -22,15 +22,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::controller(AuthenticatedSessionController::class)->group(function(){
-//     Route::get('/', 'create')->name('login');
-//     Route::post('/store', 'store');
-//     Route::get('/destroy', 'destroy');
-// });
-// Route::controller(RegisteredUserController::class)->group(function(){
-//     Route::get('/create', 'create')->name('register');
-//     Route::get('/store', 'store')->name('store');
-// });
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');
@@ -42,7 +33,6 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth');
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
-    Route::get('/kirimwhatsapp', 'sendWhatsAppMessage');
     Route::get('/updating', 'updating')->middleware('auth');
     Route::get('/updating/export_excel_pelanggan', 'export_excel_pelanggan');
     Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
