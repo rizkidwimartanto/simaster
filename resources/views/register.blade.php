@@ -44,16 +44,6 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label class="form-label required">No Telepon</label>
-                        <input type="text" name="no_telepon" id="no_telepon" value="{{ old('no_telepon') }}" inputmode="numeric" pattern="[0-9]*"
-                            class="form-control @error('no_telepon') is-invalid @enderror" placeholder="Enter No Telepon">
-                        @error('no_telepon')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label required">Password</label>
                         <input type="password" name="password" id="password"
                             class="form-control @error('password') is-invalid @enderror" placeholder="Password"
