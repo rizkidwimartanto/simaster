@@ -16,9 +16,19 @@
                 <h3> {{ session('success_edit') }}</h3>
             </div>
         @endif
+        @if (session('success_tambah_unit'))
+            <div class="alert alert-success">
+                <h3> {{ session('success_tambah_unit') }}</h3>
+            </div>
+        @endif
         @if (session('error_import'))
             <div class="alert alert-danger">
                 <h3>{{ session('error_import') }}</h3>
+            </div>
+        @endif
+        @if (session('error_tambah_unit'))
+            <div class="alert alert-danger">
+                <h3>{{ session('error_tambah_unit') }}</h3>
             </div>
         @endif
         @if (session('validate_file'))
@@ -57,9 +67,15 @@
                                     <input type="file" name="file_penyulang" class="form-control" required />
                                     <div class="form-label mt-2 fs-2">Upload File Section</div>
                                     <input type="file" name="file_section" class="form-control" required />
-                                    <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-2"><i
+                                    <button type="submit" class="btn btn-primary mt-1 mb-3 col-lg-3"><i
                                             class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import
                                         Excel</button>
+                                    <a href="file_penyulang/template_penyulang/penyulang dummy.xlsx"
+                                        class="btn btn-success mt-1 mb-3 col-lg-3"><i class="fa-solid fa-download fa-lg"
+                                            style="margin-right: 5px"></i>Template Excel Penyulang</a>
+                                    <a href="file_section/template_section/section dummyy.xlsx"
+                                        class="btn btn-secondary mt-1 mb-3 col-lg-3"><i class="fa-solid fa-download fa-lg"
+                                            style="margin-right: 5px"></i>Template Excel Section</a>
                                 </form>
                             </div>
                         </div>
@@ -82,13 +98,15 @@
                                 {{ csrf_field() }}
                                 <div class="form-label fs-2">Upload File Pelanggan</div>
                                 <input type="file" name="file" class="form-control" required />
-                                <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-3"><i
+                                <button type="submit" class="btn btn-primary mt-1 mb-3 col-lg-3"><i
                                         class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import Excel
-                                    Pelanggan</button>
-                                <a href="/updating/export_excel_pelanggan"
-                                    class="btn btn-warning mt-3 mb-3 col-lg-3"><i class="fa-solid fa-download fa-lg"
-                                        style="margin-right: 5px"></i>Export Excel
-                                    Pelanggan</a>
+                                </button>
+                                <a href="/updating/export_excel_pelanggan" class="btn btn-warning mt-1 mb-3 col-lg-3"><i
+                                        class="fa-solid fa-file-export fa-lg" style="margin-right: 5px"></i>Export Excel
+                                </a>
+                                <a href="file_pelanggan/template_pelanggan/Pelanggan TM.xlsx"
+                                    class="btn btn-success mt-1 mb-3 col-lg-3"><i class="fa-solid fa-download fa-lg"
+                                        style="margin-right: 5px"></i>Template Excel</a>
                             </form>
                             <form action="/updating/hapus_pelanggan" method="get">
                                 @csrf
@@ -126,8 +144,7 @@
                                                                 Cancel
                                                             </a></div>
                                                         <div class="col"><button type="submit"
-                                                                class="btn btn-danger w-100"
-                                                                data-bs-dismiss="modal">
+                                                                class="btn btn-danger w-100" data-bs-dismiss="modal">
                                                                 Delete
                                                             </button></div>
                                                     </div>
@@ -141,8 +158,8 @@
                                         id="tabel_data_pelanggan" style="width: 100%">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
-                                                <th>
+                                                <th style="width: 5%">No</th>
+                                                <th style="width: 5%">
                                                     <div class="d-flex justify-content-center">
                                                         <div class="form-check">
                                                             <input class="form-check-input mt-2"
@@ -151,19 +168,19 @@
                                                         </div>
                                                     </div>
                                                 </th>
-                                                <th>ID Pelanggan</th>
-                                                <th>Nama</th>
-                                                <th>Alamat</th>
-                                                <th>Maps</th>
-                                                <th>Aksi</th>
+                                                <th style="width: 15%">ID Pelanggan</th>
+                                                <th style="width: 25%">Nama</th>
+                                                <th style="width: 35%">Alamat</th>
+                                                <th style="width: 15%">Maps</th>
+                                                <th style="width: 5%">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php $i = 1; ?>
                                             @foreach ($data_pelanggan as $s)
                                                 <tr>
-                                                    <td>{{ $i++ }}</td>
-                                                    <td>
+                                                    <td style="width: 5%">{{ $i++ }}</td>
+                                                    <td style="width: 5%">
                                                         <div class="d-flex justify-content-center">
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox"
@@ -172,12 +189,12 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{ $s->idpel }}</td>
-                                                    <td>{{ $s->nama }}</td>
-                                                    <td>{{ $s->alamat }}</td>
-                                                    <td><a href="{{ $s->maps }}"
+                                                    <td style="width: 15%">{{ $s->idpel }}</td>
+                                                    <td style="width: 25%">{{ $s->nama }}</td>
+                                                    <td style="width: 35%">{{ $s->alamat }}</td>
+                                                    <td style="width: 15%"><a href="{{ $s->maps }}"
                                                             target="_blank">{{ $s->maps }}</a></td>
-                                                    <td>
+                                                    <td style="width: 5%">
                                                         <a href="#" data-bs-target="#{{ $s->id }}"
                                                             data-bs-toggle="modal">
                                                             <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
@@ -189,7 +206,7 @@
                             </form>
                             <div class="modal modal-blur fade" id="{{ $s->id }}" tabindex="-1" role="dialog"
                                 aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title">{{ $s->nama }}</h5>
@@ -330,7 +347,7 @@
                             </div>
                             <div class="modal modal-blur fade" id="edit-{{ $s->id }}" tabindex="-1"
                                 role="dialog" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
                                     <form action="/updating/edit_pelanggan/{{ $s->id }}" method="post">
                                         @csrf
                                         <div class="modal-content">
@@ -614,11 +631,11 @@
                             {{ csrf_field() }}
                             <div class="form-label fs-2">Upload File Trafo</div>
                             <input type="file" name="file" class="form-control" required />
-                            <button type="submit" class="btn btn-primary mt-3 mb-3 col-lg-4"><i
-                                    class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import Excel
-                                Trafo</button>
-                            {{-- <a href="/updating/export_excel_trafo" class="btn btn-warning mt-3 mb-3 col-lg-2"><i
-                                        class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel Trafo</a> --}}
+                            <button type="submit" class="btn btn-primary mt-1 mb-3 col-lg-3"><i
+                                    class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import Excel</button>
+                            <a href="file_trafo/template_trafo/Data Trafo.xlsx"
+                                class="btn btn-success mt-1 mb-3 col-lg-3"><i class="fa-solid fa-download fa-lg"
+                                    style="margin-right: 5px"></i>Template Excel</a>
                         </form>
                         <form action="/updating/hapus_trafo" method="get">
                             @csrf
@@ -717,7 +734,7 @@
                         </form>
                         <div class="modal modal-blur fade" id="trafo-{{ $s->id }}" tabindex="-1" role="dialog"
                             aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title">{{ $s->penyulang }}</h5>
@@ -732,6 +749,7 @@
                                                     <input value="{{ $s->unit_layanan }}" class="form-control" readonly>
                                                 </div>
                                             </div>
+                                            <!-- Additional fields -->
                                             <div class="mb-3 col-lg-4">
                                                 <label class="form-label">Penyulang</label>
                                                 <div class="input-group input-group-flat">
@@ -780,161 +798,151 @@
                                                     <input value="{{ $s->lokasi }}" class="form-control" readonly>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-lg-4">
-                                                <label class="form-label">penyebab</label>
+                                            <div class="mb-3 col-lg-12">
+                                                <label class="form-label">Koordinat</label>
                                                 <div class="input-group input-group-flat">
-                                                    <input value="{{ $s->penyebab }}" class="form-control" readonly>
+                                                    <input value="{{ $s->latitude }}{{ $s->longitude }}"
+                                                        class="form-control" readonly>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-lg-4">
-                                                <label class="form-label">No APKT</label>
+                                            <div class="mb-3 col-lg-12">
+                                                <label class="form-label">Keterangan</label>
                                                 <div class="input-group input-group-flat">
-                                                    <input value="{{ $s->no_pk_apkt }}" class="form-control" readonly>
+                                                    <textarea rows="3" class="form-control" readonly>{{ $s->keterangan }}</textarea>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-lg-4">
-                                                <label class="form-label">Beban (A)</label>
+                                            <div class="mb-3 col-lg-12">
+                                                <label class="form-label">Foto</label>
                                                 <div class="input-group input-group-flat">
-                                                    <input value="{{ $s->bebanA }}" class="form-control" readonly>
+                                                    <img src="{{ asset('storage/trafo/' . $s->foto) }}"
+                                                        class="form-control"
+                                                        style="height: 400px; object-fit:cover; overflow:hidden">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger me-auto"
-                                            data-bs-dismiss="modal">Close</button>
+                                        <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                                            Cancel
+                                        </a>
+                                        <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                                            Confirm
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal modal-blur fade" id="trafo-edit-{{ $s->id }}" tabindex="-1"
                             role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
-                                <form action="/updating/edit_trafo/{{ $s->id }}" method="post">
-                                    @csrf
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Edit Trafo</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
+                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">{{ $s->penyulang }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="/updating/edit_trafo/{{ $s->id }}" method="post"
+                                            enctype="multipart/form-data">
+                                            @csrf
+                                            @method('put')
                                             <div class="row">
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Unit Layanan</label>
                                                     <div class="input-group input-group-flat">
-                                                        <select name="unit_layanan" id="unit_layanan"
-                                                            class="form-control @error('unit_layanan') is-invalid @enderror">
-                                                            <option value="Demak"
-                                                                {{ $s->unit_layanan == 'Demak' ? 'selected' : '' }}>
-                                                                Demak</option>
-                                                            <option value="Tegowanu"
-                                                                {{ $s->unit_layanan == 'Tegowanu' ? 'selected' : '' }}>
-                                                                Tegowanu
-                                                            </option>
-                                                            <option value="Purwodadi"
-                                                                {{ $s->unit_layanan == 'Purwodadi' ? 'selected' : '' }}>
-                                                                Purwodadi
-                                                            </option>
-                                                            <option value="Wirosari"
-                                                                {{ $s->unit_layanan == 'Wirosari' ? 'selected' : '' }}>
-                                                                Wirosari
-                                                            </option>
-                                                        </select>
-                                                        @error('unit_layanan')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
+                                                        <input name="unit_layanan" value="{{ $s->unit_layanan }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Penyulang</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="penyulang" id="penyulang"
-                                                            value="{{ $s->penyulang }}" class="form-control">
+                                                        <input name="penyulang" value="{{ $s->penyulang }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Nomor Tiang</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="no_tiang" id="no_tiang"
-                                                            value="{{ $s->no_tiang }}" class="form-control">
+                                                        <input name="no_tiang" value="{{ $s->no_tiang }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Daya</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="daya" id="daya"
-                                                            value="{{ $s->daya }}" class="form-control">
+                                                        <input name="daya" value="{{ $s->daya }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Merk</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="merk" id="merk"
-                                                            value="{{ $s->merk }}" class="form-control">
+                                                        <input name="merk" value="{{ $s->merk }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Beban X1</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="beban_X1" id="beban_X1"
-                                                            value="{{ $s->beban_X1 }}" class="form-control">
+                                                        <input name="beban_X1" value="{{ $s->beban_X1 }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Beban X2</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="beban_X2" id="beban_X2"
-                                                            value="{{ $s->beban_X2 }}" class="form-control">
+                                                        <input name="beban_X2" value="{{ $s->beban_X2 }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Beban Xo</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="beban_Xo" id="beban_Xo"
-                                                            value="{{ $s->beban_Xo }}" class="form-control">
+                                                        <input name="beban_Xo" value="{{ $s->beban_Xo }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-lg-4">
                                                     <label class="form-label">Lokasi</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="lokasi" id="lokasi"
-                                                            value="{{ $s->lokasi }}" class="form-control">
+                                                        <input name="lokasi" value="{{ $s->lokasi }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3 col-lg-4">
-                                                    <label class="form-label">penyebab</label>
+                                                <div class="mb-3 col-lg-12">
+                                                    <label class="form-label">Koordinat</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="penyebab" id="penyebab"
-                                                            value="{{ $s->penyebab }}" class="form-control">
+                                                        <input name="koordinat"
+                                                            value="{{ $s->latitude }}{{ $s->longitude }}"
+                                                            class="form-control" required>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3 col-lg-4">
-                                                    <label class="form-label">No APKT</label>
+                                                <div class="mb-3 col-lg-12">
+                                                    <label class="form-label">Keterangan</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="no_pk_apkt" id="no_pk_apkt"
-                                                            value="{{ $s->no_pk_apkt }}" class="form-control">
+                                                        <textarea name="keterangan" rows="3" class="form-control" required>{{ $s->keterangan }}</textarea>
                                                     </div>
                                                 </div>
-                                                <div class="mb-3 col-lg-4">
-                                                    <label class="form-label">Beban (A)</label>
+                                                <div class="mb-3 col-lg-12">
+                                                    <label class="form-label">Foto</label>
                                                     <div class="input-group input-group-flat">
-                                                        <input type="text" name="bebanA" id="bebanA"
-                                                            value="{{ $s->bebanA }}" class="form-control">
+                                                        <input type="file" name="foto" class="form-control">
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger"
-                                                data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-info"
-                                                data-bs-dismiss="modal">Edit</button>
-                                        </div>
+                                            <div class="modal-footer">
+                                                <a href="#" class="btn btn-link link-secondary"
+                                                    data-bs-dismiss="modal">
+                                                    Cancel
+                                                </a>
+                                                <button type="submit" class="btn btn-primary ms-auto">
+                                                    Save
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                         </td>
@@ -957,13 +965,61 @@
             </h2>
             <div id="collapseDataUnit" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    <div class="row">
-                        <button type="button" class="btn btn-success mb-2 col-lg-4 col-md-6 col-sm-6">Tambah Unit</button>
-                        <button type="button" class="btn btn-warning mb-2 col-lg-4 col-md-6 col-sm-6">Edit Unit</button>
-                        <button type="button" class="btn btn-danger mb-2 col-lg-4 col-md-6 col-sm-6">Hapus Unit</button>
+                    <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                        Tambah Unit
+                    </button>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title" id="exampleModalLabel">Tambah Unit</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <form action="/updating/tambah_unit" method="post">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="mb-3">
+                                                <label class="form-label">Unit</label>
+                                                <div class="input-group input-group-flat">
+                                                    <input type="hidden" name="id_unit" id="id_unit">
+                                                    <select class="form-control" name="nama_unit" id="nama_unit">
+                                                        <option selected disabled>--- Pilih Unit---</option>
+                                                        <option value="ULP Demak">ULP Demak</option>
+                                                        <option value="ULP Tegowanu">ULP Tegowanu</option>
+                                                        <option value="ULP Purwodadi">ULP Purwodadi</option>
+                                                        <option value="ULP Wirosari">ULP Wirosari</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Nomor MULP</label>
+                                                <div class="input-group input-group-flat">
+                                                    <input class="form-control" name="nohp_mulp" id="nohp_mulp">
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Nomor TL Teknik</label>
+                                                <div class="input-group input-group-flat">
+                                                    <input class="form-control" name="nohp_tlteknik" id="nohp_tlteknik">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <table class="table table-vcenter table-bordered table-hover table-secondary"
-                        id="tabel_data_unit" style="width: 100%">
+                    <table class="table table-vcenter table-bordered table-hover table-secondary" id="tabel_data_unit"
+                        style="width: 100%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -971,16 +1027,79 @@
                                 <th>Unit</th>
                                 <th>No HP MULP</th>
                                 <th>No HP TLTeknik</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @php
+                                $no = 1;
+                            @endphp
+                            @foreach ($data_unit as $unit)
+                                <tr>
+                                    <td>{{ $no++ }}</td>
+                                    <td>{{ $unit->id_unit }}</td>
+                                    <td>{{ $unit->nama_unit }}</td>
+                                    <td>{{ $unit->nohp_mulp }}</td>
+                                    <td>{{ $unit->nohp_tlteknik }}</td>
+                                    <td>
+                                        <a style="cursor: pointer" data-bs-toggle="modal"
+                                            data-bs-target="#modalEditUnit{{ $unit->id }}">
+                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                        </a>
+
+                                        <div class="modal fade" id="modalEditUnit{{ $unit->id }}" tabindex="-1"
+                                            aria-labelledby="modalEditUnitLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title" id="exampleModalLabel">Edit Unit
+                                                        </h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Unit</label>
+                                                            <div class="input-group input-group-flat">
+                                                                <input type="hidden" name="id_unit" id="id_unit">
+                                                                <select class="form-control" name="nama_unit"
+                                                                    id="nama_unit">
+                                                                    <option selected disabled>--- Pilih Unit---</option>
+                                                                    <option value="ULP Demak" {{($unit->nama_unit == 'ULP Demak') ? 'selected' : ''}}>ULP Demak</option>
+                                                                    <option value="ULP Tegowanu" {{($unit->nama_unit == 'ULP Tegowanu') ? 'selected' : ''}}>ULP Tegowanu</option>
+                                                                    <option value="ULP Purwodadi" {{($unit->nama_unit == 'ULP Purwodadi') ? 'selected' : ''}}>ULP Purwodadi
+                                                                    </option>
+                                                                    <option value="ULP Wirosari" {{($unit->nama_unit == 'ULP Wirosari') ? 'selected' : ''}}>ULP Wirosari</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Nomor MULP</label>
+                                                            <div class="input-group input-group-flat">
+                                                                <input class="form-control" name="nohp_mulp"
+                                                                    id="nohp_mulp" value="{{ $unit->nohp_mulp }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Nomor TL Teknik</label>
+                                                            <div class="input-group input-group-flat">
+                                                                <input class="form-control" name="nohp_tlteknik"
+                                                                    id="nohp_tlteknik" value="{{ $unit->nohp_tlteknik }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -996,7 +1115,8 @@
                 </button>
             </h2>
             <div id="collapseWANotif" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
+                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate
+                    the
                     <code>.accordion-flush</code> class. This is the first item's accordion body.
                 </div>
             </div>
@@ -1068,5 +1188,24 @@
                 });
             });
         });
+    </script>
+    <script>
+        document.getElementById('nama_unit').addEventListener('change', function() {
+            var selectedUnit = this.value;
+            var id_unit = document.getElementById('id_unit');
+
+            if (selectedUnit == 'ULP Demak') {
+                id_unit.value = ' 52550'
+            }
+            if (selectedUnit == 'ULP Tegowanu') {
+                id_unit.value = ' 52551'
+            }
+            if (selectedUnit == 'ULP Purwodadi') {
+                id_unit.value = ' 52552'
+            }
+            if (selectedUnit == 'ULP Wirosari') {
+                id_unit.value = ' 52553'
+            }
+        })
     </script>
 @endsection

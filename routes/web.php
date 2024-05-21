@@ -42,6 +42,7 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::post('/updating/edit_trafo/{id}', 'edit_trafo');
     Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating/hapus_trafo', 'hapusTrafo');
+    Route::post('/updating/tambah_unit', 'tambah_unit');
 });
 Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/petapadam', 'petapadam')->middleware('auth');

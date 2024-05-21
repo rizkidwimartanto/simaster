@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary p-2" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-2 sticky-top" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/beranda" style="font-size: 15px;"> SIMPELTAS (Sistem Monitoring Pelanggan Prioritas)
         </a>

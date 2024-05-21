@@ -15,7 +15,10 @@ class Unit extends Migration
     {
        Schema::create('unit', function (Blueprint $table){
         $table->id();
-        $table->text('penyebab_padam')->nullable();
+        $table->text('id_unit')->nullable();
+        $table->text('nama_unit')->nullable();
+        $table->text('nohp_mulp')->nullable();
+        $table->text('nohp_tlteknik')->nullable();
         $table->timestamps(true);
        });
     }

@@ -14,6 +14,7 @@ use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
 use App\Models\SectionModel;
 use App\Models\TrafoModel;
+use App\Models\UnitModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
@@ -57,9 +58,34 @@ class DataPelangganController extends Controller
             'title' => 'Updating',
             'data_pelanggan' => DataPelangganModel::all(),
             'data_trafo' => TrafoModel::all(),
+            'data_unit' => UnitModel::all(),
         ];
         return view('beranda/updating', $data);
     }
+    public function tambah_unit(Request $request)
+    {
+        $message = ['required' => ':attribute harus diisi'];
+        $validateData = $request->validate([
+            'nama_unit' => 'required',
+            'nohp_mulp' => 'required',
+            'nohp_tlteknik' => 'required',
+        ], $message);
+
+        if ($validateData) {
+            UnitModel::create([
+                'id_unit' => $request->input('id_unit'),  // Assuming this is required. Normally, this should be auto-incremented.
+                'nama_unit' => $request->input('nama_unit'),
+                'nohp_mulp' => $request->input('nohp_mulp'),
+                'nohp_tlteknik' => $request->input('nohp_tlteknik'),
+            ]);
+
+            Session::flash('success_tambah_unit', 'Unit berhasil ditambahkan');
+        } else {
+            Session::flash('error_tambah_unit', 'Unit gagal ditambahkan');
+        }
+        return redirect('/updating');
+    }
+
     public function edit_pelanggan(Request $request, $id)
     {
         DataPelangganModel::find($id)->update($request->all());
@@ -128,9 +154,9 @@ class DataPelangganController extends Controller
                 $trafo = TrafoModel::find($hapus);
                 $trafo->delete();
             }
-            Session::flash('success_hapus', 'Data berhasil dihapus');
+            Session::flash('success_hapus', 'Data berhasil dihapus bro');
         } else {
-            Session::flash('error_hapus', 'Data gagal dihapus');
+            Session::flash('error_hapus', 'Data gagal dihapus bro');
         }
         return redirect('/updating');
     }
