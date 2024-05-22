@@ -15,6 +15,7 @@ use App\Models\PenyulangModel;
 use App\Models\SectionModel;
 use App\Models\TrafoModel;
 use App\Models\UnitModel;
+use App\Models\WANotifModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
@@ -59,33 +60,11 @@ class DataPelangganController extends Controller
             'data_pelanggan' => DataPelangganModel::all(),
             'data_trafo' => TrafoModel::all(),
             'data_unit' => UnitModel::all(),
+            'data_wanotif' => WANotifModel::all(),
         ];
         return view('beranda/updating', $data);
     }
-    public function tambah_unit(Request $request)
-    {
-        $message = ['required' => ':attribute harus diisi'];
-        $validateData = $request->validate([
-            'nama_unit' => 'required',
-            'nohp_mulp' => 'required',
-            'nohp_tlteknik' => 'required',
-        ], $message);
-
-        if ($validateData) {
-            UnitModel::create([
-                'id_unit' => $request->input('id_unit'),  // Assuming this is required. Normally, this should be auto-incremented.
-                'nama_unit' => $request->input('nama_unit'),
-                'nohp_mulp' => $request->input('nohp_mulp'),
-                'nohp_tlteknik' => $request->input('nohp_tlteknik'),
-            ]);
-
-            Session::flash('success_tambah_unit', 'Unit berhasil ditambahkan');
-        } else {
-            Session::flash('error_tambah_unit', 'Unit gagal ditambahkan');
-        }
-        return redirect('/updating');
-    }
-
+    
     public function edit_pelanggan(Request $request, $id)
     {
         DataPelangganModel::find($id)->update($request->all());
@@ -117,7 +96,7 @@ class DataPelangganController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_pelanggan', $nama_file);
         Excel::import(new DataPelangganImport, public_path('/file_pelanggan/' . $nama_file));
-
+        
         return redirect('/updating');
     }
     public function import_excel_trafo(Request $request)
@@ -129,7 +108,7 @@ class DataPelangganController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_trafo', $nama_file);
         Excel::import(new TrafoImport, public_path('/file_trafo/' . $nama_file));
-
+        
         return redirect('/updating');
     }
     public function hapusPelanggan(Request $request)
@@ -159,5 +138,77 @@ class DataPelangganController extends Controller
             Session::flash('error_hapus', 'Data gagal dihapus bro');
         }
         return redirect('/updating');
+    }
+    public function edit_unit(Request $request, $id)
+    {
+        $message = ['required' => ':attribute harus diisi'];
+        $validateData = $request->validate([
+            'nohp_mulp' => 'required',
+            'nohp_tlteknik' => 'required',
+        ], $message);
+        if ($validateData) {
+            $dataunit = UnitModel::find($id);
+            $dataunit->update([
+                'nohp_mulp' => $request->input('nohp_mulp'),
+                'nohp_tlteknik' => $request->input('nohp_tlteknik'),
+                $validateData
+            ]);
+            Session::flash('success_edit_unit', 'unit berhasil diedit');
+            return redirect('/updating');
+        } else {
+            Session::flash('error_edit_unit', 'unit gagal diedit');
+            return redirect('/updating');
+        }
+    }
+    public function tambah_wanotif(){
+        $data = [
+            'title' => 'Form Tambah WA Notif',
+        ];
+        return view('beranda/tambahwanotif', $data);
+    }
+    public function proses_tambah_wanotif(Request $request)
+    {
+        $message = ['required' => ':attribute harus diisi'];
+        $validateData = $request->validate([
+            'idserial' => 'required',
+            'idpel' => 'required',
+            'id_unit' => 'required',
+        ], $message);
+    
+        if ($validateData) {
+            WANotifModel::create([
+                'idserial' => $request->input('idserial'),
+                'idpel' => $request->input('idpel'),
+                'id_unit' => $request->input('id_unit'),
+            ]);
+    
+            Session::flash('success_tambah_wanotif', 'wanotif berhasil ditambahkan');
+        } else {
+            Session::flash('error_tambah_wanotif', 'wanotif gagal ditambahkan');
+        }
+        return redirect('/updating');
+    }
+    public function edit_wanotif(Request $request, $id)
+    {
+        $message = ['required' => ':attribute harus diisi'];
+        $validateData = $request->validate([
+            'idserial' => 'required',
+            'idpel' => 'required',
+            'id_unit' => 'required',
+        ], $message);
+        if ($validateData) {
+            $datawanotif = WANotifModel::find($id);
+            $datawanotif->update([
+                'idserial' => $request->input('idserial'),
+                'idpel' => $request->input('idpel'),
+                'id_unit' => $request->input('id_unit'),
+                $validateData
+            ]);
+            Session::flash('success_edit_wanotif', 'wanotif berhasil diedit');
+            return redirect('/updating');
+        } else {
+            Session::flash('error_edit_wanotif', 'wanotif gagal diedit');
+            return redirect('/updating');
+        }
     }
 }

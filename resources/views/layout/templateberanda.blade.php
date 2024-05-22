@@ -17,11 +17,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title }}</title>
     <!-- CSS files -->
-    <link href="assets_template/dist/css/tabler.min.css?1684106062" rel="stylesheet" />
-    <link href="assets_template/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet" />
-    <link href="assets_template/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet" />
-    <link href="assets_template/dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet" />
-    <link href="assets_template/dist/css/demo.min.css?1684106062" rel="stylesheet" />
+    <link href="{{asset('assets_template/dist/css/tabler.min.css?1684106062')}}" rel="stylesheet" />
+    <link href="{{asset('assets_template/dist/css/tabler-flags.min.css?1684106062')}}" rel="stylesheet" />
+    <link href="{{asset('assets_template/dist/css/tabler-payments.min.css?1684106062')}}" rel="stylesheet" />
+    <link href="{{asset('assets_template/dist/css/tabler-vendors.min.css?1684106062')}}" rel="stylesheet" />
+    <link href="{{asset('assets_template/dist/css/demo.min.css?1684106062')}}" rel="stylesheet" />
     {{-- Leaflet JS --}}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -38,8 +38,8 @@
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/leaflet-beautify-marker/dist/leaflet-beautify-marker-icon.min.css" />
     {{-- My CSS --}}
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="shortcut icon" href="assets/img/Logo_PLN.png" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="shortcut icon" href="{{asset('assets/img/Logo_PLN.png')}}" type="image/x-icon">
     <!-- DATATABLES -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
@@ -66,7 +66,7 @@
 </head>
 
 <body>
-    <script src="assets_template/dist/js/demo-theme.min.js?1684106062"></script>
+    <script src="{{asset('assets_template/dist/js/demo-theme.min.js?1684106062')}}"></script>
     @include('partials/navbar')
     @yield('content')
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -75,9 +75,9 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
     <!-- Tabler Core -->
-    <script src="assets_template/dist/js/tabler.min.js?1684106062" defer></script>
-    <script src="assets_template/dist/js/demo.min.js?1684106062" defer></script>
-    <script src="assets/js/script.js"></script>
+    <script src="{{asset('assets_template/dist/js/tabler.min.js?1684106062')}}" defer></script>
+    <script src="{{asset('assets_template/dist/js/demo.min.js?1684106062')}}" defer></script>
+    <script src="{{asset('')}}"></script>
 </body>
 
 </html>
