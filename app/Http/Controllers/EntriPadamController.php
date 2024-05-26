@@ -421,23 +421,6 @@ class EntriPadamController extends Controller
         ];
         return view('beranda/petatrafo', $data);
     }
-    public function import_excel_penyulangsection(Request $request)
-    {
-        $this->validate($request, [
-            'file_penyulang' => 'required|mimes:csv,xls,xlsx',
-            'file_section' => 'required|mimes:csv,xls,xlsx'
-        ]);
-        $file_penyulang = $request->file('file_penyulang');
-        $file_section = $request->file('file_section');
-        $nama_file_penyulang = rand() . $file_penyulang->getClientOriginalName();
-        $nama_file_section = rand() . $file_section->getClientOriginalName();
-        $file_penyulang->move('file_penyulang', $nama_file_penyulang);
-        $file_section->move('file_section', $nama_file_section);
-        Excel::import(new PenyulangImport, public_path('/file_penyulang/' . $nama_file_penyulang));
-        Excel::import(new SectionImport, public_path('/file_section/' . $nama_file_section));
-
-        return redirect('/updating');
-    }
     public function export_kali_padam()
     {
         $rekapKaliPadamModel = new RekapKaliPadamModel();

@@ -3,22 +3,26 @@
     <div class="container-fluid">
         <div class="col-lg-12 mt-2">
             @if (session('success_nyala'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h3>{{ session('success_nyala') }}</h3>
                 </div>
             @endif
             @if (session('success_tambah'))
-                <div class="alert alert-success">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h3>{{ session('success_tambah') }}</h3>
                 </div>
             @endif
             @if (session('error_tambah'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h3>{{ session('error_tambah') }}</h3>
                 </div>
             @endif
             @if (session('error_nyala'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     <h3> {{ session('error_nyala') }}</h3>
                 </div>
             @endif
@@ -158,7 +162,8 @@
                                     <td>{{ $item_rekap->penyebab_padam }}</td>
                                     <td>{{ $item_rekap->nohp_stakeholder }}</td>
                                     <td>{{ $item_rekap->nama }}</td>
-                                    <td><a href="{{ $item_rekap->maps }}" target="_blank">{{ $item_rekap->maps }}</a></td>
+                                    <td><a href="{{ $item_rekap->maps }}" target="_blank">{{ $item_rekap->maps }}</a>
+                                    </td>
                                     <td>
                                         <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}" target="_blank">
                                             <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
@@ -174,15 +179,6 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
-        function checkAllPelanggan() {
-            var checklistWhatsapp = document.getElementById('checklist-whatsapp');
-            var checkboxes = document.getElementsByName('checkWhatsapp[]');
-
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = checklistWhatsapp.checked;
-            });
-        }
-
         function checkAllPadam() {
             var checkPadam = document.getElementById('checklist-padam');
             var checkboxPadam = document.getElementsByName('checkPadam[]');
@@ -193,21 +189,18 @@
         }
     </script>
     <script>
-        $(document).ready(function() {
-            $('#tabel_data_padam').DataTable({
-                scrollX: true,
-                'pageLength': 500,
-                'lengthMenu': [10, 25, 50, 100, 200, 500],
+        function templateDataTable(namaTabel) {
+            $(document).ready(function() {
+                $(namaTabel).DataTable({
+                    scrollX: true,
+                    scrollCollapse: true,
+                    fixedColumns: true,
+                    'pageLength': 500,
+                    'lengthMenu': [10, 25, 50, 100, 200, 500],
+                });
             });
-        });
-        $(document).ready(function() {
-            $('#tabel_rekap_pelanggan').DataTable({
-                scrollX: true,
-                scrollCollapse: true,
-                fixedColumns: true,
-                'pageLength': 500,
-                'lengthMenu': [10, 25, 50, 100, 200, 500],
-            });
-        });
+        }
+        templateDataTable('#tabel_data_padam');
+        templateDataTable('#tabel_rekap_pelanggan');
     </script>
 @endsection

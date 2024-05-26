@@ -39,6 +39,7 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
     Route::post('/updating/import_excel', 'import_excel');
     Route::post('/updating/import_excel_trafo', 'import_excel_trafo');
+    Route::post('/updating/import_excel_penyulangsection', 'import_excel_penyulangsection');
     Route::post('/updating/edit_pelanggan/{id}', 'edit_pelanggan');
     Route::post('/updating/edit_trafo/{id}', 'edit_trafo');
     Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
@@ -57,7 +58,6 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/transaksipadam/export_kali_padam', 'export_kali_padam');
     Route::get('/transaksiaktif/export_pelanggan_padam', 'export_pelanggan_padam');
     Route::get('/transaksiaktif/export_pelanggan_padam_csv', 'export_pelanggan_padam_csv');
-    Route::post('/entripadam/import_excel_penyulangsection', 'import_excel_penyulangsection');
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');
 });
