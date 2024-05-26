@@ -191,14 +191,14 @@ class DataPelangganController extends Controller
         $validateData = $request->validate([
             'idserial' => 'required',
             'idpel' => 'required',
-            'id_unit' => 'required',
+            'idunit' => 'required',
         ], $message);
     
         if ($validateData) {
             WANotifModel::create([
                 'idserial' => $request->input('idserial'),
                 'idpel' => $request->input('idpel'),
-                'id_unit' => $request->input('id_unit'),
+                'idunit' => $request->input('idunit'),
             ]);
     
             Session::flash('success_tambah_wanotif', 'wanotif berhasil ditambahkan');
@@ -213,14 +213,14 @@ class DataPelangganController extends Controller
         $validateData = $request->validate([
             'idserial' => 'required',
             'idpel' => 'required',
-            'id_unit' => 'required',
+            'idunit' => 'required',
         ], $message);
         if ($validateData) {
             $datawanotif = WANotifModel::find($id);
             $datawanotif->update([
                 'idserial' => $request->input('idserial'),
                 'idpel' => $request->input('idpel'),
-                'id_unit' => $request->input('id_unit'),
+                'idunit' => $request->input('idunit'),
                 $validateData
             ]);
             Session::flash('success_edit_wanotif', 'wanotif berhasil diedit');

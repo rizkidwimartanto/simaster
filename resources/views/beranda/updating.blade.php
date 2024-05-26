@@ -1075,7 +1075,7 @@
                                     @foreach ($data_unit as $unit)
                                         <tr>
                                             <td>{{ $no++ }}</td>
-                                            <td>{{ $unit->id_unit }}</td>
+                                            <td>{{ $unit->idunit }}</td>
                                             <td>{{ $unit->nama_unit }}</td>
                                             <td>{{ $unit->nohp_mulp }}</td>
                                             <td>{{ $unit->nohp_tlteknik }}</td>
@@ -1105,9 +1105,9 @@
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Unit</label>
                                                                         <div class="input-group input-group-flat">
-                                                                            <input type="hidden" name="id_unit"
-                                                                                id="id_unit"
-                                                                                value="{{ $unit->id_unit }}">
+                                                                            <input type="hidden" name="idunit"
+                                                                                id="idunit"
+                                                                                value="{{ $unit->idunit }}">
                                                                             <select disabled class="form-control"
                                                                                 name="nama_unit" id="nama_unit">
                                                                                 <option selected disabled>--- Pilih Unit---
@@ -1213,7 +1213,7 @@
                                                     <div class="input-group input-group-flat">
                                                         <span class="input-group-text" id="basic-addon1"><i
                                                                 class="fa-solid fa-square-caret-down fa-lg"></i></span>
-                                                        <select class="form-control" name="id_unit" id="id_unit">
+                                                        <select class="form-control" name="idunit" id="idunit">
                                                             <option selected disabled>--- Pilih ID Unit ---</option>
                                                             <option value="52551">52551</option>
                                                             <option value="52552">52552</option>
@@ -1252,7 +1252,7 @@
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $wanotif->idserial }}</td>
                                             <td>{{ $wanotif->idpel }}</td>
-                                            <td>{{ $wanotif->id_unit }}</td>
+                                            <td>{{ $wanotif->idunit }}</td>
                                             <td>
                                                 <a style="cursor: pointer" data-bs-toggle="modal"
                                                     data-bs-target="#modalEditWANotif{{ $wanotif->id }}">
@@ -1295,23 +1295,23 @@
                                                                     <div class="mb-3">
                                                                         <label class="form-label">ID Unit</label>
                                                                         <div class="input-group input-group-flat">
-                                                                            <select class="form-control" name="id_unit"
-                                                                                id="id_unit">
+                                                                            <select class="form-control" name="idunit"
+                                                                                id="idunit">
                                                                                 <option selected disabled>--- Pilih ID
                                                                                     Unit---
                                                                                 </option>
                                                                                 <option value="52551"
-                                                                                    {{ $wanotif->id_unit == '52551' ? 'selected' : '' }}>
+                                                                                    {{ $wanotif->idunit == '52551' ? 'selected' : '' }}>
                                                                                     52551</option>
                                                                                 <option value="52552"
-                                                                                    {{ $wanotif->id_unit == '52552' ? 'selected' : '' }}>
+                                                                                    {{ $wanotif->idunit == '52552' ? 'selected' : '' }}>
                                                                                     52552</option>
                                                                                 <option value="52553"
-                                                                                    {{ $wanotif->id_unit == '52553' ? 'selected' : '' }}>
+                                                                                    {{ $wanotif->idunit == '52553' ? 'selected' : '' }}>
                                                                                     52553
                                                                                 </option>
                                                                                 <option value="52554"
-                                                                                    {{ $wanotif->id_unit == '52554' ? 'selected' : '' }}>
+                                                                                    {{ $wanotif->idunit == '52554' ? 'selected' : '' }}>
                                                                                     52554</option>
                                                                             </select>
                                                                         </div>
@@ -1379,19 +1379,19 @@
     <script>
         document.getElementById('nama_unit').addEventListener('change', function() {
             var selectedUnit = this.value;
-            var id_unit = document.getElementById('id_unit');
+            var idunit = document.getElementById('idunit');
 
             if (selectedUnit == 'ULP Demak') {
-                id_unit.value = '52551'
+                idunit.value = '52551'
             }
             if (selectedUnit == 'ULP Tegowanu') {
-                id_unit.value = '52552'
+                idunit.value = '52552'
             }
             if (selectedUnit == 'ULP Purwodadi') {
-                id_unit.value = '52553'
+                idunit.value = '52553'
             }
             if (selectedUnit == 'ULP Wirosari') {
-                id_unit.value = '52554'
+                idunit.value = '52554'
             }
         })
     </script>

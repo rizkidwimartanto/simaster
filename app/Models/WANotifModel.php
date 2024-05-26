@@ -10,5 +10,5 @@ class WANotifModel extends Model
     use HasFactory;
     protected $table = 'wanotif';
     protected $primaryKey = 'id';
-    protected $fillable = ['idserial','idpel', 'id_unit'];
+    protected $fillable = ['idserial','idpel', 'idunit'];
 }

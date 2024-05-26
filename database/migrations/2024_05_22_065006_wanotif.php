@@ -17,7 +17,7 @@ class Wanotif extends Migration
             $table->id();
             $table->text('idserial')->nullable();
             $table->text('idpel')->nullable();
-            $table->text('id_unit')->nullable();
+            $table->text('idunit')->nullable();
             $table->timestamps(true);
         });
     }
