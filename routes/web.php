@@ -34,7 +34,7 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating', 'updating')->middleware('auth');
-    Route::get('/updating/tambah_wanotif', 'tambah_wanotif')->middleware('auth');
+    Route::get('/updating/editdataunit/{id}', 'form_edit_data_unit')->middleware('auth');
     Route::get('/updating/export_excel_pelanggan', 'export_excel_pelanggan');
     Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
     Route::post('/updating/import_excel', 'import_excel');
@@ -44,6 +44,7 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::post('/updating/edit_trafo/{id}', 'edit_trafo');
     Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating/hapus_trafo', 'hapusTrafo');
+    Route::delete('/updating/hapus_wanotif', 'hapusWANotif');
     Route::post('/updating/edit_unit/{id}', 'edit_unit');
     Route::post('/updating/proses_tambah_dataunit', 'proses_tambah_dataunit');
     Route::post('/updating/proses_tambah_wanotif', 'proses_tambah_wanotif');

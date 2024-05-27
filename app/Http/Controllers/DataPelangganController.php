@@ -152,9 +152,9 @@ class DataPelangganController extends Controller
                 $trafo = TrafoModel::find($hapus);
                 $trafo->delete();
             }
-            Session::flash('success_hapus', 'Data berhasil dihapus bro');
+            Session::flash('success_hapus', 'Data berhasil dihapus');
         } else {
-            Session::flash('error_hapus', 'Data gagal dihapus bro');
+            Session::flash('error_hapus', 'Data gagal dihapus');
         }
         return redirect('/updating');
     }
@@ -180,6 +180,13 @@ class DataPelangganController extends Controller
             Session::flash('error_tambah_dataunit', 'dataunit gagal ditambahkan');
         }
         return redirect('/updating');
+    }
+    public function form_edit_data_unit($id){
+        $data = [
+            'title' => 'Form Edit WA Notif',
+            'wanotif' => WANotifModel::find($id)
+        ];
+        return view('beranda/FormEdit/editdataunit', $data);
     }
     public function edit_unit(Request $request, $id)
     {
@@ -255,5 +262,19 @@ class DataPelangganController extends Controller
             Session::flash('error_edit_wanotif', 'wanotif gagal diedit');
             return redirect('/updating');
         }
+    }
+    public function hapusWANotif(Request $request)
+    {
+        $hapus_items = $request->input('checkWANotif');
+        if ($hapus_items) {
+            foreach ($hapus_items as $hapus) {
+                $wanotif = WANotifModel::find($hapus);
+                $wanotif->delete();
+            }
+            Session::flash('success_hapus', 'Data berhasil dihapus');
+        } else {
+            Session::flash('error_hapus', 'Data gagal dihapus');
+        }
+        return redirect('/updating');
     }
 }

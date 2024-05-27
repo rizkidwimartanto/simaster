@@ -1083,7 +1083,7 @@
                     <div id="collapseDataUnit" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <button type="button" class="btn btn-info mb-3 col-lg-3" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-info mb-3 col-lg-12" data-bs-toggle="modal"
                                 data-bs-target="#modalTambahDataUnit">
                                 Tambah Data Unit
                             </button>
@@ -1264,8 +1264,7 @@
                     <div id="collapseWANotif" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            {{-- <a href="/updating/tambah_wanotif" class="btn btn-info col-lg-3 mb-3">Tambah Data Unit</a> --}}
-                            <button type="button" class="btn btn-info mb-3 col-lg-3" data-bs-toggle="modal"
+                            <button type="button" class="btn btn-info mb-3 col-lg-12 col-md-12 col-sm-12" data-bs-toggle="modal"
                                 data-bs-target="#modalTambahWANotif">
                                 Tambah WA Notif
                             </button>
@@ -1318,106 +1317,100 @@
                                     </form>
                                 </div>
                             </div>
-                            <table class="table table-vcenter table-bordered table-hover table-secondary"
-                                id="tabel_data_wanotif" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>ID Serial</th>
-                                        <th>ID Pel</th>
-                                        <th>ID Unit</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $no = 1;
-                                    @endphp
-                                    @foreach ($data_wanotif as $wanotif)
-                                        <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $wanotif->idserial }}</td>
-                                            <td>{{ $wanotif->idpel }}</td>
-                                            <td>{{ $wanotif->idunit }}</td>
-                                            <td>
-                                                <a style="cursor: pointer" data-bs-toggle="modal"
-                                                    data-bs-target="#modalEditWANotif{{ $wanotif->id }}">
-                                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                </a>
-
-                                                <div class="modal fade" id="modalEditWANotif{{ $wanotif->id }}"
-                                                    tabindex="-1" aria-labelledby="modalEditWANotifLabel"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <form action="/updating/edit_wanotif/{{ $wanotif->id }}"
-                                                            method="post">
-                                                            @csrf
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title" id="exampleModalLabel">Edit WA
-                                                                        Notif
-                                                                    </h1>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">ID Serial</label>
-                                                                        <div class="input-group input-group-flat">
-                                                                            <input type="text" class="form-control"
-                                                                                name="idserial" id="idserial"
-                                                                                value="{{ $wanotif->idserial }}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">ID Pel</label>
-                                                                        <div class="input-group input-group-flat">
-                                                                            <input type="text" class="form-control"
-                                                                                name="idpel" id="idpel"
-                                                                                value="{{ $wanotif->idpel }}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="mb-3">
-                                                                        <label class="form-label">ID Unit</label>
-                                                                        <div class="input-group input-group-flat">
-                                                                            <select class="form-control" name="idunit"
-                                                                                id="idunit">
-                                                                                <option selected disabled>--- Pilih ID
-                                                                                    Unit---
-                                                                                </option>
-                                                                                <option value="52551"
-                                                                                    {{ $wanotif->idunit == '52551' ? 'selected' : '' }}>
-                                                                                    52551</option>
-                                                                                <option value="52552"
-                                                                                    {{ $wanotif->idunit == '52552' ? 'selected' : '' }}>
-                                                                                    52552</option>
-                                                                                <option value="52553"
-                                                                                    {{ $wanotif->idunit == '52553' ? 'selected' : '' }}>
-                                                                                    52553
-                                                                                </option>
-                                                                                <option value="52554"
-                                                                                    {{ $wanotif->idunit == '52554' ? 'selected' : '' }}>
-                                                                                    52554</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Edit</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                            <form action="/updating/hapus_wanotif" method="post">
+                                @csrf
+                                @method('delete')
+                                <a href="#" class="btn btn-danger col-lg-12 col-md-12 col-sm-12 mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#modal-delete-dataunit">
+                                    <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus WA Notif
+                                </a>
+                                <div class="modal modal-blur fade" id="modal-delete-dataunit" tabindex="-1"
+                                    role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                            <div class="modal-status bg-danger"></div>
+                                            <div class="modal-body text-center py-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon mb-2 text-danger icon-lg" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
+                                                    <path d="M12 9v4" />
+                                                    <path d="M12 17h.01" />
+                                                </svg>
+                                                <h3>Apakah anda yakin?</h3>
+                                                <div class="text-muted">Untuk menghapus wanotif tersebut</div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="w-100">
+                                                    <div class="row">
+                                                        <div class="col"><a href="#" class="btn w-100"
+                                                                data-bs-dismiss="modal">
+                                                                Cancel
+                                                            </a></div>
+                                                        <div class="col"><button type="submit"
+                                                                class="btn btn-danger w-100" data-bs-dismiss="modal">
+                                                                Delete
+                                                            </button></div>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-vcenter table-bordered table-hover table-secondary"
+                                    id="tabel_data_wanotif" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input mt-2"
+                                                            style="position:relative; left:10px;" type="checkbox"
+                                                            id="checklist-wanotif" onclick="checkAllWANotif()">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th>ID Serial</th>
+                                            <th>ID Pel</th>
+                                            <th>ID Unit</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
+                                        @foreach ($data_wanotif as $wanotif)
+                                            <tr>
+                                                <td>{{ $no++ }}</td>
+                                                <td>
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="{{ $wanotif->id }}" id="flexCheckDefault"
+                                                                name="checkWANotif[]">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{ $wanotif->idserial }}</td>
+                                                <td>{{ $wanotif->idpel }}</td>
+                                                <td>{{ $wanotif->idunit }}</td>
+                                                <td>
+                                                    <a style="cursor: pointer" class="text-secondary" href="/updating/editdataunit/{{$wanotif->id}}">
+                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -1460,6 +1453,7 @@
             }
             checkboxGroup("checklist-pelanggan", 'input[name="checkPelanggan[]"]');
             checkboxGroup("checklist-trafo", 'input[name="checkTrafo[]"]');
+            checkboxGroup("checklist-wanotif", 'input[name="checkWANotif[]"]');
         });
     </script>
     <script>
