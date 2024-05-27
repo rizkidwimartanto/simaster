@@ -15,10 +15,10 @@ class Unit extends Migration
     {
        Schema::create('unit', function (Blueprint $table){
         $table->id();
-        $table->text('id_unit')->nullable();
-        $table->text('nama_unit')->nullable();
-        $table->text('nohp_mulp')->nullable();
-        $table->text('nohp_tlteknik')->nullable();
+        $table->text('idunit')->nullable();
+        $table->text('unit')->nullable();
+        $table->text('no_mulp')->nullable();
+        $table->text('no_tlteknik')->nullable();
         $table->timestamps(true);
        });
     }

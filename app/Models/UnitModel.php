@@ -10,5 +10,5 @@ class UnitModel extends Model
     use HasFactory;
     protected $table = 'unit';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_unit','nama_unit', 'nohp_mulp', 'nohp_tlteknik'];
+    protected $fillable = ['idunit','unit', 'no_mulp', 'no_tlteknik'];
 }

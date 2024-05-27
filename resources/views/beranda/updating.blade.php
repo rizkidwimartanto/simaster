@@ -1076,9 +1076,9 @@
                                         <tr>
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $unit->idunit }}</td>
-                                            <td>{{ $unit->nama_unit }}</td>
-                                            <td>{{ $unit->nohp_mulp }}</td>
-                                            <td>{{ $unit->nohp_tlteknik }}</td>
+                                            <td>{{ $unit->unit }}</td>
+                                            <td>{{ $unit->no_mulp }}</td>
+                                            <td>{{ $unit->no_tlteknik }}</td>
                                             <td>
                                                 <a style="cursor: pointer" data-bs-toggle="modal"
                                                     data-bs-target="#modalEditUnit{{ $unit->id }}">
@@ -1109,21 +1109,21 @@
                                                                                 id="idunit"
                                                                                 value="{{ $unit->idunit }}">
                                                                             <select disabled class="form-control"
-                                                                                name="nama_unit" id="nama_unit">
+                                                                                name="unit" id="unit">
                                                                                 <option selected disabled>--- Pilih Unit---
                                                                                 </option>
                                                                                 <option value="ULP Demak"
-                                                                                    {{ $unit->nama_unit == 'ULP Demak' ? 'selected' : '' }}>
+                                                                                    {{ $unit->unit == 'ULP Demak' ? 'selected' : '' }}>
                                                                                     ULP Demak</option>
                                                                                 <option value="ULP Tegowanu"
-                                                                                    {{ $unit->nama_unit == 'ULP Tegowanu' ? 'selected' : '' }}>
+                                                                                    {{ $unit->unit == 'ULP Tegowanu' ? 'selected' : '' }}>
                                                                                     ULP Tegowanu</option>
                                                                                 <option value="ULP Purwodadi"
-                                                                                    {{ $unit->nama_unit == 'ULP Purwodadi' ? 'selected' : '' }}>
+                                                                                    {{ $unit->unit == 'ULP Purwodadi' ? 'selected' : '' }}>
                                                                                     ULP Purwodadi
                                                                                 </option>
                                                                                 <option value="ULP Wirosari"
-                                                                                    {{ $unit->nama_unit == 'ULP Wirosari' ? 'selected' : '' }}>
+                                                                                    {{ $unit->unit == 'ULP Wirosari' ? 'selected' : '' }}>
                                                                                     ULP Wirosari</option>
                                                                             </select>
                                                                         </div>
@@ -1132,16 +1132,16 @@
                                                                         <label class="form-label">Nomor MULP</label>
                                                                         <div class="input-group input-group-flat">
                                                                             <input type="text" class="form-control"
-                                                                                name="nohp_mulp" id="nohp_mulp"
-                                                                                value="{{ $unit->nohp_mulp }}">
+                                                                                name="no_mulp" id="no_mulp"
+                                                                                value="{{ $unit->no_mulp }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="mb-3">
                                                                         <label class="form-label">Nomor TL Teknik</label>
                                                                         <div class="input-group input-group-flat">
                                                                             <input type="text" class="form-control"
-                                                                                name="nohp_tlteknik" id="nohp_tlteknik"
-                                                                                value="{{ $unit->nohp_tlteknik }}">
+                                                                                name="no_tlteknik" id="no_tlteknik"
+                                                                                value="{{ $unit->no_tlteknik }}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1378,7 +1378,7 @@
         });
     </script>
     <script>
-        document.getElementById('nama_unit').addEventListener('change', function() {
+        document.getElementById('unit').addEventListener('change', function() {
             var selectedUnit = this.value;
             var idunit = document.getElementById('idunit');
 

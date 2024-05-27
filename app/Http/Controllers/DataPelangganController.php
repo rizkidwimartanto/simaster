@@ -162,14 +162,14 @@ class DataPelangganController extends Controller
     {
         $message = ['required' => ':attribute harus diisi'];
         $validateData = $request->validate([
-            'nohp_mulp' => 'required',
-            'nohp_tlteknik' => 'required',
+            'no_mulp' => 'required',
+            'no_tlteknik' => 'required',
         ], $message);
         if ($validateData) {
             $dataunit = UnitModel::find($id);
             $dataunit->update([
-                'nohp_mulp' => $request->input('nohp_mulp'),
-                'nohp_tlteknik' => $request->input('nohp_tlteknik'),
+                'no_mulp' => $request->input('no_mulp'),
+                'no_tlteknik' => $request->input('no_tlteknik'),
                 $validateData
             ]);
             Session::flash('success_edit_unit', 'unit berhasil diedit');
