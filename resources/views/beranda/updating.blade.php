@@ -1270,24 +1270,18 @@
                                             <div class="modal-body">
                                                 <div class="mb-4">
                                                     <div class="input-group input-group-flat">
-                                                        <span class="input-group-text" id="basic-addon1"><i
-                                                                class="fa-solid fa-id-card fa-lg"></i></span>
                                                         <input class="form-control" name="idserial" id="idserial"
-                                                            type="text" placeholder="Masukkan ID Serial">
+                                                            type="text">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <div class="input-group input-group-flat">
-                                                        <span class="input-group-text" id="basic-addon1"><i
-                                                                class="fa-solid fa-id-card-clip fa-lg"></i></span>
                                                         <input class="form-control" name="idpel" id="idpel"
-                                                            type="text" placeholder="Masukkan ID Pelanggan">
+                                                            type="text">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <div class="input-group input-group-flat">
-                                                        <span class="input-group-text" id="basic-addon1"><i
-                                                                class="fa-solid fa-square-caret-down fa-lg"></i></span>
                                                         <select class="form-control" name="idunit" id="idunit">
                                                             <option selected disabled>--- Pilih ID Unit ---</option>
                                                             <option value="52551">52551</option>
