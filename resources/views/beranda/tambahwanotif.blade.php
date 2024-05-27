@@ -28,7 +28,7 @@
                         <div class="input-group input-group-flat">
                             <span class="input-group-text" id="basic-addon1"><i
                                     class="fa-solid fa-square-caret-down fa-lg"></i></span>
-                            <select class="form-control" name="id_unit" id="id_unit">
+                            <select class="form-control" name="idunit" id="idunit">
                                 <option selected disabled>--- Pilih ID Unit ---</option>
                                 <option value="52551">52551</option>
                                 <option value="52552">52552</option>

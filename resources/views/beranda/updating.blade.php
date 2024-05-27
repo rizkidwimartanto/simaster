@@ -1176,7 +1176,8 @@
                     <div id="collapseWANotif" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <button type="button" class="btn btn-info mb-3 col-lg-3" data-bs-toggle="modal"
+                            <a href="/updating/tambah_wanotif" class="btn btn-info col-lg-3 mb-3">Tambah Data Unit</a>
+                            {{-- <button type="button" class="btn btn-info mb-3 col-lg-3" data-bs-toggle="modal"
                                 data-bs-target="#modalTambahWANotif">
                                 Tambah WA Notif
                             </button>
@@ -1231,7 +1232,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div>
+                            </div> --}}
                             <table class="table table-vcenter table-bordered table-hover table-secondary"
                                 id="tabel_data_wanotif" style="width: 100%">
                                 <thead>
