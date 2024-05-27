@@ -897,14 +897,14 @@
                                                                             <textarea rows="3" class="form-control" readonly>{{ $s->keterangan }}</textarea>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="mb-3 col-lg-12">
+                                                                    {{-- <div class="mb-3 col-lg-12">
                                                                         <label class="form-label">Foto</label>
                                                                         <div class="input-group input-group-flat">
                                                                             <img src="{{ asset('storage/trafo/' . $s->foto) }}"
                                                                                 class="form-control"
                                                                                 style="height: 400px; object-fit:cover; overflow:hidden">
                                                                         </div>
-                                                                    </div>
+                                                                    </div> --}}
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -1184,7 +1184,7 @@
                                                                                 value="{{ $unit->idunit }}">
                                                                             <select disabled class="form-control"
                                                                                 name="unit" id="unit">
-                                                                                <option selected disabled>--- Pilih Unit---
+                                                                                <option selected>--- Pilih Unit---
                                                                                 </option>
                                                                                 <option value="ULP Demak"
                                                                                     {{ $unit->unit == 'ULP Demak' ? 'selected' : '' }}>
@@ -1269,18 +1269,21 @@
                                             </div>
                                             <div class="modal-body">
                                                 <div class="mb-4">
+                                                    <label class="form-label">ID Serial</label>
                                                     <div class="input-group input-group-flat">
                                                         <input class="form-control" name="idserial" id="idserial"
                                                             type="text">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
+                                                    <label class="form-label">ID Pelanggan</label>
                                                     <div class="input-group input-group-flat">
                                                         <input class="form-control" name="idpel" id="idpel"
                                                             type="text">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
+                                                    <label class="form-label">ID Unit</label>
                                                     <div class="input-group input-group-flat">
                                                         <select class="form-control" name="idunit" id="idunit">
                                                             <option selected disabled>--- Pilih ID Unit ---</option>

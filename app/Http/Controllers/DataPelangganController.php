@@ -185,12 +185,15 @@ class DataPelangganController extends Controller
     {
         $message = ['required' => ':attribute harus diisi'];
         $validateData = $request->validate([
+            // 'unit' => 'required',
             'no_mulp' => 'required',
             'no_tlteknik' => 'required',
         ], $message);
         if ($validateData) {
             $dataunit = UnitModel::find($id);
             $dataunit->update([
+                // 'idunit' => $request->input('idunit'),
+                // 'unit' => $request->input('unit'),
                 'no_mulp' => $request->input('no_mulp'),
                 'no_tlteknik' => $request->input('no_tlteknik'),
                 $validateData
