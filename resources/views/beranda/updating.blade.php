@@ -891,20 +891,6 @@
                                                                                 class="form-control" readonly>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="mb-3 col-lg-12">
-                                                                        <label class="form-label">Keterangan</label>
-                                                                        <div class="input-group input-group-flat">
-                                                                            <textarea rows="3" class="form-control" readonly>{{ $s->keterangan }}</textarea>
-                                                                        </div>
-                                                                    </div>
-                                                                    {{-- <div class="mb-3 col-lg-12">
-                                                                        <label class="form-label">Foto</label>
-                                                                        <div class="input-group input-group-flat">
-                                                                            <img src="{{ asset('storage/trafo/' . $s->foto) }}"
-                                                                                class="form-control"
-                                                                                style="height: 400px; object-fit:cover; overflow:hidden">
-                                                                        </div>
-                                                                    </div> --}}
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -922,129 +908,158 @@
                                                 </div>
                                                 <div class="modal modal-blur fade" id="trafo-edit-{{ $s->id }}"
                                                     tabindex="-1" role="dialog" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">{{ $s->penyulang }}</h5>
-                                                                <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form action="/updating/edit_trafo/{{ $s->id }}"
-                                                                    method="post" enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    @method('put')
+                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+                                                        role="document">
+                                                        <form action="/updating/edit_trafo/{{ $s->id }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Edit Trafo</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal"
+                                                                        aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
                                                                     <div class="row">
                                                                         <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Unit
-                                                                                Layanan</label>
+                                                                            <label class="form-label">Unit Layanan</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="unit_layanan"
-                                                                                    value="{{ $s->unit_layanan }}"
-                                                                                    class="form-control" required>
+                                                                                <select name="unit_layanan"
+                                                                                    id="unit_layanan"
+                                                                                    class="form-control @error('unit_layanan') is-invalid @enderror">
+                                                                                    <option value="Demak"
+                                                                                        {{ $s->unit_layanan == 'Demak' ? 'selected' : '' }}>
+                                                                                        Demak</option>
+                                                                                    <option value="Tegowanu"
+                                                                                        {{ $s->unit_layanan == 'Tegowanu' ? 'selected' : '' }}>
+                                                                                        Tegowanu
+                                                                                    </option>
+                                                                                    <option value="Purwodadi"
+                                                                                        {{ $s->unit_layanan == 'Purwodadi' ? 'selected' : '' }}>
+                                                                                        Purwodadi
+                                                                                    </option>
+                                                                                    <option value="Wirosari"
+                                                                                        {{ $s->unit_layanan == 'Wirosari' ? 'selected' : '' }}>
+                                                                                        Wirosari
+                                                                                    </option>
+                                                                                </select>
+                                                                                @error('unit_layanan')
+                                                                                    <div class="invalid-feedback">
+                                                                                        {{ $message }}
+                                                                                    </div>
+                                                                                @enderror
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Penyulang</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="penyulang"
+                                                                                <input type="text" name="penyulang"
+                                                                                    id="penyulang"
                                                                                     value="{{ $s->penyulang }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Nomor
-                                                                                Tiang</label>
+                                                                            <label class="form-label">Nomor Tiang</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="no_tiang"
+                                                                                <input type="text" name="no_tiang"
+                                                                                    id="no_tiang"
                                                                                     value="{{ $s->no_tiang }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Daya</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="daya"
+                                                                                <input type="text" name="daya"
+                                                                                    id="daya"
                                                                                     value="{{ $s->daya }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Merk</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="merk"
+                                                                                <input type="text" name="merk"
+                                                                                    id="merk"
                                                                                     value="{{ $s->merk }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Beban X1</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="beban_X1"
+                                                                                <input type="text" name="beban_X1"
+                                                                                    id="beban_X1"
                                                                                     value="{{ $s->beban_X1 }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Beban X2</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="beban_X2"
+                                                                                <input type="text" name="beban_X2"
+                                                                                    id="beban_X2"
                                                                                     value="{{ $s->beban_X2 }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Beban Xo</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="beban_Xo"
+                                                                                <input type="text" name="beban_Xo"
+                                                                                    id="beban_Xo"
                                                                                     value="{{ $s->beban_Xo }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Lokasi</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="lokasi"
+                                                                                <input type="text" name="lokasi"
+                                                                                    id="lokasi"
                                                                                     value="{{ $s->lokasi }}"
-                                                                                    class="form-control" required>
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">Koordinat</label>
+                                                                        <div class="mb-3 col-lg-4">
+                                                                            <label class="form-label">penyebab</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input name="koordinat"
-                                                                                    value="{{ $s->latitude }}{{ $s->longitude }}"
-                                                                                    class="form-control" required>
+                                                                                <input type="text" name="penyebab"
+                                                                                    id="penyebab"
+                                                                                    value="{{ $s->penyebab }}"
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">Keterangan</label>
+                                                                        <div class="mb-3 col-lg-4">
+                                                                            <label class="form-label">No APKT</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <textarea name="keterangan" rows="3" class="form-control" required>{{ $s->keterangan }}</textarea>
+                                                                                <input type="text" name="no_pk_apkt"
+                                                                                    id="no_pk_apkt"
+                                                                                    value="{{ $s->no_pk_apkt }}"
+                                                                                    class="form-control">
                                                                             </div>
                                                                         </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">Foto</label>
+                                                                        <div class="mb-3 col-lg-4">
+                                                                            <label class="form-label">Beban (A)</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input type="file" name="foto"
+                                                                                <input type="text" name="bebanA"
+                                                                                    id="bebanA"
+                                                                                    value="{{ $s->bebanA }}"
                                                                                     class="form-control">
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="modal-footer">
-                                                                        <a href="#"
-                                                                            class="btn btn-link link-secondary"
-                                                                            data-bs-dismiss="modal">
-                                                                            Cancel
-                                                                        </a>
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary ms-auto">
-                                                                            Save
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <button type="submit" class="btn btn-info"
+                                                                        data-bs-dismiss="modal">Edit</button>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </td>
@@ -1090,8 +1105,7 @@
                                                     <label class="form-label">Unit</label>
                                                     <div class="input-group input-group-flat">
                                                         <input type="hidden" name="idunit" id="idunit">
-                                                        <select class="form-control" name="unit"
-                                                            id="unit">
+                                                        <select class="form-control" name="unit" id="unit">
                                                             <option selected>--- Pilih Unit---
                                                             </option>
                                                             <option value="ULP Demak">
