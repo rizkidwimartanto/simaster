@@ -45,6 +45,7 @@ Route::controller(DataPelangganController::class)->group(function () {
     Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating/hapus_trafo', 'hapusTrafo');
     Route::post('/updating/edit_unit/{id}', 'edit_unit');
+    Route::post('/updating/proses_tambah_dataunit', 'proses_tambah_dataunit');
     Route::post('/updating/proses_tambah_wanotif', 'proses_tambah_wanotif');
     Route::post('/updating/edit_wanotif/{id}', 'edit_wanotif');
 });

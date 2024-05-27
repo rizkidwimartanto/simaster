@@ -25,6 +25,12 @@
                 <h3> {{ session('success_tambah_wanotif') }}</h3>
             </div>
         @endif
+        @if (session('success_tambah_dataunit'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <h3> {{ session('success_tambah_dataunit') }}</h3>
+            </div>
+        @endif
         @if (session('success_edit_unit'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -47,6 +53,12 @@
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <h3>{{ session('error_tambah_unit') }}</h3>
+            </div>
+        @endif
+        @if (session('error_tambah_wanotif'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <h3>{{ session('error_tambah_wanotif') }}</h3>
             </div>
         @endif
         @if (session('error_edit_unit'))
@@ -1056,6 +1068,68 @@
                     <div id="collapseDataUnit" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
+                            <button type="button" class="btn btn-info mb-3 col-lg-3" data-bs-toggle="modal"
+                                data-bs-target="#modalTambahDataUnit">
+                                Tambah Data Unit
+                            </button>
+                            <div class="modal fade" id="modalTambahDataUnit" tabindex="-1"
+                                aria-labelledby="modalTambahDataUnitLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="/updating/proses_tambah_dataunit" method="post">
+                                        @csrf
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-3" id="modalTambahDataUnitLabel">Tambah Data
+                                                    Unit
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Unit</label>
+                                                    <div class="input-group input-group-flat">
+                                                        <input type="hidden" name="idunit" id="idunit">
+                                                        <select class="form-control" name="unit"
+                                                            id="unit">
+                                                            <option selected>--- Pilih Unit---
+                                                            </option>
+                                                            <option value="ULP Demak">
+                                                                ULP Demak</option>
+                                                            <option value="ULP Tegowanu">
+                                                                ULP Tegowanu</option>
+                                                            <option value="ULP Purwodadi">
+                                                                ULP Purwodadi
+                                                            </option>
+                                                            <option value="ULP Wirosari">
+                                                                ULP Wirosari</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Nomor MULP</label>
+                                                    <div class="input-group input-group-flat">
+                                                        <input type="text" class="form-control" name="no_mulp"
+                                                            id="no_mulp">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Nomor TL Teknik</label>
+                                                    <div class="input-group input-group-flat">
+                                                        <input type="text" class="form-control" name="no_tlteknik"
+                                                            id="no_tlteknik">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <table class="table table-vcenter table-bordered table-hover table-secondary"
                                 id="tabel_data_unit" style="width: 100%">
                                 <thead>
@@ -1176,8 +1250,8 @@
                     <div id="collapseWANotif" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <a href="/updating/tambah_wanotif" class="btn btn-info col-lg-3 mb-3">Tambah Data Unit</a>
-                            {{-- <button type="button" class="btn btn-info mb-3 col-lg-3" data-bs-toggle="modal"
+                            {{-- <a href="/updating/tambah_wanotif" class="btn btn-info col-lg-3 mb-3">Tambah Data Unit</a> --}}
+                            <button type="button" class="btn btn-info mb-3 col-lg-3" data-bs-toggle="modal"
                                 data-bs-target="#modalTambahWANotif">
                                 Tambah WA Notif
                             </button>
@@ -1185,6 +1259,7 @@
                                 aria-labelledby="modalTambahWANotifLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <form action="/updating/proses_tambah_wanotif" method="post">
+                                        @csrf
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-3" id="modalTambahWANotifLabel">Tambah WA Notif
@@ -1193,7 +1268,6 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                @csrf
                                                 <div class="mb-4">
                                                     <div class="input-group input-group-flat">
                                                         <span class="input-group-text" id="basic-addon1"><i
@@ -1232,7 +1306,7 @@
                                         </div>
                                     </form>
                                 </div>
-                            </div> --}}
+                            </div>
                             <table class="table table-vcenter table-bordered table-hover table-secondary"
                                 id="tabel_data_wanotif" style="width: 100%">
                                 <thead>

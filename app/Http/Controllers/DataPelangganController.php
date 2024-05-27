@@ -158,6 +158,29 @@ class DataPelangganController extends Controller
         }
         return redirect('/updating');
     }
+    public function proses_tambah_dataunit(Request $request)
+    {
+        $message = ['required' => ':attribute harus diisi'];
+        $validateData = $request->validate([
+            'unit' => 'required',
+            'no_mulp' => 'required',
+            'no_tlteknik' => 'required',
+        ], $message);
+    
+        if ($validateData) {
+            UnitModel::create([
+                'idunit' => $request->input('idunit'),
+                'unit' => $request->input('unit'),
+                'no_mulp' => $request->input('no_mulp'),
+                'no_tlteknik' => $request->input('no_tlteknik'),
+            ]);
+    
+            Session::flash('success_tambah_dataunit', 'dataunit berhasil ditambahkan');
+        } else {
+            Session::flash('error_tambah_dataunit', 'dataunit gagal ditambahkan');
+        }
+        return redirect('/updating');
+    }
     public function edit_unit(Request $request, $id)
     {
         $message = ['required' => ':attribute harus diisi'];
