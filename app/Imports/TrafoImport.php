@@ -17,15 +17,19 @@ class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
 
     public function model(array $row)
     {
-        // $existingData = TrafoModel::where('penyulang', $row[3])->first();
+        $existingData = TrafoModel::where('no_tiang', $row[4])->first();
 
-        // if ($existingData) {
-        //     $existingData->update($this->getData($row));
-        //     Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
-        // } else {
-            TrafoModel::create($this->getData($row));
-            Session::flash('success_import', 'File Excel Berhasil Diimport');
-        // }
+        if ($existingData) {
+            $existingData->update($this->getData($row));
+            Session::flash('error_import_trafo', 'data trafo sudah ada');
+        } else {
+            if ($this->isDuplicate($row)) {
+                Session::flash('error_import_trafo', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
+            } else {
+                TrafoModel::create($this->getData($row));
+                Session::flash('success_import_trafo', 'file excel trafo berhasil diimport');
+            }
+        }
 
         return null;
     }
@@ -68,10 +72,10 @@ class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
             'kesesuaian' => $row[32],
         ];
     }
-    // private function isDuplicate(array $data)
-    // {
-    //     return TrafoModel::where('penyulang', $data['3'])->exists();
-    // }
+    private function isDuplicate(array $data)
+    {
+        return TrafoModel::where('no_tiang', $data['4'])->exists();
+    }
 
     public function sheets(): array
     {

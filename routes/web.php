@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DataPegawaiController;
 use App\Http\Controllers\DataPelangganController;
 use App\Http\Controllers\EntriPadamController;
+use App\Http\Controllers\UpdatingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\Authenticate;
@@ -29,25 +30,29 @@ Route::controller(UserController::class)->group(function () {
     Route::post('/proseslogin', 'authenticate')->name('authenticate');
     Route::get('/logout', 'logout')->name('authenticate');
 });
-Route::controller(DataPelangganController::class)->group(function () {
+Route::controller(UpdatingController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth');
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating', 'updating')->middleware('auth');
+    Route::get('/updating/editpelanggan/{id}', 'form_edit_pelanggan')->middleware('auth');
+    Route::get('/updating/edittrafo/{id}', 'form_edit_trafo')->middleware('auth');
+    Route::get('/updating/editwanotif/{id}', 'form_edit_wa_notif')->middleware('auth');
     Route::get('/updating/editdataunit/{id}', 'form_edit_data_unit')->middleware('auth');
     Route::get('/updating/export_excel_pelanggan', 'export_excel_pelanggan');
     Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
     Route::post('/updating/import_excel', 'import_excel');
     Route::post('/updating/import_excel_trafo', 'import_excel_trafo');
     Route::post('/updating/import_excel_penyulangsection', 'import_excel_penyulangsection');
-    Route::post('/updating/edit_pelanggan/{id}', 'edit_pelanggan');
-    Route::post('/updating/edit_trafo/{id}', 'edit_trafo');
-    Route::get('/updating/hapus_pelanggan', 'hapusPelanggan');
-    Route::get('/updating/hapus_trafo', 'hapusTrafo');
+    Route::delete('/updating/hapus_pelanggan', 'hapusPelanggan');
+    Route::delete('/updating/hapus_trafo', 'hapusTrafo');
+    Route::delete('/updating/hapus_dataunit', 'hapusDataUnit');
     Route::delete('/updating/hapus_wanotif', 'hapusWANotif');
-    Route::post('/updating/edit_unit/{id}', 'edit_unit');
     Route::post('/updating/proses_tambah_dataunit', 'proses_tambah_dataunit');
     Route::post('/updating/proses_tambah_wanotif', 'proses_tambah_wanotif');
+    Route::post('/updating/edit_pelanggan/{id}', 'edit_pelanggan');
+    Route::post('/updating/edit_trafo/{id}', 'edit_trafo');
+    Route::post('/updating/edit_unit/{id}', 'edit_unit');
     Route::post('/updating/edit_wanotif/{id}', 'edit_wanotif');
 });
 Route::controller(EntriPadamController::class)->group(function () {

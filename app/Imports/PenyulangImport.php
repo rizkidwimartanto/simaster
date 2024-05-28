@@ -20,7 +20,7 @@ class PenyulangImport implements ToModel, WithStartRow, WithMultipleSheets
 
     public function model(array $row)
     {
-        $existingData = PenyulangModel::where('id_penyulang', $row[0])
+        $existingData = PenyulangModel::where('penyulang', $row[2])
         ->where('gi', $row[1])
         ->first();
 
@@ -29,12 +29,12 @@ class PenyulangImport implements ToModel, WithStartRow, WithMultipleSheets
                 'penyulang' => $row[2],
             ]);
 
-            Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
+            Session::flash('error_import_penyulang', 'data penyulang sudah ada');
         } else {
             if ($this->isDuplicate($row)) {
-                Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
+                Session::flash('error_import_penyulang', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
             } else {
-                Session::flash('success_import', 'File Excel Berhasil Diimport');
+                Session::flash('success_import_penyulang', 'file excel penyulang berhasil diimport');
                 return new PenyulangModel([
                     'id_penyulang' => $row[0],
                     'gi' => $row[1],
@@ -48,7 +48,7 @@ class PenyulangImport implements ToModel, WithStartRow, WithMultipleSheets
 
     private function isDuplicate(array $data)
     {
-        $existingData = PenyulangModel::where('id_penyulang', $data[0])
+        $existingData = PenyulangModel::where('penyulang', $data[2])
             ->where('gi', $data[1])
             ->first();
 

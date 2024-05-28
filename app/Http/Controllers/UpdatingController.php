@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
 
 
-class DataPelangganController extends Controller
+class UpdatingController extends Controller
 {
     public function index()
     {
@@ -70,13 +70,13 @@ class DataPelangganController extends Controller
     public function edit_pelanggan(Request $request, $id)
     {
         DataPelangganModel::find($id)->update($request->all());
-        Session::flash('success_edit', 'Data berhasil diedit');
+        Session::flash('success_edit_pelanggan', 'data pelanggan berhasil diedit');
         return redirect('/updating');
     }
     public function edit_trafo(Request $request, $id)
     {
         TrafoModel::find($id)->update($request->all());
-        Session::flash('success_edit', 'Data berhasil diedit');
+        Session::flash('success_edit_trafo', 'trafo berhasil diedit');
         return redirect('/updating');
     }
     public function export_excel_pelanggan()
@@ -130,6 +130,13 @@ class DataPelangganController extends Controller
 
         return redirect('/updating');
     }
+    public function form_edit_pelanggan($id){
+        $data = [
+            'title' => 'Form Edit Pelanggan',
+            'pelanggan' => DataPelangganModel::find($id)
+        ];
+        return view('beranda/FormEdit/editpelanggan', $data);
+    }
     public function hapusPelanggan(Request $request)
     {
         $hapus_items = $request->input('checkPelanggan');
@@ -138,11 +145,18 @@ class DataPelangganController extends Controller
                 $pelanggan = DataPelangganModel::find($hapus);
                 $pelanggan->delete();
             }
-            Session::flash('success_hapus', 'Data berhasil dihapus');
+            Session::flash('success_hapus_pelanggan', 'data pelanggan berhasil dihapus');
         } else {
-            Session::flash('error_hapus', 'Data gagal dihapus');
+            Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
         }
         return redirect('/updating');
+    }
+    public function form_edit_trafo($id){
+        $data = [
+            'title' => 'Form Edit Trafo',
+            'trafo' => TrafoModel::find($id)
+        ];
+        return view('beranda/FormEdit/edittrafo', $data);
     }
     public function hapusTrafo(Request $request)
     {
@@ -152,11 +166,18 @@ class DataPelangganController extends Controller
                 $trafo = TrafoModel::find($hapus);
                 $trafo->delete();
             }
-            Session::flash('success_hapus', 'Data berhasil dihapus');
+            Session::flash('success_hapus_trafo', 'data trafo berhasil dihapus');
         } else {
-            Session::flash('error_hapus', 'Data gagal dihapus');
+            Session::flash('error_hapus_trafo', 'data trafo gagal dihapus');
         }
         return redirect('/updating');
+    }
+    public function form_edit_data_unit($id){
+        $data = [
+            'title' => 'Form Edit Data Unit',
+            'dataunit' => UnitModel::find($id)
+        ];
+        return view('beranda/FormEdit/editdataunit', $data);
     }
     public function proses_tambah_dataunit(Request $request)
     {
@@ -175,18 +196,11 @@ class DataPelangganController extends Controller
                 'no_tlteknik' => $request->input('no_tlteknik'),
             ]);
     
-            Session::flash('success_tambah_dataunit', 'dataunit berhasil ditambahkan');
+            Session::flash('success_tambah_dataunit', 'data unit berhasil ditambahkan');
         } else {
-            Session::flash('error_tambah_dataunit', 'dataunit gagal ditambahkan');
+            Session::flash('error_tambah_dataunit', 'data unit gagal ditambahkan');
         }
         return redirect('/updating');
-    }
-    public function form_edit_data_unit($id){
-        $data = [
-            'title' => 'Form Edit WA Notif',
-            'wanotif' => WANotifModel::find($id)
-        ];
-        return view('beranda/FormEdit/editdataunit', $data);
     }
     public function edit_unit(Request $request, $id)
     {
@@ -205,18 +219,33 @@ class DataPelangganController extends Controller
                 'no_tlteknik' => $request->input('no_tlteknik'),
                 $validateData
             ]);
-            Session::flash('success_edit_unit', 'unit berhasil diedit');
+            Session::flash('success_edit_unit', 'data unit berhasil diedit');
             return redirect('/updating');
         } else {
-            Session::flash('error_edit_unit', 'unit gagal diedit');
+            Session::flash('error_edit_unit', 'data unit gagal diedit');
             return redirect('/updating');
         }
     }
-    public function tambah_wanotif(){
+    public function hapusDataUnit(Request $request)
+    {
+        $hapus_items = $request->input('checkDataUnit');
+        if ($hapus_items) {
+            foreach ($hapus_items as $hapus) {
+                $dataunit = UnitModel::find($hapus);
+                $dataunit->delete();
+            }
+            Session::flash('success_hapus_unit', 'data unit berhasil dihapus');
+        } else {
+            Session::flash('error_hapus_unit', 'data unit gagal dihapus');
+        }
+        return redirect('/updating');
+    }
+    public function form_edit_wa_notif($id){
         $data = [
-            'title' => 'Form Tambah WA Notif',
+            'title' => 'Form Edit WA Notif',
+            'wanotif' => WANotifModel::find($id)
         ];
-        return view('beranda/tambahwanotif', $data);
+        return view('beranda/FormEdit/editwanotif', $data);
     }
     public function proses_tambah_wanotif(Request $request)
     {
@@ -271,9 +300,9 @@ class DataPelangganController extends Controller
                 $wanotif = WANotifModel::find($hapus);
                 $wanotif->delete();
             }
-            Session::flash('success_hapus', 'Data berhasil dihapus');
+            Session::flash('success_hapus_wanotif', 'wanotif berhasil dihapus');
         } else {
-            Session::flash('error_hapus', 'Data gagal dihapus');
+            Session::flash('error_hapus_wanotif', 'wanotif gagal dihapus');
         }
         return redirect('/updating');
     }

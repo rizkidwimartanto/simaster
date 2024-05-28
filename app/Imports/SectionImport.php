@@ -20,7 +20,7 @@ class SectionImport implements ToModel, WithStartRow, WithMultipleSheets
 
     public function model(array $row)
     {
-        $existingData = SectionModel::where('id_section', $row[0])
+        $existingData = SectionModel::where('nama_section', $row[2])
         ->where('penyulang', $row[1])
         ->first();
         if ($existingData) {
@@ -30,12 +30,12 @@ class SectionImport implements ToModel, WithStartRow, WithMultipleSheets
                 'id_apkt' => $row[4],
                 'unit' => $row[5],
             ]);
-            Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
+            Session::flash('error_import_section', 'data section sudah ada');
         }else{
             if($this->isDuplicate($row)){
-                Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
+                Session::flash('error_import_section', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
             }else{
-                Session::flash('success_import', 'File Excel Berhasil Diimport');
+                Session::flash('success_import_section', 'File Excel Berhasil Diimport');
                 return new SectionModel([
                     'id_section' => $row[0],
                     'penyulang' => $row[1],
@@ -51,7 +51,7 @@ class SectionImport implements ToModel, WithStartRow, WithMultipleSheets
 
     private function isDuplicate(array $data)
     {
-        $existingData = SectionModel::where('id_section', $data['0'])
+        $existingData = SectionModel::where('nama_section', $data[2])
             ->where('penyulang', $data['1'])
             ->first();
 

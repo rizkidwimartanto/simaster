@@ -19,13 +19,13 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
 
         if ($existingData) {
             $existingData->update($this->getData($row));
-            Session::flash('success_import', 'File Excel Berhasil Diimport (Data diperbarui)');
+            Session::flash('error_import_pelanggan', 'data pelanggan sudah ada');
         } else {
             if ($this->isDuplicate($row)) {
-                Session::flash('error_import', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
+                Session::flash('error_import_pelanggan', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
             } else {
                 DataPelangganModel::create($this->getData($row));
-                Session::flash('success_import', 'File Excel Berhasil Diimport');
+                Session::flash('success_import_pelanggan', 'file excel pelanggan berhasil diimport');
             }
         }
 
