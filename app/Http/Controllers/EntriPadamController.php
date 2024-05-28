@@ -184,7 +184,6 @@ class EntriPadamController extends Controller
 
             // $response = curl_exec($curl);
             // curl_close($curl);
-            exec('cvlc D:\Music\alarm_padam.mp3 vlc://quit');
             Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
             return redirect('/entripadam');
         } elseif ($request->penyebab_padam == 'Instalasi' && $request->has('nama_pelanggan')) {
@@ -271,7 +270,6 @@ class EntriPadamController extends Controller
 
             // $response = curl_exec($curl);
             // curl_close($curl);
-            exec('cvlc D:\Music\alarm_padam.mp3 vlc://quit');
             Session::flash('success_tambah', 'Entri Padam berhasil ditambah');
             return redirect('/entripadam');
         } else {

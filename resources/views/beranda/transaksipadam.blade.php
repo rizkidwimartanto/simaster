@@ -2,22 +2,14 @@
 @section('content')
     <div class="container-fluid mt-3">
         @if (session('success_nyala'))
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <h3>{{ session('success_nyala') }}</h3>
             </div>
         @endif
-        @if (session('success_tambah'))
-            <div class="alert alert-success">
-                <h3>{{ session('success_tambah') }}</h3>
-            </div>
-        @endif
-        @if (session('error_tambah'))
-            <div class="alert alert-danger">
-                <h3>{{ session('error_tambah') }}</h3>
-            </div>
-        @endif
         @if (session('error_nyala'))
-            <div class="alert alert-danger">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 <h3>{{ session('error_nyala') }}</h3>
             </div>
         @endif
@@ -107,15 +99,18 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $('#tabel_rekap_pelanggan').DataTable({
-                scrollX: true,
-            })
-        })
-        $(document).ready(function() {
-            $('#tabel_data_menyala').DataTable({
-                scrollX: true,
+        function templateDataTable(namaTabel) {
+            $(document).ready(function() {
+                $(namaTabel).DataTable({
+                    scrollX: true,
+                    scrollCollapse: true,
+                    fixedColumns: true,
+                    'pageLength': 500,
+                    'lengthMenu': [10, 25, 50, 100, 200, 500],
+                });
             });
-        });
+        }
+        templateDataTable('#tabel_data_menyala');
+        templateDataTable('#tabel_rekap_pelanggan');
     </script>
 @endsection

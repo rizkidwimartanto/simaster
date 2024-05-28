@@ -2,30 +2,6 @@
 @section('content')
     <div class="container-fluid">
         <div class="col-lg-12 mt-2">
-            @if (session('success_nyala'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <h3>{{ session('success_nyala') }}</h3>
-                </div>
-            @endif
-            @if (session('success_tambah'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <h3>{{ session('success_tambah') }}</h3>
-                </div>
-            @endif
-            @if (session('error_tambah'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <h3>{{ session('error_tambah') }}</h3>
-                </div>
-            @endif
-            @if (session('error_nyala'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <h3> {{ session('error_nyala') }}</h3>
-                </div>
-            @endif
             <div class="card border border-info p-3">
                 <h2>Data Jaringan Padam Saat Ini</h2>
                 <form action="/transaksipadam/edit_status_padam" method="post">
@@ -107,6 +83,10 @@
                         <tbody>
                             @foreach ($data_padam as $s)
                                 @if ($s->status == 'Padam')
+                                    <script>
+                                        var audio = new Audio('{{ asset('assets/music/emergency-alarm.mp3') }}');
+                                        audio.play();
+                                    </script>
                                     <tr>
                                         <td>
                                             <div class="d-flex justify-content-center">
