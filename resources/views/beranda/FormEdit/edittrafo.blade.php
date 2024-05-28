@@ -50,7 +50,7 @@
                     <div class="mb-3">
                         <label class="form-label">Daya</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="daya" id="daya" value="{{ $trafo->daya }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="daya" id="daya" value="{{ $trafo->daya }}"
                                 class="form-control">
                         </div>
                     </div>
@@ -64,20 +64,20 @@
                     <div class="mb-3">
                         <label class="form-label">Beban X1</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="beban_X1" id="beban_X1" value="{{ $trafo->beban_X1 }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="beban_X1" id="beban_X1" value="{{ $trafo->beban_X1 }}"
                                 class="form-control">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Beban X2</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="beban_X2" id="beban_X2" value="{{ $trafo->beban_X2 }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="beban_X2" id="beban_X2" value="{{ $trafo->beban_X2 }}"
                                 class="form-control">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Beban Xo</label>
-                        <div class="input-group input-group-flat">
+                        <div inputmode="numeric" pattern="[0-9]*" class="input-group input-group-flat">
                             <input type="text" name="beban_Xo" id="beban_Xo" value="{{ $trafo->beban_Xo }}"
                                 class="form-control">
                         </div>
@@ -106,7 +106,7 @@
                     <div class="mb-3">
                         <label class="form-label">Beban (A)</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="bebanA" id="bebanA" value="{{ $trafo->bebanA }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="bebanA" id="bebanA" value="{{ $trafo->bebanA }}"
                                 class="form-control">
                         </div>
                     </div>

@@ -32,14 +32,14 @@
                         <label class="form-label">Nomor MULP</label>
                         <div class="input-group input-group-flat">
                             <input type="text" class="form-control" name="no_mulp" id="no_mulp"
-                                value="{{ $dataunit->no_mulp }}">
+                                value="{{ $dataunit->no_mulp }}" inputmode="numeric" pattern="[0-9]*">
                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Nomor TL Teknik</label>
                         <div class="input-group input-group-flat">
                             <input type="text" class="form-control" name="no_tlteknik" id="no_tlteknik"
-                                value="{{ $dataunit->no_tlteknik }}">
+                                value="{{ $dataunit->no_tlteknik }}" inputmode="numeric" pattern="[0-9]*">
                         </div>
                     </div>
                     <div class="d-grid gap-2">

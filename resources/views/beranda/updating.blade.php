@@ -192,7 +192,7 @@
                                                                             <label class="form-label">Nama
                                                                                 Pelanggan</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->nama }}"
+                                                                                <input type="text" value="{{ $s->nama }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
@@ -206,7 +206,7 @@
                                                                             <label class="form-label">No HP
                                                                                 StakeHolder</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->nohp_stakeholder }}"
+                                                                                <input type="text" value="{{ $s->nohp_stakeholder }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
@@ -214,21 +214,21 @@
                                                                             <label class="form-label">No HP PIC
                                                                                 Lapangan</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->nohp_piclapangan }}"
+                                                                                <input type="text" value="{{ $s->nohp_piclapangan }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Latitude</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->latitude }}"
+                                                                                <input type="text" value="{{ $s->latitude }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Longtitude</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->longtitude }}"
+                                                                                <input type="text" value="{{ $s->longtitude }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
@@ -236,19 +236,19 @@
                                                                             <label class="form-label">Unit ULP</label>
                                                                             <div class="input-group input-group-flat">
                                                                                 <?php if ($s->unitulp == 52550) : ?>
-                                                                                <input value="UP3 Demak"
+                                                                                <input type="text" value="UP3 Demak"
                                                                                     class="form-control" readonly>
                                                                                 <?php elseif($s->unitulp == 52551) : ?>
-                                                                                <input value="ULP Demak"
+                                                                                <input type="text" value="ULP Demak"
                                                                                     class="form-control" readonly>
                                                                                 <?php elseif($s->unitulp == 52552) : ?>
-                                                                                <input value="ULP Tegowanu"
+                                                                                <input type="text" value="ULP Tegowanu"
                                                                                     class="form-control" readonly>
                                                                                 <?php elseif($s->unitulp == 52553) : ?>
-                                                                                <input value="ULP Purwodadi"
+                                                                                <input type="text" value="ULP Purwodadi"
                                                                                     class="form-control" readonly>
                                                                                 <?php elseif($s->unitulp == 52554) : ?>
-                                                                                <input value="ULP Wirosari"
+                                                                                <input type="text" value="ULP Wirosari"
                                                                                     class="form-control" readonly>
                                                                                 <?php endif; ?>
                                                                             </div>
@@ -256,56 +256,56 @@
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Tarif</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->tarif }}"
+                                                                                <input type="text" value="{{ $s->tarif }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Daya</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->daya }}"
+                                                                                <input type="text" value="{{ $s->daya }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">KOGOL</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->kogol }}"
+                                                                                <input type="text" value="{{ $s->kogol }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">fakmkwh</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->fakmkwh }}"
+                                                                                <input type="text" value="{{ $s->fakmkwh }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">rpbp</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->rpbp }}"
+                                                                                <input type="text" value="{{ $s->rpbp }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">rpujl</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->rpujl }}"
+                                                                                <input type="text" value="{{ $s->rpujl }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">nomor_kwh</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->nomor_kwh }}"
+                                                                                <input type="text" value="{{ $s->nomor_kwh }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">penyulang</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->penyulang }}"
+                                                                                <input type="text" value="{{ $s->penyulang }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
@@ -319,11 +319,11 @@
                                                                             <label class="form-label">Kali Padam</label>
                                                                             <div class="input-group input-group-flat">
                                                                                 @if ($s->entriPadam)
-                                                                                    <input
+                                                                                    <input type="text"
                                                                                         value="{{ $s->entriPadam->kalipadam }}"
                                                                                         class="form-control" readonly>
                                                                                 @else
-                                                                                    <input value="{{ 0 }}"
+                                                                                    <input type="text" value="{{ 0 }}"
                                                                                         class="form-control" readonly>
                                                                                 @endif
                                                                             </div>
@@ -481,7 +481,7 @@
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Unit Layanan</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->unit_layanan }}"
+                                                                                <input type="text" value="{{ $s->unit_layanan }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
@@ -489,63 +489,63 @@
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Penyulang</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->penyulang }}"
+                                                                                <input type="text" value="{{ $s->penyulang }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Nomor Tiang</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->no_tiang }}"
+                                                                                <input type="text" value="{{ $s->no_tiang }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Daya</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->daya }}"
+                                                                                <input type="text" value="{{ $s->daya }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Merk</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->merk }}"
+                                                                                <input type="text" value="{{ $s->merk }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Beban X1</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->beban_X1 }}"
+                                                                                <input type="text" value="{{ $s->beban_X1 }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Beban X2</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->beban_X2 }}"
+                                                                                <input type="text" value="{{ $s->beban_X2 }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Beban Xo</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->beban_Xo }}"
+                                                                                <input type="text" value="{{ $s->beban_Xo }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-4">
                                                                             <label class="form-label">Lokasi</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input value="{{ $s->lokasi }}"
+                                                                                <input type="text" value="{{ $s->lokasi }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
                                                                         </div>
                                                                         <div class="mb-3 col-lg-12">
                                                                             <label class="form-label">Koordinat</label>
                                                                             <div class="input-group input-group-flat">
-                                                                                <input
+                                                                                <input type="text"
                                                                                     value="{{ $s->latitude }}{{ $s->longitude }}"
                                                                                     class="form-control" readonly>
                                                                             </div>
@@ -623,14 +623,14 @@
                                                     <label class="form-label">Nomor MULP</label>
                                                     <div class="input-group input-group-flat">
                                                         <input type="text" class="form-control" name="no_mulp"
-                                                            id="no_mulp">
+                                                            id="no_mulp" inputmode="numeric" pattern="[0-9]*">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Nomor TL Teknik</label>
                                                     <div class="input-group input-group-flat">
                                                         <input type="text" class="form-control" name="no_tlteknik"
-                                                            id="no_tlteknik">
+                                                            id="no_tlteknik" inputmode="numeric" pattern="[0-9]*">
                                                     </div>
                                                 </div>
                                             </div>
@@ -646,7 +646,7 @@
                             <form action="/updating/hapus_dataunit" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="#" class="btn btn-danger col-lg-12 col-md-12 col-sm-12 mb-2"
+                                <a href="#" class="btn btn-danger col-12 mb-2"
                                     data-bs-toggle="modal" data-bs-target="#modal-delete-dataunit">
                                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Unit
                                 </a>
@@ -754,9 +754,9 @@
                         </button>
                     </h2>
                     <div id="collapseWANotif" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFlushExample">
+                        data-bs-parent="#accordionFlushExample"> 
                         <div class="accordion-body">
-                            <button type="button" class="btn btn-info mb-3 col-lg-12 col-md-12 col-sm-12"
+                            <button type="button" class="btn btn-info mb-3 col-12"
                                 data-bs-toggle="modal" data-bs-target="#modalTambahWANotif"><i
                                     class="fa-solid fa-circle-plus fa-lg" style="margin-right: 5px;"></i>
                                 Tambah WA Notif
@@ -778,14 +778,14 @@
                                                     <label class="form-label">ID Serial</label>
                                                     <div class="input-group input-group-flat">
                                                         <input class="form-control" name="idserial" id="idserial"
-                                                            type="text">
+                                                            type="text" inputmode="numeric" pattern="[0-9]*">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
                                                     <label class="form-label">ID Pelanggan</label>
                                                     <div class="input-group input-group-flat">
                                                         <input class="form-control" name="idpel" id="idpel"
-                                                            type="text">
+                                                            type="text" inputmode="numeric" pattern="[0-9]*">
                                                     </div>
                                                 </div>
                                                 <div class="mb-4">
@@ -813,7 +813,7 @@
                             <form action="/updating/hapus_wanotif" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="#" class="btn btn-danger col-lg-12 col-md-12 col-sm-12 mb-2"
+                                <a href="#" class="btn btn-danger col-12 mb-2"
                                     data-bs-toggle="modal" data-bs-target="#modal-delete-wanotif">
                                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus WA Notif
                                 </a>

@@ -37,7 +37,7 @@
                         <label class="form-label">No HP
                             StakeHolder</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="nohp_stakeholder" id="nohp_stakeholder"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="nohp_stakeholder" id="nohp_stakeholder"
                                 value="{{ $pelanggan->nohp_stakeholder }}"
                                 class="form-control @error('nohp_stakeholder') is-invalid @enderror">
                             @error('nohp_stakeholder')
@@ -51,7 +51,7 @@
                         <label class="form-label">No HP PIC
                             Lapangan</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="nohp_piclapangan" id="nohp_piclapangan"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="nohp_piclapangan" id="nohp_piclapangan"
                                 value="{{ $pelanggan->nohp_piclapangan }}"
                                 class="form-control @error('nohp_piclapangan') is-invalid @enderror">
                             @error('nohp_piclapangan')
@@ -64,7 +64,7 @@
                     <div class="mb-3">
                         <label class="form-label">Latitude</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="latitude" id="latitude" value="{{ $pelanggan->latitude }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="latitude" id="latitude" value="{{ $pelanggan->latitude }}"
                                 class="form-control @error('latitude') is-invalid @enderror">
                             @error('latitude')
                                 <div class="invalid-feedback">
@@ -76,7 +76,7 @@
                     <div class="mb-3">
                         <label class="form-label">Longtitude</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="longtitude" id="longtitude" value="{{ $pelanggan->longtitude }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="longtitude" id="longtitude" value="{{ $pelanggan->longtitude }}"
                                 class="form-control @error('longtitude') is-invalid @enderror">
                             @error('longtitude')
                                 <div class="invalid-feedback">
@@ -128,7 +128,7 @@
                     <div class="mb-3">
                         <label class="form-label">Daya</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="daya" id="daya" value="{{ $pelanggan->daya }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="daya" id="daya" value="{{ $pelanggan->daya }}"
                                 class="form-control @error('daya') is-invalid @enderror">
                             @error('daya')
                                 <div class="invalid-feedback">
@@ -188,7 +188,7 @@
                     <div class="mb-3">
                         <label class="form-label">nomor_kwh</label>
                         <div class="input-group input-group-flat">
-                            <input type="text" name="nomor_kwh" id="nomor_kwh" value="{{ $pelanggan->nomor_kwh }}"
+                            <input inputmode="numeric" pattern="[0-9]*" type="text" name="nomor_kwh" id="nomor_kwh" value="{{ $pelanggan->nomor_kwh }}"
                                 class="form-control @error('nomor_kwh') is-invalid @enderror">
                             @error('nomor_kwh')
                                 <div class="invalid-feedback">
