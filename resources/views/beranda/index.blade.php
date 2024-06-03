@@ -201,11 +201,11 @@
             });
         });
 
-        // function handleKeyPress(event) {
-        //     if (event.keyCode === 13) {
-        //         searchCustomer();
-        //     }
-        // }
+        function handleKeyPress(event) {
+            if (event.keyCode === 13) {
+                searchCustomer();
+            }
+        }
 
         function hapusPencarian() {
             document.getElementById('searchInput').value = "";
@@ -225,19 +225,17 @@
             var listGroup = suggestionList.querySelector('ul');
             listGroup.innerHTML = '';
 
-            var matchCount = 0;
             data_peta.forEach(function(customer) {
-                if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 10) {
+                if (customer.nama.toLowerCase().includes(searchTerm)) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
                     listItem.textContent = customer.nama;
                     listItem.onclick = function() {
                         document.getElementById('searchInput').value = customer.nama;
-                        listGroup.innerHTML = ''; 
+                        listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
                         showMarker(customer);
                     };
                     listGroup.appendChild(listItem);
-                    matchCount++;
                 }
             });
 
@@ -247,7 +245,6 @@
                 suggestionList.style.display = 'none';
             }
         }
-
 
         function showMarker(customer) {
             if (currentMarker) {
