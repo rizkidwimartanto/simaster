@@ -1,3 +1,4 @@
+{{-- test 123 --}}
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
