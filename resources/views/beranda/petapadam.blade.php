@@ -175,28 +175,31 @@
             var searchTerm = document.getElementById('searchInput').value.toLowerCase();
             var suggestionList = document.getElementById('suggestionList');
             var listGroup = suggestionList.querySelector('ul');
-            listGroup.innerHTML = ''; // Kosongkan daftar setiap kali ada perubahan input
+            listGroup.innerHTML = '';
 
+            var matchCount = 0;
             padams.forEach(function(customer) {
-                if (customer.nama.toLowerCase().includes(searchTerm)) {
+                if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 10) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
                     listItem.textContent = customer.nama;
                     listItem.onclick = function() {
                         document.getElementById('searchInput').value = customer.nama;
-                        listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
+                        listGroup.innerHTML = '';
                         showMarker(customer);
                     };
                     listGroup.appendChild(listItem);
+                    matchCount++;
                 }
             });
 
             if (listGroup.childElementCount > 0) {
-                suggestionList.style.display = 'block'; // Tampilkan daftar jika ada pilihan
+                suggestionList.style.display = 'block';
             } else {
-                suggestionList.style.display = 'none'; // Sembunyikan daftar jika tidak ada pilihan
+                suggestionList.style.display = 'none';
             }
         }
+
 
         function showMarker(customer) {
             if (currentMarker) {
