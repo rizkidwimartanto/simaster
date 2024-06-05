@@ -8,7 +8,7 @@ body {
     padding: 0;
     margin: 0;
 }
-header.navbar-expand-md {
+nav.navbar-expand-lg {
     border-bottom: 5px solid rgb(183, 136, 195);
 }
 #map {
