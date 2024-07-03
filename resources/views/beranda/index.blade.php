@@ -209,6 +209,7 @@
 
         function hapusPencarian() {
             document.getElementById('searchInput').value = "";
+            document.getElementById('suggestionList').style.display = 'none';
         }
 
         function click_map() {
@@ -227,7 +228,7 @@
 
             var matchCount = 0;
             data_peta.forEach(function(customer) {
-                if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 10) {
+                if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 6) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
                     listItem.textContent = customer.nama;

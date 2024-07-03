@@ -9,7 +9,7 @@ body {
     margin: 0;
 }
 nav.navbar-expand-lg {
-    border-bottom: 5px solid rgb(183, 136, 195);
+    border-bottom: 5px solid #088395;
 }
 #map {
     position: relative;
@@ -37,7 +37,9 @@ select.pilih_peta {
     width: 40%;
     height: 30%;
 }
-
+a.navbar-brand{
+    font-size: 15px;
+}
 #suggestionList {
     position: absolute;
     display: block;
@@ -72,5 +74,13 @@ select.pilih_peta {
     div.search_customer {
         margin-left: 12%;
         width: 40%;
+    }
+}
+@media(max-width: 400px){
+    a.navbar-brand{
+        font-size: 10.5px;
+    }
+    a.nav-link, a.dropdown-item{
+        font-size: 10px;
     }
 }

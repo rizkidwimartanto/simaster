@@ -193,6 +193,7 @@
 
         function hapusPencarian() {
             document.getElementById('searchInput').value = "";
+            document.getElementById('suggestionList').style.display = 'none';
         }
 
         function click_map() {
@@ -209,8 +210,9 @@
             var listGroup = suggestionList.querySelector('ul');
             listGroup.innerHTML = '';
 
+            var matchCount = 0;
             padams.forEach(function(customer) {
-                if (customer.penyulang.toLowerCase().includes(searchTerm)) {
+                if (customer.penyulang.toLowerCase().includes(searchTerm) && matchCount < 6) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
                     listItem.textContent = customer.penyulang;
@@ -220,6 +222,7 @@
                         showMarker(customer);
                     };
                     listGroup.appendChild(listItem);
+                    matchCount++;
                 }
             });
 
