@@ -175,9 +175,8 @@
             var searchTerm = document.getElementById('searchInput').value.toLowerCase();
             var suggestionList = document.getElementById('suggestionList');
             var listGroup = suggestionList.querySelector('ul');
-            listGroup.innerHTML = '';
+            listGroup.innerHTML = ''; // Kosongkan daftar setiap kali ada perubahan input
 
-            var matchCount = 0;
             padams.forEach(function(customer) {
                 if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 6) {
                     var listItem = document.createElement('li');
@@ -185,21 +184,19 @@
                     listItem.textContent = customer.nama;
                     listItem.onclick = function() {
                         document.getElementById('searchInput').value = customer.nama;
-                        listGroup.innerHTML = '';
+                        listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
                         showMarker(customer);
                     };
                     listGroup.appendChild(listItem);
-                    matchCount++;
                 }
             });
 
             if (listGroup.childElementCount > 0) {
-                suggestionList.style.display = 'block';
+                suggestionList.style.display = 'block'; // Tampilkan daftar jika ada pilihan
             } else {
-                suggestionList.style.display = 'none';
+                suggestionList.style.display = 'none'; // Sembunyikan daftar jika tidak ada pilihan
             }
         }
-
 
         function showMarker(customer) {
             if (currentMarker) {

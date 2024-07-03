@@ -8,8 +8,11 @@ body {
     padding: 0;
     margin: 0;
 }
-nav.navbar-expand-lg {
-    border-bottom: 5px solid #088395;
+a.navbar-brand{
+    font-size: 15px;
+}
+header.navbar-expand-md {
+    border-bottom: 5px solid rgb(183, 136, 195);
 }
 #map {
     position: relative;
@@ -76,11 +79,8 @@ a.navbar-brand{
         width: 40%;
     }
 }
-@media(max-width: 400px){
+@media (max-width: 465px){
     a.navbar-brand{
-        font-size: 10.5px;
-    }
-    a.nav-link, a.dropdown-item{
-        font-size: 10px;
+        font-size: 11.3px;
     }
 }
