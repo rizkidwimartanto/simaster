@@ -33,9 +33,23 @@ class UpdatingController extends Controller
             'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
             'data_unitulp' => DataPelangganModel::pluck('unitulp')
         ];
-        return view('beranda/index', $data);
+        return view('beranda_administrator/index', $data);
     }
-
+    public function user(){
+        $data = [
+            'title' => 'Peta Pelanggan',
+            'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
+            'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
+            'data_unitulp' => DataPelangganModel::pluck('unitulp')
+        ];
+        return view('beranda_user/index', $data);
+    }
+    public function entridata_user(){
+        $data = [
+            'title' => 'Entri Data',
+        ];
+        return view('beranda_user/entridata_user', $data);
+    }
     public function entri_padam()
     {
         $data_penyulang = SectionModel::pluck('penyulang')->unique();
@@ -52,7 +66,7 @@ class UpdatingController extends Controller
             'data_penyulang' => $data_penyulang,
             'data_section' => PenyulangModel::all(),
         ];
-        return view('beranda/entripadam', $data);
+        return view('beranda_administrator/entripadam', $data);
     }
 
     public function updating()
@@ -64,7 +78,7 @@ class UpdatingController extends Controller
             'data_unit' => UnitModel::all(),
             'data_wanotif' => WANotifModel::all(),
         ];
-        return view('beranda/updating', $data);
+        return view('beranda_administrator/updating', $data);
     }
     
     public function edit_pelanggan(Request $request, $id)
@@ -135,7 +149,7 @@ class UpdatingController extends Controller
             'title' => 'Form Edit Pelanggan',
             'pelanggan' => DataPelangganModel::find($id)
         ];
-        return view('beranda/FormEdit/editpelanggan', $data);
+        return view('beranda_administrator/FormEdit/editpelanggan', $data);
     }
     public function hapusPelanggan(Request $request)
     {
@@ -156,7 +170,7 @@ class UpdatingController extends Controller
             'title' => 'Form Edit Trafo',
             'trafo' => TrafoModel::find($id)
         ];
-        return view('beranda/FormEdit/edittrafo', $data);
+        return view('beranda_administrator/FormEdit/edittrafo', $data);
     }
     public function hapusTrafo(Request $request)
     {
@@ -177,7 +191,7 @@ class UpdatingController extends Controller
             'title' => 'Form Edit Data Unit',
             'dataunit' => UnitModel::find($id)
         ];
-        return view('beranda/FormEdit/editdataunit', $data);
+        return view('beranda_administrator/FormEdit/editdataunit', $data);
     }
     public function proses_tambah_dataunit(Request $request)
     {
@@ -245,7 +259,7 @@ class UpdatingController extends Controller
             'title' => 'Form Edit WA Notif',
             'wanotif' => WANotifModel::find($id)
         ];
-        return view('beranda/FormEdit/editwanotif', $data);
+        return view('beranda_administrator/FormEdit/editwanotif', $data);
     }
     public function proses_tambah_wanotif(Request $request)
     {

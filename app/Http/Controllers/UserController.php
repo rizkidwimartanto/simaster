@@ -29,8 +29,6 @@ class UserController extends Controller
     {
         $message = [
             'required' => ':attribute harus diisi',
-            'max' => ':attribute maximal 255 kata',
-            'min' => ':attribute minimal 2 kata',
         ];
         $data = $request->validate([
             'username' => 'required',
@@ -38,7 +36,12 @@ class UserController extends Controller
         ], $message);
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
-            return redirect()->intended('beranda');
+            $user = Auth::user();
+            if($user->role == 'administrator'){
+                return redirect()->intended('beranda');
+            }else{
+                return redirect()->intended('user');
+            }
         } else {
             Session::flash('error_login', 'Login Failed');
             return redirect('/');
@@ -57,6 +60,7 @@ class UserController extends Controller
             'username' => 'required|max:255|min:5',
             'email' => 'required|email:dns|unique:App\Models\User,email',
             'password' => 'required|min:5|max:255|confirmed',
+            'role' => '',
         ], $message);
         // event(new Registered($validateData));
         $validateData['password'] = Hash::make($validateData['password']);

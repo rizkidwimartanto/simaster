@@ -56,7 +56,7 @@ class EntriPadamController extends Controller
             'rekap_section' => $rekap_section,
         ];
 
-        return view('beranda/transaksipadam', $data);
+        return view('beranda_administrator/transaksipadam', $data);
     }
     public function transaksiaktif()
     {
@@ -80,7 +80,7 @@ class EntriPadamController extends Controller
             'rekap_pelanggan' => $rekap_pelanggan,
             'rekap_instalasi' => $rekap_instalasi
         ];
-        return view('beranda/transaksiaktif', $data);
+        return view('beranda_administrator/transaksiaktif', $data);
     }
     public function insertEntriPadam(Request $request)
     {
@@ -403,7 +403,7 @@ class EntriPadamController extends Controller
             'padam' => $padam,
             'data_unitulp' => DataPelangganModel::pluck('unitulp')
         ];
-        return view('beranda/petapadam', $data);
+        return view('beranda_administrator/petapadam', $data);
     }
     public function peta_trafo()
     {
@@ -417,7 +417,7 @@ class EntriPadamController extends Controller
             'unit_layanan' => TrafoModel::pluck('unit_layanan'),
             'kategori' => TrafoModel::pluck('kategori')
         ];
-        return view('beranda/petatrafo', $data);
+        return view('beranda_administrator/petatrafo', $data);
     }
     public function export_kali_padam()
     {

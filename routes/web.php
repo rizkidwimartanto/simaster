@@ -31,7 +31,9 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/logout', 'logout')->name('authenticate');
 });
 Route::controller(UpdatingController::class)->group(function () {
-    Route::get('/beranda', 'index')->middleware('auth');
+    Route::get('/beranda', 'index')->middleware('auth')->name('beranda_administrator');
+    Route::get('/user', 'user')->middleware('auth')->name('user');
+    Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating', 'updating')->middleware('auth');

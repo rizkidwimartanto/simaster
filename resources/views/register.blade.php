@@ -11,6 +11,8 @@
                 @csrf
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Create new account</h2>
+                    <input type="hidden" name="role" id="role" value="user"
+                    class="form-control">
                     <div class="mb-3">
                         <label class="form-label required">Name</label>
                         <input type="text" name="name" id="name" value="{{ old('name') }}"
