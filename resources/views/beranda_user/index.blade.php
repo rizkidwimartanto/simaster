@@ -19,25 +19,6 @@
                     </div>
                 </div>
             </div>
-            <select class="form-select pilih_peta" id="pilih_peta" name="pilih_peta">
-                <option disabled selected>--- Pilih Area Unit ---</option>
-                @foreach ($data_unitulp->unique() as $data)
-                    <option value="{{ $data }}">
-                        @if ($data == '52551')
-                            {{ $data = 'Demak' }}
-                        @endif
-                        @if ($data == '52552')
-                            {{ $data = 'Tegowanu' }}
-                        @endif
-                        @if ($data == '52553')
-                            {{ $data = 'Purwodadi' }}
-                        @endif
-                        @if ($data == '52554')
-                            {{ $data = 'Wirosari' }}
-                        @endif
-                    </option>
-                @endforeach
-            </select>
         </div>
     </div>
     <div id="map" onclick="click_map()"></div>
@@ -46,19 +27,14 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">{{ $data->nama }}</h5>
+                        <h5 class="modal-title">{{ $data->nama_pelanggan }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama }} </p>
+                        <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama_pelanggan }} </p>
                         <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
-                        <p class="detail_pelanggan">No Telepon :
-                            <a href="https://wa.me/{{ $data->nohp_stakeholder }}?text=Halo." target="_blank">
-                                {{ $data->nohp_stakeholder }}
-                            </a>
-                        </p>
-                        <p class="detail_pelanggan">Maps : <a href="{{ $data->maps }}"
-                                target="_blank">{{ $data->maps }}</a></p>
+                        <p class="detail_pelanggan">Maps : <a href="https://www.google.com/maps/place/{{ $data->latitude }},{{ $data->longitude }}"
+                                target="_blank">Klik Lokasi</a></p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
@@ -123,53 +99,52 @@
         }).addTo(map);
 
         var data_peta = @json($data_peta);
-        var data_padam = @json($data_padam);
         // Menangani perubahan pada elemen select
-        $('#pilih_peta').change(function() {
-            // Menghapus semua marker yang ada pada peta
-            map.eachLayer(function(layer) {
-                if (layer instanceof L.Marker) {
-                    map.removeLayer(layer);
-                }
-            });
+        // $('#pilih_peta').change(function() {
+        //     // Menghapus semua marker yang ada pada peta
+        //     map.eachLayer(function(layer) {
+        //         if (layer instanceof L.Marker) {
+        //             map.removeLayer(layer);
+        //         }
+        //     });
 
-            var selectedUnitulp = $(this).val();
+        //     var selectedUnitulp = $(this).val();
 
-            var filteredDataPeta = data_peta.filter(function(customer) {
-                return customer.unitulp === selectedUnitulp;
-            });
+        //     var filteredDataPeta = data_peta.filter(function(customer) {
+        //         return customer.unitulp === selectedUnitulp;
+        //     });
 
-            filteredDataPeta.forEach(function(customer) {
-                var iconPadam = L.icon({
-                    iconUrl: 'assets/img/lokasi_merah.png',
-                    iconSize: [20, 20],
-                    iconAnchor: [20, 20],
-                });
-                var iconMenyala = L.icon({
-                    iconUrl: 'assets/img/lokasi_hijau.png',
-                    iconSize: [20, 20],
-                    iconAnchor: [20, 20],
-                });
-                if (data_padam.some(padam => padam.section === customer.nama_section && padam.status ===
-                        'Padam')) {
-                    var marker = L.marker([customer.latitude, customer.longtitude], {
-                        icon: iconPadam
-                    }).addTo(map);
-                } else {
-                    var marker = L.marker([customer.latitude, customer.longtitude], {
-                        icon: iconMenyala
-                    }).addTo(map);
-                }
+        //     filteredDataPeta.forEach(function(customer) {
+        //         var iconPadam = L.icon({
+        //             iconUrl: 'assets/img/lokasi_merah.png',
+        //             iconSize: [20, 20],
+        //             iconAnchor: [20, 20],
+        //         });
+        //         var iconMenyala = L.icon({
+        //             iconUrl: 'assets/img/lokasi_hijau.png',
+        //             iconSize: [20, 20],
+        //             iconAnchor: [20, 20],
+        //         });
+        //         if (data_padam.some(padam => padam.section === customer.nama_section && padam.status ===
+        //                 'Padam')) {
+        //             var marker = L.marker([customer.latitude, customer.longitude], {
+        //                 icon: iconPadam
+        //             }).addTo(map);
+        //         } else {
+        //             var marker = L.marker([customer.latitude, customer.longitude], {
+        //                 icon: iconMenyala
+        //             }).addTo(map);
+        //         }
 
-                marker.bindTooltip(customer.nama).openTooltip();
+        //         marker.bindTooltip(customer.nama).openTooltip();
 
-                marker.on('click', function() {
-                    $('#' + customer.id).modal('show');
-                    $('#customerName').text(customer.nama);
-                    $('#customerDetails').text('Alamat: ' + customer.alamat);
-                });
-            });
-        });
+        //         marker.on('click', function() {
+        //             $('#' + customer.id).modal('show');
+        //             $('#customerName').text(customer.nama);
+        //             $('#customerDetails').text('Alamat: ' + customer.alamat);
+        //         });
+        //     });
+        // });
 
         data_peta.forEach(function(customer) {
             var iconPadam = L.icon({
@@ -182,21 +157,21 @@
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             });
-            if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
-                var marker = L.marker([customer.latitude, customer.longtitude], {
-                    icon: iconPadam
-                }).addTo(map);
-            } else {
-                var marker = L.marker([customer.latitude, customer.longtitude], {
+            // if (data_padam.some(padam => padam.section === customer.nama_section && padam.status === 'Padam')) {
+            //     var marker = L.marker([customer.latitude, customer.longitude], {
+            //         icon: iconPadam
+            //     }).addTo(map);
+            // } else {
+                var marker = L.marker([customer.latitude, customer.longitude], {
                     icon: iconMenyala
                 }).addTo(map);
-            }
+            // }
 
-            marker.bindTooltip(customer.nama).openTooltip();
+            marker.bindTooltip(customer.nama_pelanggan).openTooltip();
 
             marker.on('click', function() {
                 $('#' + customer.id).modal('show');
-                $('#customerName').text(customer.nama);
+                $('#customerName').text(customer.nama_pelanggan);
                 $('#customerDetails').text('Alamat: ' + customer.alamat);
             });
         });
@@ -230,10 +205,10 @@
                 if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 6) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
-                    listItem.textContent = customer.nama;
+                    listItem.textContent = customer.nama_pelanggan;
                     listItem.onclick = function() {
-                        document.getElementById('searchInput').value = customer.nama;
-                        listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
+                        document.getElementById('searchInput').value = customer.nama_pelanggan;
+                        listGroup.innerHTML = ''; 
                         showMarker(customer);
                     };
                     listGroup.appendChild(listItem);
@@ -251,11 +226,11 @@
             if (currentMarker) {
                 map.removeLayer(currentMarker);
             }
-            map.setView([customer.latitude, customer.longtitude], 19);
-            currentMarker.bindTooltip(customer.nama).openTooltip();
+            map.setView([customer.latitude, customer.longitude], 19);
+            currentMarker.bindTooltip(customer.nama_pelanggan).openTooltip();
             currentMarker.on('click', function() {
                 $('#' + customer.id).modal('show');
-                $('#customerName').text(customer.nama);
+                $('#customerName').text(customer.nama_pelanggan);
                 $('#customerDetails').text('Alamat: ' + customer.alamat);
             });
         }

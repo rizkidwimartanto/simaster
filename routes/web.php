@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DataPegawaiController;
 use App\Http\Controllers\DataPelangganController;
 use App\Http\Controllers\EntriPadamController;
+use App\Http\Controllers\InputPelangganAPPController;
 use App\Http\Controllers\UpdatingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -24,16 +25,19 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Route::controller(UserController::class)->group(function () {
-    Route::get('/', 'index')->name('login');
+    Route::get('/', 'index')->name('index');
     Route::get('/register', 'register');
     Route::post('/store', 'store');
     Route::post('/proseslogin', 'authenticate')->name('authenticate');
     Route::get('/logout', 'logout')->name('authenticate');
 });
-Route::controller(UpdatingController::class)->group(function () {
-    Route::get('/beranda', 'index')->middleware('auth')->name('beranda_administrator');
-    Route::get('/user', 'user')->middleware('auth')->name('user');
+Route::controller(InputPelangganAPPController::class)->group(function () {
+    Route::get('/user', 'user')->middleware(['auth', 'role:user'])->name('user');
     Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
+    Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
+});
+Route::controller(UpdatingController::class)->group(function () {
+    Route::get('/beranda', 'index')->middleware(['auth', 'role:administrator'])->name('beranda_administrator');
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating', 'updating')->middleware('auth');

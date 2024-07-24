@@ -37,10 +37,11 @@ class UserController extends Controller
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
             $user = Auth::user();
-            if($user->role == 'administrator'){
-                return redirect()->intended('beranda');
-            }else{
+            $request->session()->put('role', $user->role);
+            if($user->role == 'user'){
                 return redirect()->intended('user');
+            }else{
+                return redirect()->intended('beranda');
             }
         } else {
             Session::flash('error_login', 'Login Failed');
