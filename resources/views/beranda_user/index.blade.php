@@ -22,7 +22,7 @@
         </div>
     </div>
     <div id="map" onclick="click_map()"></div>
-    @foreach ($data_peta as $data)
+    @foreach ($data_pelanggan_app as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -98,7 +98,7 @@
             }
         }).addTo(map);
 
-        var data_peta = @json($data_peta);
+        var data_pelanggan_app = @json($data_pelanggan_app);
         // Menangani perubahan pada elemen select
         // $('#pilih_peta').change(function() {
         //     // Menghapus semua marker yang ada pada peta
@@ -110,7 +110,7 @@
 
         //     var selectedUnitulp = $(this).val();
 
-        //     var filteredDataPeta = data_peta.filter(function(customer) {
+        //     var filteredDataPeta = data_pelanggan_app.filter(function(customer) {
         //         return customer.unitulp === selectedUnitulp;
         //     });
 
@@ -146,7 +146,7 @@
         //     });
         // });
 
-        data_peta.forEach(function(customer) {
+        data_pelanggan_app.forEach(function(customer) {
             var iconPadam = L.icon({
                 iconUrl: 'assets/img/lokasi_merah.png',
                 iconSize: [20, 20],
@@ -201,7 +201,7 @@
             var listGroup = suggestionList.querySelector('ul');
             listGroup.innerHTML = '';
 
-            data_peta.forEach(function(customer) {
+            data_pelanggan_app.forEach(function(customer) {
                 if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 6) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';

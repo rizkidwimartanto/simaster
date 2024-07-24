@@ -32,12 +32,12 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/logout', 'logout')->name('authenticate');
 });
 Route::controller(InputPelangganAPPController::class)->group(function () {
-    Route::get('/user', 'user')->middleware(['auth', 'role:user'])->name('user');
+    Route::get('/user', 'user')->middleware('auth')->name('user');
     Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
     Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
 });
 Route::controller(UpdatingController::class)->group(function () {
-    Route::get('/beranda', 'index')->middleware(['auth', 'role:administrator'])->name('beranda_administrator');
+    Route::get('/beranda', 'index')->middleware('auth')->name('beranda_administrator');
     Route::get('/entripadam', 'entri_padam')->middleware('auth');
     Route::delete('/hapus_pelanggan', 'hapusPelanggan');
     Route::get('/updating', 'updating')->middleware('auth');

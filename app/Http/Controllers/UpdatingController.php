@@ -18,6 +18,7 @@ use App\Models\SectionModel;
 use App\Models\TrafoModel;
 use App\Models\UnitModel;
 use App\Models\WANotifModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Twilio\Rest\Client;
@@ -31,18 +32,15 @@ class UpdatingController extends Controller
             'title' => 'Peta Pelanggan',
             'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
             'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
+            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id','id_pelanggan', 'nama_pelanggan', 'tarif', 'daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter')->get(),
             'data_unitulp' => DataPelangganModel::pluck('unitulp')
         ];
-        return view('beranda_administrator/index', $data);
-    }
-    public function user(){
-        $data = [
-            'title' => 'Peta Pelanggan',
-            'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
-            'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
-            'data_unitulp' => DataPelangganModel::pluck('unitulp')
-        ];
-        return view('beranda_user/index', $data);
+        if (Auth::user()->role === 'administrator') {
+            return view('beranda_administrator/index', $data);
+        } else {
+            return view('beranda_user/index', $data);
+        }
+
     }
     public function entridata_user(){
         $data = [
