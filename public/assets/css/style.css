@@ -21,13 +21,21 @@ header.navbar-expand-md {
     height: 90%;
     z-index: 0;
 }
-
+#map_koordinator {
+    position: relative;
+    bottom: 68px;
+    height: 55%;
+    z-index: 0;
+}
+.display-pelanggan-app{
+    position: relative;
+    bottom: 53px;
+}
 p.detail_pelanggan {
     border-bottom: 1px solid black;
     color: #353535;
     padding-bottom: 10px;
 }
-
 div.search_customer {
     position: relative;
     width: 50%;

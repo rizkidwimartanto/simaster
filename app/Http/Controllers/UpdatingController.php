@@ -37,8 +37,10 @@ class UpdatingController extends Controller
         ];
         if (Auth::user()->role === 'administrator') {
             return view('beranda_administrator/index', $data);
-        } else {
+        } else if(Auth::user()->role === 'user'){
             return view('beranda_user/index', $data);
+        }else{
+            return view('beranda_koordinator.index', $data);
         }
 
     }

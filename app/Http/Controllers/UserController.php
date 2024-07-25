@@ -40,6 +40,8 @@ class UserController extends Controller
             $request->session()->put('role', $user->role);
             if($user->role == 'user'){
                 return redirect()->intended('user');
+            }else if($user->role == 'koordinator'){
+                return redirect()->intended('koordinator');
             }else{
                 return redirect()->intended('beranda');
             }

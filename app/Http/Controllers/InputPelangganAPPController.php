@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\APPExport;
 use App\Models\DataPelangganModel;
 use App\Models\PelangganAPPModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class InputPelangganAPPController extends Controller
 {
@@ -72,5 +74,21 @@ class InputPelangganAPPController extends Controller
             Session::flash('error_tambah_wanotif', 'wanotif gagal ditambahkan');
         }
         return redirect('/user');
+    }
+    public function koordinator(){
+        $data = [
+            'title' => 'Koordinator',
+            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->get(),
+        ];
+        return view('beranda_koordinator.index', $data);
+    }
+    public function export_excel_app(Request $request)
+    {
+        date_default_timezone_set('Asia/Jakarta');
+    
+        $startDate = $request->query('start_date');
+        $endDate = $request->query('end_date');
+    
+        return Excel::download(new APPExport($startDate, $endDate), 'APP ' . date('d-m-Y') . '.xlsx');
     }
 }

@@ -55,15 +55,15 @@
             <div class="mb-4">
                 <div class="row">
                     <div class="col-md-6">
-                        <label class="form-label">Latitude</label>
+                        {{-- <label class="form-label">Latitude</label> --}}
                         <div class="input-group input-group-flat">
-                            <input required class="form-control" name="latitude" id="latitude" type="text" readonly>
+                            <input required class="form-control" name="latitude" id="latitude" type="hidden" readonly>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label">Longitude</label>
+                        {{-- <label class="form-label">Longitude</label> --}}
                         <div class="input-group input-group-flat">
-                            <input required class="form-control" name="longitude" id="longitude" type="text" readonly>
+                            <input required class="form-control" name="longitude" id="longitude" type="hidden" readonly>
                         </div>
                     </div>
                 </div>

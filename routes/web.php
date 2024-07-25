@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 Route::controller(UserController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
+    Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');
     Route::post('/store', 'store');
     Route::post('/proseslogin', 'authenticate')->name('authenticate');
@@ -33,8 +33,10 @@ Route::controller(UserController::class)->group(function () {
 });
 Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/user', 'user')->middleware('auth')->name('user');
+    Route::get('/koordinator', 'koordinator')->middleware('auth')->name('koordinator');
     Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
     Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
+    Route::get('/export_excel_app', 'export_excel_app');
 });
 Route::controller(UpdatingController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth')->name('beranda_administrator');

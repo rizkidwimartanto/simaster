@@ -11,4 +11,5 @@ class PelangganAPPModel extends Model
     protected $table = 'entri_pelanggan_app';
     protected $primaryKey = 'id';
     protected $fillable = ['id_pelanggan', 'nama_pelanggan', 'tarif', 'daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'tahun_meter', 'merk_mcb', 'ukuran_mcb', 'no_segel','no_gardu','sr_deret','catatan'];
+    public $timestamps = true;
 }
