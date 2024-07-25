@@ -14,7 +14,7 @@ class InputPelangganAPPController extends Controller
         $data = [
             'title' => 'Peta Pelanggan',
             // 'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
-            'data_peta' => DB::table('entri_pelanggan_app')->select('id','id_pelanggan', 'nama_pelanggan', 'tarif', 'daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter')->get(),
+            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id','id_pelanggan', 'nama_pelanggan', 'tarif', 'daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter')->get(),
             // 'data_unitulp' => PelangganAPPModel::pluck('unitulp')
         ];
         return view('beranda_user/index', $data);

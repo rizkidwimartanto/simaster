@@ -34,6 +34,7 @@
     @yield('content')
     <!-- Libs JS -->
     <!-- Tabler Core -->
+    <script src="assets/js/script.js"></script>
     <script src="assets_template/dist/js/tabler.min.js?1684106062" defer></script>
     <script src="assets_template/dist/js/demo.min.js?1684106062" defer></script>
   </body>

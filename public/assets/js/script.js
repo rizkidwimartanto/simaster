@@ -1,45 +1,31 @@
-$(document).ready(function () {});
-function hapusTargetNomorHP(){
-    
-}
-function buttonEntriPadam() {
-    var penyebab_padam = document.getElementById("penyebab_padam").value;
-    var penyulang = document.getElementById("penyulang").value;
-    var checkboxes = document.querySelectorAll('input[name="section[]"]');
-
-    for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener("change", function () {
-            if (this.checked) {
-                console.log(this.value);
-                // Lakukan apapun yang Anda butuhkan dengan nilai yang dicentang di sini
-            }
-        });
+//? SCRIPT DARI ENTRIDATA_USER.BLADE
+document.getElementById('getLocation').addEventListener('click', function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        alert("Geolocation is not supported by this browser.");
     }
+});
 
-    var jam_padam = document.getElementById("jam_padam").value;
-    var keterangan = document.getElementById("keterangan").value;
-    var status = document.getElementById("status").value;
-    var csrfToken = document.head.querySelector(
-        'meta[name="csrf-token"]'
-    ).content;
-    $.ajax({
-        url: "/entripadam",
-        type: "POST",
-        data: {
-            _token: csrfToken,
-            penyebab_padam,
-            penyulang,
-            jam_padam,
-            keterangan,
-            status,
-        },
-        success: function (response) {
-            console.log(response);
-            var alertSuccessEntri =
-                document.getElementById("alertSuccessEntri");
-            var alertTextEntri = document.getElementById("alertTextEntri");
-            alertTextEntri.innerHTML = response.message;
-            alertSuccessEntri.classList.remove("d-none");
-        },
-    });
+function showPosition(position) {
+    document.getElementById('latitude').value = position.coords.latitude;
+    document.getElementById('longitude').value = position.coords.longitude;
 }
+
+function showError(error) {
+    switch (error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+    }
+}
+//? END SCRIPT DARI ENTRIDATA_USER.BLADE
