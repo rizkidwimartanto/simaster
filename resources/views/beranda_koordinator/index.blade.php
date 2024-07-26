@@ -118,76 +118,76 @@
                                             <div class="mb-3">
                                                 <label for="idPelanggan" class="form-label">Tanggal Dibuat</label>
                                                 <input type="text" class="form-control" id="idPelanggan"
-                                                    name="id_pelanggan" value="{{ date('d/m/Y H:i', strtotime($app->created_at)) }}" required>
+                                                    name="id_pelanggan" value="{{ date('d/m/Y H:i', strtotime($app->created_at)) }}" readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="idPelanggan" class="form-label">ID Pelanggan</label>
                                                 <input type="text" class="form-control" id="idPelanggan"
-                                                    name="id_pelanggan" value="{{ $app->id_pelanggan }}" required>
+                                                    name="id_pelanggan" value="{{ $app->id_pelanggan }}" readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="namaPelanggan" class="form-label">Nama Pelanggan</label>
                                                 <input type="text" class="form-control" id="namaPelanggan"
-                                                    name="nama_pelanggan" value="{{ $app->nama_pelanggan }}" required>
+                                                    name="nama_pelanggan" value="{{ $app->nama_pelanggan }}" readonly>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tarif" class="form-label">Tarif</label>
                                                 <input type="text" class="form-control" id="tarif" name="tarif"
-                                                    required value="{{ $app->tarif }}">
+                                                    readonly value="{{ $app->tarif }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="daya" class="form-label">Daya</label>
                                                 <input type="text" class="form-control" id="daya" name="daya"
-                                                    required value="{{ $app->daya }}">
+                                                    readonly value="{{ $app->daya }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="alamat" class="form-label">Alamat</label>
-                                                <textarea class="form-control" id="alamat" name="alamat" rows="3" required>{{ $app->alamat }}</textarea>
+                                                <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $app->alamat }}</textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="jenis_meter" class="form-label">jenis_meter</label>
                                                 <input type="text" class="form-control" id="jenis_meter"
-                                                    name="jenis_meter" required value="{{ $app->jenis_meter }}">
+                                                    name="jenis_meter" readonly value="{{ $app->jenis_meter }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="merk_meter" class="form-label">merk_meter</label>
                                                 <input type="text" class="form-control" id="merk_meter"
-                                                    name="merk_meter" required value="{{ $app->merk_meter }}">
+                                                    name="merk_meter" readonly value="{{ $app->merk_meter }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tahun_meter" class="form-label">tahun_meter</label>
                                                 <input type="text" class="form-control" id="tahun_meter"
-                                                    name="tahun_meter" required value="{{ $app->tahun_meter }}">
+                                                    name="tahun_meter" readonly value="{{ $app->tahun_meter }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="merk_mcb" class="form-label">merk_mcb</label>
                                                 <input type="text" class="form-control" id="merk_mcb"
-                                                    name="merk_mcb" required value="{{ $app->merk_mcb }}">
+                                                    name="merk_mcb" readonly value="{{ $app->merk_mcb }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ukuran_mcb" class="form-label">ukuran_mcb</label>
                                                 <input type="text" class="form-control" id="ukuran_mcb"
-                                                    name="ukuran_mcb" required value="{{ $app->ukuran_mcb }}">
+                                                    name="ukuran_mcb" readonly value="{{ $app->ukuran_mcb }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="no_segel" class="form-label">no_segel</label>
                                                 <input type="text" class="form-control" id="no_segel"
-                                                    name="no_segel" required value="{{ $app->no_segel }}">
+                                                    name="no_segel" readonly value="{{ $app->no_segel }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="no_gardu" class="form-label">no_gardu</label>
                                                 <input type="text" class="form-control" id="no_gardu"
-                                                    name="no_gardu" required value="{{ $app->no_gardu }}">
+                                                    name="no_gardu" readonly value="{{ $app->no_gardu }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="sr_deret" class="form-label">sr_deret</label>
                                                 <input type="text" class="form-control" id="sr_deret"
-                                                    name="sr_deret" required value="{{ $app->sr_deret }}">
+                                                    name="sr_deret" readonly value="{{ $app->sr_deret }}">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="catatan" class="form-label">catatan</label>
                                                 <input type="text" class="form-control" id="catatan" name="catatan"
-                                                    required value="{{ $app->catatan }}">
+                                                    readonly value="{{ $app->catatan }}">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
