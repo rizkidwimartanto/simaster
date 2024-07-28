@@ -29,7 +29,7 @@ class APPExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'Tanggal Dibuat',
+            'Tanggal Pasang',
             'ID Pelanggan',
             'Nama Pelanggan',
             'Tarif',

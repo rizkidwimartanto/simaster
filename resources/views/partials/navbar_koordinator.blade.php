@@ -8,8 +8,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul style="font-size: 13px;" class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item {{ $title == 'Peta Pelanggan' ? 'active' : '' }}">
-                    <a class="nav-link" href="/user">Peta Pelanggan</a>
+                <li class="nav-item {{ $title == 'Koordinator' ? 'active' : '' }}">
+                    <a class="nav-link" href="/user">Koordinator</a>
                 </li>
             </ul>
             <form class="d-flex" role="search" action="/logout" method="GET">

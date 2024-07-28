@@ -37,6 +37,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
     Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
     Route::get('/export_excel_app', 'export_excel_app');
+    Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');
 });
 Route::controller(UpdatingController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth')->name('beranda_administrator');

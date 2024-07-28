@@ -25,6 +25,7 @@ class EntriPelangganApp extends Migration
             $table->string('jenis_meter')->nullable();
             $table->string('merk_meter')->nullable();
             $table->string('tahun_meter')->nullable();
+            $table->string('nomor_meter')->nullable();
             $table->string('merk_mcb')->nullable();
             $table->string('ukuran_mcb')->nullable();
             $table->string('no_segel')->nullable();

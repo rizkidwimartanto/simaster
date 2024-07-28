@@ -42,6 +42,7 @@ class InputPelangganAPPController extends Controller
             'jenis_meter' => 'required',
             'merk_meter' => 'required',
             'tahun_meter' => 'required',
+            'nomor_meter' => 'required',
             'merk_mcb' => 'required',
             'ukuran_mcb' => 'required',
             'no_segel' => 'required',
@@ -61,6 +62,7 @@ class InputPelangganAPPController extends Controller
                 'jenis_meter' => $request->input('jenis_meter'),
                 'merk_meter' => $request->input('merk_meter'),
                 'tahun_meter' => $request->input('tahun_meter'),
+                'nomor_meter' => $request->input('nomor_meter'),
                 'merk_mcb' => $request->input('merk_mcb'),
                 'ukuran_mcb' => $request->input('ukuran_mcb'),
                 'no_segel' => $request->input('no_segel'),
@@ -69,11 +71,12 @@ class InputPelangganAPPController extends Controller
                 'catatan' => $request->input('catatan'),
             ]);
     
-            Session::flash('success_tambah_wanotif', 'wanotif berhasil ditambahkan');
+            Session::flash('success_tambah_APP', 'APP berhasil ditambahkan');
+            return redirect('/user');
         } else {
-            Session::flash('error_tambah_wanotif', 'wanotif gagal ditambahkan');
+            Session::flash('error_tambah_APP', 'APP gagal ditambahkan');
+            return redirect('/entridata_user');
         }
-        return redirect('/user');
     }
     public function koordinator(){
         $data = [
@@ -90,5 +93,19 @@ class InputPelangganAPPController extends Controller
         $endDate = $request->query('end_date');
     
         return Excel::download(new APPExport($startDate, $endDate), 'APP ' . date('d-m-Y') . '.xlsx');
+    }
+    public function hapusPelangganAPP(Request $request)
+    {
+        $hapus_items = $request->input('checkPelangganAPP');
+        if ($hapus_items) {
+            foreach ($hapus_items as $hapus) {
+                $pelanggan = PelangganAPPModel::find($hapus);
+                $pelanggan->delete();
+            }
+            Session::flash('success_hapus_pelanggan', 'data pelanggan berhasil dihapus');
+        } else {
+            Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
+        }
+        return redirect('/koordinator');
     }
 }

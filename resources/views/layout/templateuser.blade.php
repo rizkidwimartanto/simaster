@@ -30,7 +30,7 @@
       }
     </style>
   </head>
-  <body  class=" d-flex flex-column">
+  <body  class="d-flex flex-column">
     @yield('content')
     <!-- Libs JS -->
     <!-- Tabler Core -->
