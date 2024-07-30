@@ -54,16 +54,20 @@ class UserController extends Controller
     {
         $message = [
             'required' => ':attribute harus diisi',
+            'role.in' => ':attribute harus dipilih',
             'max' => ':attribute maximal 255 kata/angka',
             'min' => ':attribute minimal 2 kata/angka',
             'email' => ':attribute tidak valid',
+            'unit_ulp.required_if' => 'Unit ULP harus diisi jika role adalah User',
+            'unit_ulp.in' => 'Unit ULP yang dipilih tidak valid',
         ];
         $validateData = $request->validate([
             'name' => 'required|max:255|min:2',
             'username' => 'required|max:255|min:5',
             'email' => 'required|email:dns|unique:App\Models\User,email',
             'password' => 'required|min:5|max:255|confirmed',
-            'role' => '',
+            'role' => 'required|in:administrator,koordinator,user',
+            'unit_ulp' => 'required_if:role,user|in:ulp demak,ulp tegowanu,ulp purwodadi,ulp wirosari',
         ], $message);
         // event(new Registered($validateData));
         $validateData['password'] = Hash::make($validateData['password']);

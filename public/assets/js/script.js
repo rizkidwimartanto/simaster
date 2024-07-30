@@ -28,7 +28,6 @@ function showError(error) {
             break;
     }
 }
-
 document.getElementById("tarif").addEventListener("change", function () {
     var dayaSelected = document.getElementById("daya");
     var selectedTarif = this.value;

@@ -1,19 +1,14 @@
 @extends('layout/templateberanda_koordinator')
 @section('content')
-    <div class="container-fluid" style="padding: 8px;">
-        <div class="row justify-content-between text-center nav_koordinator">
-            <div class="col-2" style="font-weight: 700"><a href="/koordinator" style="text-decoration: none;">Semua Pelanggan
-                    APP</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_demak" style="text-decoration: none;">Pelanggan
-                    Demak</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_tegowanu"
-                    style="text-decoration: none;">Pelanggan Tegowanu</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_purwodadi"
-                    style="text-decoration: none;">Pelanggan Purwodadi</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_wirosari"
-                    style="text-decoration: none;">Pelanggan Wirosari</a></div>
-        </div>
+<div class="container-fluid" style="padding: 8px;">
+    <div class="row justify-content-between text-center nav_koordinator">
+        <div class="col-2" style="font-weight: 700"><a href="/koordinator" style="text-decoration: none;">Semua Pelanggan APP</a></div>
+        <div class="col-2" style="font-weight: 700"><a href="/pelanggan_demak" style="text-decoration: none;">Pelanggan Demak</a></div>
+        <div class="col-2" style="font-weight: 700"><a href="/pelanggan_tegowanu" style="text-decoration: none;">Pelanggan Tegowanu</a></div>
+        <div class="col-2" style="font-weight: 700"><a href="/pelanggan_purwodadi" style="text-decoration: none;">Pelanggan Purwodadi</a></div>
+        <div class="col-2" style="font-weight: 700"><a href="/pelanggan_wirosari" style="text-decoration: none;">Pelanggan Wirosari</a></div>
     </div>
+</div>
     <div class="container">
         <div class="d-flex justify-content-around">
             <div class="mt-3 mb-3 search_customer">
@@ -36,7 +31,7 @@
         </div>
     </div>
     <div id="map_koordinator" onclick="click_map()"></div>
-    @foreach ($data_pelanggan_app as $data)
+    @foreach ($data_pelanggan_app_demak as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -59,7 +54,7 @@
         </div>
     @endforeach
     <div class="container-fluid display-pelanggan-app">
-        <h1 class="text-center" style="font-weight: 700;">Semua Pelanggan APP</h1>
+        <h1 class="text-center" style="font-weight: 700;">Pelanggan Demak</h1>
         <div class="card p-3 mb-3">
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -75,8 +70,8 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary mt-2 mb-2" id="filterButton"> <i class="fa-solid fa-filter fa-lg"
-                                style="margin-right: 5px;"></i> Filter Map</button>
+                        <button class="btn btn-primary mt-2 mb-2" id="filterButton"><i
+                            class="fa-solid fa-filter fa-lg" style="margin-right: 5px;"></i> Filter Map</button>
                     </div>
                 </div>
                 <div class="col-md-6 col-12">
@@ -92,8 +87,8 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-warning mt-2 mb-2" id="exportButton"><i
-                                class="fa-solid fa-file-export fa-lg" style="margin-right: 5px"></i>Export Excel</button>
+                        <button class="btn btn-warning mt-2 mb-2" id="exportButton"><i class="fa-solid fa-file-export fa-lg"
+                                style="margin-right: 5px"></i>Export Excel</button>
                     </div>
                 </div>
             </div>
@@ -162,7 +157,7 @@
                     @php
                         $no = 1;
                     @endphp
-                    @foreach ($data_pelanggan_app as $app)
+                    @foreach ($data_pelanggan_app_demak as $app)
                         <tr>
                             <td width="5%">{{ $no++ }}</td>
                             <td width="2%">
@@ -178,10 +173,7 @@
                             <td width="45%">{{ $app->nama_pelanggan }}</td>
                             <td width="5%">
                                 <a href="#" data-bs-target="#detail-{{ $app->id }}" data-bs-toggle="modal">
-                                    <i class="fa-solid fa-circle-info fa-lg"></i>
-                                </a>
-                                <a href="/edit_pelanggan_app/{{$app->id}}">
-                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                 </a>
                                 <!-- Modal -->
                                 <div class="modal fade" id="detail-{{ $app->id }}" tabindex="-1"
@@ -314,7 +306,7 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var data_pelanggan_app = @json($data_pelanggan_app);
+        var data_pelanggan_app_demak = @json($data_pelanggan_app_demak);
         var currentMarker;
 
         function addMarkers(data) {
@@ -324,10 +316,12 @@
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 });
-                var marker = L.marker([customer.latitude, customer.longitude], {
-                    icon: iconMenyala
-                }).addTo(map);
-
+                if (customer.unit_ulp === 'ulp demak') {
+                    var marker = L.marker([customer.latitude, customer.longitude], {
+                        icon: iconMenyala
+                    }).addTo(map);
+                }
+                console.log(customer);
                 marker.bindTooltip(customer.nama_pelanggan).openTooltip();
 
                 marker.on('click', function() {
@@ -338,7 +332,7 @@
             });
         }
 
-        addMarkers(data_pelanggan_app);
+        addMarkers(data_pelanggan_app_demak);
 
         document.getElementById('filterButton').addEventListener('click', function() {
             var startDate = document.getElementById('startDate').value;
@@ -347,7 +341,7 @@
                 var endDateObj = new Date(endDate);
                 endDateObj.setDate(endDateObj.getDate() + 1);
 
-                var filteredData = data_pelanggan_app.filter(function(customer) {
+                var filteredData = data_pelanggan_app_demak.filter(function(customer) {
                     var createdAt = new Date(customer.created_at);
                     return createdAt >= new Date(startDate) && createdAt < endDateObj;
                 });
@@ -359,34 +353,6 @@
                 addMarkers(filteredData);
             }
         });
-
-        function showSuggestions() {
-            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            var suggestionList = document.getElementById('suggestionList');
-            var listGroup = suggestionList.querySelector('ul');
-            listGroup.innerHTML = '';
-
-            data_pelanggan_app.forEach(function(customer) {
-                if (customer.nama_pelanggan.toLowerCase().includes(
-                        searchTerm)) {
-                    var listItem = document.createElement('li');
-                    listItem.className = 'list-group-item';
-                    listItem.textContent = customer.nama_pelanggan;
-                    listItem.onclick = function() {
-                        document.getElementById('searchInput').value = customer.nama_pelanggan;
-                        listGroup.innerHTML = '';
-                        showMarker(customer);
-                    };
-                    listGroup.appendChild(listItem);
-                }
-            });
-
-            if (listGroup.childElementCount > 0) {
-                suggestionList.style.display = 'block';
-            } else {
-                suggestionList.style.display = 'none';
-            }
-        }
 
         function hapusPencarian() {
             document.getElementById('searchInput').value = "";
@@ -421,12 +387,33 @@
             });
         }
 
-        document.addEventListener('click', function(event) {
+        function showSuggestions() {
+            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
             var suggestionList = document.getElementById('suggestionList');
-            if (event.target !== suggestionList && !suggestionList.contains(event.target)) {
+            var listGroup = suggestionList.querySelector('ul');
+            listGroup.innerHTML = '';
+
+            data_pelanggan_app_demak.forEach(function(customer) {
+                if (customer.nama_pelanggan.toLowerCase().includes(
+                        searchTerm)) {
+                    var listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = customer.nama_pelanggan;
+                    listItem.onclick = function() {
+                        document.getElementById('searchInput').value = customer.nama_pelanggan;
+                        listGroup.innerHTML = '';
+                        showMarker(customer);
+                    };
+                    listGroup.appendChild(listItem);
+                }
+            });
+
+            if (listGroup.childElementCount > 0) {
+                suggestionList.style.display = 'block';
+            } else {
                 suggestionList.style.display = 'none';
             }
-        });
+        }
         document.getElementById('exportButton').addEventListener('click', function() {
             var startDateExcel = document.getElementById('startDateExcel').value;
             var endDateExcel = document.getElementById('endDateExcel').value;

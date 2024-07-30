@@ -33,8 +33,14 @@ Route::controller(UserController::class)->group(function () {
 });
 Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/user', 'user')->middleware('auth')->name('user');
-    Route::get('/koordinator', 'koordinator')->middleware('auth')->name('koordinator');
     Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
+    Route::get('/koordinator', 'koordinator')->middleware('auth')->name('koordinator');
+    Route::get('/pelanggan_demak', 'pelanggan_demak')->middleware('auth')->name('pelanggan_demak');
+    Route::get('/pelanggan_tegowanu', 'pelanggan_tegowanu')->middleware('auth')->name('pelanggan_tegowanu');
+    Route::get('/pelanggan_purwodadi', 'pelanggan_purwodadi')->middleware('auth')->name('pelanggan_purwodadi');
+    Route::get('/pelanggan_wirosari', 'pelanggan_wirosari')->middleware('auth')->name('pelanggan_wirosari');
+    Route::get('/edit_pelanggan_app/{id}', 'edit_pelanggan_app')->middleware('auth')->name('edit_pelanggan_app');
+    Route::post('/proses_edit_pelanggan_app/{id}', 'proses_edit_pelanggan_app');
     Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');

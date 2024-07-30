@@ -36,7 +36,7 @@
         </div>
     </div>
     <div id="map_koordinator" onclick="click_map()"></div>
-    @foreach ($data_pelanggan_app as $data)
+    @foreach ($data_pelanggan_app_wirosari as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -59,7 +59,7 @@
         </div>
     @endforeach
     <div class="container-fluid display-pelanggan-app">
-        <h1 class="text-center" style="font-weight: 700;">Semua Pelanggan APP</h1>
+        <h1 class="text-center" style="font-weight: 700;">Pelanggan Wirosari</h1>
         <div class="card p-3 mb-3">
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-primary mt-2 mb-2" id="filterButton"> <i class="fa-solid fa-filter fa-lg"
+                        <button class="btn btn-primary mt-2 mb-2" id="filterButton"><i class="fa-solid fa-filter fa-lg"
                                 style="margin-right: 5px;"></i> Filter Map</button>
                     </div>
                 </div>
@@ -162,7 +162,7 @@
                     @php
                         $no = 1;
                     @endphp
-                    @foreach ($data_pelanggan_app as $app)
+                    @foreach ($data_pelanggan_app_wirosari as $app)
                         <tr>
                             <td width="5%">{{ $no++ }}</td>
                             <td width="2%">
@@ -178,10 +178,7 @@
                             <td width="45%">{{ $app->nama_pelanggan }}</td>
                             <td width="5%">
                                 <a href="#" data-bs-target="#detail-{{ $app->id }}" data-bs-toggle="modal">
-                                    <i class="fa-solid fa-circle-info fa-lg"></i>
-                                </a>
-                                <a href="/edit_pelanggan_app/{{$app->id}}">
-                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                    <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                 </a>
                                 <!-- Modal -->
                                 <div class="modal fade" id="detail-{{ $app->id }}" tabindex="-1"
@@ -314,7 +311,7 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var data_pelanggan_app = @json($data_pelanggan_app);
+        var data_pelanggan_app_wirosari = @json($data_pelanggan_app_wirosari);
         var currentMarker;
 
         function addMarkers(data) {
@@ -338,55 +335,7 @@
             });
         }
 
-        addMarkers(data_pelanggan_app);
-
-        document.getElementById('filterButton').addEventListener('click', function() {
-            var startDate = document.getElementById('startDate').value;
-            var endDate = document.getElementById('endDate').value;
-            if (startDate && endDate) {
-                var endDateObj = new Date(endDate);
-                endDateObj.setDate(endDateObj.getDate() + 1);
-
-                var filteredData = data_pelanggan_app.filter(function(customer) {
-                    var createdAt = new Date(customer.created_at);
-                    return createdAt >= new Date(startDate) && createdAt < endDateObj;
-                });
-                map.eachLayer(function(layer) {
-                    if (layer instanceof L.Marker) {
-                        map.removeLayer(layer);
-                    }
-                });
-                addMarkers(filteredData);
-            }
-        });
-
-        function showSuggestions() {
-            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            var suggestionList = document.getElementById('suggestionList');
-            var listGroup = suggestionList.querySelector('ul');
-            listGroup.innerHTML = '';
-
-            data_pelanggan_app.forEach(function(customer) {
-                if (customer.nama_pelanggan.toLowerCase().includes(
-                        searchTerm)) {
-                    var listItem = document.createElement('li');
-                    listItem.className = 'list-group-item';
-                    listItem.textContent = customer.nama_pelanggan;
-                    listItem.onclick = function() {
-                        document.getElementById('searchInput').value = customer.nama_pelanggan;
-                        listGroup.innerHTML = '';
-                        showMarker(customer);
-                    };
-                    listGroup.appendChild(listItem);
-                }
-            });
-
-            if (listGroup.childElementCount > 0) {
-                suggestionList.style.display = 'block';
-            } else {
-                suggestionList.style.display = 'none';
-            }
-        }
+        addMarkers(data_pelanggan_app_wirosari);
 
         function hapusPencarian() {
             document.getElementById('searchInput').value = "";
@@ -421,12 +370,54 @@
             });
         }
 
-        document.addEventListener('click', function(event) {
+        function showSuggestions() {
+            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
             var suggestionList = document.getElementById('suggestionList');
-            if (event.target !== suggestionList && !suggestionList.contains(event.target)) {
+            var listGroup = suggestionList.querySelector('ul');
+            listGroup.innerHTML = '';
+
+            data_pelanggan_app_wirosari.forEach(function(customer) {
+                if (customer.nama_pelanggan.toLowerCase().includes(
+                        searchTerm)) {
+                    var listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.textContent = customer.nama_pelanggan;
+                    listItem.onclick = function() {
+                        document.getElementById('searchInput').value = customer.nama_pelanggan;
+                        listGroup.innerHTML = '';
+                        showMarker(customer);
+                    };
+                    listGroup.appendChild(listItem);
+                }
+            });
+
+            if (listGroup.childElementCount > 0) {
+                suggestionList.style.display = 'block';
+            } else {
                 suggestionList.style.display = 'none';
             }
+        }
+
+        document.getElementById('filterButton').addEventListener('click', function() {
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
+            if (startDate && endDate) {
+                var endDateObj = new Date(endDate);
+                endDateObj.setDate(endDateObj.getDate() + 1);
+
+                var filteredData = data_pelanggan_app_wirosari.filter(function(customer) {
+                    var createdAt = new Date(customer.created_at);
+                    return createdAt >= new Date(startDate) && createdAt < endDateObj;
+                });
+                map.eachLayer(function(layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
+                addMarkers(filteredData);
+            }
         });
+
         document.getElementById('exportButton').addEventListener('click', function() {
             var startDateExcel = document.getElementById('startDateExcel').value;
             var endDateExcel = document.getElementById('endDateExcel').value;

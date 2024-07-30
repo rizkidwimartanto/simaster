@@ -32,6 +32,7 @@ class EntriPelangganApp extends Migration
             $table->string('no_gardu')->nullable();
             $table->string('sr_deret')->nullable();
             $table->string('catatan');
+            $table->string('unit_ulp')->nullable();
             $table->timestamps();
         });
     }

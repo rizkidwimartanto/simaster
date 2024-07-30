@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul style="font-size: 13px;" class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li
-                    class="nav-item {{ $title == 'Peta Pelanggan' ? 'active' : ($title == 'Peta Padam' ? 'active' : '') }} dropdown">
+                    class="nav-item {{ in_array($title, ['Peta Pelanggan', 'Peta Padam', 'Peta Trafo']) ? 'active' : '' }} dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Peta
