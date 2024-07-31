@@ -246,4 +246,90 @@
             </div>
         </form>
     </div>
+    <script>
+        document.getElementById("tarif").addEventListener("change", function() {
+            updateDayaOptions();
+        });
+    
+        function updateDayaOptions() {
+            var dayaSelected = document.getElementById("daya");
+            var selectedTarif = document.getElementById("tarif").value;
+            var oldDaya = "{{ old('daya') }}";
+    
+            dayaSelected.innerHTML = "<option selected disabled>--- Pilih Daya ---</option>";
+    
+            if (selectedTarif === "R1" || selectedTarif === "R1T") {
+                addOption(dayaSelected, "450 VA", oldDaya);
+                addOption(dayaSelected, "900 VA", oldDaya);
+                addOption(dayaSelected, "1300 VA", oldDaya);
+                addOption(dayaSelected, "2200 VA", oldDaya);
+            } else if (selectedTarif === "R1M" || selectedTarif === "R1MT") {
+                addOption(dayaSelected, "900 VA", oldDaya);
+            } else if (selectedTarif === "R2" || selectedTarif === "R2T") {
+                addOption(dayaSelected, "3500 VA", oldDaya);
+                addOption(dayaSelected, "4400 VA", oldDaya);
+                addOption(dayaSelected, "5500 VA", oldDaya);
+            } else if (selectedTarif === "R3" || selectedTarif === "R3T") {
+                addOption(dayaSelected, "7700 VA", oldDaya);
+                addOption(dayaSelected, "11000 VA", oldDaya);
+            } else if (selectedTarif === "B1" || selectedTarif === "B1T") {
+                addOption(dayaSelected, "450 VA", oldDaya);
+                addOption(dayaSelected, "900 VA", oldDaya);
+                addOption(dayaSelected, "1300 VA", oldDaya);
+                addOption(dayaSelected, "2200 VA", oldDaya);
+                addOption(dayaSelected, "3500 VA", oldDaya);
+                addOption(dayaSelected, "4400 VA", oldDaya);
+                addOption(dayaSelected, "5500 VA", oldDaya);
+            } else if (selectedTarif === "B2" || selectedTarif === "B2T") {
+                addOption(dayaSelected, "7700 VA", oldDaya);
+                addOption(dayaSelected, "11000 VA", oldDaya);
+            } else if (selectedTarif === "S2" || selectedTarif === "S2T") {
+                addOption(dayaSelected, "450 VA", oldDaya);
+                addOption(dayaSelected, "900 VA", oldDaya);
+                addOption(dayaSelected, "1300 VA", oldDaya);
+                addOption(dayaSelected, "2200 VA", oldDaya);
+                addOption(dayaSelected, "3500 VA", oldDaya);
+                addOption(dayaSelected, "4400 VA", oldDaya);
+                addOption(dayaSelected, "5500 VA", oldDaya);
+                addOption(dayaSelected, "7700 VA", oldDaya);
+                addOption(dayaSelected, "11000 VA", oldDaya);
+            } else if (selectedTarif === "P1" || selectedTarif === "P1T") {
+                addOption(dayaSelected, "450 VA", oldDaya);
+                addOption(dayaSelected, "900 VA", oldDaya);
+                addOption(dayaSelected, "1300 VA", oldDaya);
+                addOption(dayaSelected, "2200 VA", oldDaya);
+                addOption(dayaSelected, "3500 VA", oldDaya);
+                addOption(dayaSelected, "4400 VA", oldDaya);
+                addOption(dayaSelected, "5500 VA", oldDaya);
+                addOption(dayaSelected, "7700 VA", oldDaya);
+                addOption(dayaSelected, "11000 VA", oldDaya);
+            } else if (selectedTarif === "P3" || selectedTarif === "P3T") {
+                addOption(dayaSelected, "450 VA", oldDaya);
+                addOption(dayaSelected, "900 VA", oldDaya);
+                addOption(dayaSelected, "1300 VA", oldDaya);
+                addOption(dayaSelected, "2200 VA", oldDaya);
+                addOption(dayaSelected, "3500 VA", oldDaya);
+                addOption(dayaSelected, "4400 VA", oldDaya);
+                addOption(dayaSelected, "5500 VA", oldDaya);
+                addOption(dayaSelected, "7700 VA", oldDaya);
+                addOption(dayaSelected, "11000 VA", oldDaya);
+            } else {
+                dayaSelected.innerHTML += '<option value="other">Pilihan Daya Tidak Ada</option>';
+            }
+        }
+    
+        function addOption(selectElement, value, oldDaya) {
+            var option = document.createElement("option");
+            option.value = value;
+            option.text = value;
+            if (value === oldDaya) {
+                option.selected = true;
+            }
+            selectElement.appendChild(option);
+        }
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            updateDayaOptions();
+        });
+    </script>
 @endsection

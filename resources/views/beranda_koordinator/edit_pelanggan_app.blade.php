@@ -83,11 +83,11 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {{-- <label class="form-label">Latitude</label> --}}
-                                <input class="form-control" name="latitude" id="latitude" type="hidden" readonly>
+                                <input class="form-control" name="latitude" id="latitude" type="hidden" value="{{$datapelangganapp->latitude}}" readonly>
                             </div>
                             <div class="col-md-6">
                                 {{-- <label class="form-label">Longitude</label> --}}
-                                <input class="form-control" name="longitude" id="longitude" type="hidden" readonly>
+                                <input class="form-control" name="longitude" id="longitude" type="hidden" value="{{$datapelangganapp->longitude}}" readonly>
                             </div>
                         </div>
                     </div>

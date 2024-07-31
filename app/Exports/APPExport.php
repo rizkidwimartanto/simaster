@@ -40,11 +40,13 @@ class APPExport implements FromCollection, WithHeadings, WithMapping
             'Jenis Meter',
             'Merk Meter',
             'Tahun Meter',
+            'Nomor Meter',
             'Merk MCB',
             'Ukuran MCB',
             'No Segel',
             'No Gardu',
             'SR Deret',
+            'Unit ULP',
             'Catatan',
         ];
     }
@@ -62,11 +64,13 @@ class APPExport implements FromCollection, WithHeadings, WithMapping
             $pelanggan->jenis_meter,
             $pelanggan->merk_meter,
             $pelanggan->tahun_meter,
+            $pelanggan->nomor_meter,
             $pelanggan->merk_mcb,
             $pelanggan->ukuran_mcb,
             $pelanggan->no_segel,
             $pelanggan->no_gardu,
             $pelanggan->sr_deret,
+            $pelanggan->unit_ulp,
             $pelanggan->catatan,
         ];
     }
