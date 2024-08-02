@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\DataPegawaiController;
 use App\Http\Controllers\DataPelangganController;
@@ -24,9 +25,13 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//? Route untuk Auth
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/register', 'register');
+    Route::get('/register_app_simpeltas', 'register_app_simpeltas');
+    Route::get('/edit_user_simpeltas/{id}', 'edit_user_simpeltas');
+    Route::post('/proses_edit_user_simpeltas/{id}', 'proses_edit_user_simpeltas');
     Route::post('/store', 'store');
     Route::post('/proseslogin', 'authenticate')->name('authenticate');
     Route::get('/logout', 'logout')->name('authenticate');

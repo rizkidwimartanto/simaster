@@ -20,6 +20,11 @@ class UserController extends Controller
             return view('login', $data);
         }
     }
+    public function register_app_simpeltas()
+    {
+        $data['title'] = 'Registrasi';
+        return view('register_app_simpeltas', $data);
+    }
     public function register()
     {
         $data['title'] = 'Registrasi';
@@ -76,6 +81,76 @@ class UserController extends Controller
         // Auth::login($user);
         return redirect('/');
     }
+    public function edit_user_simpeltas($id)
+    {
+        $layout = '';
+    
+        switch (auth()->user()->role) {
+            case 'administrator':
+                $layout = 'layout/templateberanda';
+                break;
+            case 'koordinator':
+                $layout = 'layout/templateberanda_koordinator';
+                break;
+            case 'user':
+                $layout = 'layout/templateberanda_user';
+                break;
+            default:
+                $layout = 'layout/default';
+                break;
+        }
+    
+        $data = [
+            'title' => 'Edit User Simpeltas',
+            'user' => User::find($id),
+            'layout' => $layout
+        ];
+    
+        return view('edit_user_simpeltas', $data);
+    }
+    
+    public function proses_edit_user_simpeltas(Request $request, $id)
+    {
+        $message = [
+            'required' => ':attribute harus diisi',
+            'role.in' => ':attribute harus dipilih',
+            'max' => ':attribute maksimal 255 kata/angka',
+            'min' => ':attribute minimal 2 kata/angka',
+            'email' => ':attribute tidak valid',
+        ];
+        
+        $validateData = $request->validate([
+            'name' => 'required|max:255|min:2',
+            'username' => 'required|max:255|min:5',
+            'email' => 'required|email:dns|unique:users,email,'.$id,
+            'password' => 'required|min:5|max:255|confirmed',
+            'password_lama' => 'required',
+        ], $message);
+        
+        $user = User::find($id);
+        if (!Hash::check($request->password_lama, $user->password)) {
+            return back()->withErrors(['password_lama' => 'Password lama tidak sesuai']);
+        }
+        if($request->filled('password')) {
+            $validateData['password'] = Hash::make($validateData['password']);
+        } else {
+            unset($validateData['password']);
+        }
+        
+        $user->update($validateData);
+        
+        switch (auth()->user()->role) {
+            case 'administrator':
+                return redirect('/beranda');
+            case 'koordinator':
+                return redirect('/koordinator');
+            case 'user':
+                return redirect('/user');
+            default:
+                return redirect('/');
+        }
+    }
+    
     public function logout(Request $request)
     {
         Auth::logout();
