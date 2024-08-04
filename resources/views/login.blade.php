@@ -12,7 +12,14 @@
                         </div>
                         @if (session('error_login'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{session('error_login')}}</strong>
+                                <strong>{{ session('error_login') }}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if (session('success_registrasi'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{ session('success_registrasi') }} <a href=""></a></strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
