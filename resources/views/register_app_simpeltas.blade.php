@@ -69,7 +69,9 @@
                     <div class="mb-3">
                         <label for="role" class="form-label required">Role</label>
                         <select name="role" id="role_select" class="form-control @error('role') is-invalid @enderror">
-                            <option value="" disabled {{ old('role') == '' ? 'selected' : '' }}>--- Pilih Role ---</option>on>
+                            <option value="" disabled {{ old('role') == '' ? 'selected' : '' }}>--- Pilih Role ---</option>
+                            <option value="administrator" {{ old('role') == 'administrator' ? 'selected' : '' }}>Administrator</option>
+                            <option value="koordinator" {{ old('role') == 'koordinator' ? 'selected' : '' }}>Koordinator</option>
                             <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
                         </select>
                         @error('role')
@@ -78,7 +80,7 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="mb-3" id="unit_ulp_container">
+                    <div class="mb-3" id="unit_ulp_container" style="display:none;">
                         <label for="unit_ulp" class="form-label required">Unit ULP</label>
                         <select name="unit_ulp" id="unit_ulp" class="form-control @error('unit_ulp') is-invalid @enderror">
                             <option selected disabled>--- Pilih Unit ULP ---</option>
@@ -103,4 +105,17 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('role_select').addEventListener('change', function() {
+            var ulpContainer = document.getElementById('unit_ulp_container');
+            var roleValue = this.value;
+    
+            if (roleValue === 'user') {
+                ulpContainer.style.display = 'block';
+            } else {
+                ulpContainer.style.display = 'none';
+                document.getElementById('unit_ulp').value = '';
+            }
+        });
+    </script>
 @endsection

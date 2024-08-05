@@ -16,6 +16,7 @@
         "maatwebsite/excel": "*",
         "mckenziearts/laravel-notify": "^2.4",
         "nesbot/carbon": "^2.71",
+        "phpmailer/phpmailer": "^6.9",
         "twilio/sdk": "^6.44",
         "yajra/laravel-datatables-oracle": "^9.21"
     },
