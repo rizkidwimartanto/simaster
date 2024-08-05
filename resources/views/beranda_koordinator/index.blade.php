@@ -225,52 +225,56 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="alamat" class="form-label">Alamat</label>
-                                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $app->alamat }}</textarea>
+                                                    <textarea class="form-control" id="alamat" name="alamat" rows="5" readonly>{{ $app->alamat }}</textarea>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="jenis_meter" class="form-label">jenis_meter</label>
+                                                    <label for="jenis_meter" class="form-label">Jenis Meter</label>
                                                     <input type="text" class="form-control" id="jenis_meter"
                                                         name="jenis_meter" readonly value="{{ $app->jenis_meter }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="merk_meter" class="form-label">merk_meter</label>
+                                                    <label for="merk_meter" class="form-label">Merk Meter</label>
                                                     <input type="text" class="form-control" id="merk_meter"
                                                         name="merk_meter" readonly value="{{ $app->merk_meter }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="tahun_meter" class="form-label">tahun_meter</label>
+                                                    <label for="tahun_meter" class="form-label">Tahun Meter</label>
                                                     <input type="text" class="form-control" id="tahun_meter"
                                                         name="tahun_meter" readonly value="{{ $app->tahun_meter }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="merk_mcb" class="form-label">merk_mcb</label>
+                                                    <label for="merk_mcb" class="form-label">Merk MCB</label>
                                                     <input type="text" class="form-control" id="merk_mcb"
                                                         name="merk_mcb" readonly value="{{ $app->merk_mcb }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="ukuran_mcb" class="form-label">ukuran_mcb</label>
+                                                    <label for="ukuran_mcb" class="form-label">Ukuran MCB</label>
                                                     <input type="text" class="form-control" id="ukuran_mcb"
                                                         name="ukuran_mcb" readonly value="{{ $app->ukuran_mcb }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="no_segel" class="form-label">no_segel</label>
+                                                    <label for="no_segel" class="form-label">Nomor Segel</label>
                                                     <input type="text" class="form-control" id="no_segel"
                                                         name="no_segel" readonly value="{{ $app->no_segel }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="no_gardu" class="form-label">no_gardu</label>
+                                                    <label for="no_gardu" class="form-label">Nomor Gardu</label>
                                                     <input type="text" class="form-control" id="no_gardu"
                                                         name="no_gardu" readonly value="{{ $app->no_gardu }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="sr_deret" class="form-label">sr_deret</label>
+                                                    <label for="sr_deret" class="form-label">Tarikan ke ....</label>
                                                     <input type="text" class="form-control" id="sr_deret"
                                                         name="sr_deret" readonly value="{{ $app->sr_deret }}">
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="catatan" class="form-label">catatan</label>
-                                                    <input type="text" class="form-control" id="catatan"
-                                                        name="catatan" readonly value="{{ $app->catatan }}">
+                                                    <label for="catatan" class="form-label">Catatan</label>
+                                                    <textarea name="catatan" id="catatan" rows="5" class="form-control" readonly>{{ $app->catatan }}</textarea>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="unit_ulp" class="form-label">Unit ULP</label>
+                                                    <input type="text" class="form-control" id="unit_ulp"
+                                                        name="unit_ulp" readonly value="{{ $app->unit_ulp }}">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
