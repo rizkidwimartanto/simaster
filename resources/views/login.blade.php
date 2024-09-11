@@ -12,14 +12,14 @@
                         </div>
                         @if (session('error_login'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                <strong>{{ session('error_login') }}</strong>
+                                <strong>{!! session('error_login') !!}</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
                         @endif
                         @if (session('success_registrasi'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong>{{ session('success_registrasi') }} <a href=""></a></strong>
+                                <strong>{!! session('success_registrasi') !!}</strong>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"
                                     aria-label="Close"></button>
                             </div>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="text-center text-muted mt-3">
-                            Don't have account yet? <a href="/register" tabindex="-1">Sign up</a>
+                            Don't have account yet? <a href="/register_user" tabindex="-1">Sign up</a>
                         </div>
                     </div>
                 </div>

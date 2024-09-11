@@ -3,8 +3,6 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\DataPegawaiController;
-use App\Http\Controllers\DataPelangganController;
 use App\Http\Controllers\EntriPadamController;
 use App\Http\Controllers\InputPelangganAPPController;
 use App\Http\Controllers\UpdatingController;
@@ -28,13 +26,14 @@ use Illuminate\Support\Facades\Auth;
 //? Route untuk Auth
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
-    Route::get('/register', 'register');
+    Route::get('/register_user', 'register_user');
     Route::get('/register_app_simpeltas', 'register_app_simpeltas');
     Route::get('/edit_user_simpeltas/{id}', 'edit_user_simpeltas');
     Route::post('/proses_edit_user_simpeltas/{id}', 'proses_edit_user_simpeltas');
     Route::post('/store', 'store');
     Route::post('/proseslogin', 'authenticate')->name('authenticate');
     Route::get('/logout', 'logout')->name('authenticate');
+    Route::get('/verify-email/{token}', [UserController::class, 'verifyEmail'])->name('verify.email');
 });
 Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/user', 'user')->middleware('auth')->name('user');
