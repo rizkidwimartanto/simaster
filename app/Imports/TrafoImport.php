@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
+class TrafoImport implements ToModel, WithStartRow
 {
     use Importable;
 
@@ -75,13 +75,6 @@ class TrafoImport implements ToModel, WithStartRow, WithMultipleSheets
     private function isDuplicate(array $data)
     {
         return TrafoModel::where('no_tiang', $data['4'])->exists();
-    }
-
-    public function sheets(): array
-    {
-        return [
-            'Data Trafo' => new TrafoImport()
-        ];
     }
 
     public function startRow(): int

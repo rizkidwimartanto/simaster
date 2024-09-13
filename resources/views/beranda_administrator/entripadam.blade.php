@@ -38,7 +38,8 @@
                                 style="width: 100%;">
                                 <option disabled selected>--- Pilih Nama Pelanggan ---</option>
                                 @foreach ($nama_pelanggan as $pelanggan)
-                                    <option value="{{ $pelanggan }}" {{ old('nama_pelanggan') == $pelanggan ? 'selected' : '' }}>
+                                    <option value="{{ $pelanggan }}"
+                                        {{ old('nama_pelanggan') == $pelanggan ? 'selected' : '' }}>
                                         {{ $pelanggan }}</option>
                                 @endforeach
                             </select>
@@ -50,8 +51,8 @@
                         </div>
                         <div id="penyulangInput" style="display:none;">
                             <div class="form-label required">Penyulang</div>
-                            <select class="form-select selectPenyulang @error('penyulang') is-invalid @enderror"
-                                id="penyulang" name="penyulang" style="width: 100%;">
+                            <select class="selectPenyulang @error('penyulang') is-invalid @enderror" id="penyulang"
+                                name="penyulang" style="width: 100%;">
                                 <option disabled selected>--- Pilih Penyulang ---</option>
                                 @foreach ($data_penyulang->unique() as $penyulang)
                                     <option value="{{ $penyulang }}"
@@ -109,7 +110,13 @@
             </div>
         </div>
     </div>
-
+    <script>
+        $(document).ready(function() {
+            $('#penyulang').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
     <script>
         document.getElementById('penyebab_padam').addEventListener('change', function() {
             var selectedValue = this.value;
@@ -132,13 +139,6 @@
         });
     </script>
     <script>
-        $('#penyulang').select2({});
-        // Tambahkan event listener untuk perubahan nilai 'penyulang'
-        $('#penyulang').on('select2:select', function (e) {
-            var selectedPenyulang = e.params.data.id;
-            displaySections(selectedPenyulang);
-        });
-
         function displaySections(selectedPenyulang) {
             var sectionMapping = @json($section);
             var selectedSections = sectionMapping[selectedPenyulang] || [];

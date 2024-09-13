@@ -30,10 +30,11 @@ class UpdatingController extends Controller
     {
         $data = [
             'title' => 'Peta Pelanggan',
-            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id','id_pelanggan', 'nama_pelanggan', 'tarif', 'daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'tahun_meter', 'nomor_meter', 'merk_mcb', 'ukuran_mcb', 'no_segel', 'no_gardu', 'sr_deret' ,'catatan', 'unit_ulp', 'created_at')->get(),
+            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id','id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'tahun_meter', 'nomor_meter', 'merk_mcb', 'ukuran_mcb', 'no_segel', 'no_gardu', 'sr_deret' ,'catatan', 'unit_ulp', 'created_at')->get(),
             'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
             'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
-            'data_unitulp' => DataPelangganModel::pluck('unitulp')
+            'data_unitulp' => DataPelangganModel::pluck('unitulp'),
+            'auth_unit_ulp' => auth()->user()->unit_ulp,
         ];
         if (Auth::user()->role === 'administrator') {
             return view('beranda_administrator/index', $data);

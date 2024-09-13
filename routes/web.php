@@ -46,6 +46,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/edit_pelanggan_app/{id}', 'edit_pelanggan_app')->middleware('auth')->name('edit_pelanggan_app');
     Route::post('/proses_edit_pelanggan_app/{id}', 'proses_edit_pelanggan_app');
     Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
+    Route::post('/koordinator/import_excel', 'import_excel');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');
 });

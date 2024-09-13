@@ -62,6 +62,22 @@
         <h1 class="text-center" style="font-weight: 700;">Semua Pelanggan APP</h1>
         <div class="card p-3 mb-3">
             <div class="row">
+                <div class="col-12">
+                    <h2>Import Excel Data Pelanggan APP</h2>
+                    <form action="/koordinator/import_excel" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" id="file" class="form-control" required>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-upload fa-lg"
+                                    style="margin-right: 5px"></i>Import Excel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="card p-3 mb-3">
+            <div class="row">
                 <div class="col-md-6 col-12">
                     <div class="row rentang-tanggal-map filter-tanggal">
                         <h2>Filter Map</h2>
@@ -180,7 +196,7 @@
                                 <a href="#" data-bs-target="#detail-{{ $app->id }}" data-bs-toggle="modal">
                                     <i class="fa-solid fa-circle-info fa-lg"></i>
                                 </a>
-                                <a href="/edit_pelanggan_app/{{$app->id}}">
+                                <a href="/edit_pelanggan_app/{{ $app->id }}">
                                     <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                 </a>
                                 <!-- Modal -->
@@ -214,14 +230,9 @@
                                                         readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="tarif" class="form-label">Tarif</label>
-                                                    <input type="text" class="form-control" id="tarif"
-                                                        name="tarif" readonly value="{{ $app->tarif }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="daya" class="form-label">Daya</label>
-                                                    <input type="text" class="form-control" id="daya"
-                                                        name="daya" readonly value="{{ $app->daya }}">
+                                                    <label for="tarif_daya" class="form-label">Tarif/Daya</label>
+                                                    <input type="text" class="form-control" id="tarif_daya"
+                                                        name="tarif_daya" readonly value="{{ $app->tarif_daya }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="alamat" class="form-label">Alamat</label>
@@ -241,6 +252,11 @@
                                                     <label for="tahun_meter" class="form-label">Tahun Meter</label>
                                                     <input type="text" class="form-control" id="tahun_meter"
                                                         name="tahun_meter" readonly value="{{ $app->tahun_meter }}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="nomor_meter" class="form-label">Nomor Meter</label>
+                                                    <input type="text" class="form-control" id="nomor_meter"
+                                                        name="nomor_meter" readonly value="{{ $app->nomor_meter }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="merk_mcb" class="form-label">Merk MCB</label>

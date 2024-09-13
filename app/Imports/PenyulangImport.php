@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class PenyulangImport implements ToModel, WithStartRow, WithMultipleSheets
+class PenyulangImport implements ToModel, WithStartRow
 {
     /**
      * @param array $row
@@ -53,11 +53,6 @@ class PenyulangImport implements ToModel, WithStartRow, WithMultipleSheets
             ->first();
 
         return $existingData !== null;
-    }
-    public function sheets(): array{
-        return[
-            'penyulang' => new PenyulangImport()
-        ];
     }
     public function startRow(): int
     {

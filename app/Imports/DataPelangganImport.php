@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
+class DataPelangganImport implements ToModel, WithStartRow
 {
     use Importable;
 
@@ -62,13 +62,6 @@ class DataPelangganImport implements ToModel, WithStartRow, WithMultipleSheets
     private function isDuplicate(array $data)
     {
         return DataPelangganModel::where('idpel', $data['0'])->exists();
-    }
-
-    public function sheets(): array
-    {
-        return [
-            'Data Pelanggan TM' => new DataPelangganImport()
-        ];
     }
 
     public function startRow(): int

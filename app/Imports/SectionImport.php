@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class SectionImport implements ToModel, WithStartRow, WithMultipleSheets
+class SectionImport implements ToModel, WithStartRow
 {
     /**
      * @param array $row
@@ -56,11 +56,6 @@ class SectionImport implements ToModel, WithStartRow, WithMultipleSheets
             ->first();
 
         return $existingData !== null;
-    }
-    public function sheets(): array{
-        return[
-            'section' => new SectionImport()
-        ];
     }
     public function startRow(): int
     {

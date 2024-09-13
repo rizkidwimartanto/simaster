@@ -206,14 +206,9 @@
                                                         readonly>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="tarif" class="form-label">Tarif</label>
-                                                    <input type="text" class="form-control" id="tarif"
-                                                        name="tarif" readonly value="{{ $app->tarif }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="daya" class="form-label">Daya</label>
-                                                    <input type="text" class="form-control" id="daya"
-                                                        name="daya" readonly value="{{ $app->daya }}">
+                                                    <label for="tarif_daya" class="form-label">Tarif/Daya</label>
+                                                    <input type="text" class="form-control" id="tarif_daya"
+                                                        name="tarif_daya" readonly value="{{ $app->tarif_daya }}">
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="alamat" class="form-label">Alamat</label>

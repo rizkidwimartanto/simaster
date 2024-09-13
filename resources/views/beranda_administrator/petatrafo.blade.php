@@ -33,14 +33,14 @@
                         </div>
                         <div class="modal-body">
                             <label class="form-label">Point A</label>
-                            <select name="pointA" id="pointA" class="form-select mb-4">
+                            <select name="pointA" id="pointA" class="mb-4">
                                 @foreach ($data_trafo as $trafo)
                                     <option value="{{ $trafo->latitude }},{{ $trafo->longtitude }}">{{ $trafo->no_tiang }}
                                     </option>
                                 @endforeach
                             </select>
                             <label class="form-label">Point B</label>
-                            <select name="pointB" id="pointB" class="form-select">
+                            <select name="pointB" id="pointB">
                                 @foreach ($data_trafo as $trafo)
                                     <option value="{{ $trafo->latitude }},{{ $trafo->longtitude }}">{{ $trafo->no_tiang }}
                                     </option>
@@ -116,6 +116,18 @@
         </div>
     @endforeach
     <script src="https://cdn.jsdelivr.net/npm/typeahead.js/dist/typeahead.bundle.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#pointA').selectize({
+                sortField: 'text'
+            });
+        });
+        $(document).ready(function(){
+            $('#pointB').selectize({
+                sortField: 'text'
+            });
+        });
+    </script>
     <script>
         // Menanggapi event klik pada modal untuk menyembunyikan elemen pencarian
         $('.modal').on('show.bs.modal', function() {
