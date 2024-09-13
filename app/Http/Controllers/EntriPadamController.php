@@ -415,7 +415,8 @@ class EntriPadamController extends Controller
             'title' => 'Peta Trafo',
             'trafo' => $trafo,
             'unit_layanan' => TrafoModel::pluck('unit_layanan'),
-            'kategori' => TrafoModel::pluck('kategori')
+            'kategori' => TrafoModel::pluck('kategori'),
+            'data_trafo' => $trafo
         ];
         return view('beranda_administrator/petatrafo', $data);
     }

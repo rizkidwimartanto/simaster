@@ -25,6 +25,11 @@ class UserController extends Controller
         $data['title'] = 'Registrasi';
         return view('register_app_simpeltas', $data);
     }
+    public function register_user()
+    {
+        $data['title'] = 'Registrasi';
+        return view('register_user', $data);
+    }
     public function register()
     {
         $data['title'] = 'Registrasi';

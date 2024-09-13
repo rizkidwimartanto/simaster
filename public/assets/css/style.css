@@ -7,9 +7,9 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-font-family: 'Quicksand';
+    font-family: "Quicksand";
 }
-a.navbar-brand{
+a.navbar-brand {
     font-size: 15px;
 }
 header.navbar-expand-md {
@@ -17,7 +17,7 @@ header.navbar-expand-md {
 }
 #map {
     position: relative;
-    bottom: 68px;
+    bottom: 114px;
     height: 90%;
     z-index: 0;
 }
@@ -27,11 +27,11 @@ header.navbar-expand-md {
     height: 60%;
     z-index: 0;
 }
-.display-pelanggan-app{
+.display-pelanggan-app {
     position: relative;
     bottom: 53px;
 }
-button#getLocation{
+button#getLocation {
     font-size: 20px;
 }
 p.detail_pelanggan {
@@ -52,7 +52,14 @@ select.pilih_peta {
     width: 40%;
     height: 30%;
 }
-a.navbar-brand{
+button#tambah_garis {
+    position: relative;
+    top: 0.7rem;
+    width: 50%;
+    margin: 0 auto;
+    z-index: 1;
+}
+a.navbar-brand {
     font-size: 15px;
 }
 #suggestionList {
@@ -85,22 +92,22 @@ a.navbar-brand{
     color: #ffffff;
 }
 
-@media (max-width: 768px){
-    div.nav_koordinator a{
+@media (max-width: 768px) {
+    div.nav_koordinator a {
         font-size: 13px;
     }
 }
-@media (max-width:615px) {
+@media (max-width: 615px) {
     div.search_customer {
         margin-left: 12%;
         width: 40%;
     }
 }
-@media (max-width: 465px){
-    a.navbar-brand{
+@media (max-width: 465px) {
+    a.navbar-brand {
         font-size: 11.3px;
     }
-    div.nav_koordinator a{
+    div.nav_koordinator a {
         font-size: 11px;
     }
 }
