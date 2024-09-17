@@ -29,7 +29,6 @@ class InputPelangganAPPController extends Controller
         $data = [
             'title' => 'Entri Data',
             'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->get(),
-            // 'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->where('unit_ulp', auth()->user()->unit_ulp)->get(),
         ];
         return view('beranda_user/entridata_user', $data);
     }
@@ -38,10 +37,10 @@ class InputPelangganAPPController extends Controller
     {
         $message = ['required' => ':attribute harus diisi'];
         $validateData = $request->validate([
-            'id_pelanggan' => 'required',
-            'nama_pelanggan' => 'required',
-            'tarif_daya' => 'required',
-            'alamat' => 'required',
+            // 'id_pelanggan' => 'required',
+            // 'nama_pelanggan' => 'required',
+            // 'tarif_daya' => 'required',
+            // 'alamat' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'jenis_meter' => 'required',
@@ -198,7 +197,7 @@ class InputPelangganAPPController extends Controller
             return redirect('/koordinator');
         } else {
             Session::flash('error_edit_unit', 'data unit gagal diedit');
-            return redirect('/edit_pelanggan_app/' . $id);
+            return redirect('edit_pelanggan_app/' . $id);
         }
     }
     public function hapusPelangganAPP(Request $request)
@@ -215,12 +214,62 @@ class InputPelangganAPPController extends Controller
         }
         return redirect('/koordinator');
     }
-    public function getPelangganData($nama_pelanggan)
+    public function edit_pelanggan_app_user($nama_pelanggan)
     {
-        $pelanggan = PelangganAPPModel::where('nama_pelanggan', $nama_pelanggan)->first();
-        if($pelanggan){
-            return response()->json($pelanggan);
+        $pelanggan = DB::table('entri_pelanggan_app')
+            ->where('nama_pelanggan', $nama_pelanggan)
+            ->first();
+
+        if (!$pelanggan) {
+            return redirect()->back()->with('error', 'Pelanggan tidak ditemukan');
         }
-        return response()->json(['message' => 'Data pelanggan tidak ditemukan'], 404);
+
+        $data = [
+            'title' => 'Edit Pelanggan APP',
+            'pelanggan' => $pelanggan
+        ];
+
+        return view('beranda_user/edit_pelanggan_app_user', $data);
+    }
+    public function proses_edit_pelanggan_app_user(Request $request, $nama_pelanggan)
+    {
+        $message = ['required' => ':attribute harus diisi'];
+        $validateData = $request->validate([
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'jenis_meter' => 'required',
+            'merk_meter' => 'required',
+            'tahun_meter' => 'required',
+            'nomor_meter' => 'required',
+            'merk_mcb' => 'required',
+            'ukuran_mcb' => 'required',
+            'no_segel' => 'required',
+            'no_gardu' => 'required',
+            'sr_deret' => 'required',
+        ], $message);
+        if ($validateData) {
+            $datapelangganapp = PelangganAPPModel::find($nama_pelanggan);
+            $datapelangganapp->update([
+                'latitude' => $request->input('latitude'),
+                'longitude' => $request->input('longitude'),
+                'jenis_meter' => $request->input('jenis_meter'),
+                'merk_meter' => $request->input('merk_meter'),
+                'tahun_meter' => $request->input('tahun_meter'),
+                'nomor_meter' => $request->input('nomor_meter'),
+                'merk_mcb' => $request->input('merk_mcb'),
+                'ukuran_mcb' => $request->input('ukuran_mcb'),
+                'no_segel' => $request->input('no_segel'),
+                'no_gardu' => $request->input('no_gardu'),
+                'sr_deret' => $request->input('sr_deret'),
+                'catatan' => $request->input('catatan'),
+                'unit_ulp' => $request->input('unit_ulp'),
+                // $validateData
+            ]);
+            Session::flash('success_edit_unit', 'data unit berhasil diedit');
+            return redirect('/user');
+        } else {
+            Session::flash('error_edit_unit', 'data unit gagal diedit');
+            return redirect('edit_pelanggan_app_user/' . $nama_pelanggan);
+        }
     }
 }
