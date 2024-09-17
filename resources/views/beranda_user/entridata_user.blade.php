@@ -9,22 +9,22 @@
         @enderror
         <div class="m-3">
             <label class="form-label">Nama Pelanggan</label>
-            <select name="nama_pelanggan" id="nama_pelanggan" class="mb-4">
-                @foreach ($data_pelanggan_app as $app)
+            <select name="nama_pelanggan" id="nama_pelanggan" class="mb-4 form-select">
                 <option disabled selected>--- Pilih Nama Pelanggan ---</option>
+                @foreach ($data_pelanggan_app->sortBy('nama_pelanggan') as $app)
                     <option value="{{ $app->nama_pelanggan }}">{{ $app->nama_pelanggan }}
                     </option>
                 @endforeach
             </select>
         </div>
-        <div class="mb-4">
-            <div class="d-grid gap-2 m-3">
-                <button type="button" class="btn btn-primary" id="getLocation" style="height: 80px"><i
-                        class="fa-solid fa-location-crosshairs fa-lg" style="margin-right: 5px;"></i> Klik Lokasi Saat
-                    Ini</button>
+        <div class="container-fluid mt-4" id="container-pelanggan-app" style="display: none">
+            <div class="mb-4">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-primary" id="getLocation" style="height: 80px"><i
+                            class="fa-solid fa-location-crosshairs fa-lg" style="margin-right: 5px;"></i> Klik Lokasi Saat
+                        Ini</button>
+                </div>
             </div>
-        </div>
-        <div class="container-fluid mt-4">
             <div class="card shadow-lg border-0 rounded">
                 <div class="card-header bg-info text-white text-center rounded-top">
                     <h3 class="mb-0">Entri Pelanggan APP</h3>
@@ -189,7 +189,7 @@
                             @enderror
                         </div>
                         <div class="mb-4">
-                            <label class="form-label">Catatan</label>
+                            <label class="form-label">Catatan <span><i>(bisa dikosongi)</i></span></label>
                             <textarea class="form-control" name="catatan" id="catatan" cols="30" rows="10">{{ old('catatan') }}</textarea>
                         </div>
                         <input type="hidden" name="unit_ulp" id="unit_ulp" value="{{ auth()->user()->unit_ulp }}">
@@ -200,11 +200,40 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
+        <script>
             $(document).ready(function() {
-                $('#nama_pelanggan').selectize({
-                    sortField: 'text'
+                $('#nama_pelanggan').change(function() {
+                    var nama_pelanggan = $(this).val();
+
+                    if (nama_pelanggan) {
+                        $.ajax({
+                            url: '/get-pelanggan/' + nama_pelanggan,
+                            type: 'GET',
+                            dataType: 'json',
+                            success: function(data) {
+                                // Jika data ditemukan, isi form dengan data pelanggan
+                                $('#jenis_meter').val(data.jenis_meter);
+                                $('#merk_meter').val(data.merk_meter);
+                                $('#tahun_meter').val(data.tahun_meter);
+                                $('#nomor_meter').val(data.nomor_meter);
+                                $('#merk_mcb').val(data.merk_mcb);
+                                $('#ukuran_mcb').val(data.ukuran_mcb);
+                                $('#no_segel').val(data.no_segel);
+                                $('#no_gardu').val(data.no_gardu);
+                                $('#sr_deret').val(data.sr_deret);
+                                $('#catatan').val(data.catatan);
+                            },
+                            error: function(xhr, status, error) {
+                                alert('Data pelanggan tidak ditemukan');
+                            }
+                        });
+                    }
                 });
+            });
+        </script>
+        <script>
+            document.getElementById('nama_pelanggan').addEventListener('change', function(){
+                document.getElementById('container-pelanggan-app').style.display = 'block';
             });
         </script>
         <script>

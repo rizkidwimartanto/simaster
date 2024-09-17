@@ -29,6 +29,7 @@ class InputPelangganAPPController extends Controller
         $data = [
             'title' => 'Entri Data',
             'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->get(),
+            // 'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->where('unit_ulp', auth()->user()->unit_ulp)->get(),
         ];
         return view('beranda_user/entridata_user', $data);
     }
@@ -213,5 +214,13 @@ class InputPelangganAPPController extends Controller
             Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
         }
         return redirect('/koordinator');
+    }
+    public function getPelangganData($nama_pelanggan)
+    {
+        $pelanggan = PelangganAPPModel::where('nama_pelanggan', $nama_pelanggan)->first();
+        if($pelanggan){
+            return response()->json($pelanggan);
+        }
+        return response()->json(['message' => 'Data pelanggan tidak ditemukan'], 404);
     }
 }
