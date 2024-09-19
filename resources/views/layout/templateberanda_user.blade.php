@@ -60,10 +60,10 @@
 <body>
     @include('partials/navbar_user')
     @yield('content')
-    <script src="assets/js/script.js"></script>
-    <script src="{{ asset('assets_template/dist/js/demo-theme.min.js?1684106062') }}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="{{ asset('assets_template/dist/js/demo-theme.min.js?1684106062') }}"></script>
     <!-- Libs JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
