@@ -9,22 +9,22 @@
         @enderror
         <div class="m-3">
             <label class="form-label">Nama Pelanggan</label>
-            <select name="nama_pelanggan" id="nama_pelanggan" class="mb-4">
-                @foreach ($data_pelanggan_app as $app)
+            <select name="nama_pelanggan" id="nama_pelanggan" class="mb-4 form-select">
                 <option disabled selected>--- Pilih Nama Pelanggan ---</option>
+                @foreach ($data_pelanggan_app->sortBy('nama_pelanggan') as $app)
                     <option value="{{ $app->nama_pelanggan }}">{{ $app->nama_pelanggan }}
                     </option>
                 @endforeach
             </select>
         </div>
-        <div class="mb-4">
-            <div class="d-grid gap-2 m-3">
-                <button type="button" class="btn btn-primary" id="getLocation" style="height: 80px"><i
-                        class="fa-solid fa-location-crosshairs fa-lg" style="margin-right: 5px;"></i> Klik Lokasi Saat
-                    Ini</button>
+        <div class="container-fluid mt-4" style="display:none" id="data_pelanggan_app">
+            <div class="mb-4">
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-primary" id="getLocation" style="height: 80px"><i
+                            class="fa-solid fa-location-crosshairs fa-lg" style="margin-right: 5px;"></i> Klik Lokasi Saat
+                        Ini</button>
+                </div>
             </div>
-        </div>
-        <div class="container-fluid mt-4">
             <div class="card shadow-lg border-0 rounded">
                 <div class="card-header bg-info text-white text-center rounded-top">
                     <h3 class="mb-0">Entri Pelanggan APP</h3>
@@ -200,13 +200,20 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
+        <script>
+            var nama_pelanggan = document.getElementById('nama_pelanggan');
+            var data_pelanggan_app = document.getElementById('data_pelanggan_app'); 
+            nama_pelanggan.addEventListener('change', function(){
+                data_pelanggan_app.style.display = 'block';
+            });
+        </script>
+        {{-- <script type="text/javascript">
             $(document).ready(function() {
                 $('#nama_pelanggan').selectize({
                     sortField: 'text'
                 });
             });
-        </script>
+        </script> --}}
         <script>
             document.getElementById("tarif").addEventListener("change", function() {
                 updateDayaOptions();

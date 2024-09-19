@@ -173,6 +173,5 @@
                 sectionContainer.style.display = "none";
             }
         }
-        $('.selectNamaPelanggan').select2({});
     </script>
 @endsection
