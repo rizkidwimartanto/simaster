@@ -69,6 +69,13 @@ a.navbar-brand {
     overflow-y: auto;
     border-radius: 4px;
 }
+#suggestionListAPP {
+    position: absolute;
+    display: block;
+    width: 96%;
+    overflow-y: auto;
+    border-radius: 4px;
+}
 
 #suggestionList ul {
     list-style: none;

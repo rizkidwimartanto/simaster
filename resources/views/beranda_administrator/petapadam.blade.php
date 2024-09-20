@@ -178,7 +178,7 @@
             listGroup.innerHTML = ''; // Kosongkan daftar setiap kali ada perubahan input
 
             padams.forEach(function(customer) {
-                if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 6) {
+                if (customer.nama.toLowerCase().includes(searchTerm) && matchCount < 10) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
                     listItem.textContent = customer.nama;
@@ -188,6 +188,7 @@
                         showMarker(customer);
                     };
                     listGroup.appendChild(listItem);
+                    matchCount++;
                 }
             });
 

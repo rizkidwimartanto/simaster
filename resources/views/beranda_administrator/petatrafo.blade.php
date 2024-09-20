@@ -404,7 +404,7 @@
 
             var matchCount = 0;
             padams.forEach(function(customer) {
-                if (customer.penyulang.toLowerCase().includes(searchTerm) && matchCount < 6) {
+                if (customer.penyulang.toLowerCase().includes(searchTerm) && matchCount < 10) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
                     listItem.textContent = customer.penyulang;

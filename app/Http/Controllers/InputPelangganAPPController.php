@@ -214,10 +214,10 @@ class InputPelangganAPPController extends Controller
         }
         return redirect('/koordinator');
     }
-    public function edit_pelanggan_app_user($nama_pelanggan)
+    public function edit_pelanggan_app_user($id_pelanggan)
     {
         $pelanggan = DB::table('entri_pelanggan_app')
-            ->where('nama_pelanggan', $nama_pelanggan)
+            ->where('id_pelanggan', $id_pelanggan)
             ->first();
 
         if (!$pelanggan) {

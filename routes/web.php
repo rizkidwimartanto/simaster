@@ -44,7 +44,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/pelanggan_purwodadi', 'pelanggan_purwodadi')->middleware('auth')->name('pelanggan_purwodadi');
     Route::get('/pelanggan_wirosari', 'pelanggan_wirosari')->middleware('auth')->name('pelanggan_wirosari');
     Route::get('/edit_pelanggan_app/{id}', 'edit_pelanggan_app')->middleware('auth')->name('edit_pelanggan_app');
-    Route::get('/edit_pelanggan_app_user/{nama_pelanggan}', 'edit_pelanggan_app_user')->middleware('auth')->name('edit_pelanggan_app_user');
+    Route::get('/edit_pelanggan_app_user/{id_pelanggan}', 'edit_pelanggan_app_user')->middleware('auth')->name('edit_pelanggan_app_user');
     Route::post('/proses_edit_pelanggan_app/{id}', 'proses_edit_pelanggan_app');
     Route::post('/proses_edit_pelanggan_app_user/{id}', 'proses_edit_pelanggan_app_user');
     Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');

@@ -384,11 +384,11 @@
             var searchTerm = document.getElementById('searchInput').value.toLowerCase();
             var suggestionList = document.getElementById('suggestionList');
             var listGroup = suggestionList.querySelector('ul');
+            var matchCount = 0;
             listGroup.innerHTML = '';
 
             data_pelanggan_app.forEach(function(customer) {
-                if (customer.nama_pelanggan.toLowerCase().includes(
-                        searchTerm)) {
+                if (customer.nama_pelanggan.toLowerCase().includes(searchTerm) && matchCount < 10) {
                     var listItem = document.createElement('li');
                     listItem.className = 'list-group-item';
                     listItem.textContent = customer.nama_pelanggan;
@@ -398,6 +398,7 @@
                         showMarker(customer);
                     };
                     listGroup.appendChild(listItem);
+                    matchCount++;
                 }
             });
 
