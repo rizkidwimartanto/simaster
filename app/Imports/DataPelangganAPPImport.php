@@ -5,63 +5,77 @@ namespace App\Imports;
 use App\Models\PelangganAPPModel;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithStartRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 use Illuminate\Support\Facades\Session;
 
-class DataPelangganAPPImport implements ToModel, WithStartRow
+class DataPelangganAPPImport implements ToModel, WithStartRow, WithMultipleSheets
 {
     use Importable;
 
+    /**
+     * Method untuk memetakan baris dari file excel menjadi data model.
+     */
     public function model(array $row)
     {
-        $existingData = PelangganAPPModel::where('id_pelanggan', $row[0])->first();
+        if (empty($row[3])) { // Asumsi kolom ID pelanggan berada di index 3
+            return null; // Lewati baris
+        }
+        $existingData = PelangganAPPModel::where('id_pelanggan', $row[3])->first(); // Ubah index sesuai urutan yang benar
 
         if ($existingData) {
             $existingData->update($this->getData($row));
-            Session::flash('error_import_pelangganAPP', 'data pelangganAPP sudah ada');
+            Session::flash('error_import_pelangganAPP', 'Data pelangganAPP sudah ada dan telah diperbarui.');
         } else {
             if ($this->isDuplicate($row)) {
-                Session::flash('error_import_pelangganAPP', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
+                Session::flash('error_import_pelangganAPP', 'Data sudah ada. Tidak ada perubahan yang dilakukan.');
             } else {
                 PelangganAPPModel::create($this->getData($row));
-                Session::flash('success_import_pelangganAPP', 'file excel trafo berhasil diimport');
+                Session::flash('success_import_pelangganAPP', 'Data pelangganAPP berhasil diimport.');
             }
         }
 
         return null;
     }
 
+    /**
+     * Ambil data dari baris excel untuk disimpan ke model.
+     */
     private function getData(array $row)
     {
         return [
-            'id_pelanggan' => $row[0],
-            'nama_pelanggan' => $row[1],
-            'tarif_daya' => $row[2],
-            'alamat' => $row[3],
-            'latitude' => $row[4],
-            'longtitude' => $row[5],
-            'jenis_meter' => $row[6],
-            'merk_meter' => $row[7],
-            'tahun_meter' => $row[8],
-            'nomor_meter' => $row[9],
-            'merk_mcb' => $row[10],
-            'ukuran_mcb' => $row[11],
-            'no_segel' => $row[12],
-            'no_gardu' => $row[13],
-            'sr_deret' => $row[14],
-            'unit_ulp' => $row[15],
+            'id_pelanggan' => $row[3], 
+            'nama_pelanggan' => $row[4], 
+            'alamat' => $row[5], 
+            'tarif_daya' => $row[6], 
+            'nomor_meter' => $row[7], 
+            'ukuran_mcb' => $row[8], 
+            'no_segel' => $row[10], 
         ];
     }
-    private function isDuplicate(array $data)
+
+    /**
+     * Periksa apakah data sudah ada di dalam database.
+     */
+    private function isDuplicate(array $row)
     {
-        return PelangganAPPModel::where('id_pelanggan', $data['0'])->exists();
+        return PelangganAPPModel::where('id_pelanggan', $row[3])->exists(); // Gunakan index 3 sesuai dengan urutan excel
     }
 
+    public function sheets(): array
+    {
+        return [
+            'MCB ON' => $this
+        ];
+    }
+
+    /**
+     * Tentukan baris awal untuk membaca data dari excel (skip header).
+     */
     public function startRow(): int
     {
-        return 2;
+        return 3; // Asumsi header ada di baris pertama, mulai membaca dari baris kedua
     }
 }

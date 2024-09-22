@@ -3,67 +3,35 @@
     <div class="container-fluid mt-4">
         <div class="container-fluid mt-4">
             <label class="form-label">ID Pelanggan</label>
-            <input type="text" class="form-control" id="searchInput"
-                placeholder="Ketik disini untuk mencari ID Pelanggan ........" onkeypress="handleKeyPress(event)"
-                oninput="showSuggestions()" onclick="click_customer_app()">
-            <div id="suggestionListAPP" class="dropdown">
-                <ul class="list-group"></ul>
-            </div>
+            <select id="select-pelanggan" placeholder="Ketik disini untuk mencari ID Pelanggan ........"></select>
         </div>
+    </div>
 
-        <script>
-            // Fungsi ini diubah untuk menangkap pemilihan ID Pelanggan dari saran
-            function handleKeyPress(event) {
-                if (event.keyCode === 13) {
-                    searchCustomer();
-                }
-            }
+    <script>
+        // Data pelanggan dari backend (pastikan $data_pelanggan_app berisi data pelanggan)
+        var data_pelanggan_app = @json($data_pelanggan_app);
 
-            function click_map() {
-                document.getElementById('suggestionListAPP').style.display = "none";
-            }
+        // Filter pelanggan yang tidak memiliki latitude dan longitude
+        var filteredData = data_pelanggan_app.filter(function(customer) {
+            return customer.latitude == null || customer.longitude == null; // Hanya pilih pelanggan tanpa latitude/longitude
+        });
 
-            function click_customer_app() {
-                document.getElementById('suggestionListAPP').style.display = "block";
-            }
-
-            function showSuggestions() {
-                var data_pelanggan_app = @json($data_pelanggan_app);
-                var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-                var suggestionListAPP = document.getElementById('suggestionListAPP');
-                var listGroup = suggestionListAPP.querySelector('ul');
-                listGroup.innerHTML = '';
-
-                var matchCount = 0;
-                data_pelanggan_app.forEach(function(customer) {
-                    if (customer.id_pelanggan.toLowerCase().includes(searchTerm) && matchCount < 10) {
-                        var listItem = document.createElement('li');
-                        listItem.className = 'list-group-item';
-                        listItem.textContent = customer.id_pelanggan;
-                        listItem.onclick = function() {
-                            document.getElementById('searchInput').value = customer.id_pelanggan;
-                            listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
-                            // Redirect berdasarkan ID Pelanggan
-                            window.location.href = '/edit_pelanggan_app_user/' + customer.id_pelanggan;
-                        };
-                        listGroup.appendChild(listItem);
-                        matchCount++;
+        // Inisialisasi Selectize hanya untuk pelanggan yang belum memiliki latitude dan longitude
+        $(document).ready(function() {
+            $('#select-pelanggan').selectize({
+                valueField: 'id_pelanggan', // Nilai yang akan dipilih
+                labelField: 'id_pelanggan', // Label yang ditampilkan
+                searchField: ['id_pelanggan'], // Kolom yang akan dicari
+                options: filteredData, // Data pelanggan yang difilter dari server
+                placeholder: 'Ketik disini untuk mencari ID Pelanggan ........',
+                maxItems: 1, // Hanya satu pilihan
+                onChange: function(value) {
+                    if (value) {
+                        // Redirect ke halaman edit pelanggan berdasarkan ID pelanggan yang dipilih
+                        window.location.href = '/edit_pelanggan_app_user/' + value;
                     }
-                });
-
-                if (listGroup.childElementCount > 0) {
-                    suggestionListAPP.style.display = 'block';
-                } else {
-                    suggestionListAPP.style.display = 'none';
-                }
-            }
-
-            // Menutup daftar saran jika klik di luar elemen
-            document.addEventListener('click', function(event) {
-                var suggestionListAPP = document.getElementById('suggestionListAPP');
-                if (event.target !== suggestionListAPP && !suggestionListAPP.contains(event.target)) {
-                    suggestionListAPP.style.display = 'none';
                 }
             });
-        </script>
-    @endsection
+        });
+    </script>
+@endsection
