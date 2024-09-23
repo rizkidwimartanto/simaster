@@ -24,8 +24,8 @@
             <button class="btn btn-primary" type="button" id="tambah_garis" data-bs-toggle="modal"
                 data-bs-target="#exampleModal">Tambah Garis</button>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
+            <div class="modal fade" style="z-index: 999999999" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title" id="exampleModalLabel">Tambah Garis</h1>
@@ -62,7 +62,7 @@
             <div class="mt-3 mb-3 search_customer">
                 <div class="row g-2">
                     <div class="col">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Cari pemyulang..."
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari penyulang..."
                             onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
                         <div id="suggestionList" class="dropdown">
                             <ul class="list-group"></ul>
@@ -93,7 +93,7 @@
     </div>
     <div id="map" onclick="click_map()"></div>
     @foreach ($data_trafo as $trafo)
-        <div class="modal modal-blur fade" id="{{ $trafo->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal modal-blur fade" id="{{ $trafo->id }}" style="z-index: 99999999" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">

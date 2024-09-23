@@ -15,9 +15,12 @@ class DataPelangganAPPImport implements ToModel, WithStartRow, WithMultipleSheet
 {
     use Importable;
 
-    /**
-     * Method untuk memetakan baris dari file excel menjadi data model.
-     */
+    protected $unit_ulp;
+
+    public function __construct($unit_ulp)
+    {
+        $this->unit_ulp = $unit_ulp;
+    }
     public function model(array $row)
     {
         if (empty($row[3])) { // Asumsi kolom ID pelanggan berada di index 3
@@ -53,6 +56,7 @@ class DataPelangganAPPImport implements ToModel, WithStartRow, WithMultipleSheet
             'nomor_meter' => $row[7], 
             'ukuran_mcb' => $row[8], 
             'no_segel' => $row[10], 
+            'unit_ulp'  => $this->unit_ulp,
         ];
     }
 

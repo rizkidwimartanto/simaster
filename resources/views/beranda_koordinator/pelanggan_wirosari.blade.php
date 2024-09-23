@@ -1,19 +1,5 @@
 @extends('layout/templateberanda_koordinator')
 @section('content')
-    <div class="container-fluid" style="padding: 8px;">
-        <div class="row justify-content-between text-center nav_koordinator">
-            <div class="col-2" style="font-weight: 700"><a href="/koordinator" style="text-decoration: none;">Semua Pelanggan
-                    APP</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_demak" style="text-decoration: none;">Pelanggan
-                    Demak</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_tegowanu"
-                    style="text-decoration: none;">Pelanggan Tegowanu</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_purwodadi"
-                    style="text-decoration: none;">Pelanggan Purwodadi</a></div>
-            <div class="col-2" style="font-weight: 700"><a href="/pelanggan_wirosari"
-                    style="text-decoration: none;">Pelanggan Wirosari</a></div>
-        </div>
-    </div>
     <div class="container">
         <div class="d-flex justify-content-around">
             <div class="mt-3 mb-3 search_customer">
@@ -60,6 +46,22 @@
     @endforeach
     <div class="container-fluid display-pelanggan-app">
         <h1 class="text-center" style="font-weight: 700;">Pelanggan Wirosari</h1>
+        <div class="card p-3 mb-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Import Excel Data Pelanggan APP</h2>
+                    <form action="/koordinator/import_excel/ulp_wirosari" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" id="file" class="form-control" required>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-upload fa-lg"
+                                    style="margin-right: 5px"></i>Import Excel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="card p-3 mb-3">
             <div class="row">
                 <div class="col-md-6 col-12">

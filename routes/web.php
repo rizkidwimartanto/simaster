@@ -48,7 +48,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::post('/proses_edit_pelanggan_app/{id}', 'proses_edit_pelanggan_app');
     Route::post('/proses_edit_pelanggan_app_user/{id}', 'proses_edit_pelanggan_app_user');
     Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
-    Route::post('/koordinator/import_excel', 'import_excel');
+    Route::post('/koordinator/import_excel/{unit_ulp}', 'import_excel');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');
     Route::get('/get-pelanggan/{nama_pelanggan}','getPelangganData');
