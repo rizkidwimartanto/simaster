@@ -49,13 +49,13 @@ class DataPelangganAPPImport implements ToModel, WithStartRow, WithMultipleSheet
     private function getData(array $row)
     {
         return [
-            'id_pelanggan' => $row[3], 
-            'nama_pelanggan' => $row[4], 
-            'alamat' => $row[5], 
-            'tarif_daya' => $row[6], 
-            'nomor_meter' => $row[7], 
-            'ukuran_mcb' => $row[8], 
-            'no_segel' => $row[10], 
+            'id_pelanggan' => $row[3],
+            'nama_pelanggan' => $row[4],
+            'alamat' => $row[5],
+            'tarif_daya' => $row[6],
+            'nomor_meter' => $row[7],
+            'ukuran_mcb' => $row[8],
+            'no_segel' => $row[10],
             'unit_ulp'  => $this->unit_ulp,
         ];
     }

@@ -34,7 +34,7 @@ class UpdatingController extends Controller
             'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
             'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
             'data_unitulp' => DataPelangganModel::pluck('unitulp'),
-            'auth_unit_ulp' => auth()->user()->unit_ulp,
+            'auth_unit_ulp' => auth()->user(),
         ];
         if (Auth::user()->role === 'administrator') {
             return view('beranda_administrator/index', $data);
@@ -45,12 +45,12 @@ class UpdatingController extends Controller
         }
 
     }
-    public function entridata_user(){
-        $data = [
-            'title' => 'Entri Data',
-        ];
-        return view('beranda_user/entridata_user', $data);
-    }
+    // public function entridata_user(){
+    //     $data = [
+    //         'title' => 'Entri Data',
+    //     ];
+    //     return view('beranda_user/entridata_user', $data);
+    // }
     public function entri_padam()
     {
         $data_penyulang = SectionModel::pluck('penyulang')->unique();

@@ -1,7 +1,7 @@
 @extends('layout/templateberanda_user')
 @section('content')
-    <div class="container-fluid mt-4">
-        <div class="container-fluid mt-4">
+    <div class="container-fluid" style="margin-top: 85px">
+        <div class="container-fluid">
             <label class="form-label">ID Pelanggan</label>
             <select id="select-pelanggan" placeholder="Ketik disini untuk mencari ID Pelanggan ........"></select>
         </div>
@@ -10,9 +10,10 @@
     <script>
         // Data pelanggan dari backend (pastikan $data_pelanggan_app berisi data pelanggan)
         var data_pelanggan_app = @json($data_pelanggan_app);
+        var auth_unit_ulp = @json($auth_unit_ulp);
 
-        // Filter pelanggan yang tidak memiliki latitude dan longitude
-        var filteredData = data_pelanggan_app.filter(function(customer) {
+        if(auth_unit_ulp){
+            var filteredData = data_pelanggan_app.filter(function(customer) {
             return customer.latitude == null || customer.longitude == null; // Hanya pilih pelanggan tanpa latitude/longitude
         });
 
@@ -33,5 +34,6 @@
                 }
             });
         });
+        }
     </script>
 @endsection

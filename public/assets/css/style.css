@@ -21,6 +21,12 @@ header.navbar-expand-md {
     height: 90%;
     z-index: 0;
 }
+#map_koordinator {
+    position: relative;
+    bottom: 5px;
+    height: 70%;
+    z-index: 0;
+}
 .display-pelanggan-app {
     position: relative;
     bottom: 53px;
@@ -36,7 +42,7 @@ p.detail_pelanggan {
 div.search_customer {
     position: relative;
     width: 50%;
-    z-index: 9999999;
+    z-index: 999;
     top: 5.5rem;
 }
 

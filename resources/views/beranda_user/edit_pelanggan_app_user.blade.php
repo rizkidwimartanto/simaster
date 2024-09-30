@@ -1,6 +1,6 @@
 @extends('layout/templateberanda_user')
 @section('content')
-    <div class="container-fluid mt-4" id="container-pelanggan-app">
+    <div class="container-fluid" style="margin-top: 80px;" id="container-pelanggan-app">
         @error('latitude')
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>Anda belum klik lokasi saat ini</strong>

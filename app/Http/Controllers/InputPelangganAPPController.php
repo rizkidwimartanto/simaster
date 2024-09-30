@@ -28,6 +28,7 @@ class InputPelangganAPPController extends Controller
     {
         $data = [
             'title' => 'Entri Data',
+            'auth_unit_ulp' => auth()->user()->unit_ulp,
             'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->get(),
         ];
         return view('beranda_user/entridata_user', $data);
@@ -111,7 +112,7 @@ class InputPelangganAPPController extends Controller
     {
         $data = [
             'title' => 'Pelanggan Purwodadi',
-            'data_pelanggan_app_purwodadi' => DB::table('entri_pelanggan_app')->where('unit_ulp', '=', 'ulp purwodadi')->get(),
+            'data_pelanggan_app_purwodadi' => DB::table('entri_pelanggan_app')->where('unit_ulp', '=', 'ulp_purwodadi')->get(),
         ];
         return view('beranda_koordinator.pelanggan_purwodadi', $data);
     }
@@ -123,22 +124,35 @@ class InputPelangganAPPController extends Controller
         ];
         return view('beranda_koordinator.pelanggan_wirosari', $data);
     }
-    public function import_excel(Request $request, $unit_ulp)
+    public function import_excel_purwodadi(Request $request)
     {
         $this->validate($request, [
             'file' => 'required|mimes:csv,xls,xlsx'
         ]);
-
-        // Handle file upload
+        $unit_ulp = 'ulp_purwodadi';
         $file = $request->file('file');
         $nama_file = rand() . '_' . $file->getClientOriginalName();
         $file->move('file_pelanggan_app', $nama_file);
 
-        // Import data dengan unit_ulp yang sesuai
         Excel::import(new DataPelangganAPPImport($unit_ulp), public_path('/file_pelanggan_app/' . $nama_file));
 
-        return redirect('/koordinator')->with('success', 'Data Pelanggan Berhasil Diimpor');
+        return redirect('/pelanggan_purwodadi')->with('success', 'Data Pelanggan Berhasil Diimpor');
     }
+    public function import_excel_wirosari(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $unit_ulp = 'ulp_wirosari';
+        $file = $request->file('file');
+        $nama_file = rand() . '_' . $file->getClientOriginalName();
+        $file->move('file_pelanggan_app', $nama_file);
+
+        Excel::import(new DataPelangganAPPImport($unit_ulp), public_path('/file_pelanggan_app/' . $nama_file));
+
+        return redirect('/pelanggan_wirosari')->with('success', 'Data Pelanggan Berhasil Diimpor');
+    }
+
     public function export_excel_app(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');

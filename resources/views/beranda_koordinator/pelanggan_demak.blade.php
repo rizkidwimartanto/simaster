@@ -5,7 +5,7 @@
             <div class="mt-3 mb-3 search_customer">
                 <div class="row g-2">
                     <div class="col">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Cari customer..."
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari pelanggan..."
                             onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
                         <div id="suggestionList" class="dropdown">
                             <ul class="list-group"></ul>
@@ -44,8 +44,24 @@
             </div>
         </div>
     @endforeach
-    <div class="container-fluid display-pelanggan-app">
+    <div class="container-fluid display-pelanggan-app" style="margin-top: 60px;">
         <h1 class="text-center" style="font-weight: 700;">Pelanggan Demak</h1>
+        <div class="card p-3 mb-3">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Import Excel Data Pelanggan APP</h2>
+                    <form action="/koordinator/import_excel" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" id="file" class="form-control" required>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success mt-3"><i class="fa-solid fa-upload fa-lg"
+                                    style="margin-right: 5px"></i>Import Excel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="card p-3 mb-3">
             <div class="row">
                 <div class="col-md-6 col-12">
