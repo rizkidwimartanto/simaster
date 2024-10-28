@@ -1,0 +1,225 @@
+@extends('layout/templateberanda_mitra')
+@section('content')
+    <div class="container-fluid" style="margin-top: 5rem;">
+        @foreach (['success_tambah_keypoint'] as $msg)
+            @if (session($msg))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <h3>{{ session($msg) }}</h3>
+                </div>
+            @endif
+        @endforeach
+        @foreach (['error_tambah_keypoint'] as $msg)
+            @if (session($msg))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <h3>{{ session($msg) }}</h3>
+                </div>
+            @endif
+        @endforeach
+        <button type="button" class="btn btn-info mb-3 col-12" data-bs-toggle="modal"
+            data-bs-target="#modalTambahKeypoint"><i class="fa-solid fa-circle-plus fa-lg" style="margin-right: 5px;"></i>
+            Tambah Data Keypoint
+        </button>
+        <div class="modal fade" id="modalTambahKeypoint" tabindex="-1" aria-labelledby="modalTambahKeypointLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="/keypoint/proses_tambah_keypoint" method="post">
+                    @csrf
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-3" id="modalTambahKeypointLabel">Tambah Data Keypoint
+                            </h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-4">
+                                <label class="form-label">Jenis Keypoint</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="jenis_keypoint" id="jenis_keypoint" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Nomor Tiang</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="nomor_tiang" id="nomor_tiang" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Status Keypoint</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="status_keypoint" id="status_keypoint" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Kondisi Keypoint</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="kondisi_keypoint" id="kondisi_keypoint"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Merk</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="merk" id="merk" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Nomor Seri</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="no_seri" id="no_seri" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Setting OCR</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="setting_ocr" id="setting_ocr" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Setting GFR</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="setting_gfr" id="setting_gfr" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Setting Grup Aktif</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="setting_grupaktif" id="setting_grupaktif"
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Alamat</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="alamat" id="alamat" type="text">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Tanggal HAR</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="tanggal_har" id="tanggal_har" type="date">
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Tanggal Pasang</label>
+                                <div class="input-group input-group-flat">
+                                    <input class="form-control" name="tanggal_pasang" id="tanggal_pasang"
+                                        type="date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <form action="/hapusPelangganAPP" method="post">
+            @csrf
+            @method('delete')
+            <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
+                data-bs-target="#modal-delete-pelangganapp">
+                <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pelanggan APP
+            </a>
+            <div class="modal modal-blur fade" id="modal-delete-pelangganapp" tabindex="-1" role="dialog"
+                aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-status bg-danger"></div>
+                        <div class="modal-body text-center py-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
+                                <path d="M12 9v4" />
+                                <path d="M12 17h.01" />
+                            </svg>
+                            <h3>Apakah anda yakin?</h3>
+                            <div class="text-muted">Untuk menghapus pelanggan tersebut</div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="w-100">
+                                <div class="row">
+                                    <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                            Cancel
+                                        </a></div>
+                                    <div class="col"><button type="submit" class="btn btn-danger w-100"
+                                            data-bs-dismiss="modal">
+                                            Delete
+                                        </button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered tabel-app mt-2" id="tabel-keypoint">
+                <thead>
+                    <tr>
+                        <th width="5%">No</th>
+                        <th width="5%">
+                            <div class="d-flex justify-content-center">
+                                <div class="form-check">
+                                    <input class="form-check-input" style="position:relative; left:10px; top:7px;"
+                                        type="checkbox" id="checklist-pelangganapp" onclick="checkAllPelangganAPP()">
+                                </div>
+                            </div>
+                        </th>
+                        <th width="40%">Jenis Keypoint</th>
+                        <th width="45%">Nomor Tiang</th>
+                        <th width="5%">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $no = 1;
+                    @endphp
+                    @foreach ($data_keypoint as $keypoint)
+                        <tr>
+                            <td width="5%">{{ $no++ }}</td>
+                            <td width="2%">
+                                <div class="d-flex justify-content-center">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="{{ $keypoint->id }}"
+                                            id="flexCheckDefault" name="checkPelangganAPP[]">
+                                    </div>
+                                </div>
+                            </td>
+                            <td width="20%">{{ $keypoint->jenis_keypoint }}</td>
+                            <td width="20%">{{ $keypoint->nomor_tiang }}</td>
+                            <td width="5%">
+                                <a href="/informasi_keypoint/{{ $keypoint->id }}">
+                                    <i class="fa-solid fa-circle-info fa-lg"></i>
+                                </a>
+                                <a href="/edit_pelanggan_app/{{ $keypoint->id }}">
+                                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            function template_tabel(nama_tabel) {
+                $(nama_tabel).DataTable({
+                    scrollX: true,
+                    scrollCollapse: true,
+                    fixedColumns: true,
+                    'pageLength': 10,
+                    'lengthMenu': [10, 25, 50, 100, 200, 500],
+                });
+            }
+
+            template_tabel('#tabel-keypoint');
+        });
+    </script>
+@endsection

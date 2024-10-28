@@ -52,6 +52,8 @@ class UserController extends Controller
                 return redirect()->intended('user');
             }else if($user->role == 'koordinator'){
                 return redirect()->intended('koordinator');
+            }else if($user->role == 'mitra'){
+                return redirect()->intended('keypoint');
             }else{
                 return redirect()->intended('beranda');
             }
@@ -76,7 +78,7 @@ class UserController extends Controller
             'username' => 'required|max:255|min:5',
             'email' => 'required|email:dns|unique:App\Models\User,email',
             'password' => 'required|min:5|max:255|confirmed',
-            'role' => 'required|in:administrator,koordinator,user',
+            'role' => 'required|in:administrator,koordinator,user,mitra',
             'unit_ulp' => 'required_if:role,user|in:ulp demak,ulp tegowanu,ulp purwodadi,ulp wirosari',
         ], $message);
         // event(new Registered($validateData));
@@ -99,6 +101,9 @@ class UserController extends Controller
                 break;
             case 'user':
                 $layout = 'layout/templateberanda_user';
+                break;
+            case 'mitra':
+                $layout = 'layout/templateberanda_mitra';
                 break;
             default:
                 $layout = 'layout/default';
@@ -151,6 +156,8 @@ class UserController extends Controller
                 return redirect('/koordinator');
             case 'user':
                 return redirect('/user');
+            case 'mitra':
+                return redirect('/mitra');
             default:
                 return redirect('/');
         }

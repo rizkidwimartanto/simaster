@@ -73,6 +73,7 @@
                             <option value="administrator" {{ old('role') == 'administrator' ? 'selected' : '' }}>Administrator</option>
                             <option value="koordinator" {{ old('role') == 'koordinator' ? 'selected' : '' }}>Koordinator</option>
                             <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
+                            <option value="mitra" {{ old('role') == 'mitra' ? 'selected' : '' }}>Mitra</option>
                         </select>
                         @error('role')
                             <div class="invalid-feedback">

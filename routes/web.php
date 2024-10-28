@@ -5,8 +5,10 @@ use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\EntriPadamController;
 use App\Http\Controllers\InputPelangganAPPController;
+use App\Http\Controllers\MitraController;
 use App\Http\Controllers\UpdatingController;
 use App\Http\Controllers\UserController;
+use App\Models\MitraModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -52,7 +54,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::post('/koordinator/import_excel_wirosari', 'import_excel_wirosari');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');
-    Route::get('/get-pelanggan/{nama_pelanggan}','getPelangganData');
+    Route::get('/get-pelanggan/{nama_pelanggan}', 'getPelangganData');
 });
 Route::controller(UpdatingController::class)->group(function () {
     Route::get('/beranda', 'index')->middleware('auth')->name('beranda_administrator');
@@ -91,4 +93,9 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/transaksiaktif/export_pelanggan_padam_csv', 'export_pelanggan_padam_csv');
     Route::get('/transaksipadam/hapus_entri', 'hapusEntriPadam');
     Route::post('/transaksipadam/edit_status_padam', 'editStatusPadam');
+});
+Route::controller(MitraController::class)->group(function () {
+    Route::get('/keypoint', 'keypoint')->middleware('auth')->name('keypoint');
+    Route::get('/informasi_keypoint/{id}', 'informasi_keypoint');
+    Route::post('/keypoint/proses_tambah_keypoint', 'proses_tambah_keypoint');
 });
