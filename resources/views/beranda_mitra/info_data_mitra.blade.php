@@ -19,15 +19,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            background: linear-gradient(135deg, #33c5f9, #0079a5);
         }
 
         /* Container utama */
         .content {
             background-color: #ffffff;
-            padding: 3rem; /* Menggunakan rem untuk padding */
+            padding: 3rem;
             width: 90%;
-            max-width: 70rem; /* Lebar maksimal dalam rem */
+            max-width: 70rem;
             border-radius: 1rem;
             box-shadow: 0px 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
             animation: fadeIn 1s ease-in-out;
@@ -37,16 +37,16 @@
         .content h2 {
             text-align: center;
             font-size: 2rem;
-            color: #4e54c8;
+            color: #027aa5;
             margin-bottom: 2rem;
         }
 
-        /* Styling untuk daftar informasi dalam dua kolom */
+        /* Styling untuk daftar informasi dalam tiga kolom */
         .info-list {
             list-style: none;
             font-size: 1.2rem;
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Dua kolom */
+            grid-template-columns: repeat(3, 1fr); /* Tiga kolom */
             gap: 1rem; /* Spasi antar item */
             max-height: 25rem;
             overflow-y: auto;
@@ -55,23 +55,22 @@
 
         .info-list li {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             padding: 1rem;
             border: 1px solid #ddd;
             border-radius: 0.5rem;
-            background-color: #f9f9f9;
+            background-color: #FEF200;
         }
 
         .info-title {
             font-weight: bold;
             color: #333;
-            flex: 1;
+            margin-bottom: 0.5rem;
         }
 
         .info-data {
             color: #666;
-            text-align: right;
-            flex: 2;
+            text-align: left;
         }
 
         /* Responsif untuk layar kecil */
@@ -91,7 +90,7 @@
 <body>
 
 <div class="content">
-    <h2>Data Pengguna</h2>
+    <h2>Data Keypoint {{$keypoint->jenis_keypoint}}</h2>
     <ul class="info-list">
         <li>
             <span class="info-title">Jenis Keypoint:</span>

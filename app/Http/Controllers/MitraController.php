@@ -19,12 +19,12 @@ class MitraController extends Controller
           ];
           return view('beranda_mitra/index', $data);
       }
-      public function informasi_keypoint($id){
+      public function info_keypoint($id){
         $data = [
             'title' => 'Keypoint',
             'keypoint' => MitraModel::find($id)
         ];
-        return view('beranda_mitra/informasi_data_mitra', $data);
+        return view('beranda_mitra/info_data_mitra', $data);
     }
       public function proses_tambah_keypoint(Request $request)
       {

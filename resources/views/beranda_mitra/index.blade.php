@@ -194,7 +194,7 @@
                             <td width="20%">{{ $keypoint->jenis_keypoint }}</td>
                             <td width="20%">{{ $keypoint->nomor_tiang }}</td>
                             <td width="5%">
-                                <a href="/informasi_keypoint/{{ $keypoint->id }}">
+                                <a href="/info_keypoint/{{ $keypoint->id }}">
                                     <i class="fa-solid fa-circle-info fa-lg"></i>
                                 </a>
                                 <a href="/edit_pelanggan_app/{{ $keypoint->id }}">
