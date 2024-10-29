@@ -97,5 +97,7 @@ Route::controller(EntriPadamController::class)->group(function () {
 Route::controller(MitraController::class)->group(function () {
     Route::get('/keypoint', 'keypoint')->middleware('auth')->name('keypoint');
     Route::get('/info_keypoint/{id}', 'info_keypoint');
+    Route::post('/edit_keypoint/{id}', 'edit_keypoint');
+    Route::delete('/delete_keypoint/{id}', 'delete_keypoint');
     Route::post('/keypoint/proses_tambah_keypoint', 'proses_tambah_keypoint');
 });

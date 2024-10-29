@@ -19,15 +19,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #33c5f9, #0079a5);
+            background: linear-gradient(#33c5f9, #0079a5);
         }
 
         /* Container utama */
         .content {
             background-color: #ffffff;
             padding: 3rem;
-            width: 90%;
-            max-width: 70rem;
+            width: 45rem;
+            max-width: 80rem;
             border-radius: 1rem;
             box-shadow: 0px 0.625rem 1.25rem rgba(0, 0, 0, 0.2);
             animation: fadeIn 1s ease-in-out;
@@ -46,7 +46,6 @@
             list-style: none;
             font-size: 1.2rem;
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* Tiga kolom */
             gap: 1rem; /* Spasi antar item */
             max-height: 25rem;
             overflow-y: auto;
@@ -72,11 +71,29 @@
             color: #666;
             text-align: left;
         }
-
         /* Responsif untuk layar kecil */
-        @media (max-width: 37.5rem) { /* 600px dalam rem */
+        @media (max-width: 700px) { /* 600px dalam rem */
             .info-list {
                 grid-template-columns: 1fr; /* Satu kolom pada layar kecil */
+            }
+            .content{
+                width: 28rem;
+            }
+        }
+        @media (max-width: 485px) { /* 600px dalam rem */
+            .info-list {
+                grid-template-columns: 1fr; /* Satu kolom pada layar kecil */
+            }
+            .content{
+                width: 25rem;
+            }
+        }
+        @media (max-width: 400px) { /* 600px dalam rem */
+            .info-list {
+                grid-template-columns: 1fr; /* Satu kolom pada layar kecil */
+            }
+            .content{
+                width: 18rem;
             }
         }
 
