@@ -2,22 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ABSWImport;
+use App\Imports\KeypointImport;
+use App\Imports\RecloserLBSImport;
+use App\Imports\RisePoleImport;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\MitraModel;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MitraController extends Controller
 {
     public function keypoint()
     {
         $data = [
-            'title' => 'Keypoint',
-            'data_keypoint' => DB::table('mitra')->select('id', 'jenis_keypoint', 'nomor_tiang', 'status_keypoint', 'kondisi_keypoint', 'merk', 'no_seri', 'setting_ocr', 'setting_gfr', 'setting_grupaktif', 'alamat', 'tanggal_har', 'tanggal_pasang')->get(),
+            'title' => 'Recloser & LBS',
+            'data_keypoint' => DB::table('keypoint')->select('id', 'penyulang', 'jenis_keypoint', 'nomor_tiang', 'status_keypoint', 'kondisi_keypoint', 'merk', 'no_seri', 'setting_ocr', 'setting_gfr', 'setting_grupaktif', 'alamat', 'tanggal_har', 'tanggal_pasang')->get(),
         ];
         return view('beranda_mitra/index', $data);
+    }
+    public function rise_pole()
+    {
+        $data = [
+            'title' => 'Rise Pole',
+            'data_keypoint' => DB::table('keypoint')->select('id', 'penyulang', 'absw', 'jenis_keypoint', 'nomor_tiang', 'status_keypoint', 'kondisi_keypoint', 'merk', 'no_seri', 'setting_ocr', 'setting_gfr', 'setting_grupaktif', 'alamat', 'tanggal_har', 'tanggal_pasang')->get(),
+        ];
+        return view('beranda_mitra/rise_pole', $data);
     }
     public function info_keypoint($id)
     {
@@ -113,5 +126,23 @@ class MitraController extends Controller
         $dataunit = MitraModel::find($id);
         $dataunit->delete();
         return redirect('/keypoint');
+    }
+    public function import_excel_recloser_lbs(Request $request)
+    {
+        $file = $request->file('file_recloser_lbs');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_recloser_lbs', $nama_file);
+        Excel::import(new RecloserLBSImport, public_path('/file_recloser_lbs/' . $nama_file));
+
+        return redirect('/keypoint');
+    }
+    public function import_excel_risepole(Request $request)
+    {
+        $file = $request->file('file_risepole');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_risepole', $nama_file);
+        Excel::import(new RisePoleImport, public_path('/file_risepole/' . $nama_file));
+
+        return redirect('/rise_pole');
     }
 }

@@ -96,8 +96,11 @@ Route::controller(EntriPadamController::class)->group(function () {
 });
 Route::controller(MitraController::class)->group(function () {
     Route::get('/keypoint', 'keypoint')->middleware('auth')->name('keypoint');
+    Route::get('/rise_pole', 'rise_pole')->middleware('auth')->name('rise_pole');
     Route::get('/info_keypoint/{id}', 'info_keypoint');
     Route::post('/edit_keypoint/{id}', 'edit_keypoint');
     Route::delete('/delete_keypoint/{id}', 'delete_keypoint');
+    Route::post('/import_excel_recloser_lbs', 'import_excel_recloser_lbs');
+    Route::post('/import_excel_risepole', 'import_excel_risepole');
     Route::post('/keypoint/proses_tambah_keypoint', 'proses_tambah_keypoint');
 });

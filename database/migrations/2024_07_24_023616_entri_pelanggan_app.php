@@ -17,8 +17,7 @@ class EntriPelangganApp extends Migration
             $table->id();
             $table->string('id_pelanggan')->nullable();
             $table->string('nama_pelanggan')->nullable();
-            $table->string('tarif')->nullable();
-            $table->string('daya')->nullable();
+            $table->string('tarif_daya')->nullable();
             $table->string('alamat')->nullable();
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();

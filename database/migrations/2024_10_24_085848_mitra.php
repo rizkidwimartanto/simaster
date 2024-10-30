@@ -13,8 +13,10 @@ class Mitra extends Migration
      */
     public function up()
     {
-        Schema::create('mitra', function (Blueprint $table) {
+        Schema::create('keypoint', function (Blueprint $table) {
             $table->id();
+            $table->string('penyulang')->nullable();
+            $table->string('absw')->nullable();
             $table->string('jenis_keypoint')->nullable();
             $table->string('nomor_tiang')->nullable();
             $table->string('status_keypoint')->nullable();
@@ -38,6 +40,6 @@ class Mitra extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('mitra');
+        Schema::dropIfExists('keypoint');
     }
 }

@@ -9,7 +9,7 @@ class MitraModel extends Model
 {
       use HasFactory;
 
-      protected $table = 'mitra';
+      protected $table = 'keypoint';
       protected $primaryKey = 'id';
-      protected $fillable = ['jenis_keypoint', 'nomor_tiang', 'status_keypoint', 'kondisi_keypoint', 'merk', 'no_seri', 'setting_ocr', 'setting_gfr', 'setting_grupaktif', 'alamat', 'tanggal_har', 'tanggal_pasang'];
+      protected $fillable = ['penyulang','absw','jenis_keypoint', 'nomor_tiang', 'status_keypoint', 'kondisi_keypoint', 'merk', 'no_seri', 'setting_ocr', 'setting_gfr', 'setting_grupaktif', 'alamat', 'tanggal_har', 'tanggal_pasang'];
 }
