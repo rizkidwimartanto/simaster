@@ -36,9 +36,9 @@ class PenyulangImport implements ToModel, WithStartRow
             } else {
                 Session::flash('success_import_penyulang', 'file excel penyulang berhasil diimport');
                 return new PenyulangModel([
-                    'id_penyulang' => $row[0],
-                    'gi' => $row[1],
-                    'penyulang' => $row[2],
+                    'id_penyulang' => $row[0] ?? '',
+                    'gi' => $row[1] ?? '',
+                    'penyulang' => $row[2] ?? '',
                 ]);
             }
         }

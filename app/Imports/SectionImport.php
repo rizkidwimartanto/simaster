@@ -52,7 +52,7 @@ class SectionImport implements ToModel, WithStartRow
     private function isDuplicate(array $data)
     {
         $existingData = SectionModel::where('nama_section', $data[2])
-            ->where('penyulang', $data['1'])
+            ->where('penyulang', $data['1'] ?? '')
             ->first();
 
         return $existingData !== null;

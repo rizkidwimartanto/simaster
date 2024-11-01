@@ -42,10 +42,10 @@ class RecloserLBSImport implements ToModel, WithStartRow, WithMultipleSheets
     private function getData(array $row)
     {
         return [
-            'penyulang' => $row[0],
-            'jenis_keypoint' => $row[1],
-            'nomor_tiang' => $row[2],
-            'status_keypoint' => $row[3],
+            'penyulang' => $row[0] ?? '',
+            'jenis_keypoint' => $row[1] ?? '',
+            'nomor_tiang' => $row[2] ?? '',
+            'status_keypoint' => $row[3] ?? '',
         ];
     }
     private function isDuplicate(array $data)
