@@ -2,7 +2,7 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
-        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif', 'success_edit_pelanggan','success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif'] as $msg)
+        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif', 'success_edit_pelanggan', 'success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif'] as $msg)
             @if (session($msg))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -10,7 +10,7 @@
                 </div>
             @endif
         @endforeach
-        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif', 'error_edit_pelanggan','error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif'] as $msg)
+        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif', 'error_edit_pelanggan', 'error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif'] as $msg)
             @if (session($msg))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -85,8 +85,8 @@
                             <form action="/updating/hapus_pelanggan" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="#" class="btn btn-danger col-12 mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#modal-delete-pelanggan">
+                                <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#modal-delete-pelanggan">
                                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Pelanggan
                                 </a>
                                 <div class="modal modal-blur fade" id="modal-delete-pelanggan" tabindex="-1" role="dialog"
@@ -127,222 +127,247 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-vcenter table-bordered table-hover table-info"
-                                    id="tabel_data_pelanggan" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 5%">No</th>
-                                            <th style="width: 5%">
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input mt-2"
-                                                            style="position:relative; left:10px;" type="checkbox"
-                                                            id="checklist-pelanggan" onclick="checkAllPelanggan()">
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <th style="width: 15%">ID Pelanggan</th>
-                                            <th style="width: 25%">Nama</th>
-                                            <th style="width: 35%">Alamat</th>
-                                            <th style="width: 15%">Maps</th>
-                                            <th style="width: 5%">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $i = 1; ?>
-                                        @foreach ($data_pelanggan as $s)
+                                <div style="overflow-y: auto;">
+                                    <table class="table-bordered display" id="tabel_data_pelanggan">
+                                        <thead>
                                             <tr>
-                                                <td style="width: 5%">{{ $i++ }}</td>
-                                                <td style="width: 5%">
+                                                <th>No</th>
+                                                <th>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="{{ $s->id }}" id="flexCheckDefault"
-                                                                name="checkPelanggan[]">
+                                                            <input class="form-check-input mt-2"
+                                                                style="position:relative; left:10px;" type="checkbox"
+                                                                id="checklist-pelanggan" onclick="checkAllPelanggan()">
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td style="width: 15%">{{ $s->idpel }}</td>
-                                                <td style="width: 25%">{{ $s->nama }}</td>
-                                                <td style="width: 35%">{{ $s->alamat }}</td>
-                                                <td style="width: 15%"><a href="{{ $s->maps }}"
-                                                        target="_blank">{{ $s->maps }}</a></td>
-                                                <td style="width: 5%">
-                                                    <a href="#" data-bs-target="#{{ $s->id }}"
-                                                        data-bs-toggle="modal">
-                                                        <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
-                                                    </a>
-                                                    <a style="cursor: pointer" class="text-secondary"
-                                                        href="/updating/editpelanggan/{{ $s->id }}">
-                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                    </a>
-                                                    {{-- </form> --}}
-                                                    <div class="modal modal-blur fade" id="{{ $s->id }}"
-                                                        tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">{{ $s->nama }}</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">Nama
-                                                                                Pelanggan</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->nama }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3">
-                                                                            <label class="form-label">Alamat</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <textarea class="form-control" name="alamat" rows="5" readonly>{{ $s->alamat }}</textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">No HP
-                                                                                StakeHolder</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->nohp_stakeholder }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">No HP PIC
-                                                                                Lapangan</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->nohp_piclapangan }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Latitude</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->latitude }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Longtitude</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->longtitude }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Unit ULP</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <?php if ($s->unitulp == 52550) : ?>
-                                                                                <input type="text" value="UP3 Demak"
-                                                                                    class="form-control" readonly>
-                                                                                <?php elseif($s->unitulp == 52551) : ?>
-                                                                                <input type="text" value="ULP Demak"
-                                                                                    class="form-control" readonly>
-                                                                                <?php elseif($s->unitulp == 52552) : ?>
-                                                                                <input type="text" value="ULP Tegowanu"
-                                                                                    class="form-control" readonly>
-                                                                                <?php elseif($s->unitulp == 52553) : ?>
-                                                                                <input type="text" value="ULP Purwodadi"
-                                                                                    class="form-control" readonly>
-                                                                                <?php elseif($s->unitulp == 52554) : ?>
-                                                                                <input type="text" value="ULP Wirosari"
-                                                                                    class="form-control" readonly>
-                                                                                <?php endif; ?>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Tarif</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->tarif }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Daya</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->daya }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">KOGOL</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->kogol }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">fakmkwh</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->fakmkwh }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">rpbp</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->rpbp }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">rpujl</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->rpujl }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">nomor_kwh</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->nomor_kwh }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">penyulang</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->penyulang }}"
-                                                                                    class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">nama_section</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <textarea class="form-control" name="nama_section" rows="3" readonly>{{ $s->nama_section }}</textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">Kali Padam</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                @if ($s->entriPadam)
+                                                </th>
+                                                <th>ID Pelanggan</th>
+                                                <th>Nama</th>
+                                                <th>Alamat</th>
+                                                <th>Maps</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 1; ?>
+                                            @foreach ($data_pelanggan as $s)
+                                                <tr>
+                                                    <td>{{ $i++ }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    value="{{ $s->id }}" id="flexCheckDefault"
+                                                                    name="checkPelanggan[]">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $s->idpel }}</td>
+                                                    <td>{{ $s->nama }}</td>
+                                                    <td>{{ $s->alamat }}</td>
+                                                    <td><a href="{{ $s->maps }}"
+                                                            target="_blank">{{ $s->maps }}</a>
+                                                    </td>
+                                                    <td>
+                                                        <a href="#" data-bs-target="#{{ $s->id }}"
+                                                            data-bs-toggle="modal">
+                                                            <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
+                                                        </a>
+                                                        <a style="cursor: pointer" class="text-secondary"
+                                                            href="/updating/editpelanggan/{{ $s->id }}">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                        {{-- </form> --}}
+                                                        <div class="modal modal-blur fade" id="{{ $s->id }}"
+                                                            tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-scrollable"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">{{ $s->nama }}</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-lg-12">
+                                                                                <label class="form-label">Nama
+                                                                                    Pelanggan</label>
+                                                                                <div class="input-group input-group-flat">
                                                                                     <input type="text"
-                                                                                        value="{{ $s->entriPadam->kalipadam }}"
+                                                                                        value="{{ $s->nama }}"
                                                                                         class="form-control" readonly>
-                                                                                @else
-                                                                                    <input type="text" value="{{ 0 }}"
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3">
+                                                                                <label class="form-label">Alamat</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <textarea class="form-control" name="alamat" rows="5" readonly>{{ $s->alamat }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-12">
+                                                                                <label class="form-label">No HP
+                                                                                    StakeHolder</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->nohp_stakeholder }}"
                                                                                         class="form-control" readonly>
-                                                                                @endif
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-12">
+                                                                                <label class="form-label">No HP PIC
+                                                                                    Lapangan</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->nohp_piclapangan }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Latitude</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->latitude }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label
+                                                                                    class="form-label">Longtitude</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->longtitude }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Unit ULP</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <?php if ($s->unitulp == 52550) : ?>
+                                                                                    <input type="text"
+                                                                                        value="UP3 Demak"
+                                                                                        class="form-control" readonly>
+                                                                                    <?php elseif($s->unitulp == 52551) : ?>
+                                                                                    <input type="text"
+                                                                                        value="ULP Demak"
+                                                                                        class="form-control" readonly>
+                                                                                    <?php elseif($s->unitulp == 52552) : ?>
+                                                                                    <input type="text"
+                                                                                        value="ULP Tegowanu"
+                                                                                        class="form-control" readonly>
+                                                                                    <?php elseif($s->unitulp == 52553) : ?>
+                                                                                    <input type="text"
+                                                                                        value="ULP Purwodadi"
+                                                                                        class="form-control" readonly>
+                                                                                    <?php elseif($s->unitulp == 52554) : ?>
+                                                                                    <input type="text"
+                                                                                        value="ULP Wirosari"
+                                                                                        class="form-control" readonly>
+                                                                                    <?php endif; ?>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Tarif</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->tarif }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Daya</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->daya }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">KOGOL</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->kogol }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">fakmkwh</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->fakmkwh }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">rpbp</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->rpbp }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">rpujl</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->rpujl }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">nomor_kwh</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->nomor_kwh }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">penyulang</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->penyulang }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-12">
+                                                                                <label
+                                                                                    class="form-label">nama_section</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <textarea class="form-control" name="nama_section" rows="3" readonly>{{ $s->nama_section }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="mb-3 col-lg-12">
+                                                                                <label class="form-label">Kali
+                                                                                    Padam</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    @if ($s->entriPadam)
+                                                                                        <input type="text"
+                                                                                            value="{{ $s->entriPadam->kalipadam }}"
+                                                                                            class="form-control" readonly>
+                                                                                    @else
+                                                                                        <input type="text"
+                                                                                            value="{{ 0 }}"
+                                                                                            class="form-control" readonly>
+                                                                                    @endif
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -418,153 +443,166 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-vcenter table-bordered table-hover table-success"
-                                    id="tabel_data_trafo" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%">No</th>
-                                            <th width="2%">
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input mt-2"
-                                                            style="position:relative; left:10px;" type="checkbox"
-                                                            id="checklist-trafo" onclick="checkAllTrafo()">
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <th width="20%">Unit Layanan</th>
-                                            <th width="18%">Penyulang</th>
-                                            <th width="25%">No Tiang</th>
-                                            <th width="25%">Lokasi</th>
-                                            <th width="5%">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $i = 1; ?>
-                                        @foreach ($data_trafo as $s)
+                                <div style="overflow-y: auto;">
+                                    <table class="table-bordered display" id="tabel_data_trafo">
+                                        <thead>
                                             <tr>
-                                                <td width="5%">{{ $i++ }}</td>
-                                                <td width="2%">
+                                                <th>No</th>
+                                                <th>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="{{ $s->id }}" id="flexCheckDefault"
-                                                                name="checkTrafo[]">
+                                                            <input class="form-check-input mt-2"
+                                                                style="position:relative; left:10px;" type="checkbox"
+                                                                id="checklist-trafo" onclick="checkAllTrafo()">
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td width="20%">{{ $s->unit_layanan }}</td>
-                                                <td width="18%">{{ $s->penyulang }}</td>
-                                                <td width="25%">{{ $s->no_tiang }}</td>
-                                                <td width="25%">{{ $s->lokasi }}</td>
-                                                <td width="5%">
-                                                    <a href="#" data-bs-target="#trafo-{{ $s->id }}"
-                                                        data-bs-toggle="modal">
-                                                        <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
-                                                    </a>
-                                                    <a style="cursor: pointer" class="text-secondary"
-                                                        href="/updating/edittrafo/{{ $s->id }}">
-                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                    </a>
-                                                    {{-- </form> --}}
-                                                    <div class="modal modal-blur fade" id="trafo-{{ $s->id }}"
-                                                        tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">{{ $s->penyulang }}</h5>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Unit Layanan</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->unit_layanan }}"
-                                                                                    class="form-control" readonly>
+                                                </th>
+                                                <th>Unit Layanan</th>
+                                                <th>Penyulang</th>
+                                                <th>No Tiang</th>
+                                                <th>Lokasi</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php $i = 1; ?>
+                                            @foreach ($data_trafo as $s)
+                                                <tr>
+                                                    <td>{{ $i++ }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    value="{{ $s->id }}" id="flexCheckDefault"
+                                                                    name="checkTrafo[]">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $s->unit_layanan }}</td>
+                                                    <td>{{ $s->penyulang }}</td>
+                                                    <td>{{ $s->no_tiang }}</td>
+                                                    <td>{{ $s->lokasi }}</td>
+                                                    <td>
+                                                        <a href="#" data-bs-target="#trafo-{{ $s->id }}"
+                                                            data-bs-toggle="modal">
+                                                            <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
+                                                        </a>
+                                                        <a style="cursor: pointer" class="text-secondary"
+                                                            href="/updating/edittrafo/{{ $s->id }}">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                        {{-- </form> --}}
+                                                        <div class="modal modal-blur fade" id="trafo-{{ $s->id }}"
+                                                            tabindex="-1" role="dialog" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-scrollable"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">{{ $s->penyulang }}</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Unit
+                                                                                    Layanan</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->unit_layanan }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <!-- Additional fields -->
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Penyulang</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->penyulang }}"
-                                                                                    class="form-control" readonly>
+                                                                            <!-- Additional fields -->
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Penyulang</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->penyulang }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Nomor Tiang</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->no_tiang }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Nomor
+                                                                                    Tiang</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->no_tiang }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Daya</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->daya }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Daya</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->daya }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Merk</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->merk }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Merk</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->merk }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Beban X1</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->beban_X1 }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Beban X1</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->beban_X1 }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Beban X2</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->beban_X2 }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Beban X2</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->beban_X2 }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Beban Xo</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->beban_Xo }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Beban Xo</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->beban_Xo }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-4">
-                                                                            <label class="form-label">Lokasi</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text" value="{{ $s->lokasi }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-4">
+                                                                                <label class="form-label">Lokasi</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->lokasi }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="mb-3 col-lg-12">
-                                                                            <label class="form-label">Koordinat</label>
-                                                                            <div class="input-group input-group-flat">
-                                                                                <input type="text"
-                                                                                    value="{{ $s->latitude }}{{ $s->longitude }}"
-                                                                                    class="form-control" readonly>
+                                                                            <div class="mb-3 col-lg-12">
+                                                                                <label class="form-label">Koordinat</label>
+                                                                                <div class="input-group input-group-flat">
+                                                                                    <input type="text"
+                                                                                        value="{{ $s->latitude }}{{ $s->longitude }}"
+                                                                                        class="form-control" readonly>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -647,8 +685,8 @@
                             <form action="/updating/hapus_dataunit" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="#" class="btn btn-danger col-12 mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#modal-delete-dataunit">
+                                <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#modal-delete-dataunit">
                                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Unit
                                 </a>
                                 <div class="modal modal-blur fade" id="modal-delete-dataunit" tabindex="-1"
@@ -689,57 +727,58 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-vcenter table-bordered table-hover table-secondary"
-                                    id="tabel_data_unit" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%">No</th>
-                                            <th width="2%">
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input mt-2"
-                                                            style="position:relative; left:10px;" type="checkbox"
-                                                            id="checklist-dataunit" onclick="checkAllDataUnit()">
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <th width="20%">ID Unit</th>
-                                            <th width="20%">Unit</th>
-                                            <th width="20%">No HP MULP</th>
-                                            <th width="20%">No HP TLTeknik</th>
-                                            <th width="13%">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                            $no = 1;
-                                        @endphp
-                                        @foreach ($data_unit as $unit)
+                                <div style="overflow-y: auto;">
+                                    <table class="table-bordered display" id="tabel_data_unit">
+                                        <thead>
                                             <tr>
-                                                <td width="5%">{{ $no++ }}</td>
-                                                <td width="2%">
+                                                <th>No</th>
+                                                <th>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="{{ $unit->id }}" id="flexCheckDefault"
-                                                                name="checkDataUnit[]">
+                                                            <input class="form-check-input mt-2"
+                                                                style="position:relative; left:10px;" type="checkbox"
+                                                                id="checklist-dataunit" onclick="checkAllDataUnit()">
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td width="20%">{{ $unit->idunit }}</td>
-                                                <td width="20%">{{ $unit->unit }}</td>
-                                                <td width="20%">{{ $unit->no_mulp }}</td>
-                                                <td width="20%">{{ $unit->no_tlteknik }}</td>
-                                                <td width="13%">
-                                                    <a style="cursor: pointer" class="text-secondary"
-                                                        href="/updating/editdataunit/{{ $unit->id }}">
-                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                    </a>
-                                                </td>
+                                                </th>
+                                                <th>ID Unit</th>
+                                                <th>Unit</th>
+                                                <th>No HP MULP</th>
+                                                <th>No HP TLTeknik</th>
+                                                <th>Aksi</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($data_unit as $unit)
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    value="{{ $unit->id }}" id="flexCheckDefault"
+                                                                    name="checkDataUnit[]">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $unit->idunit }}</td>
+                                                    <td>{{ $unit->unit }}</td>
+                                                    <td>{{ $unit->no_mulp }}</td>
+                                                    <td>{{ $unit->no_tlteknik }}</td>
+                                                    <td>
+                                                        <a style="cursor: pointer" class="text-secondary"
+                                                            href="/updating/editdataunit/{{ $unit->id }}">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -755,11 +794,11 @@
                         </button>
                     </h2>
                     <div id="collapseWANotif" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFlushExample"> 
+                        data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <button type="button" class="btn btn-info mb-3 col-12"
-                                data-bs-toggle="modal" data-bs-target="#modalTambahWANotif"><i
-                                    class="fa-solid fa-circle-plus fa-lg" style="margin-right: 5px;"></i>
+                            <button type="button" class="btn btn-info mb-3 col-12" data-bs-toggle="modal"
+                                data-bs-target="#modalTambahWANotif"><i class="fa-solid fa-circle-plus fa-lg"
+                                    style="margin-right: 5px;"></i>
                                 Tambah WA Notif
                             </button>
                             <div class="modal fade" id="modalTambahWANotif" tabindex="-1"
@@ -814,8 +853,8 @@
                             <form action="/updating/hapus_wanotif" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="#" class="btn btn-danger col-12 mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#modal-delete-wanotif">
+                                <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#modal-delete-wanotif">
                                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus WA Notif
                                 </a>
                                 <div class="modal modal-blur fade" id="modal-delete-wanotif" tabindex="-1"
@@ -856,55 +895,56 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-vcenter table-bordered table-hover table-danger"
-                                    id="tabel_data_wanotif" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%">No</th>
-                                            <th width="2%">
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input mt-2"
-                                                            style="position:relative; left:10px;" type="checkbox"
-                                                            id="checklist-wanotif" onclick="checkAllWANotif()">
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <th width="30%">ID Serial</th>
-                                            <th width="25%">ID Pel</th>
-                                            <th width="25%">ID Unit</th>
-                                            <th width="13%">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                            $no = 1;
-                                        @endphp
-                                        @foreach ($data_wanotif as $wanotif)
+                                <div style="overflow-y: auto;">
+                                    <table class="table-bordered display" id="tabel_data_wanotif">
+                                        <thead>
                                             <tr>
-                                                <td width="5%">{{ $no++ }}</td>
-                                                <td width="2%">
+                                                <th>No</th>
+                                                <th>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="{{ $wanotif->id }}" id="flexCheckDefault"
-                                                                name="checkWANotif[]">
+                                                            <input class="form-check-input mt-2"
+                                                                style="position:relative; left:10px;" type="checkbox"
+                                                                id="checklist-wanotif" onclick="checkAllWANotif()">
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td width="30%">{{ $wanotif->idserial }}</td>
-                                                <td width="25%">{{ $wanotif->idpel }}</td>
-                                                <td width="25%">{{ $wanotif->idunit }}</td>
-                                                <td width="13%">
-                                                    <a style="cursor: pointer" class="text-secondary"
-                                                        href="/updating/editwanotif/{{ $wanotif->id }}">
-                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                    </a>
-                                                </td>
+                                                </th>
+                                                <th>ID Serial</th>
+                                                <th>ID Pel</th>
+                                                <th>ID Unit</th>
+                                                <th>Aksi</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($data_wanotif as $wanotif)
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    value="{{ $wanotif->id }}" id="flexCheckDefault"
+                                                                    name="checkWANotif[]">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $wanotif->idserial }}</td>
+                                                    <td>{{ $wanotif->idpel }}</td>
+                                                    <td>{{ $wanotif->idunit }}</td>
+                                                    <td>
+                                                        <a style="cursor: pointer" class="text-secondary"
+                                                            href="/updating/editwanotif/{{ $wanotif->id }}">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -913,28 +953,35 @@
             <div class="card mt-2 border">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed fw-bold bg-light text-dark fs-3" type="button"
+                        <button class="accordion-button collapsed fw-bold bg-primary text-light fs-3" type="button"
                             data-bs-toggle="collapse" data-bs-target="#collapseDataZone" aria-expanded="false"
                             aria-controls="collapseDataZone">
                             Data Zone
                         </button>
                     </h2>
                     <div id="collapseDataZone" class="accordion-collapse collapse"
-                        data-bs-parent="#accordionFlushExample"> 
+                        data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
                             <form method="post" action="/updating/import_excel_datazone" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Data Zone</div>
-                                <input type="file" name="file_datazone" id="file_datazone" class="form-control" required />
-                                <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-12"><i class="fa-solid fa-upload fa-lg"
-                                        style="margin-right: 5px"></i>Import
-                                    Excel</button>
+                                <input type="file" name="file_datazone" id="file_datazone" class="form-control"
+                                    required />
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-6"><i
+                                            class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import
+                                        Excel</button>
+                                    <a href="/file_datazone/template_datazone/data_zone_non_reclose_PWI_edit.xlsx"
+                                        class="btn btn-success mt-2 mb-3 col-lg-6"><i class="fa-solid fa-download fa-lg"
+                                            style="margin-right: 5px"></i>Template
+                                        Excel</a>
+                                </div>
                             </form>
                             <form action="/updating/hapus_wanotif" method="post">
                                 @csrf
                                 @method('delete')
-                                <a href="#" class="btn btn-danger col-12 mb-2"
-                                    data-bs-toggle="modal" data-bs-target="#modal-delete-wanotif">
+                                <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#modal-delete-wanotif">
                                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Zone
                                 </a>
                                 <div class="modal modal-blur fade" id="modal-delete-wanotif" tabindex="-1"
@@ -975,59 +1022,61 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-vcenter table-bordered table-hover table-danger"
-                                    id="tabel_data_zone" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th width="5%">No</th>
-                                            <th width="5%">
-                                                <div class="d-flex justify-content-center">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input mt-2"
-                                                            style="position:relative; left:10px;" type="checkbox"
-                                                            id="checklist-wanotif" onclick="checkAllWANotif()">
-                                                    </div>
-                                                </div>
-                                            </th>
-                                            <th width="15%">Keypoint</th>
-                                            <th width="15%">Jarak</th>
-                                            <th width="15%">Latitude</th>
-                                            <th width="15%">Longitude</th>
-                                            <th width="15%">Google Maps</th>
-                                            <th width="15%">Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                            $no = 1;
-                                        @endphp
-                                        @foreach ($data_zone as $zone)
+                                <div style="overflow-y: auto;">
+                                    <table class="table-bordered display" id="tabel_data_zone">
+                                        <thead>
                                             <tr>
-                                                <td width="5%">{{ $no++ }}</td>
-                                                <td width="5%">
+                                                <th>No</th>
+                                                <th>
                                                     <div class="d-flex justify-content-center">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                value="{{ $zone->id }}" id="flexCheckDefault"
-                                                                name="checkWANotif[]">
+                                                            <input class="form-check-input mt-2"
+                                                                style="position:relative; left:10px;" type="checkbox"
+                                                                id="checklist-wanotif" onclick="checkAllWANotif()">
                                                         </div>
                                                     </div>
-                                                </td>
-                                                <td width="15%">{{ $zone->keypoint }}</td>
-                                                <td width="15%">{{ $zone->jarak }}</td>
-                                                <td width="15%">{{ $zone->latitude }}</td>
-                                                <td width="15%">{{ $zone->longitude }}</td>
-                                                <td width="15%">{{ $zone->google_maps }}</td>
-                                                <td width="15%">
-                                                    <a style="cursor: pointer" class="text-secondary"
-                                                        href="/updating/editwanotif/{{ $zone->id }}">
-                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                    </a>
-                                                </td>
+                                                </th>
+                                                <th>Keypoint</th>
+                                                <th>Jarak</th>
+                                                <th>Latitude</th>
+                                                <th>Longitude</th>
+                                                <th>Google Maps</th>
+                                                <th>Aksi</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($data_zone as $zone)
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    value="{{ $zone->id }}" id="flexCheckDefault"
+                                                                    name="checkWANotif[]">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $zone->keypoint }}</td>
+                                                    <td>{{ $zone->jarak }}</td>
+                                                    <td>{{ $zone->latitude }}</td>
+                                                    <td>{{ $zone->longitude }}</td>
+                                                    <td><a href="{{ $zone->google_maps }}"
+                                                            target="_blank">{{ $zone->google_maps }}</a></td>
+                                                    <td>
+                                                        <a style="cursor: pointer" class="text-secondary"
+                                                            href="/updating/editdatazone/{{ $zone->id }}">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -1039,9 +1088,6 @@
         $(document).ready(function() {
             function template_tabel(nama_tabel) {
                 $(nama_tabel).DataTable({
-                    scrollX: true,
-                    scrollCollapse: true,
-                    fixedColumns: true,
                     'pageLength': 10,
                     'lengthMenu': [10, 25, 50, 100, 200, 500],
                 });

@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-center">
-            <div class="mt-3 mb-3 search_customer">
+            <div class="mt-3 mb-3 search_tiang">
                 <div class="row g-2">
                     <div class="col">
                         <input type="text" class="form-control" id="searchInput" placeholder="Cari nomor tiang..."
@@ -208,6 +208,7 @@
 
             routes.push(newRoute); // Tambahkan rute baru ke array routes
             saveRoutes(); // Simpan rute ke localStorage
+            map.setView([pointA[0], pointA[1]], 15); // 15 untuk level zoom
         }
 
         function loadSavedRoutes() {

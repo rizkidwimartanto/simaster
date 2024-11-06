@@ -65,6 +65,7 @@ Route::controller(UpdatingController::class)->group(function () {
     Route::get('/updating/edittrafo/{id}', 'form_edit_trafo')->middleware('auth');
     Route::get('/updating/editwanotif/{id}', 'form_edit_wa_notif')->middleware('auth');
     Route::get('/updating/editdataunit/{id}', 'form_edit_data_unit')->middleware('auth');
+    Route::get('/updating/editdatazone/{id}', 'form_edit_datazone')->middleware('auth');
     Route::get('/updating/export_excel_pelanggan', 'export_excel_pelanggan');
     Route::get('/updating/export_excel_trafo', 'export_excel_trafo');
     Route::post('/updating/import_excel', 'import_excel');
@@ -81,6 +82,7 @@ Route::controller(UpdatingController::class)->group(function () {
     Route::post('/updating/edit_trafo/{id}', 'edit_trafo');
     Route::post('/updating/edit_unit/{id}', 'edit_unit');
     Route::post('/updating/edit_wanotif/{id}', 'edit_wanotif');
+    Route::post('/updating/edit_datazone/{id}', 'edit_datazone');
 });
 Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/petapadam', 'petapadam')->middleware('auth');

@@ -59,101 +59,104 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-vcenter table-bordered table-hover table-warning" id="tabel_data_padam">
+                    <div style="overflow-y: auto;">
+                        <table class="table-bordered table-warning display" id="tabel_data_padam">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <div class="d-flex justify-content-center">
+                                            <div class="form-check">
+                                                <input class="form-check-input mt-2" style="position:relative; left:10px;"
+                                                    type="checkbox" id="checklist-padam" onclick="checkAllPadam()">
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <th>Penyebab Padam</th>
+                                    <th>Nama Pelanggan</th>
+                                    <th>Penyulang</th>
+                                    <th>Section</th>
+                                    <th>Nomor Tiang</th>
+                                    <th>Jam Padam</th>
+                                    <th>Keterangan</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($data_padam as $s)
+                                    @if ($s->status == 'Padam')
+                                        <script>
+                                            var audio = new Audio('{{ asset('assets/music/emergency-alarm.mp3') }}');
+                                            audio.play();
+                                        </script>
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="{{ $s->id }}" id="flexCheckDefault"
+                                                            name="checkPadam[]">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{ $s->penyebab_padam }}</td>
+                                            <td>{{ $s->nama_pelanggan }}</td>
+                                            <td>{{ $s->penyulang }}</td>
+                                            <td>{{ $s->section }}</td>
+                                            <td>
+                                                @if ($s->nomorTiang)
+                                                    {{ $s->nomorTiang->nama_section }}
+                                                @else
+                                                    {{ null }}
+                                                @endif
+                                            </td>
+                                            {{-- <td>{{ $s->penyebab_padam }}</td> --}}
+                                            <td>{{ $s->jam_padam }}</td>
+                                            <td>{{ $s->keterangan }}</td>
+                                            <td>{{ $s->status }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="card border border-info p-3 mb-3 mt-3">
+                <h2>Daftar Pelanggan Padam Saat Ini</h2>
+                <div style="overflow-y: auto;">
+                    <table class="table-bordered table-hover table-success display" id="tabel_rekap_pelanggan">
                         <thead>
                             <tr>
-                                <th width="2%">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="form-check">
-                                            <input class="form-check-input mt-2" style="position:relative; left:10px;"
-                                                type="checkbox" id="checklist-padam" onclick="checkAllPadam()">
-                                        </div>
-                                    </div>
-                                </th>
-                                <th width="6%">Penyebab Padam</th>
-                                <th width="14%">Nama Pelanggan</th>
-                                <th width="4%">Penyulang</th>
-                                <th width="16%">Section</th>
-                                <th width="20%">Nomor Tiang</th>
-                                <th width="20%">Jam Padam</th>
-                                <th width="10%">Keterangan</th>
-                                <th width="8%">Status</th>
+                                <th>Penyebab Padam</th>
+                                <th>Nomor Telepon</th>
+                                <th>Nama Pelanggan</th>
+                                <th>Alamat</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($data_padam as $s)
-                                @if ($s->status == 'Padam')
-                                    <script>
-                                        var audio = new Audio('{{ asset('assets/music/emergency-alarm.mp3') }}');
-                                        audio.play();
-                                    </script>
+                            @php
+                                $rekap_gabungan = $rekap_pelanggan->merge($rekap_instalasi);
+                            @endphp
+                            @foreach ($rekap_gabungan as $item_rekap)
+                                @if ($item_rekap->nama !== null)
                                     <tr>
-                                        <td>
-                                            <div class="d-flex justify-content-center">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        value="{{ $s->id }}" id="flexCheckDefault"
-                                                        name="checkPadam[]">
-                                                </div>
-                                            </div>
+                                        <td>{{ $item_rekap->penyebab_padam }}</td>
+                                        <td>{{ $item_rekap->nohp_stakeholder }}</td>
+                                        <td>{{ $item_rekap->nama }}</td>
+                                        <td><a href="{{ $item_rekap->maps }}" target="_blank">{{ $item_rekap->maps }}</a>
                                         </td>
-                                        <td>{{ $s->penyebab_padam }}</td>
-                                        <td>{{ $s->nama_pelanggan }}</td>
-                                        <td>{{ $s->penyulang }}</td>
-                                        <td>{{ $s->section }}</td>
                                         <td>
-                                            @if ($s->nomorTiang)
-                                                {{ $s->nomorTiang->nama_section }}
-                                            @else
-                                                {{ null }}
-                                            @endif
+                                            <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}" target="_blank">
+                                                <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
+                                            </a>
                                         </td>
-                                        {{-- <td>{{ $s->penyebab_padam }}</td> --}}
-                                        <td>{{ $s->jam_padam }}</td>
-                                        <td>{{ $s->keterangan }}</td>
-                                        <td>{{ $s->status }}</td>
                                     </tr>
                                 @endif
                             @endforeach
                         </tbody>
                     </table>
-                </form>
-            </div>
-            <div class="card border border-info p-3 mb-3 mt-3">
-                <h2>Daftar Pelanggan Padam Saat Ini</h2>
-                <table class="table table-vcenter table-bordered table-hover table-success" id="tabel_rekap_pelanggan"
-                    style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th width="18%">Penyebab Padam</th>
-                            <th width="10%">Nomor Telepon</th>
-                            <th width="30%">Nama Pelanggan</th>
-                            <th width="40%">Alamat</th>
-                            <th width="2%">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                            $rekap_gabungan = $rekap_pelanggan->merge($rekap_instalasi);
-                        @endphp
-                        @foreach ($rekap_gabungan as $item_rekap)
-                            @if ($item_rekap->nama !== null)
-                                <tr>
-                                    <td>{{ $item_rekap->penyebab_padam }}</td>
-                                    <td>{{ $item_rekap->nohp_stakeholder }}</td>
-                                    <td>{{ $item_rekap->nama }}</td>
-                                    <td><a href="{{ $item_rekap->maps }}" target="_blank">{{ $item_rekap->maps }}</a>
-                                    </td>
-                                    <td>
-                                        <a href="https://wa.me/{{ $item_rekap->nohp_stakeholder }}" target="_blank">
-                                            <i class="fa-brands fa-whatsapp fa-lg text-success"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endif
-                        @endforeach
-                    </tbody>
-                </table>
+                </div>
             </div>
         </div>
     </div>
@@ -172,9 +175,6 @@
         function templateDataTable(namaTabel) {
             $(document).ready(function() {
                 $(namaTabel).DataTable({
-                    scrollX: true,
-                    scrollCollapse: true,
-                    fixedColumns: true,
                     'pageLength': 500,
                     'lengthMenu': [10, 25, 50, 100, 200, 500],
                 });

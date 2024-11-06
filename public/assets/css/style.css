@@ -43,9 +43,14 @@ p.detail_pelanggan {
     padding-bottom: 10px;
 }
 div.search_customer {
-    position: absolute;
+    position: relative;
     width: 50%;
     z-index: 999;
+}
+div.search_tiang {
+    position: absolute;
+    width: 50%;
+    z-index: 9999;
 }
 
 select.pilih_peta {

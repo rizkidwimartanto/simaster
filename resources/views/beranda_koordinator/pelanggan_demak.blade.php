@@ -94,8 +94,8 @@
                         </div>
                     </div>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-warning mt-2 mb-2" id="exportButton"><i class="fa-solid fa-file-export fa-lg"
-                                style="margin-right: 5px"></i>Export Excel</button>
+                        <button class="btn btn-warning mt-2 mb-2" id="exportButton"><i
+                                class="fa-solid fa-file-export fa-lg" style="margin-right: 5px"></i>Export Excel</button>
                     </div>
                 </div>
             </div>
@@ -142,143 +142,149 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered tabel-app mt-2" id="tabel-pelanggan-app">
-                <thead>
-                    <tr>
-                        <th width="5%">No</th>
-                        <th width="2%">
-                            <div class="d-flex justify-content-center">
-                                <div class="form-check">
-                                    <input class="form-check-input" style="position:relative; left:10px; top:7px;"
-                                        type="checkbox" id="checklist-pelangganapp" onclick="checkAllPelangganAPP()">
-                                </div>
-                            </div>
-                        </th>
-                        <th width="20%">Tanggal</th>
-                        <th width="20%">ID Pelanggan</th>
-                        <th width="45%">Nama Pelanggan</th>
-                        <th width="5%">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $no = 1;
-                    @endphp
-                    @foreach ($data_pelanggan_app_demak as $app)
+            <div style="overflow-y: auto;">
+                <table class="table-bordered mt-2 display" id="tabel-pelanggan-app">
+                    <thead>
                         <tr>
-                            <td width="5%">{{ $no++ }}</td>
-                            <td width="2%">
+                            <th>No</th>
+                            <th>
                                 <div class="d-flex justify-content-center">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="{{ $app->id }}"
-                                            id="flexCheckDefault" name="checkPelangganAPP[]">
+                                        <input class="form-check-input" style="position:relative; left:10px; top:7px;"
+                                            type="checkbox" id="checklist-pelangganapp" onclick="checkAllPelangganAPP()">
                                     </div>
                                 </div>
-                            </td>
-                            <td width="20%">{{ date('d/m/Y H:i', strtotime($app->created_at)) }}</td>
-                            <td width="20%">{{ $app->id_pelanggan }}</td>
-                            <td width="45%">{{ $app->nama_pelanggan }}</td>
-                            <td width="5%">
-                                <a href="#" data-bs-target="#detail-{{ $app->id }}" data-bs-toggle="modal">
-                                    <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
-                                </a>
-                                <!-- Modal -->
-                                <div class="modal fade" id="detail-{{ $app->id }}" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title" id="exampleModalLabel">{{ $app->nama_pelanggan }}
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="idPelanggan" class="form-label">Tanggal Dibuat</label>
-                                                    <input type="text" class="form-control" id="idPelanggan"
-                                                        name="id_pelanggan"
-                                                        value="{{ date('d/m/Y H:i', strtotime($app->created_at)) }}"
-                                                        readonly>
+                            </th>
+                            <th>Tanggal</th>
+                            <th>ID Pelanggan</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                            $no = 1;
+                        @endphp
+                        @foreach ($data_pelanggan_app_demak as $app)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{ $app->id }}"
+                                                id="flexCheckDefault" name="checkPelangganAPP[]">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{ date('d/m/Y H:i', strtotime($app->created_at)) }}</td>
+                                <td>{{ $app->id_pelanggan }}</td>
+                                <td>{{ $app->nama_pelanggan }}</td>
+                                <td>
+                                    <a href="#" data-bs-target="#detail-{{ $app->id }}"
+                                        data-bs-toggle="modal">
+                                        <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="detail-{{ $app->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title" id="exampleModalLabel">
+                                                        {{ $app->nama_pelanggan }}
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="idPelanggan" class="form-label">ID Pelanggan</label>
-                                                    <input type="text" class="form-control" id="idPelanggan"
-                                                        name="id_pelanggan" value="{{ $app->id_pelanggan }}" readonly>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="idPelanggan" class="form-label">Tanggal Dibuat</label>
+                                                        <input type="text" class="form-control" id="idPelanggan"
+                                                            name="id_pelanggan"
+                                                            value="{{ date('d/m/Y H:i', strtotime($app->created_at)) }}"
+                                                            readonly>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="idPelanggan" class="form-label">ID Pelanggan</label>
+                                                        <input type="text" class="form-control" id="idPelanggan"
+                                                            name="id_pelanggan" value="{{ $app->id_pelanggan }}"
+                                                            readonly>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="namaPelanggan" class="form-label">Nama
+                                                            Pelanggan</label>
+                                                        <input type="text" class="form-control" id="namaPelanggan"
+                                                            name="nama_pelanggan" value="{{ $app->nama_pelanggan }}"
+                                                            readonly>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="tarif_daya" class="form-label">Tarif/Daya</label>
+                                                        <input type="text" class="form-control" id="tarif_daya"
+                                                            name="tarif_daya" readonly value="{{ $app->tarif_daya }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="alamat" class="form-label">Alamat</label>
+                                                        <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $app->alamat }}</textarea>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="jenis_meter" class="form-label">jenis_meter</label>
+                                                        <input type="text" class="form-control" id="jenis_meter"
+                                                            name="jenis_meter" readonly value="{{ $app->jenis_meter }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="merk_meter" class="form-label">merk_meter</label>
+                                                        <input type="text" class="form-control" id="merk_meter"
+                                                            name="merk_meter" readonly value="{{ $app->merk_meter }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="tahun_meter" class="form-label">tahun_meter</label>
+                                                        <input type="text" class="form-control" id="tahun_meter"
+                                                            name="tahun_meter" readonly value="{{ $app->tahun_meter }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="merk_mcb" class="form-label">merk_mcb</label>
+                                                        <input type="text" class="form-control" id="merk_mcb"
+                                                            name="merk_mcb" readonly value="{{ $app->merk_mcb }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="ukuran_mcb" class="form-label">ukuran_mcb</label>
+                                                        <input type="text" class="form-control" id="ukuran_mcb"
+                                                            name="ukuran_mcb" readonly value="{{ $app->ukuran_mcb }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="no_segel" class="form-label">no_segel</label>
+                                                        <input type="text" class="form-control" id="no_segel"
+                                                            name="no_segel" readonly value="{{ $app->no_segel }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="no_gardu" class="form-label">no_gardu</label>
+                                                        <input type="text" class="form-control" id="no_gardu"
+                                                            name="no_gardu" readonly value="{{ $app->no_gardu }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="sr_deret" class="form-label">sr_deret</label>
+                                                        <input type="text" class="form-control" id="sr_deret"
+                                                            name="sr_deret" readonly value="{{ $app->sr_deret }}">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="catatan" class="form-label">catatan</label>
+                                                        <input type="text" class="form-control" id="catatan"
+                                                            name="catatan" readonly value="{{ $app->catatan }}">
+                                                    </div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="namaPelanggan" class="form-label">Nama Pelanggan</label>
-                                                    <input type="text" class="form-control" id="namaPelanggan"
-                                                        name="nama_pelanggan" value="{{ $app->nama_pelanggan }}"
-                                                        readonly>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="tarif_daya" class="form-label">Tarif/Daya</label>
-                                                    <input type="text" class="form-control" id="tarif_daya"
-                                                        name="tarif_daya" readonly value="{{ $app->tarif_daya }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="alamat" class="form-label">Alamat</label>
-                                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" readonly>{{ $app->alamat }}</textarea>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="jenis_meter" class="form-label">jenis_meter</label>
-                                                    <input type="text" class="form-control" id="jenis_meter"
-                                                        name="jenis_meter" readonly value="{{ $app->jenis_meter }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="merk_meter" class="form-label">merk_meter</label>
-                                                    <input type="text" class="form-control" id="merk_meter"
-                                                        name="merk_meter" readonly value="{{ $app->merk_meter }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="tahun_meter" class="form-label">tahun_meter</label>
-                                                    <input type="text" class="form-control" id="tahun_meter"
-                                                        name="tahun_meter" readonly value="{{ $app->tahun_meter }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="merk_mcb" class="form-label">merk_mcb</label>
-                                                    <input type="text" class="form-control" id="merk_mcb"
-                                                        name="merk_mcb" readonly value="{{ $app->merk_mcb }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="ukuran_mcb" class="form-label">ukuran_mcb</label>
-                                                    <input type="text" class="form-control" id="ukuran_mcb"
-                                                        name="ukuran_mcb" readonly value="{{ $app->ukuran_mcb }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="no_segel" class="form-label">no_segel</label>
-                                                    <input type="text" class="form-control" id="no_segel"
-                                                        name="no_segel" readonly value="{{ $app->no_segel }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="no_gardu" class="form-label">no_gardu</label>
-                                                    <input type="text" class="form-control" id="no_gardu"
-                                                        name="no_gardu" readonly value="{{ $app->no_gardu }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="sr_deret" class="form-label">sr_deret</label>
-                                                    <input type="text" class="form-control" id="sr_deret"
-                                                        name="sr_deret" readonly value="{{ $app->sr_deret }}">
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="catatan" class="form-label">catatan</label>
-                                                    <input type="text" class="form-control" id="catatan"
-                                                        name="catatan" readonly value="{{ $app->catatan }}">
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/typeahead.js/dist/typeahead.bundle.min.js"></script>
@@ -434,9 +440,6 @@
         $(document).ready(function() {
             function template_tabel(nama_tabel) {
                 $(nama_tabel).DataTable({
-                    scrollX: true,
-                    scrollCollapse: true,
-                    fixedColumns: true,
                     'pageLength': 10,
                     'lengthMenu': [10, 25, 50, 100, 200, 500],
                 });
