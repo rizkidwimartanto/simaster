@@ -1,14 +1,6 @@
 @extends('layout/templateberanda_mitra')
 @section('content')
     <div class="container-fluid" style="margin-top: 5rem;">
-        <form method="post" action="/import_excel_risepole" enctype="multipart/form-data">
-            @csrf
-            <div class="form-label fs-2">Upload File Rise Pole</div>
-            <input type="file" name="file_risepole" id="file_risepole" class="form-control" required />
-            <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-12"><i class="fa-solid fa-upload fa-lg"
-                    style="margin-right: 5px"></i>Import
-                Excel</button>
-        </form>
         <table class="table table-bordered tabel-app mt-2" id="tabel_rise_pole">
             <thead>
                 <tr>
@@ -104,9 +96,8 @@
                                                     <div class="mb-4">
                                                         <label class="form-label">Setting GFR</label>
                                                         <div class="input-group input-group-flat">
-                                                            <input class="form-control" name="setting_gfr"
-                                                                id="setting_gfr" type="text"
-                                                                value="{{ $keypoint->setting_gfr }}">
+                                                            <input class="form-control" name="setting_gfr" id="setting_gfr"
+                                                                type="text" value="{{ $keypoint->setting_gfr }}">
                                                         </div>
                                                     </div>
                                                     <div class="mb-4">

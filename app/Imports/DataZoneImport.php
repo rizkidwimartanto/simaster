@@ -2,28 +2,26 @@
 
 namespace App\Imports;
 
-use App\Models\MitraModel;
+use App\Models\DataZoneModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 
-class RecloserLBSImport implements ToModel, WithStartRow, WithMultipleSheets
+class DataZoneImport implements ToModel, WithStartRow, WithMultipleSheets
 {
     use Importable;
     public function sheets(): array
     {
         return [
-            'LBS' => $this,
-            'RECLOSER' => $this,
-            'RISE POLE' => $this,
+            'ZONE 8kms' => $this,
         ];
     }
 
     public function model(array $row)
     {
-        $existingData = MitraModel::where('nomor_tiang', $row[2])->first();
+        $existingData = DataZoneModel::where('keypoint', $row[5])->first();
 
         if ($existingData) {
             $existingData->update($this->getData($row));
@@ -32,7 +30,7 @@ class RecloserLBSImport implements ToModel, WithStartRow, WithMultipleSheets
             if ($this->isDuplicate($row)) {
                 Session::flash('error_import_keypoint', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
             } else {
-                MitraModel::create($this->getData($row));
+                DataZoneModel::create($this->getData($row));
                 Session::flash('success_import_keypoint', 'file excel keypoint berhasil diimport');
             }
         }
@@ -43,20 +41,20 @@ class RecloserLBSImport implements ToModel, WithStartRow, WithMultipleSheets
     private function getData(array $row)
     {
         return [
-            'penyulang' => $row[0] ?? '',
-            'jenis_keypoint' => $row[1] ?? '',
-            'nomor_tiang' => $row[2] ?? '',
-            'absw' => $row[2] ?? '',
-            'status_keypoint' => $row[3] ?? '',
+            'keypoint' => $row[5] ?? '',
+            'jarak' => $row[6] ?? '',
+            'latitude' => $row[8] ?? '',
+            'longitude' => $row[9] ?? '',
+            'google_maps' => $row[10] ?? '',
         ];
     }
     private function isDuplicate(array $data)
     {
-        return MitraModel::where('nomor_tiang', $data['2'])->exists();
+        return DataZoneModel::where('keypoint', $data['5'])->exists();
     }
 
     public function startRow(): int
     {
-        return 2;
+        return 3;
     }
 }

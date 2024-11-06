@@ -12,6 +12,7 @@ use App\Imports\DataPelangganImport;
 use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
 use App\Models\DataPegawaiModel;
+use App\Models\DataZoneModel;
 use App\Models\PelangganPadamModel;
 use App\Models\RekapKaliPadamModel;
 use App\Models\TrafoModel;
@@ -419,6 +420,14 @@ class EntriPadamController extends Controller
             'data_trafo' => $trafo
         ];
         return view('beranda_administrator/petatrafo', $data);
+    }
+    public function peta_zone()
+    {
+        $data = [
+            'title' => 'Peta Zone',
+            'data_zone' => DataZoneModel::all(),
+        ];
+        return view('beranda_administrator/petazone', $data);
     }
     public function export_kali_padam()
     {

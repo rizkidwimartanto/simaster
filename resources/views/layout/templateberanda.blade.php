@@ -38,6 +38,8 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet-beautify-marker/dist/leaflet-beautify-marker-icon.min.js"></script>
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/leaflet-beautify-marker/dist/leaflet-beautify-marker-icon.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
     {{-- My CSS --}}
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/img/Logo_PLN.png') }}" type="image/x-icon">
@@ -71,8 +73,8 @@
     <script src="{{ asset('assets_template/dist/js/demo.min.js?1684106062') }}" defer></script>
     <script src="assets/js/script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js"
-    integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 
 </html>

@@ -9,6 +9,9 @@ body {
     margin: 0;
     font-family: "Quicksand";
 }
+.leaflet-routing-container {
+    display: none !important;
+}
 a.navbar-brand {
     font-size: 15px;
 }
@@ -17,14 +20,14 @@ header.navbar-expand-md {
 }
 #map {
     position: relative;
-    bottom: 15px;
+    bottom: 68px;
     height: 90%;
     z-index: 0;
 }
 #map_koordinator {
     position: relative;
-    bottom: 5px;
-    height: 70%;
+    bottom: 68px;
+    height: 90%;
     z-index: 0;
 }
 .display-pelanggan-app {
@@ -40,23 +43,31 @@ p.detail_pelanggan {
     padding-bottom: 10px;
 }
 div.search_customer {
-    position: relative;
+    position: absolute;
     width: 50%;
     z-index: 999;
-    top: 5.5rem;
 }
 
 select.pilih_peta {
     position: relative;
-    z-index: 9999999;
-    top: 6.5rem;
+    z-index: 999;
+    top: 1rem;
     width: 40%;
     height: 30%;
 }
 button#tambah_garis {
     position: absolute;
-    top: 70px;
-    width: 50%;
+    top: 130px;
+    left: 73px;
+    width: 26%;
+    margin: 0 auto;
+    z-index: 999;
+}
+button#hapus_garis {
+    position: absolute;
+    top: 130px;
+    right: 73px;
+    width: 26%;
     margin: 0 auto;
     z-index: 999;
 }

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary p-2 fixed-top" data-bs-theme="dark" style="z-index: 99999999999">
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-2" data-bs-theme="dark" style="z-index: 99999999999">
     <div class="container-fluid">
         <a class="navbar-brand" href="/beranda"> SIMPELTAS (Sistem Monitoring Pelanggan Prioritas)
         </a>
@@ -18,6 +18,7 @@
                         <li><a class="dropdown-item" href="/">Peta Pelanggan</a></li>
                         <li><a class="dropdown-item" href="/petapadam">Peta Padam</a></li>
                         <li><a class="dropdown-item" href="/petatrafo">Peta Trafo</a></li>
+                        <li><a class="dropdown-item" href="/petazone">Peta Zone</a></li>
                     </ul>
                 </li>
                 <li

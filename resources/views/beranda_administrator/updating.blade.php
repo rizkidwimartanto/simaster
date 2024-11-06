@@ -910,6 +910,129 @@
                     </div>
                 </div>
             </div>
+            <div class="card mt-2 border">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold bg-light text-dark fs-3" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseDataZone" aria-expanded="false"
+                            aria-controls="collapseDataZone">
+                            Data Zone
+                        </button>
+                    </h2>
+                    <div id="collapseDataZone" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionFlushExample"> 
+                        <div class="accordion-body">
+                            <form method="post" action="/updating/import_excel_datazone" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-label fs-2">Upload File Data Zone</div>
+                                <input type="file" name="file_datazone" id="file_datazone" class="form-control" required />
+                                <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-12"><i class="fa-solid fa-upload fa-lg"
+                                        style="margin-right: 5px"></i>Import
+                                    Excel</button>
+                            </form>
+                            <form action="/updating/hapus_wanotif" method="post">
+                                @csrf
+                                @method('delete')
+                                <a href="#" class="btn btn-danger col-12 mb-2"
+                                    data-bs-toggle="modal" data-bs-target="#modal-delete-wanotif">
+                                    <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Zone
+                                </a>
+                                <div class="modal modal-blur fade" id="modal-delete-wanotif" tabindex="-1"
+                                    role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                            <div class="modal-status bg-danger"></div>
+                                            <div class="modal-body text-center py-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon mb-2 text-danger icon-lg" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
+                                                    <path d="M12 9v4" />
+                                                    <path d="M12 17h.01" />
+                                                </svg>
+                                                <h3>Apakah anda yakin?</h3>
+                                                <div class="text-muted">Untuk menghapus wanotif tersebut</div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="w-100">
+                                                    <div class="row">
+                                                        <div class="col"><a href="#" class="btn w-100"
+                                                                data-bs-dismiss="modal">
+                                                                Cancel
+                                                            </a></div>
+                                                        <div class="col"><button type="submit"
+                                                                class="btn btn-danger w-100" data-bs-dismiss="modal">
+                                                                Delete
+                                                            </button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-vcenter table-bordered table-hover table-danger"
+                                    id="tabel_data_zone" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th width="5%">No</th>
+                                            <th width="5%">
+                                                <div class="d-flex justify-content-center">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input mt-2"
+                                                            style="position:relative; left:10px;" type="checkbox"
+                                                            id="checklist-wanotif" onclick="checkAllWANotif()">
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <th width="15%">Keypoint</th>
+                                            <th width="15%">Jarak</th>
+                                            <th width="15%">Latitude</th>
+                                            <th width="15%">Longitude</th>
+                                            <th width="15%">Google Maps</th>
+                                            <th width="15%">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
+                                        @foreach ($data_zone as $zone)
+                                            <tr>
+                                                <td width="5%">{{ $no++ }}</td>
+                                                <td width="5%">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                value="{{ $zone->id }}" id="flexCheckDefault"
+                                                                name="checkWANotif[]">
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td width="15%">{{ $zone->keypoint }}</td>
+                                                <td width="15%">{{ $zone->jarak }}</td>
+                                                <td width="15%">{{ $zone->latitude }}</td>
+                                                <td width="15%">{{ $zone->longitude }}</td>
+                                                <td width="15%">{{ $zone->google_maps }}</td>
+                                                <td width="15%">
+                                                    <a style="cursor: pointer" class="text-secondary"
+                                                        href="/updating/editwanotif/{{ $zone->id }}">
+                                                        <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <script>
@@ -927,6 +1050,7 @@
             template_tabel('#tabel_data_pelanggan');
             template_tabel('#tabel_data_trafo');
             template_tabel('#tabel_data_unit');
+            template_tabel('#tabel_data_zone');
             template_tabel('#tabel_data_wanotif');
         });
     </script>
