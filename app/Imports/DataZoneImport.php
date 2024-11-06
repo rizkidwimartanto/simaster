@@ -41,6 +41,7 @@ class DataZoneImport implements ToModel, WithStartRow, WithMultipleSheets
     private function getData(array $row)
     {
         return [
+            'feeder' => $row[4] ?? '',
             'keypoint' => $row[5] ?? '',
             'jarak' => $row[6] ?? '',
             'latitude' => $row[8] ?? '',

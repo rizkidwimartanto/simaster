@@ -340,4 +340,18 @@ class UpdatingController extends Controller
         }
         return redirect('/updating');
     }
+    public function hapusDataZone(Request $request)
+    {
+        $hapus_items = $request->input('checkDataZone');
+        if ($hapus_items) {
+            foreach ($hapus_items as $hapus) {
+                $datazone = DataZoneModel::find($hapus);
+                $datazone->delete();
+            }
+            Session::flash('success_hapus_datazone', 'datazone berhasil dihapus');
+        } else {
+            Session::flash('error_hapus_datazone', 'datazone gagal dihapus');
+        }
+        return redirect('/updating');
+    }
 }

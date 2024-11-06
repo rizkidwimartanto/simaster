@@ -10,5 +10,5 @@ class DataZoneModel extends Model
     use HasFactory;
     protected $table = 'data_zone';
     protected $primaryKey = 'id';
-    protected $fillable = ['keypoint', 'jarak', 'latitude', 'longitude', 'google_maps'];
+    protected $fillable = ['feeder','keypoint', 'jarak', 'latitude', 'longitude', 'google_maps'];
 }

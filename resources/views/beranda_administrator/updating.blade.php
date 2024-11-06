@@ -2,7 +2,7 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
-        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif', 'success_edit_pelanggan', 'success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif'] as $msg)
+        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif','success_hapus_datazone', 'success_edit_pelanggan', 'success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif',] as $msg)
             @if (session($msg))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -10,7 +10,7 @@
                 </div>
             @endif
         @endforeach
-        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif', 'error_edit_pelanggan', 'error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif'] as $msg)
+        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif','error_hapus_datazone', 'error_edit_pelanggan', 'error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif'] as $msg)
             @if (session($msg))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -977,14 +977,14 @@
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/updating/hapus_wanotif" method="post">
+                            <form action="/updating/hapus_datazone" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
-                                    data-bs-target="#modal-delete-wanotif">
+                                    data-bs-target="#modal-delete-datazone">
                                     <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Zone
                                 </a>
-                                <div class="modal modal-blur fade" id="modal-delete-wanotif" tabindex="-1"
+                                <div class="modal modal-blur fade" id="modal-delete-datazone" tabindex="-1"
                                     role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -1003,7 +1003,7 @@
                                                     <path d="M12 17h.01" />
                                                 </svg>
                                                 <h3>Apakah anda yakin?</h3>
-                                                <div class="text-muted">Untuk menghapus wanotif tersebut</div>
+                                                <div class="text-muted">Untuk menghapus datazone tersebut</div>
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="w-100">
@@ -1032,10 +1032,11 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input mt-2"
                                                                 style="position:relative; left:10px;" type="checkbox"
-                                                                id="checklist-wanotif" onclick="checkAllWANotif()">
+                                                                id="checklist-datazone" onclick="checkAllDataZone()">
                                                         </div>
                                                     </div>
                                                 </th>
+                                                <th>Feeder</th>
                                                 <th>Keypoint</th>
                                                 <th>Jarak</th>
                                                 <th>Latitude</th>
@@ -1056,10 +1057,11 @@
                                                             <div class="form-check">
                                                                 <input class="form-check-input" type="checkbox"
                                                                     value="{{ $zone->id }}" id="flexCheckDefault"
-                                                                    name="checkWANotif[]">
+                                                                    name="checkDataZone[]">
                                                             </div>
                                                         </div>
                                                     </td>
+                                                    <td>{{ $zone->feeder }}</td>
                                                     <td>{{ $zone->keypoint }}</td>
                                                     <td>{{ $zone->jarak }}</td>
                                                     <td>{{ $zone->latitude }}</td>
@@ -1119,6 +1121,7 @@
             checkboxGroup("checklist-pelanggan", 'input[name="checkPelanggan[]"]');
             checkboxGroup("checklist-trafo", 'input[name="checkTrafo[]"]');
             checkboxGroup("checklist-wanotif", 'input[name="checkWANotif[]"]');
+            checkboxGroup("checklist-datazone", 'input[name="checkDataZone[]"]');
             checkboxGroup("checklist-dataunit", 'input[name="checkDataUnit[]"]');
         });
     </script>

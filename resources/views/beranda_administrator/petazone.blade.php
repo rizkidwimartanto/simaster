@@ -5,7 +5,7 @@
             <div class="mt-3 mb-3 search_tiang">
                 <div class="row g-2">
                     <div class="col">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Cari nomor tiang..."
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari keypoint..."
                             onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
                         <div id="suggestionList" class="dropdown">
                             <ul class="list-group"></ul>
@@ -106,6 +106,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <p class="detail_pelanggan">Feeder : {{ $zone->feeder }} </p>
                         <p class="detail_pelanggan">Keypoint : {{ $zone->keypoint }} </p>
                         <p class="detail_pelanggan">Jarak : {{ $zone->jarak }} </p>
                         <p class="detail_pelanggan">Google Maps : <a target="_blank"
