@@ -220,7 +220,6 @@
                 });
             }
         }
-        document.addEventListener('DOMContentLoaded', loadSavedRoutes);
         // Event untuk menyimpan rute baru
         document.getElementById('saveChanges').addEventListener('click', function() {
             var pointA = document.getElementById('pointA').value.split(',');
@@ -235,6 +234,7 @@
 
             // Simpan rute ke localStorage
             saveRoutes();
+            $('#tambahGaris').modal('hide');
         });
         document.getElementById('deleteRoute').addEventListener('click', function() {
             var pointA = document.getElementById('hapusGarisModal').querySelector('#pointAHapus').value.split(',');
