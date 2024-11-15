@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exports\APPExport;
 use App\Imports\DataPelangganAPPImport;
+use App\Imports\ManajemenAsetImport;
 use App\Models\DataPelangganModel;
+use App\Models\ManajemenAset;
 use App\Models\PelangganAPPModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -32,6 +34,14 @@ class InputPelangganAPPController extends Controller
             'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->get(),
         ];
         return view('beranda_user/entridata_user', $data);
+    }
+    public function manajemen_aset_jaringan()
+    {
+        $data = [
+            'title' => 'Manajemen Aset Jaringan',
+            'data_aset' => ManajemenAset::all()
+        ];
+        return view('beranda_koordinator/manajemen_aset_jaringan', $data);
     }
 
     public function proses_input_pelangganapp(Request $request)
@@ -152,7 +162,15 @@ class InputPelangganAPPController extends Controller
 
         return redirect('/pelanggan_wirosari')->with('success', 'Data Pelanggan Berhasil Diimpor');
     }
+    public function import_excel_data_aset(Request $request)
+    {
+        $file = $request->file('file_data_aset');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_data_aset', $nama_file);
+        Excel::import(new ManajemenAsetImport, public_path('/file_data_aset/' . $nama_file));
 
+        return redirect('/manajemen_aset_jaringan');
+    }
     public function export_excel_app(Request $request)
     {
         date_default_timezone_set('Asia/Jakarta');

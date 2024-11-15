@@ -3,6 +3,24 @@
     --bg: #08b1f0;
     --text_color: #0c356a;
 }
+.card-items-unit {
+    background: rgb(218, 255, 238);
+    background: linear-gradient(
+        90deg,
+        rgba(218, 255, 238, 1) 0%,
+        rgba(134, 221, 217, 1) 35%,
+        rgba(0, 212, 255, 1) 100%
+    );
+}
+.card-items-unit-ulp {
+    background: rgb(253, 255, 218);
+    background: linear-gradient(
+        90deg,
+        rgba(253, 255, 218, 1) 0%,
+        rgba(248, 255, 134, 1) 35%,
+        rgba(255, 243, 0, 1) 100%
+    );
+}
 body {
     height: 100%;
     padding: 0;

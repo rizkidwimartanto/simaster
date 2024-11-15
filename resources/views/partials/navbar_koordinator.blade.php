@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary p-2" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg navbar-transparent bg-body-tertiary p-2">
     <div class="container-fluid">
         <a class="navbar-brand" href="/koordinator"> SIMPELTAS (Sistem Monitoring Pelanggan Prioritas)
         </a>
@@ -8,19 +8,17 @@
         </button>
         <div class="collapse navbar-collapse" style="margin-right: 40px;" id="navbarSupportedContent">
             <ul style="font-size: 13px;" class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li
-                    class="nav-item {{ in_array($title, ['Koordinator', 'Pelanggan Demak', 'Pelanggan Tegowanu', 'Pelanggan Purwodadi', 'Pelanggan Wirosari']) ? 'active' : '' }} dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Pelanggan APP
-                    </a>
-                    <ul class="dropdown-menu" style="font-size: 13px;">
-                        <li><a class="dropdown-item" href="/koordinator">Semua Pelanggan APP</a></li>
-                        <li><a class="dropdown-item" href="/pelanggan_demak">Pelanggan Demak</a></li>
-                        <li><a class="dropdown-item" href="/pelanggan_tegowanu">Pelanggan Tegowanu</a></li>
-                        <li><a class="dropdown-item" href="/pelanggan_purwodadi">Pelanggan Purwodadi</a></li>
-                        <li><a class="dropdown-item" href="/pelanggan_wirosari">Pelanggan Wirosari</a></li>
-                    </ul>
+                <li class="nav-item {{ $title == 'Manajemen Aset Jaringan' ? 'active' : '' }}">
+                    <a class="nav-link" href="/manajemen_aset_jaringan">Manajemen Aset Jaringan</a>
+                </li>
+                <li class="nav-item {{ $title == 'Manajemen Penyambungan' ? 'active' : '' }}">
+                    <a class="nav-link" href="/entripadam">Manajemen Penyambungan</a>
+                </li>
+                <li class="nav-item {{ $title == 'Manajemen Pelanggan' ? 'active' : '' }}">
+                    <a class="nav-link" href="/entripadam">Manajemen Pelanggan</a>
+                </li>
+                <li class="nav-item {{ $title == 'Kinerja UP3' ? 'active' : '' }}">
+                    <a class="nav-link" href="/entripadam">Kinerja UP3</a>
                 </li>
             </ul>
             <div class="btn-group">
