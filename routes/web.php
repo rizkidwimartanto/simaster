@@ -42,6 +42,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
     Route::get('/manajemen_aset_jaringan', 'manajemen_aset_jaringan')->middleware('auth')->name('manajemen_aset_jaringan');
     Route::get('/koordinator', 'koordinator')->middleware('auth')->name('koordinator');
+    Route::get('/updating_koordinator', 'updating_koordinator')->middleware('auth')->name('updating_koordinator');
     Route::get('/pelanggan_demak', 'pelanggan_demak')->middleware('auth')->name('pelanggan_demak');
     Route::get('/pelanggan_tegowanu', 'pelanggan_tegowanu')->middleware('auth')->name('pelanggan_tegowanu');
     Route::get('/pelanggan_purwodadi', 'pelanggan_purwodadi')->middleware('auth')->name('pelanggan_purwodadi');
@@ -54,6 +55,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::post('/koordinator/import_excel_purwodadi', 'import_excel_purwodadi');
     Route::post('/koordinator/import_excel_wirosari', 'import_excel_wirosari');
     Route::post('/koordinator/import_excel_data_aset', 'import_excel_data_aset');
+    Route::post('/koordinator/import_excel_data_gi', 'import_excel_data_gi');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');
     Route::get('/get-pelanggan/{nama_pelanggan}', 'getPelangganData');

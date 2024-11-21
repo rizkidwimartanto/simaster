@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exports\APPExport;
+use App\Imports\DataGIImport;
 use App\Imports\DataPelangganAPPImport;
 use App\Imports\ManajemenAsetImport;
+use App\Models\DataGIModel;
 use App\Models\DataPelangganModel;
 use App\Models\ManajemenAset;
 use App\Models\PelangganAPPModel;
@@ -37,13 +39,25 @@ class InputPelangganAPPController extends Controller
     }
     public function manajemen_aset_jaringan()
     {
+        // Data untuk view
         $data = [
             'title' => 'Manajemen Aset Jaringan',
-            'data_aset' => ManajemenAset::all()
+            'data_aset' => ManajemenAset::all(),
+            'data_gi' => DataGIModel::all(),
+            'total_daya_terpakai' => DataGIModel::sum('daya_terpakai')
         ];
+
         return view('beranda_koordinator/manajemen_aset_jaringan', $data);
     }
 
+
+    public function updating_koordinator()
+    {
+        $data = [
+            'title' => 'Updating Koordinator',
+        ];
+        return view('beranda_koordinator/updating_koordinator', $data);
+    }
     public function proses_input_pelangganapp(Request $request)
     {
         $message = ['required' => ':attribute harus diisi'];
@@ -168,6 +182,15 @@ class InputPelangganAPPController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_data_aset', $nama_file);
         Excel::import(new ManajemenAsetImport, public_path('/file_data_aset/' . $nama_file));
+
+        return redirect('/manajemen_aset_jaringan');
+    }
+    public function import_excel_data_gi(Request $request)
+    {
+        $file = $request->file('file_data_gi');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_data_gi', $nama_file);
+        Excel::import(new DataGIImport, public_path('/file_data_gi/' . $nama_file));
 
         return redirect('/manajemen_aset_jaringan');
     }

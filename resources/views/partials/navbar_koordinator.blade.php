@@ -20,6 +20,9 @@
                 <li class="nav-item {{ $title == 'Kinerja UP3' ? 'active' : '' }}">
                     <a class="nav-link" href="/entripadam">Kinerja UP3</a>
                 </li>
+                <li class="nav-item {{ $title == 'Updating Koordinator' ? 'active' : '' }}">
+                    <a class="nav-link" href="/updating_koordinator">Updating Koordinator</a>
+                </li>
             </ul>
             <div class="btn-group">
                 <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown"
