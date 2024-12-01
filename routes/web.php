@@ -47,6 +47,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/pelanggan_tegowanu', 'pelanggan_tegowanu')->middleware('auth')->name('pelanggan_tegowanu');
     Route::get('/pelanggan_purwodadi', 'pelanggan_purwodadi')->middleware('auth')->name('pelanggan_purwodadi');
     Route::get('/pelanggan_wirosari', 'pelanggan_wirosari')->middleware('auth')->name('pelanggan_wirosari');
+    Route::get('/koordinator/map_aset', 'map_aset')->middleware('auth')->name('map_aset');
     Route::get('/edit_pelanggan_app/{id}', 'edit_pelanggan_app')->middleware('auth')->name('edit_pelanggan_app');
     Route::get('/edit_pelanggan_app_user/{id_pelanggan}', 'edit_pelanggan_app_user')->middleware('auth')->name('edit_pelanggan_app_user');
     Route::post('/proses_edit_pelanggan_app/{id}', 'proses_edit_pelanggan_app');

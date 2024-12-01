@@ -126,7 +126,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th class="text-center" colspan="4">Total</th>
+                        <th class="text-center" colspan="4"><a href="/koordinator/map_aset">Total UP3 Grobogan</a></th>
                         <th id="total_kms_jtm"></th>
                         <th id="total_kms_jtr"></th>
                         <th id="total_jumlah_trafo"></th>
@@ -139,7 +139,7 @@
             </table>
         </div>
         <div class="row">
-            <div class="col-lg-9">
+            <div class="col-lg-12">
                 <div class="row mt-3">
                     <div class="col-md-6">
                         <label for="bulanGI">Pilih Bulan:</label>
@@ -190,9 +190,9 @@
                     </table>
                 </div>
             </div>
-            <div class="col-lg-3">
+            {{-- <div class="col-lg-3">
                 <canvas id="giDayaChart" width="10" height="10"></canvas>
-            </div>
+            </div> --}}
         </div>
     </div>
     <script>

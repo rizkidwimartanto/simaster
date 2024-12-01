@@ -49,7 +49,14 @@ class InputPelangganAPPController extends Controller
 
         return view('beranda_koordinator/manajemen_aset_jaringan', $data);
     }
-
+    public function map_aset()
+    {
+        $data = [
+            'title' => 'Map Aset',
+            'data_aset' => ManajemenAset::all(),
+        ];
+        return view('beranda_koordinator.map_aset', $data);
+    }
 
     public function updating_koordinator()
     {
