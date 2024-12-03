@@ -80,25 +80,14 @@ class MitraController extends Controller
         }
         return redirect('/keypoint');
     }
+
     public function edit_keypoint(Request $request, $id)
     {
-        $message = ['required' => ':attribute harus diisi'];
-        $validateData = $request->validate([
-            'jenis_keypoint' => 'required',
-            'nomor_tiang' => 'required',
-            'status_keypoint' => 'required',
-            'kondisi_keypoint' => 'required',
-            'merk' => 'required',
-            'no_seri' => 'required',
-            'setting_ocr' => 'required',
-            'setting_gfr' => 'required',
-            'setting_grupaktif' => 'required',
-            'alamat' => 'required',
-            'tanggal_har' => 'required',
-            'tanggal_pasang' => 'required',
-        ], $message);
-        if ($validateData) {
-            $datawanotif = MitraModel::find($id);
+        // Temukan data berdasarkan ID
+        $datawanotif = MitraModel::find($id);
+
+        if ($datawanotif) {
+            // Update data langsung tanpa validasi
             $datawanotif->update([
                 'jenis_keypoint' => $request->input('jenis_keypoint'),
                 'nomor_tiang' => $request->input('nomor_tiang'),
@@ -112,19 +101,36 @@ class MitraController extends Controller
                 'alamat' => $request->input('alamat'),
                 'tanggal_har' => $request->input('tanggal_har'),
                 'tanggal_pasang' => $request->input('tanggal_pasang'),
-                $validateData
             ]);
-            Session::flash('success_edit_wanotif', 'wanotif berhasil diedit');
-            return redirect('/keypoint');
+            if ($request->input('jenis_keypoint') === "Rise Pole") {
+                Session::flash('success_edit_mitraup3', 'Data berhasil diedit');
+                return redirect('/rise_pole');
+            }
+            // Flash pesan sukses
+            Session::flash('success_edit_mitraup3', 'Data berhasil diedit');
         } else {
-            Session::flash('error_edit_wanotif', 'wanotif gagal diedit');
-            return redirect('/keypoint');
+            // Flash pesan gagal
+            if ($request->input('jenis_keypoint') === "Rise Pole") {
+                Session::flash('error_edit_mitraup3', 'Data gagal diedit');
+                return redirect('/rise_pole');
+            }
+            Session::flash('error_edit_mitraup3', 'Data gagal diedit');
         }
+
+        // Redirect ke halaman keypoint
+        return redirect('/keypoint');
     }
-    public function delete_keypoint($id)
+
+    public function delete_keypoint(Request $request, $id)
     {
         $dataunit = MitraModel::find($id);
+        if ($request->input('jenis_keypoint') === "Rise Pole") {
+            $dataunit->delete();
+            Session::flash('success_delete_mitraup3', 'Data berhasil dihapus');
+            return redirect('/keypoint');
+        }
         $dataunit->delete();
+        Session::flash('error_delete_mitraup3', 'Data gagal dihapus');
         return redirect('/keypoint');
     }
     public function import_excel_recloser_lbs(Request $request)

@@ -1,6 +1,20 @@
 @extends('layout/templateberanda_mitra')
 @section('content')
     <div class="container-fluid mt-2">
+		        @if (session('success_edit_mitraup3'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <h3> {{ session('success_edit_mitraup3') }}
+                </h3>
+            </div>
+        @endif
+        @if (session('success_error_mitraup3'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <h3> {{ session('error_edit_mitraup3') }}
+                </h3>
+            </div>
+        @endif
         <div style="overflow-y: auto;">
             <table class="display mt-2 table-bordered" id="tabel_rise_pole">
                 <thead>
