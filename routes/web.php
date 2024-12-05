@@ -76,6 +76,7 @@ Route::controller(UpdatingController::class)->group(function () {
     Route::post('/updating/import_excel', 'import_excel');
     Route::post('/updating/import_excel_trafo', 'import_excel_trafo');
     Route::post('/updating/import_excel_datazone', 'import_excel_datazone');
+    Route::post('/updating/import_excel_datapohon', 'import_excel_datapohon');
     Route::post('/updating/import_excel_penyulangsection', 'import_excel_penyulangsection');
     Route::delete('/updating/hapus_pelanggan', 'hapusPelanggan');
     Route::delete('/updating/hapus_trafo', 'hapusTrafo');
@@ -94,6 +95,7 @@ Route::controller(EntriPadamController::class)->group(function () {
     Route::get('/petapadam', 'petapadam')->middleware('auth');
     Route::get('/petatrafo', 'peta_trafo')->middleware('auth');
     Route::get('/petazone', 'peta_zone')->middleware('auth');
+    Route::get('/datapohon', 'datapohon')->middleware('auth');
     Route::get('/transaksihistori', 'index')->middleware('auth');
     Route::get('/transaksiaktif', 'transaksiaktif')->middleware('auth');
     Route::post('/entripadam/insertentripadam', 'insertEntriPadam');

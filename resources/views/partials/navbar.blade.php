@@ -19,6 +19,7 @@
                         <li><a class="dropdown-item" href="/petapadam">Peta Padam</a></li>
                         <li><a class="dropdown-item" href="/petatrafo">Peta Trafo</a></li>
                         <li><a class="dropdown-item" href="/petazone">Peta Zone</a></li>
+                        <li><a class="dropdown-item" href="/datapohon">Data Pohon</a></li>
                     </ul>
                 </li>
                 <li

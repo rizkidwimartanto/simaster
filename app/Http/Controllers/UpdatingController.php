@@ -8,11 +8,13 @@ use App\Exports\TrafoExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganImport;
+use App\Imports\DataPohonImport;
 use App\Imports\DataZoneImport;
 use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
 use App\Imports\TrafoImport;
 use App\Models\DataPelangganModel;
+use App\Models\DataPohonModel;
 use App\Models\DataZoneModel;
 use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
@@ -75,6 +77,7 @@ class UpdatingController extends Controller
             'data_unit' => UnitModel::all(),
             'data_wanotif' => WANotifModel::all(),
             'data_zone' => DataZoneModel::all(),
+            'data_pohon' => DataPohonModel::all(),
         ];
         return view('beranda_administrator/updating', $data);
     }
@@ -133,10 +136,25 @@ class UpdatingController extends Controller
     }
     public function import_excel_datazone(Request $request)
     {
+        // $this->validate($request, [
+        //     'file' => 'required|mimes:csv,xls,xlsx'
+        // ]);
         $file = $request->file('file_datazone');
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_datazone', $nama_file);
         Excel::import(new DataZoneImport, public_path('/file_datazone/' . $nama_file));
+        
+        return redirect('/updating');
+    }
+    public function import_excel_datapohon(Request $request)
+    {
+        // $this->validate($request, [
+        //     'file' => 'required|mimes:csv,xls,xlsx'
+        // ]);
+        $file = $request->file('file_datapohon');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_datapohon', $nama_file);
+        Excel::import(new DataPohonImport, public_path('/file_datapohon/' . $nama_file));
         
         return redirect('/updating');
     }

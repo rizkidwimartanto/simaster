@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $data['title'] = 'Login';
+        $data['title'] = 'Simpeltas';
         if (Auth::check()) {
             return redirect('/beranda');
         } else {

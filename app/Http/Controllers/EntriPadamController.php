@@ -12,6 +12,7 @@ use App\Imports\DataPelangganImport;
 use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
 use App\Models\DataPegawaiModel;
+use App\Models\DataPohonModel;
 use App\Models\DataZoneModel;
 use App\Models\PelangganPadamModel;
 use App\Models\RekapKaliPadamModel;
@@ -428,6 +429,15 @@ class EntriPadamController extends Controller
             'data_zone' => DataZoneModel::all(),
         ];
         return view('beranda_administrator/petazone', $data);
+    }
+    public function datapohon()
+    {
+        $data = [
+            'title' => 'Data Pohon',
+            'datapohon' => DataPohonModel::all(),
+            'datarayon' => DataPohonModel::pluck('rayon')
+        ];
+        return view('beranda_administrator/datapohon', $data);
     }
     public function export_kali_padam()
     {
