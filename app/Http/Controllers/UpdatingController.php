@@ -372,4 +372,18 @@ class UpdatingController extends Controller
         }
         return redirect('/updating');
     }
+    public function hapusDataPohon(Request $request)
+    {
+        $hapus_items = $request->input('checkDataPohon');
+        if ($hapus_items) {
+            foreach ($hapus_items as $hapus) {
+                $datazone = DataPohonModel::find($hapus);
+                $datazone->delete();
+            }
+            Session::flash('success_hapus_datazone', 'data berhasil dihapus');
+        } else {
+            Session::flash('error_hapus_datazone', 'data gagal dihapus');
+        }
+        return redirect('/updating');
+    }
 }

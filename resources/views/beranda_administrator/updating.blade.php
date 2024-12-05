@@ -1111,7 +1111,7 @@
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/updating/hapus_datazone" method="post">
+                            <form action="/updating/hapus_datapohon" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -1137,7 +1137,7 @@
                                                     <path d="M12 17h.01" />
                                                 </svg>
                                                 <h3>Apakah anda yakin?</h3>
-                                                <div class="text-muted">Untuk menghapus datazone tersebut</div>
+                                                <div class="text-muted">Untuk menghapus datapohon tersebut</div>
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="w-100">
@@ -1165,7 +1165,7 @@
                                                         <div class="form-check">
                                                             <input class="form-check-input mt-2"
                                                                 style="position:relative; left:10px;" type="checkbox"
-                                                                id="checklist-datapohon" onclick="checkAllDataZone()">
+                                                                id="checklist-datapohon" onclick="checkAllDataPohon()">
                                                         </div>
                                                     </div>
                                                 </th>
@@ -1174,7 +1174,6 @@
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>
                                                 <th>Rayon</th>
-                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1194,12 +1193,6 @@
                                                     <td>{{ $pohon->latitude }}</td>
                                                     <td>{{ $pohon->longitude }}</td>
                                                     <td>{{ $pohon->rayon }}</td>
-                                                    <td>
-                                                        <a style="cursor: pointer" class="text-secondary"
-                                                            href="/updating/editdatazone/{{ $pohon->id }}">
-                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
-                                                        </a>
-                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

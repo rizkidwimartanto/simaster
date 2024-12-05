@@ -83,6 +83,7 @@ Route::controller(UpdatingController::class)->group(function () {
     Route::delete('/updating/hapus_dataunit', 'hapusDataUnit');
     Route::delete('/updating/hapus_wanotif', 'hapusWANotif');
     Route::delete('/updating/hapus_datazone', 'hapusDataZone');
+    Route::delete('/updating/hapus_datapohon', 'hapusDataPohon');
     Route::post('/updating/proses_tambah_dataunit', 'proses_tambah_dataunit');
     Route::post('/updating/proses_tambah_wanotif', 'proses_tambah_wanotif');
     Route::post('/updating/edit_pelanggan/{id}', 'edit_pelanggan');
