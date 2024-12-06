@@ -100,6 +100,12 @@ class UpdatingController extends Controller
         Session::flash('success_edit_datazone', 'datazone berhasil diedit');
         return redirect('/updating');
     }
+    public function edit_datapohon(Request $request, $id)
+    {
+        DataPohonModel::find($id)->update($request->all());
+        Session::flash('success_edit_datapohon', 'data berhasil diedit');
+        return redirect('/updating');
+    }
     public function export_excel_pelanggan()
     {
         date_default_timezone_set('Asia/Jakarta');
@@ -188,6 +194,13 @@ class UpdatingController extends Controller
             'datazone' => DataZoneModel::find($id)
         ];
         return view('beranda_administrator/FormEdit/editdatazone', $data);
+    }
+    public function form_edit_datapohon($id){
+        $data = [
+            'title' => 'Form Edit Data Pohon',
+            'datapohon' => DataPohonModel::find($id)
+        ];
+        return view('beranda_administrator/FormEdit/editdatapohon', $data);
     }
     public function hapusPelanggan(Request $request)
     {

@@ -2,7 +2,7 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
-        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif', 'success_hapus_datazone', 'success_edit_pelanggan', 'success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif'. 'success_import_data_pohon'] as $msg)
+        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif', 'success_hapus_datazone', 'success_edit_pelanggan', 'success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif', 'success_edit_datazone', 'success_import_data_pohon', 'success_import_keypoint', 'success_edit_datapohon'] as $msg)
             @if (session($msg))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -10,7 +10,7 @@
                 </div>
             @endif
         @endforeach
-        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif', 'error_hapus_datazone', 'error_edit_pelanggan', 'error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif'. 'error_import_data_pohon'] as $msg)
+        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif', 'error_hapus_datazone', 'error_edit_pelanggan', 'error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif', 'error_import_data_pohon', 'error_import_keypoint'] as $msg)
             @if (session($msg))
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -608,7 +608,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-2 border border-secondary">
+            {{-- <div class="card mt-2 border border-secondary">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed fw-bold bg-secondary text-light fs-3" type="button"
@@ -949,7 +949,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="card mt-2 border">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -1105,7 +1105,7 @@
                                     <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-6"><i
                                             class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import
                                         Excel</button>
-                                    <a href="/file_datapohon/template_datazone/data_zone_non_reclose_PWI_edit.xlsx"
+                                    <a href="/file_datapohon/template_datapohon/data_peta_pohon.xlsx"
                                         class="btn btn-success mt-2 mb-3 col-lg-6"><i class="fa-solid fa-download fa-lg"
                                             style="margin-right: 5px"></i>Template
                                         Excel</a>
@@ -1116,7 +1116,7 @@
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
                                     data-bs-target="#modal-delete-datapohon">
-                                    <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Zone
+                                    <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Pohon
                                 </a>
                                 <div class="modal modal-blur fade" id="modal-delete-datapohon" tabindex="-1"
                                     role="dialog" aria-hidden="true">
@@ -1174,6 +1174,7 @@
                                                 <th>Latitude</th>
                                                 <th>Longitude</th>
                                                 <th>Rayon</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -1193,6 +1194,12 @@
                                                     <td>{{ $pohon->latitude }}</td>
                                                     <td>{{ $pohon->longitude }}</td>
                                                     <td>{{ $pohon->rayon }}</td>
+                                                    <td>
+                                                        <a style="cursor: pointer" class="text-secondary"
+                                                            href="/updating/editdatapohon/{{ $pohon->id }}">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

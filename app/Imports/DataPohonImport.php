@@ -12,6 +12,8 @@ use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 class DataPohonImport implements ToModel, WithStartRow, WithMultipleSheets
 {
     use Importable;
+    private $importedCount = 0;
+    private $updatedCount = 0;
     public function sheets(): array
     {
         return [
@@ -21,18 +23,16 @@ class DataPohonImport implements ToModel, WithStartRow, WithMultipleSheets
 
     public function model(array $row)
     {
-        $existingData = DataPohonModel::where('tiang_section', $row[3])->first();
+        $data = $this->getData($row);
+        $existingData = DataPohonModel::updateOrCreate(
+            ['tiang_section' => $data['tiang_section']],
+            $data
+        );
 
-        if ($existingData) {
-            $existingData->update($this->getData($row));
-            Session::flash('error_import_data_pohon', 'data sudah ada');
+        if ($existingData->wasRecentlyCreated) {
+            $this->importedCount++;
         } else {
-            if ($this->isDuplicate($row)) {
-                Session::flash('error_import_data_pohon', 'Data sudah ada. Namun jika ada data tambahan lainnya, maka dapat dicek');
-            } else {
-                DataPohonModel::create($this->getData($row));
-                Session::flash('success_import_data_pohon', 'file excel berhasil diimport');
-            }
+            $this->updatedCount++;
         }
 
         return null;
@@ -48,13 +48,13 @@ class DataPohonImport implements ToModel, WithStartRow, WithMultipleSheets
             'perlu_rabas' => $row[7] ?? '',
         ];
     }
-    private function isDuplicate(array $data)
-    {
-        return DataPohonModel::where('tiang_section', $data['3'])->exists();
-    }
 
     public function startRow(): int
     {
         return 2;
+    }
+    public function __destruct()
+    {
+        Session::flash('success_import_data_pohon', "{$this->importedCount} data baru ditambahkan");
     }
 }
