@@ -20,6 +20,7 @@
                         <li><a class="dropdown-item" href="/petatrafo">Peta Trafo</a></li>
                         <li><a class="dropdown-item" href="/petazone">Peta Zone</a></li>
                         <li><a class="dropdown-item" href="/datapohon">Data Pohon</a></li>
+                        <li><a class="dropdown-item" href="/datatrafo">Data Trafo</a></li>
                     </ul>
                 </li>
                 <li

@@ -9,12 +9,14 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganImport;
 use App\Imports\DataPohonImport;
+use App\Imports\DataTrafoImport;
 use App\Imports\DataZoneImport;
 use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
 use App\Imports\TrafoImport;
 use App\Models\DataPelangganModel;
 use App\Models\DataPohonModel;
+use App\Models\DataTrafoModel;
 use App\Models\DataZoneModel;
 use App\Models\EntriPadamModel;
 use App\Models\PenyulangModel;
@@ -34,7 +36,7 @@ class UpdatingController extends Controller
     {
         $data = [
             'title' => 'Peta Pelanggan',
-            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id','id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'tahun_meter', 'nomor_meter', 'merk_mcb', 'ukuran_mcb', 'no_segel', 'no_gardu', 'sr_deret' ,'catatan', 'unit_ulp', 'created_at')->get(),
+            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'tahun_meter', 'nomor_meter', 'merk_mcb', 'ukuran_mcb', 'no_segel', 'no_gardu', 'sr_deret', 'catatan', 'unit_ulp', 'created_at')->get(),
             'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
             'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
             'data_unitulp' => DataPelangganModel::pluck('unitulp'),
@@ -42,12 +44,11 @@ class UpdatingController extends Controller
         ];
         if (Auth::user()->role === 'administrator') {
             return view('beranda_administrator/index', $data);
-        } else if(Auth::user()->role === 'user'){
+        } else if (Auth::user()->role === 'user') {
             return view('beranda_user/index', $data);
-        }else{
+        } else {
             return view('beranda_koordinator.index', $data);
         }
-
     }
     public function entri_padam()
     {
@@ -74,6 +75,7 @@ class UpdatingController extends Controller
             'title' => 'Updating',
             'data_pelanggan' => DataPelangganModel::all(),
             'data_trafo' => TrafoModel::all(),
+            'data_trafo2' => DataTrafoModel::all(),
             'data_unit' => UnitModel::all(),
             'data_wanotif' => WANotifModel::all(),
             'data_zone' => DataZoneModel::all(),
@@ -81,7 +83,7 @@ class UpdatingController extends Controller
         ];
         return view('beranda_administrator/updating', $data);
     }
-    
+
     public function edit_pelanggan(Request $request, $id)
     {
         DataPelangganModel::find($id)->update($request->all());
@@ -125,7 +127,7 @@ class UpdatingController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_pelanggan', $nama_file);
         Excel::import(new DataPelangganImport, public_path('/file_pelanggan/' . $nama_file));
-        
+
         return redirect('/updating');
     }
     public function import_excel_trafo(Request $request)
@@ -137,7 +139,7 @@ class UpdatingController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_trafo', $nama_file);
         Excel::import(new TrafoImport, public_path('/file_trafo/' . $nama_file));
-        
+
         return redirect('/updating');
     }
     public function import_excel_datazone(Request $request)
@@ -149,19 +151,25 @@ class UpdatingController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_datazone', $nama_file);
         Excel::import(new DataZoneImport, public_path('/file_datazone/' . $nama_file));
-        
+
         return redirect('/updating');
     }
     public function import_excel_datapohon(Request $request)
     {
-        // $this->validate($request, [
-        //     'file' => 'required|mimes:csv,xls,xlsx'
-        // ]);
         $file = $request->file('file_datapohon');
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move('file_datapohon', $nama_file);
         Excel::import(new DataPohonImport, public_path('/file_datapohon/' . $nama_file));
         
+        return redirect('/updating');
+    }
+    public function import_excel_datatrafo(Request $request)
+    {
+        $file = $request->file('file_datatrafo');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move('file_datatrafo', $nama_file);
+        Excel::import(new DataTrafoImport, public_path('/file_datatrafo/' . $nama_file));
+
         return redirect('/updating');
     }
     public function import_excel_penyulangsection(Request $request)
@@ -181,21 +189,24 @@ class UpdatingController extends Controller
 
         return redirect('/updating');
     }
-    public function form_edit_pelanggan($id){
+    public function form_edit_pelanggan($id)
+    {
         $data = [
             'title' => 'Form Edit Pelanggan',
             'pelanggan' => DataPelangganModel::find($id)
         ];
         return view('beranda_administrator/FormEdit/editpelanggan', $data);
     }
-    public function form_edit_datazone($id){
+    public function form_edit_datazone($id)
+    {
         $data = [
             'title' => 'Form Edit Data Zone',
             'datazone' => DataZoneModel::find($id)
         ];
         return view('beranda_administrator/FormEdit/editdatazone', $data);
     }
-    public function form_edit_datapohon($id){
+    public function form_edit_datapohon($id)
+    {
         $data = [
             'title' => 'Form Edit Data Pohon',
             'datapohon' => DataPohonModel::find($id)
@@ -216,7 +227,8 @@ class UpdatingController extends Controller
         }
         return redirect('/updating');
     }
-    public function form_edit_trafo($id){
+    public function form_edit_trafo($id)
+    {
         $data = [
             'title' => 'Form Edit Trafo',
             'trafo' => TrafoModel::find($id)
@@ -237,7 +249,8 @@ class UpdatingController extends Controller
         }
         return redirect('/updating');
     }
-    public function form_edit_data_unit($id){
+    public function form_edit_data_unit($id)
+    {
         $data = [
             'title' => 'Form Edit Data Unit',
             'dataunit' => UnitModel::find($id)
@@ -252,7 +265,7 @@ class UpdatingController extends Controller
             'no_mulp' => 'required',
             'no_tlteknik' => 'required',
         ], $message);
-    
+
         if ($validateData) {
             UnitModel::create([
                 'idunit' => $request->input('idunit'),
@@ -260,7 +273,7 @@ class UpdatingController extends Controller
                 'no_mulp' => $request->input('no_mulp'),
                 'no_tlteknik' => $request->input('no_tlteknik'),
             ]);
-    
+
             Session::flash('success_tambah_dataunit', 'data unit berhasil ditambahkan');
         } else {
             Session::flash('error_tambah_dataunit', 'data unit gagal ditambahkan');
@@ -305,7 +318,8 @@ class UpdatingController extends Controller
         }
         return redirect('/updating');
     }
-    public function form_edit_wa_notif($id){
+    public function form_edit_wa_notif($id)
+    {
         $data = [
             'title' => 'Form Edit WA Notif',
             'wanotif' => WANotifModel::find($id)
@@ -320,14 +334,14 @@ class UpdatingController extends Controller
             'idpel' => 'required',
             'idunit' => 'required',
         ], $message);
-    
+
         if ($validateData) {
             WANotifModel::create([
                 'idserial' => $request->input('idserial'),
                 'idpel' => $request->input('idpel'),
                 'idunit' => $request->input('idunit'),
             ]);
-    
+
             Session::flash('success_tambah_wanotif', 'wanotif berhasil ditambahkan');
         } else {
             Session::flash('error_tambah_wanotif', 'wanotif gagal ditambahkan');

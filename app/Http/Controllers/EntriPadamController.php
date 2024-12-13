@@ -13,6 +13,7 @@ use App\Imports\PenyulangImport;
 use App\Imports\SectionImport;
 use App\Models\DataPegawaiModel;
 use App\Models\DataPohonModel;
+use App\Models\DataTrafoModel;
 use App\Models\DataZoneModel;
 use App\Models\PelangganPadamModel;
 use App\Models\RekapKaliPadamModel;
@@ -438,6 +439,16 @@ class EntriPadamController extends Controller
             'datarayon' => DataPohonModel::pluck('rayon')
         ];
         return view('beranda_administrator/datapohon', $data);
+    }
+    public function datatrafo()
+    {
+        $data = [
+            'title' => 'Data Trafo',
+            'datatrafo' => DataTrafoModel::all(),
+            'dataklasifikasi' => DataTrafoModel::pluck('klasifikasi_beban'),
+            'datarayon' => DataTrafoModel::pluck('rayon'),
+        ];
+        return view('beranda_administrator/datatrafo', $data);
     }
     public function export_kali_padam()
     {
