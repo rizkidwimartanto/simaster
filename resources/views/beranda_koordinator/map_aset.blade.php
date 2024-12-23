@@ -108,7 +108,20 @@
         }).addTo(map);
 
         // Tambahkan marker pelanggan seperti sebelumnya
-        var data_aset = @json($data_aset);
+        var data_pelanggan_app = @json($data_pelanggan_app);
+        data_pelanggan_app.forEach(pelangganapp => {
+            const iconpelangganapp = L.icon({
+                iconUrl: 'assets/img/lokasi_hijau.png',
+                iconSize: [20, 20],
+                iconAnchor: [20, 20],
+            });
+            const marker = L.marker([pelangganapp.latitude, pelangganapp.longitude], {
+                icon: iconpelangganapp
+            }).addTo(map);
+
+            marker.on('click', () => $('#' + pelangganapp.id).modal('show'));
+        });
+
         var currentMarker;
     </script>
 @endsection

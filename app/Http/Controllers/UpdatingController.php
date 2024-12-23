@@ -7,6 +7,7 @@ use App\Exports\DataPelangganExport;
 use App\Exports\TrafoExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
+use App\Imports\DataPelangganAPPImport;
 use App\Imports\DataPelangganImport;
 use App\Imports\DataPohonImport;
 use App\Imports\DataTrafoImport;
@@ -19,6 +20,7 @@ use App\Models\DataPohonModel;
 use App\Models\DataTrafoModel;
 use App\Models\DataZoneModel;
 use App\Models\EntriPadamModel;
+use App\Models\PelangganAPPModel;
 use App\Models\PenyulangModel;
 use App\Models\SectionModel;
 use App\Models\TrafoModel;
@@ -36,7 +38,7 @@ class UpdatingController extends Controller
     {
         $data = [
             'title' => 'Peta Pelanggan',
-            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'tahun_meter', 'nomor_meter', 'merk_mcb', 'ukuran_mcb', 'no_segel', 'no_gardu', 'sr_deret', 'catatan', 'unit_ulp', 'created_at')->get(),
+            'data_pelanggan_app' => PelangganAPPModel::all(),
             'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
             'data_peta' => DB::table('data_pelanggan')->select('id', 'nama', 'alamat', 'maps', 'latitude', 'longtitude', 'nama_section', 'nohp_stakeholder', 'unitulp')->get(),
             'data_unitulp' => DataPelangganModel::pluck('unitulp'),

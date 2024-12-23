@@ -63,67 +63,41 @@
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
 
-        var markerClusterGroup = L.markerClusterGroup();
-        map.addLayer(markerClusterGroup);
-
         var datapohon = @json($datapohon);
 
         // Tambahkan semua marker ke cluster
-        datapohon.forEach(function(pohon) {
-            var iconpohon = L.icon({
+        datapohon.forEach(pohon => {
+            const iconpohon = L.icon({
                 iconUrl: 'assets/img/tree.png',
                 iconSize: [20, 20],
-                iconAnchor: [10, 20],
+                iconAnchor: [20, 20],
             });
-
-            var marker = L.marker([
-                parseFloat(pohon.latitude.replace(',', '.')),
-                parseFloat(pohon.longitude.replace(',', '.'))
-            ], {
+            const marker = L.marker([pohon.latitude, pohon.longitude], {
                 icon: iconpohon
-            });
+            }).addTo(map);
 
-            marker.bindTooltip(pohon.perlu_rabas).openTooltip();
-            marker.on('click', function() {
-                $('#' + pohon.id).modal('show');
-            });
-
-            markerClusterGroup.addLayer(marker);
+            marker.on('click', () => $('#' + pohon.id).modal('show'));
         });
 
-        // Filter marker berdasarkan rayon
         $('#pilih_peta').change(function() {
-            var selectedRayon = $(this).val();
-
-            // Hapus semua marker dari cluster
-            markerClusterGroup.clearLayers();
-
-            // Filter data berdasarkan rayon
-            var filteredData = datapohon.filter(function(pohon) {
-                return pohon.rayon === selectedRayon;
+            map.eachLayer(layer => {
+                if (layer instanceof L.Marker) map.removeLayer(layer);
             });
 
-            // Tambahkan marker yang difilter ke cluster
-            filteredData.forEach(function(pohon) {
-                var iconpohon = L.icon({
+            const selectedBeban = $(this).val();
+            const filteredDataPeta = datapohon.filter(pohon => pohon.rayon === selectedBeban);
+
+            filteredDataPeta.forEach(pohon => {
+                const iconpohon = L.icon({
                     iconUrl: 'assets/img/tree.png',
                     iconSize: [20, 20],
-                    iconAnchor: [10, 20],
+                    iconAnchor: [20, 20],
                 });
-
-                var marker = L.marker([
-                    parseFloat(pohon.latitude.replace(',', '.')),
-                    parseFloat(pohon.longitude.replace(',', '.'))
-                ], {
+                const marker = L.marker([pohon.latitude, pohon.longitude], {
                     icon: iconpohon
-                });
+                }).addTo(map);
 
-                marker.bindTooltip(pohon.perlu_rabas).openTooltip();
-                marker.on('click', function() {
-                    $('#' + pohon.id).modal('show');
-                });
-
-                markerClusterGroup.addLayer(marker);
+                marker.on('click', () => $('#' + pohon.id).modal('show'));
             });
         });
 

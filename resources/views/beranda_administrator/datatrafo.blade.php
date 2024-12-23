@@ -120,29 +120,6 @@
 
         var datatrafo = @json($datatrafo);
 
-        $('#pilih_unit').change(function() {
-            map.eachLayer(layer => {
-                if (layer instanceof L.Marker) map.removeLayer(layer);
-            });
-
-            const selectedBeban = $(this).val();
-            const filteredDataPeta = datatrafo.filter(trafo => trafo.rayon === selectedBeban);
-
-            filteredDataPeta.forEach(trafo => {
-                const icontrafo = L.icon({
-                    iconUrl: 'assets/img/tree.png',
-                    iconSize: [20, 20],
-                    iconAnchor: [20, 20],
-                });
-                const marker = L.marker([trafo.latitude, trafo.longitude], {
-                    icon: icontrafo
-                }).addTo(map);
-
-                marker.bindTooltip(trafo.perhitungan_beban).openTooltip();
-                marker.on('click', () => $('#' + trafo.id).modal('show'));
-            });
-        });
-
         datatrafo.forEach(trafo => {
             const icontrafo = L.icon({
                 iconUrl: 'assets/img/tree.png',
@@ -157,75 +134,7 @@
             marker.on('click', () => $('#' + trafo.id).modal('show'));
         });
 
-        function showSuggestions() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const suggestionList = document.getElementById('suggestionList');
-            const listGroup = suggestionList.querySelector('ul');
-            listGroup.innerHTML = '';
-
-            let matchCount = 0;
-            datatrafo.forEach(trafo => {
-                if (trafo.nomor_tiang.toLowerCase().includes(searchTerm) && matchCount < 10) {
-                    const listItem = document.createElement('li');
-                    listItem.className = 'list-group-item';
-                    listItem.textContent = trafo.nomor_tiang;
-                    listItem.onclick = () => {
-                        document.getElementById('searchInput').value = trafo.nomor_tiang;
-                        listGroup.innerHTML = '';
-                        suggestionList.style.display = 'none';
-                        showMarker(trafo);
-                    };
-                    listGroup.appendChild(listItem);
-                    matchCount++;
-                }
-            });
-
-            suggestionList.style.display = listGroup.childElementCount > 0 ? 'block' : 'none';
-        }
-
-        function showMarker(trafo) {
-            if (currentMarker) map.removeLayer(currentMarker);
-            currentMarker = L.marker([trafo.latitude, trafo.longitude], {
-                icon: L.icon({
-                    iconUrl: 'assets/img/tree.png',
-                    iconSize: [20, 20],
-                    iconAnchor: [20, 20],
-                }),
-            }).addTo(map);
-
-            map.setView([trafo.latitude, trafo.longitude], 19);
-            currentMarker.bindTooltip(trafo.perhitungan_beban).openTooltip();
-            currentMarker.on('click', () => $('#' + trafo.id).modal('show'));
-        }
-
-        function handleKeyPress(event) {
-            if (event.keyCode === 13) {
-                // Enter key pressed
-                event.preventDefault(); // Mencegah submit form jika ada
-                showSuggestions();
-            }
-        }
-
-        function hapusPencarian() {
-            document.getElementById('searchInput').value = "";
-            document.getElementById('suggestionList').style.display = 'none';
-        }
-
-        function click_map() {
-            document.getElementById('suggestionList').style.display = "none";
-        }
-
-        function click_customer() {
-            document.getElementById('suggestionList').style.display = "block";
-        }
-
-        // Sembunyikan dropdown ketika klik di luar elemen
-        document.addEventListener('click', function(event) {
-            var suggestionList = document.getElementById('suggestionList');
-            if (event.target !== suggestionList && !suggestionList.contains(event.target)) {
-                suggestionList.style.display = 'none';
-            }
-        });
+        
 
         var currentMarker;
     </script>

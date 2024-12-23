@@ -29,9 +29,9 @@ use Illuminate\Support\Facades\Auth;
 Route::controller(UserController::class)->group(function () {
     Route::get('/', 'index')->name('login');
     Route::get('/register_user', 'register_user');
-    Route::get('/register_app_simpeltas', 'register_app_simpeltas');
-    Route::get('/edit_user_simpeltas/{id}', 'edit_user_simpeltas');
-    Route::post('/proses_edit_user_simpeltas/{id}', 'proses_edit_user_simpeltas');
+    Route::get('/register_app_simaster', 'register_app_simaster');
+    Route::get('/edit_user_simaster/{id}', 'edit_user_simaster');
+    Route::post('/proses_edit_user_simaster/{id}', 'proses_edit_user_simaster');
     Route::post('/store', 'store');
     Route::post('/proseslogin', 'authenticate')->name('authenticate');
     Route::get('/logout', 'logout')->name('authenticate');
@@ -57,6 +57,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::post('/koordinator/import_excel_wirosari', 'import_excel_wirosari');
     Route::post('/koordinator/import_excel_data_aset', 'import_excel_data_aset');
     Route::post('/koordinator/import_excel_data_gi', 'import_excel_data_gi');
+    Route::post('/koordinator/import_excel_kelengkapan_data_aset', 'import_excel_kelengkapan_data_aset');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');
     Route::get('/get-pelanggan/{nama_pelanggan}', 'getPelangganData');
