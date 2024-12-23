@@ -244,9 +244,9 @@
                         pelanggan2.latitude, pelanggan2.longitude
                     );
 
-                    if (distance < 5) {
+                    if (distance < 20) {
                         const message =
-                            `Warning: Pelanggan ${pelanggan1.nama_pelanggan} dan ${pelanggan2.nama_pelanggan} memiliki jarak kurang dari 5 meter (${distance.toFixed(2)} m).`;
+                            `Warning: Pelanggan ${pelanggan1.nama_pelanggan} dan ${pelanggan2.nama_pelanggan} memiliki jarak kurang dari 20 meter (${distance.toFixed(2)} m).`;
                         displayNotice(message);
                     }
                 }
