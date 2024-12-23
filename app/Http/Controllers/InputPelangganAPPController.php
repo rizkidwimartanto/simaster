@@ -290,7 +290,7 @@ class InputPelangganAPPController extends Controller
         } else {
             Session::flash('error_hapus_pelanggan', 'Data gagal dihapus');
         }
-        return redirect('/koordinator');
+        return redirect('/manajemen_aset_jaringan');
     }
     public function edit_pelanggan_app_user($id_pelanggan)
     {

@@ -11,7 +11,7 @@
                 <li class="nav-item {{ $title == 'Manajemen Aset Jaringan' ? 'active' : '' }}">
                     <a class="nav-link" href="/manajemen_aset_jaringan">Manajemen Aset Jaringan</a>
                 </li>
-                <li class="nav-item {{ $title == 'Manajemen Penyambungan' ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ $title == 'Manajemen Penyambungan' ? 'active' : '' }}">
                     <a class="nav-link" href="/paka">Manajemen Penyambungan</a>
                 </li>
                 <li class="nav-item {{ $title == 'Manajemen Pelanggan' ? 'active' : '' }}">
@@ -19,7 +19,7 @@
                 </li>
                 <li class="nav-item {{ $title == 'Kinerja UP3' ? 'active' : '' }}">
                     <a class="nav-link" href="/entripadam">Kinerja UP3</a>
-                </li>
+                </li> --}}
                 <li class="nav-item {{ $title == 'Updating Koordinator' ? 'active' : '' }}">
                     <a class="nav-link" href="/updating_koordinator">Updating Koordinator</a>
                 </li>
