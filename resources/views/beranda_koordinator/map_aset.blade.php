@@ -73,18 +73,24 @@
         // Tambahkan marker pelanggan seperti sebelumnya
         var data_pelanggan_app = @json($data_pelanggan_app);
         data_pelanggan_app.forEach(pelangganapp => {
-            const iconpelangganapp = L.icon({
-                iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
-                iconSize: [20, 20],
-                iconAnchor: [10, 10],
-            });
+            if (pelangganapp.latitude && pelangganapp.longitude) {
+                const iconpelangganapp = L.icon({
+                    iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                    iconSize: [20, 20],
+                    iconAnchor: [10, 10],
+                });
 
-            const marker = L.marker([pelangganapp.latitude, pelangganapp.longitude], {
-                icon: iconpelangganapp
-            }).addTo(map);
-            marker.bindTooltip(pelangganapp.nama_pelanggan).openTooltip();
-            marker.on('click', () => $('#' + pelangganapp.id).modal('show'));
+                const marker = L.marker([pelangganapp.latitude, pelangganapp.longitude], {
+                    icon: iconpelangganapp
+                }).addTo(map);
+
+                marker.bindTooltip(pelangganapp.nama_pelanggan).openTooltip();
+                marker.on('click', () => $('#' + pelangganapp.id).modal('show'));
+            } else {
+                console.warn(`Pelanggan ${pelangganapp.nama_pelanggan} tidak memiliki koordinat yang valid.`);
+            }
         });
+
 
         var currentMarker;
 
