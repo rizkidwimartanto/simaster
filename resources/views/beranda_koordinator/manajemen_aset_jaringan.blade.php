@@ -196,7 +196,7 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="row mt-3">
+                {{-- <div class="row mt-3">
                     <div class="col-md-6">
                         <label for="bulanGI">Pilih Bulan:</label>
                         <input type="month" id="bulanGI" class="form-control" placeholder="YYYY-MM">
@@ -205,23 +205,28 @@
                         <label>&nbsp;</label>
                         <button id="filterGI" class="btn btn-primary w-100">Filter</button>
                     </div>
-                </div>
+                </div> --}}
                 <div style="overflow-y: auto;">
                     <h2 class="mt-2">Laporan Kelengkapan Data Asset dan Data Pelanggan</h2>
                     <table class="table-bordered tabel-app mt-2 display" id="tabel-kelengkapan-data-asset">
                         <thead class="text-light" style="background:linear-gradient(#780206, #061161)">
                             <tr>
-                                <th>Tanggal Pasang</th>
+                                {{-- <th>Tanggal Pasang</th> --}}
+                                <th>No</th>
                                 <th>ID Pelanggan</th>
                                 <th>Nama Pelanggan</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $no = 1;
+                            @endphp
                             @foreach ($data_pelanggan_app as $app)
                                 @if (!empty($app->id_pelanggan))
                                     <tr>
-                                        <td>{{ $app->tanggal_pasang }}</td>
+                                        <td>{{ $no++ }}</td>
+                                        {{-- <td>{{ $app->tanggal_pasang }}</td> --}}
                                         <td>{{ $app->id_pelanggan }}</td>
                                         <td>{{ $app->nama_pelanggan }}</td>
                                         <td>
@@ -396,7 +401,25 @@
                             @endforeach
                         </tbody>
                         <tfoot>
-                            <tr><td colspan="4"><h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP UP3 Grobogan</a></h3></td></tr>
+                            <tr>
+                                <td>
+                                    <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP Demak</a>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP Tegowanu</a>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP
+                                            Purwodadi</a>
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP Wirosari</a>
+                                    </h3>
+                                </td>
+                            </tr>
                         </tfoot>
                     </table>
                 </div>
@@ -523,8 +546,8 @@
                     'pageLength': 10,
                     'lengthMenu': [10, 25, 50, 100, 200, 500],
                     'order': [
-                        [1, 'asc']
-                    ] // Kolom ketiga (index 2, karena mulai dari 0) diurutkan secara ascending
+                        [0, 'asc']
+                    ]
                 });
             }
 
