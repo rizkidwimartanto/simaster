@@ -87,7 +87,12 @@
                     icon: iconpelangganapp
                 });
 
-                marker.bindTooltip(pelangganapp.nama_pelanggan).openTooltip();
+                const tooltipContent = `
+                    <b>Pelanggan:</b> ${pelangganapp.nama_pelanggan}<br>
+                    <b>Petugas:</b> ${pelangganapp.nama_petugas}
+                `;
+
+                marker.bindTooltip(tooltipContent).openTooltip();
                 marker.on('click', () => $('#' + pelangganapp.id).modal('show'));
 
                 // Tambahkan marker ke grup cluster
@@ -132,7 +137,7 @@
                     listItem.textContent = pelanggan.nama_pelanggan; // Nama pelanggan ditampilkan
                     listItem.onclick = function() {
                         document.getElementById('searchInput').value = pelanggan
-                        .nama_pelanggan; // Pilih nama pelanggan
+                            .nama_pelanggan; // Pilih nama pelanggan
                         listGroup.innerHTML = ''; // Kosongkan daftar saran
                         suggestionList.style.display = 'none'; // Sembunyikan daftar
                         showMarker(pelanggan); // Tampilkan marker
@@ -168,9 +173,14 @@
             currentMarker = L.marker([pelanggan.latitude, pelanggan.longitude], {
                 icon: iconpelanggan
             }).addTo(map);
-            currentMarker.bindTooltip(pelanggan.nama_pelanggan).openTooltip(); // Tambahkan tooltip
+            const tooltipContent = `
+                <b>Pelanggan:</b> ${pelanggan.nama_pelanggan}<br>
+                <b>Petugas:</b> ${pelanggan.nama_petugas}
+            `;
 
-            map.setView([pelanggan.latitude, pelanggan.longitude], 19); // Atur view ke lokasi marker
+            currentMarker.bindTooltip(tooltipContent).openTooltip();
+
+            map.setView([pelanggan.latitude, pelanggan.longitude], 19);
 
             // Event untuk menampilkan modal saat marker diklik
             currentMarker.on('click', function() {

@@ -465,30 +465,6 @@
                                     @endif
                                 @endforeach
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td>
-                                        <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP
-                                                Demak</a>
-                                        </h3>
-                                    </td>
-                                    <td>
-                                        <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP
-                                                Tegowanu</a>
-                                        </h3>
-                                    </td>
-                                    <td>
-                                        <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP
-                                                Purwodadi</a>
-                                        </h3>
-                                    </td>
-                                    <td>
-                                        <h3 class="text-center mt-2"><a href="/koordinator/map_aset">Buka MAP ULP
-                                                Wirosari</a>
-                                        </h3>
-                                    </td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </form>
                 </div>

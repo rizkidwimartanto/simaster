@@ -13,13 +13,16 @@
                 </li>
                 {{-- <li class="nav-item {{ $title == 'Manajemen Penyambungan' ? 'active' : '' }}">
                     <a class="nav-link" href="/paka">Manajemen Penyambungan</a>
-                </li>
-                <li class="nav-item {{ $title == 'Manajemen Pelanggan' ? 'active' : '' }}">
+                </li> --}}
+                {{-- <li class="nav-item {{ $title == 'Manajemen Pelanggan' ? 'active' : '' }}">
                     <a class="nav-link" href="/entripadam">Manajemen Pelanggan</a>
-                </li>
-                <li class="nav-item {{ $title == 'Kinerja UP3' ? 'active' : '' }}">
+                </li> --}}
+                {{-- <li class="nav-item {{ $title == 'Kinerja UP3' ? 'active' : '' }}">
                     <a class="nav-link" href="/entripadam">Kinerja UP3</a>
                 </li> --}}
+                <li class="nav-item {{ $title == 'Map Aset Pelanggan' ? 'active' : '' }}">
+                    <a class="nav-link" href="/koordinator/map_aset_pelanggan">Map Aset Pelanggan</a>
+                </li>
                 <li class="nav-item {{ $title == 'Updating Koordinator' ? 'active' : '' }}">
                     <a class="nav-link" href="/updating_koordinator">Updating Koordinator</a>
                 </li>

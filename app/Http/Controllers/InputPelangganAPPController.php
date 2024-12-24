@@ -51,10 +51,10 @@ class InputPelangganAPPController extends Controller
 
         return view('beranda_koordinator/manajemen_aset_jaringan', $data);
     }
-    public function map_aset()
+    public function map_aset_pelanggan()
     {
         $data = [
-            'title' => 'Map Aset',
+            'title' => 'Map Aset Pelanggan',
             'data_aset' => ManajemenAset::all(),
             'data_pelanggan_app' => PelangganAPPModel::all(),
         ];
