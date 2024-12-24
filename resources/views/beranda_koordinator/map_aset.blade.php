@@ -27,22 +27,128 @@
     </div>
     @foreach ($data_pelanggan_app as $data)
         <div class="modal modal-blur fade" id="{{ $data->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ $data->nama_pelanggan }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p class="detail_pelanggan">Nama Pelanggan : {{ $data->nama_pelanggan }} </p>
-                        <p class="detail_pelanggan">Alamat : {{ $data->alamat }}</p>
-                        <p class="detail_pelanggan">Nama Petugas : {{ $data->nama_petugas }}</p>
-                        <p class="detail_pelanggan">Maps : <a
-                                href="https://www.google.com/maps/place/{{ $data->latitude }},{{ $data->longitude }}"
-                                target="_blank">Klik Lokasi</a></p>
+                        <div class="row">
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Tanggal Pasang</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->tanggal_pasang }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">ID Pelanggan</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->id_pelanggan }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Nama
+                                    Pelanggan</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->nama_pelanggan }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Tarif</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->tarif }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Daya</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->daya }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Alamat</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->alamat }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Latitude</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->latitude }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Longitude</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->longitude }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Jenis Meter</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->jenis_meter }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Merk Meter</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->merk_meter }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Tahun Meter</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->tahun_meter }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Nomor Meter</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->nomor_meter }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Merk MCB</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->merk_mcb }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Nomor Segel</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->no_segel }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Nomor Gardu</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->no_gardu }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Tarikan SR ke</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->sr_deret }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Catatan</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->catatan }}" class="form-control" readonly>
+                                </div>
+                            </div>
+                            <div class="mb-3 col-lg-12">
+                                <label class="form-label">Nama Petugas</label>
+                                <div class="input-group input-group-flat">
+                                    <input type="text" value="{{ $data->nama_petugas }}" class="form-control"
+                                        readonly>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn me-auto" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
