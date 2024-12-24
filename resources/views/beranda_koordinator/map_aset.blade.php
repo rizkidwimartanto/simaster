@@ -72,6 +72,9 @@
 
         // Tambahkan marker pelanggan seperti sebelumnya
         var data_pelanggan_app = @json($data_pelanggan_app);
+        // Buat grup cluster
+        var markers = L.markerClusterGroup();
+
         data_pelanggan_app.forEach(pelangganapp => {
             if (pelangganapp.latitude && pelangganapp.longitude) {
                 const iconpelangganapp = L.icon({
@@ -82,14 +85,19 @@
 
                 const marker = L.marker([pelangganapp.latitude, pelangganapp.longitude], {
                     icon: iconpelangganapp
-                }).addTo(map);
+                });
 
                 marker.bindTooltip(pelangganapp.nama_pelanggan).openTooltip();
                 marker.on('click', () => $('#' + pelangganapp.id).modal('show'));
-            } else {
-                console.warn(`Pelanggan ${pelangganapp.nama_pelanggan} tidak memiliki koordinat yang valid.`);
+
+                // Tambahkan marker ke grup cluster
+                markers.addLayer(marker);
             }
         });
+
+        // Tambahkan grup cluster ke peta
+        map.addLayer(markers);
+
 
 
         var currentMarker;
@@ -107,28 +115,35 @@
             document.getElementById('suggestionList').style.display = "block";
         }
 
+        // Filter pelanggan berdasarkan input pencarian
         function showSuggestions() {
-            var searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            var suggestionList = document.getElementById('suggestionList');
-            var listGroup = suggestionList.querySelector('ul');
-            listGroup.innerHTML = '';
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase(); // Ambil nilai input
+            const suggestionList = document.getElementById('suggestionList'); // Elemen dropdown untuk saran
+            const listGroup = suggestionList.querySelector('ul');
+            listGroup.innerHTML = ''; // Kosongkan daftar saran
 
-            var matchCount = 0;
-            data_pelanggan_app.forEach(function(pelanggan_app) {
-                if (pelanggan_app.nama_pelanggan.toLowerCase().includes(searchTerm) && matchCount < 10) {
-                    var listItem = document.createElement('li');
-                    listItem.className = 'list-group-item';
-                    listItem.textContent = pelanggan_app.nama_pelanggan;
+            let matchCount = 0;
+
+            // Loop data pelanggan
+            data_pelanggan_app.forEach(function(pelanggan) {
+                if (pelanggan.nama_pelanggan.toLowerCase().includes(searchTerm) && matchCount < 10) {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item'; // Kelas untuk styling
+                    listItem.textContent = pelanggan.nama_pelanggan; // Nama pelanggan ditampilkan
                     listItem.onclick = function() {
-                        document.getElementById('searchInput').value = pelanggan_app.nama_pelanggan;
-                        listGroup.innerHTML = ''; // Sembunyikan daftar setelah memilih
-                        showMarker(pelanggan_app);
+                        document.getElementById('searchInput').value = pelanggan
+                        .nama_pelanggan; // Pilih nama pelanggan
+                        listGroup.innerHTML = ''; // Kosongkan daftar saran
+                        suggestionList.style.display = 'none'; // Sembunyikan daftar
+                        showMarker(pelanggan); // Tampilkan marker
                     };
-                    listGroup.appendChild(listItem);
+
+                    listGroup.appendChild(listItem); // Tambahkan item ke daftar
                     matchCount++;
                 }
             });
 
+            // Tampilkan atau sembunyikan dropdown berdasarkan hasil pencarian
             if (listGroup.childElementCount > 0) {
                 suggestionList.style.display = 'block';
             } else {
@@ -136,38 +151,36 @@
             }
         }
 
-        function showMarker(pelanggan_app) {
+        // Tampilkan marker pelanggan di peta
+        function showMarker(pelanggan) {
             // Hapus marker sebelumnya jika ada
             if (currentMarker) {
                 map.removeLayer(currentMarker);
             }
 
             // Buat marker baru dengan ikon dan tooltip
-            const iconpelangganapp = L.icon({
+            const iconpelanggan = L.icon({
                 iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [10, 10],
             });
 
-            currentMarker = L.marker([pelanggan_app.latitude, pelanggan_app.longitude], {
-                icon: iconpelangganapp
+            currentMarker = L.marker([pelanggan.latitude, pelanggan.longitude], {
+                icon: iconpelanggan
             }).addTo(map);
+            currentMarker.bindTooltip(pelanggan.nama_pelanggan).openTooltip(); // Tambahkan tooltip
 
-            // Tambahkan tooltip ke marker
-            currentMarker.bindTooltip(pelanggan_app.nama_pelanggan).openTooltip();
+            map.setView([pelanggan.latitude, pelanggan.longitude], 19); // Atur view ke lokasi marker
 
-            // Atur view peta ke lokasi marker
-            map.setView([pelanggan_app.latitude, pelanggan_app.longitude], 19);
-
-            // Tambahkan event untuk menampilkan modal saat marker diklik
+            // Event untuk menampilkan modal saat marker diklik
             currentMarker.on('click', function() {
-                $('#' + pelanggan_app.id).modal('show');
+                $('#' + pelanggan.id).modal('show');
             });
         }
 
-
+        // Sembunyikan dropdown saran jika klik di luar elemen
         document.addEventListener('click', function(event) {
-            var suggestionList = document.getElementById('suggestionList');
+            const suggestionList = document.getElementById('suggestionList');
             if (event.target !== suggestionList && !suggestionList.contains(event.target)) {
                 suggestionList.style.display = 'none';
             }
