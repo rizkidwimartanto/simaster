@@ -89,7 +89,8 @@
 
                 const tooltipContent = `
                     <b>Pelanggan:</b> ${pelangganapp.nama_pelanggan}<br>
-                    <b>Petugas:</b> ${pelangganapp.nama_petugas}
+                    <b>Petugas:</b> ${pelangganapp.nama_petugas}<br>
+                    <b>Alamat:</b> ${pelangganapp.alamat}
                 `;
 
                 marker.bindTooltip(tooltipContent).openTooltip();
@@ -175,7 +176,8 @@
             }).addTo(map);
             const tooltipContent = `
                 <b>Pelanggan:</b> ${pelanggan.nama_pelanggan}<br>
-                <b>Petugas:</b> ${pelanggan.nama_petugas}
+                <b>Petugas:</b> ${pelanggan.nama_petugas}<br>
+                <b>Alamat:</b> ${pelanggan.alamat}
             `;
 
             currentMarker.bindTooltip(tooltipContent).openTooltip();

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-transparent bg-body-tertiary p-2">
+<nav class="navbar navbar-expand-lg bg-body-tertiary p-2" data-bs-theme="dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/koordinator">SIMASTER (Sistem Informasi Aset Terintegrasi)
         </a>
