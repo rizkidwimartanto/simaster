@@ -29,7 +29,7 @@
                 onChange: function(value) {
                     if (value) {
                         // Redirect ke halaman edit pelanggan berdasarkan ID pelanggan yang dipilih
-                        window.location.href = '/edit_pelanggan_app_user/' + value;
+                        window.location.href = '/simaster/edit_pelanggan_app_user/' + value;
                     }
                 }
             });

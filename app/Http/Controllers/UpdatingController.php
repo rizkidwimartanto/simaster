@@ -127,8 +127,8 @@ class UpdatingController extends Controller
         ]);
         $file = $request->file('file');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_pelanggan', $nama_file);
-        Excel::import(new DataPelangganImport, public_path('/file_pelanggan/' . $nama_file));
+        $file->move(public_path('simaster/file_pelanggan/'), $nama_file);
+        Excel::import(new DataPelangganImport, public_path('simaster/file_pelanggan/' . $nama_file));
 
         return redirect('/updating');
     }
@@ -139,8 +139,8 @@ class UpdatingController extends Controller
         ]);
         $file = $request->file('file');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_trafo', $nama_file);
-        Excel::import(new TrafoImport, public_path('/file_trafo/' . $nama_file));
+        $file->move(public_path('simaster/file_trafo/'), $nama_file);
+        Excel::import(new TrafoImport, public_path('simaster/file_trafo/' . $nama_file));
 
         return redirect('/updating');
     }
@@ -151,8 +151,8 @@ class UpdatingController extends Controller
         // ]);
         $file = $request->file('file_datazone');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_datazone', $nama_file);
-        Excel::import(new DataZoneImport, public_path('/file_datazone/' . $nama_file));
+        $file->move(public_path('simaster/file_datazone/'), $nama_file);
+        Excel::import(new DataZoneImport, public_path('simaster/file_datazone/' . $nama_file));
 
         return redirect('/updating');
     }
@@ -160,8 +160,8 @@ class UpdatingController extends Controller
     {
         $file = $request->file('file_datapohon');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_datapohon', $nama_file);
-        Excel::import(new DataPohonImport, public_path('/file_datapohon/' . $nama_file));
+        $file->move(public_path('simaster/file_datapohon/'), $nama_file);
+        Excel::import(new DataPohonImport, public_path('simaster/file_datapohon/' . $nama_file));
         
         return redirect('/updating');
     }
@@ -169,8 +169,8 @@ class UpdatingController extends Controller
     {
         $file = $request->file('file_datatrafo');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_datatrafo', $nama_file);
-        Excel::import(new DataTrafoImport, public_path('/file_datatrafo/' . $nama_file));
+        $file->move(public_path('simaster/file_datatrafo/'), $nama_file);
+        Excel::import(new DataTrafoImport, public_path('simaster/file_datatrafo/' . $nama_file));
 
         return redirect('/updating');
     }
@@ -184,10 +184,10 @@ class UpdatingController extends Controller
         $file_section = $request->file('file_section');
         $nama_file_penyulang = rand() . $file_penyulang->getClientOriginalName();
         $nama_file_section = rand() . $file_section->getClientOriginalName();
-        $file_penyulang->move('file_penyulang', $nama_file_penyulang);
-        $file_section->move('file_section', $nama_file_section);
-        Excel::import(new PenyulangImport, public_path('/file_penyulang/' . $nama_file_penyulang));
-        Excel::import(new SectionImport, public_path('/file_section/' . $nama_file_section));
+        $file_penyulang->move(public_path('simaster/file_penyulang/'), $nama_file_penyulang);
+        $file_section->move(public_path('simaster/file_section/'), $nama_file_section);
+        Excel::import(new PenyulangImport, public_path('simaster/file_penyulang/' . $nama_file_penyulang));
+        Excel::import(new SectionImport, public_path('simaster/file_section/' . $nama_file_section));
 
         return redirect('/updating');
     }

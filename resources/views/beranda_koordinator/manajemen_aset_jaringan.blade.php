@@ -40,7 +40,7 @@
                                 <div class="modal fade" id="edit-aset{{ $aset->id }}" tabindex="-1"
                                     aria-labelledby="modalTambahasetLabel" aria-hidden="true">
                                     <div class="modal-dialog">
-                                        <form action="/edit_aset/{{ $aset->id }}" method="post">
+                                        <form action="/simaster/edit_aset/{{ $aset->id }}" method="post">
                                             @csrf
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -72,7 +72,7 @@
                                     role="dialog" aria-hidden="true">
                                     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                         <div class="modal-content">
-                                            <form action="/delete_aset/{{ $aset->id }}" method="post">
+                                            <form action="/simaster/delete_aset/{{ $aset->id }}" method="post">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
@@ -126,7 +126,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th class="text-center" colspan="4"><a href="/koordinator/map_aset">Total UP3 Grobogan</a></th>
+                        <th class="text-center" colspan="4"><a href="/simaster/koordinator/map_aset">Total UP3 Grobogan</a></th>
                         <th id="total_kms_jtm"></th>
                         <th id="total_kms_jtr"></th>
                         <th id="total_jumlah_trafo"></th>
@@ -208,7 +208,7 @@
                 </div> --}}
                 <div style="overflow-y: auto;">
                     <h2 class="mt-2">Laporan Kelengkapan Data Asset dan Data Pelanggan</h2>
-                    <form action="/hapusPelangganAPP" method="post">
+                    <form action="/simaster/hapusPelangganAPP" method="post">
                         @csrf
                         @method('delete')
                         <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"

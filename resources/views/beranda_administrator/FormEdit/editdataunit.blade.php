@@ -6,7 +6,7 @@
                 <h3 class="mb-0">Edit Data Unit</h3>
             </div>
             <div class="card-body p-4">
-                <form action="/updating/edit_unit/{{ $dataunit->id }}" method="post">
+                <form action="/simaster/updating/edit_unit/{{ $dataunit->id }}" method="post">
                     @csrf
                     <input type="hidden" id="id" name="id" value="{{ $dataunit->id }}">
                     <div class="mb-3">
@@ -45,7 +45,7 @@
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary btn-block" type="submit"><i
                                 class="fa-solid fa-right-to-bracket fa-lg" style="margin-right: 5px;"></i> Submit</button>
-                        <a href="/updating" class="btn btn-secondary"><i class="fa-solid fa-left-long fa-lg"
+                        <a href="/simaster/updating" class="btn btn-secondary"><i class="fa-solid fa-left-long fa-lg"
                                 style="margin-right: 5px;"></i> Kembali</a>
                     </div>
                 </form>

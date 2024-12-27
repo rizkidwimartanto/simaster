@@ -17,7 +17,7 @@
                 </div>
             @endif
         @endforeach
-        <form method="post" action="/import_excel_recloser_lbs" enctype="multipart/form-data">
+        <form method="post" action="/simaster/import_excel_recloser_lbs" enctype="multipart/form-data">
             @csrf
             <div class="form-label fs-2">Upload File Recloser & LBS</div>
             <input type="file" name="file_recloser_lbs" id="file_recloser_lbs" class="form-control" required />
@@ -25,7 +25,7 @@
                 <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-6"><i class="fa-solid fa-upload fa-lg"
                         style="margin-right: 5px"></i>Import
                     Excel</button>
-                <a href="/file_recloser_lbs/template_recloser_lbs/Data Label.xlsx"
+                <a href="/simaster/file_recloser_lbs/template_recloser_lbs/Data Label.xlsx"
                     class="btn btn-success mt-2 mb-3 col-lg-6"><i class="fa-solid fa-download fa-lg"
                         style="margin-right: 5px"></i>Template
                     Excel</a>
@@ -38,7 +38,7 @@
         <div class="modal fade" id="modalTambahKeypoint" tabindex="-1" aria-labelledby="modalTambahKeypointLabel"
             aria-hidden="true">
             <div class="modal-dialog">
-                <form action="/keypoint/proses_tambah_keypoint" method="post">
+                <form action="/simaster/keypoint/proses_tambah_keypoint" method="post">
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
@@ -154,7 +154,7 @@
                                 <td>{{ $keypoint->jenis_keypoint }}</td>
                                 <td>{{ $keypoint->nomor_tiang }}</td>
                                 <td>
-                                    <a href="/info_keypoint/{{ $keypoint->id }}">
+                                    <a href="/simaster/info_keypoint/{{ $keypoint->id }}">
                                         <i class="fa-solid text-secondary fa-circle-info fa-lg"></i>
                                     </a>
                                     <a href="#" data-bs-target="#{{ $keypoint->id }}" data-bs-toggle="modal">
@@ -163,7 +163,7 @@
                                     <div class="modal fade" id="{{ $keypoint->id }}" tabindex="-1"
                                         aria-labelledby="modalTambahKeypointLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <form action="/edit_keypoint/{{ $keypoint->id }}" method="post">
+                                            <form action="/simaster/edit_keypoint/{{ $keypoint->id }}" method="post">
                                                 @csrf
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -289,7 +289,7 @@
                                         role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                             <div class="modal-content">
-                                                <form action="/delete_keypoint/{{ $keypoint->id }}" method="post">
+                                                <form action="/simaster/delete_keypoint/{{ $keypoint->id }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"

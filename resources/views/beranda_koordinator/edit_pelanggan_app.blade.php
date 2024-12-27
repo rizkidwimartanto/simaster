@@ -6,7 +6,7 @@
                 <h3 class="mb-0">Edit Pelanggan APP</h3>
             </div>
             <div class="card-body p-4">
-                <form action="/proses_edit_pelanggan_app/{{ $datapelangganapp->id }}" method="post">
+                <form action="/simaster/proses_edit_pelanggan_app/{{ $datapelangganapp->id }}" method="post">
                     @csrf
                     <div class="mb-4">
                         <label class="form-label">ID Pelanggan</label>

@@ -137,8 +137,8 @@ class MitraController extends Controller
     {
         $file = $request->file('file_recloser_lbs');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_recloser_lbs', $nama_file);
-        Excel::import(new RecloserLBSImport, public_path('/file_recloser_lbs/' . $nama_file));
+        $file->move(public_path('simaster/file_recloser_lbs/'), $nama_file);
+        Excel::import(new RecloserLBSImport, public_path('simaster/file_recloser_lbs/' . $nama_file));
 
         return redirect('/keypoint');
     }
@@ -146,8 +146,8 @@ class MitraController extends Controller
     {
         $file = $request->file('file_risepole');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_risepole', $nama_file);
-        Excel::import(new RisePoleImport, public_path('/file_risepole/' . $nama_file));
+        $file->move(public_path('simaster/file_risepole/'), $nama_file);
+        Excel::import(new RisePoleImport, public_path('simaster/file_risepole/' . $nama_file));
 
         return redirect('/rise_pole');
     }

@@ -199,8 +199,8 @@ class InputPelangganAPPController extends Controller
     {
         $file = $request->file('file_data_gi');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_data_gi', $nama_file);
-        Excel::import(new DataGIImport, public_path('/file_data_gi/' . $nama_file));
+        $file->move(public_path('simaster/file_data_gi/'), $nama_file);
+        Excel::import(new DataGIImport, public_path('simaster/file_data_gi/' . $nama_file));
 
         return redirect('/manajemen_aset_jaringan');
     }
@@ -208,8 +208,8 @@ class InputPelangganAPPController extends Controller
     {
         $file = $request->file('file_kelengkapan_data_aset');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_kelengkapan_data_aset', $nama_file);
-        Excel::import(new DataPelangganAPPImport, public_path('/file_kelengkapan_data_aset/' . $nama_file));
+        $file->move(public_path('simaster/file_kelengkapan_data_aset/'), $nama_file);
+        Excel::import(new DataPelangganAPPImport, public_path('simaster/file_kelengkapan_data_aset/' . $nama_file));
 
         return redirect('/manajemen_aset_jaringan');
     }
