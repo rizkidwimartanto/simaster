@@ -5,7 +5,7 @@
             <div class="mt-3 mb-3 search_customer">
                 <div class="row g-2">
                     <div class="col">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Cari pelanggan..."
+                        <input type="text" class="form-control" id="searchInput" placeholder="Cari pasangan..."
                             onkeypress="handleKeyPress(event)" oninput="showSuggestions()" onclick="click_customer()">
                         <div id="suggestionList" class="dropdown">
                             <ul class="list-group"></ul>
@@ -99,13 +99,15 @@
                             <div class="mb-3 col-lg-12">
                                 <label class="form-label">Tahun Meter</label>
                                 <div class="input-group input-group-flat">
-                                    <input type="text" value="{{ $data->tahun_meter }}" class="form-control" readonly>
+                                    <input type="text" value="{{ $data->tahun_meter }}" class="form-control"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="mb-3 col-lg-12">
                                 <label class="form-label">Nomor Meter</label>
                                 <div class="input-group input-group-flat">
-                                    <input type="text" value="{{ $data->nomor_meter }}" class="form-control" readonly>
+                                    <input type="text" value="{{ $data->nomor_meter }}" class="form-control"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="mb-3 col-lg-12">
@@ -184,7 +186,7 @@
         data_pelanggan_app.forEach(pelangganapp => {
             if (pelangganapp.latitude && pelangganapp.longitude) {
                 const iconpelangganapp = L.icon({
-                    iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                    iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [10, 10],
                 });
@@ -272,7 +274,7 @@
 
             // Buat marker baru dengan ikon dan tooltip
             const iconpelanggan = L.icon({
-                iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [10, 10],
             });
