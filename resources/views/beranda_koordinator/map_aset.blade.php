@@ -212,8 +212,6 @@
         // Tambahkan grup cluster ke peta
         map.addLayer(markers);
 
-
-
         var currentMarker;
 
         function hapusPencarian() {
@@ -298,7 +296,6 @@
             });
         }
 
-        // Sembunyikan dropdown saran jika klik di luar elemen
         document.addEventListener('click', function(event) {
             const suggestionList = document.getElementById('suggestionList');
             if (event.target !== suggestionList && !suggestionList.contains(event.target)) {
@@ -348,7 +345,7 @@
         // Panggil fungsi
         checkProximityLessThan5Meters(data_pelanggan_app);
 
-        function displayNotice(message) {
+        function displayNotice(message, pelanggan1, pelanggan2) {
             const noticeContainer = document.getElementById('noticeContainer');
             if (noticeContainer) {
                 const noticeElement = document.createElement('div');
@@ -360,6 +357,21 @@
             ${message}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         `;
+
+                // Tambahkan event listener untuk klik notifikasi
+                noticeElement.addEventListener('click', () => {
+                    showMarker(pelanggan1);
+                    showMarker(pelanggan2);
+
+                    // Scroll ke map koordinator
+                    const mapKoordinator = document.getElementById('map_koordinator');
+                    if (mapKoordinator) {
+                        mapKoordinator.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                });
 
                 // Tambahkan notifikasi ke container
                 noticeContainer.appendChild(noticeElement);
@@ -377,10 +389,10 @@
                         pelanggan2.latitude, pelanggan2.longitude
                     );
 
-                    if (distance < 20) {
+                    if (distance < 10) {
                         const message =
-                            `Warning: Pelanggan ${pelanggan1.nama_pelanggan} dan ${pelanggan2.nama_pelanggan} memiliki jarak kurang dari 20 meter (${distance.toFixed(2)} m).`;
-                        displayNotice(message);
+                            `Warning: Pelanggan ${pelanggan1.nama_pelanggan} dan ${pelanggan2.nama_pelanggan} memiliki jarak kurang dari 10 meter (${distance.toFixed(2)} m).`;
+                        displayNotice(message, pelanggan1, pelanggan2);
                     }
                 }
             }

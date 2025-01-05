@@ -8,9 +8,9 @@
         </button>
         <div class="collapse navbar-collapse" style="margin-right: 40px;" id="navbarSupportedContent">
             <ul style="font-size: 13px;" class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item {{ $title == 'Peta Pelanggan' ? 'active' : '' }}">
+                {{-- <li class="nav-item {{ $title == 'Peta Pelanggan' ? 'active' : '' }}">
                     <a class="nav-link" href="/simaster/user">Peta Pelanggan</a>
-                </li>
+                </li> --}}
                 <li class="nav-item {{ $title == 'Entri Data' ? 'active' : '' }}">
                     <a class="nav-link" href="/simaster/entridata_user">Entri Data</a>
                 </li>

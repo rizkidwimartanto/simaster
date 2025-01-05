@@ -41,6 +41,7 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/user', 'user')->middleware('auth')->name('user');
     Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
     Route::get('/manajemen_aset_jaringan', 'manajemen_aset_jaringan')->middleware('auth')->name('manajemen_aset_jaringan');
+    Route::get('/kinerja_up3', 'kinerja_up3')->middleware('auth')->name('kinerja_up3');
     Route::get('/koordinator', 'koordinator')->middleware('auth')->name('koordinator');
     Route::get('/updating_koordinator', 'updating_koordinator')->middleware('auth')->name('updating_koordinator');
     Route::get('/pelanggan_demak', 'pelanggan_demak')->middleware('auth')->name('pelanggan_demak');

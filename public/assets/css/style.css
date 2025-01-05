@@ -3,7 +3,6 @@
     --bg: #08b1f0;
     --text_color: #0c356a;
 }
-
 .card-items-unit {
     background: rgb(218, 255, 238);
     background: linear-gradient(90deg,
@@ -60,10 +59,6 @@ header.navbar-expand-md {
 .display-pelanggan-app {
     position: relative;
     bottom: 53px;
-}
-
-button#getLocation {
-    font-size: 20px;
 }
 
 p.detail_pelanggan {

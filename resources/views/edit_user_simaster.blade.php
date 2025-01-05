@@ -7,7 +7,7 @@
                 <h3 class="mb-0">Edit User Simpeltas</h3>
             </div>
             <div class="card-body p-4">
-                <form action="{{ url('/proses_edit_user_simpeltas/' . $user->id) }}" method="post">
+                <form action="{{ url('/proses_edit_user_simaster/' . $user->id) }}" method="post">
                     @csrf
                     <div class="mb-4">
                         <label class="form-label">Nama</label>

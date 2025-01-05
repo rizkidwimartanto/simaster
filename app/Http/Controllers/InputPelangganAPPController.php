@@ -7,8 +7,8 @@ use App\Imports\DataGIImport;
 use App\Imports\DataPelangganAPPImport;
 use App\Imports\DataPelangganImport;
 use App\Imports\ManajemenAsetImport;
-use App\Models\DataGIModel;
-use App\Models\DataPelangganModel;
+use App\Models\DataKi;
+use App\Models\DataKinerjaModel;
 use App\Models\ManajemenAset;
 use App\Models\PelangganAPPModel;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +23,7 @@ class InputPelangganAPPController extends Controller
         $data = [
             'title' => 'Peta Pelanggan',
             // 'data_padam' => DB::table('entri_padam')->select('status', 'section')->get(),
-            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->get(),
+            'data_pelanggan_app' => PelangganAPPModel::all(),
             'auth_unit_ulp' => auth()->user()->unit_ulp,
             // 'data_unitulp' => PelangganAPPModel::pluck('unitulp')
         ];
@@ -34,7 +34,7 @@ class InputPelangganAPPController extends Controller
         $data = [
             'title' => 'Entri Data',
             'auth_unit_ulp' => auth()->user()->unit_ulp,
-            'data_pelanggan_app' => DB::table('entri_pelanggan_app')->select('id', 'id_pelanggan', 'nama_pelanggan', 'tarif_daya', 'alamat', 'latitude', 'longitude', 'jenis_meter', 'merk_meter', 'unit_ulp')->get(),
+            'data_pelanggan_app' => PelangganAPPModel::all(),
         ];
         return view('beranda_user/entridata_user', $data);
     }
@@ -44,12 +44,25 @@ class InputPelangganAPPController extends Controller
         $data = [
             'title' => 'Manajemen Aset Jaringan',
             'data_aset' => ManajemenAset::all(),
-            'data_gi' => DataGIModel::all(),
+            'data_kinerja' => DataKinerjaModel::all(),
             'data_pelanggan_app' => PelangganAPPModel::all(),
-            'total_daya_terpakai' => DataGIModel::sum('daya_terpakai')
+            'total_daya_terpakai' => DataKinerjaModel::sum('daya_terpakai')
         ];
 
         return view('beranda_koordinator/manajemen_aset_jaringan', $data);
+    }
+    public function kinerja_up3()
+    {
+        // Data untuk view
+        $data = [
+            'title' => 'Kinerja UP3',
+            'data_aset' => ManajemenAset::all(),
+            'data_kinerja' => DataKinerjaModel::all(),
+            'data_pelanggan_app' => PelangganAPPModel::all(),
+            'total_daya_terpakai' => DataKinerjaModel::sum('daya_terpakai')
+        ];
+
+        return view('beranda_koordinator/kinerja_up3', $data);
     }
     public function map_aset_pelanggan()
     {
@@ -190,17 +203,17 @@ class InputPelangganAPPController extends Controller
     {
         $file = $request->file('file_data_aset');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move('file_data_aset', $nama_file);
-        Excel::import(new ManajemenAsetImport, public_path('/file_data_aset/' . $nama_file));
+        $file->move(public_path('simaster/file_data_aset/'), $nama_file);
+        Excel::import(new ManajemenAsetImport, public_path('simaster/file_data_aset/' . $nama_file));
 
         return redirect('/manajemen_aset_jaringan');
     }
-    public function import_excel_data_gi(Request $request)
+    public function import_excel_data_kinerja(Request $request)
     {
-        $file = $request->file('file_data_gi');
+        $file = $request->file('file_data_kinerja');
         $nama_file = rand() . $file->getClientOriginalName();
-        $file->move(public_path('simaster/file_data_gi/'), $nama_file);
-        Excel::import(new DataGIImport, public_path('simaster/file_data_gi/' . $nama_file));
+        $file->move(public_path('simaster/file_data_kinerja/'), $nama_file);
+        Excel::import(new DataGIImport, public_path('simaster/file_data_kinerja/' . $nama_file));
 
         return redirect('/manajemen_aset_jaringan');
     }
