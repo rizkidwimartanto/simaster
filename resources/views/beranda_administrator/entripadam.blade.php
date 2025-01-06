@@ -11,7 +11,7 @@
         <div class="col-lg-12">
             <div class="card border border-info p-3 mt-4">
                 <h2>Form Entri Padam </h2>
-                <form action="/simaster/entripadam/insertentripadam" method="post" id="entriPadamForm">
+                <form action="/entripadam/insertentripadam" method="post" id="entriPadamForm">
                     @csrf
                     <div class="mb-3">
                         <div class="mb-3">
@@ -103,7 +103,7 @@
                     <div class="mb-3">
                         <button type="submit" class="btn btn-success col-12"><i class="fa-solid fa-plus fa-lg"
                                 style="margin-right: 5px;"></i>Entri Padam</button>
-                        <a href="/simaster/transaksiaktif" class="btn btn-info col-12 mt-3"><i class="fa-solid fa-arrow-right fa-lg"
+                        <a href="/transaksiaktif" class="btn btn-info col-12 mt-3"><i class="fa-solid fa-arrow-right fa-lg"
                                 style="margin-right: 5px;"></i>Menu Transaksi Aktif</a>
                     </div>
                 </form>

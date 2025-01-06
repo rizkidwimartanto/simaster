@@ -27,7 +27,7 @@
                         <div class="card card-md">
                             <div class="card-body">
                                 <h2 class="h2 text-center mb-4">Login to your account</h2>
-                                <form action="/simaster/proseslogin" method="post" autocomplete="off" novalidate>
+                                <form action="/proseslogin" method="post" autocomplete="off" novalidate>
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Username</label>
@@ -60,12 +60,12 @@
                             </div>
                         </div>
                         <div class="text-center text-muted mt-3">
-                            Don't have account yet? <a href="/simaster/register_user" tabindex="-1">Sign up</a>
+                            Don't have account yet? <a href="/register_user" tabindex="-1">Sign up</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg d-none d-lg-block">
-                    <img src="public/assets_template/static/illustrations/undraw_secure_login_pdn4.svg" height="300"
+                    <img src="assets_template/static/illustrations/undraw_secure_login_pdn4.svg" height="300"
                         class="d-block mx-auto" alt="">
                 </div>
             </div>

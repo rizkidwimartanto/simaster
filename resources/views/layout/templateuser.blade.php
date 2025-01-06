@@ -14,12 +14,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{$title}}</title>
     <!-- CSS files -->
-    <link rel="shortcut icon" href="public/assets/img/Logo_PLN.png" type="image/x-icon">
-    <link href="public/assets_template/dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
-    <link href="public/assets_template/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
-    <link href="public/assets_template/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
-    <link href="public/assets_template/dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
-    <link href="public/assets_template/dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <link rel="shortcut icon" href="assets/img/Logo_PLN.png" type="image/x-icon">
+    <link href="assets_template/dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="assets_template/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="assets_template/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="assets_template/dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="assets_template/dist/css/demo.min.css?1684106062" rel="stylesheet"/>
     <style>
       @import url('https://rsms.me/inter/inter.css');
       :root {
@@ -34,7 +34,7 @@
     @yield('content')
     <!-- Libs JS -->
     <!-- Tabler Core -->
-    <script src="public/assets_template/dist/js/tabler.min.js?1684106062" defer></script>
-    <script src="public/assets_template/dist/js/demo.min.js?1684106062" defer></script>
+    <script src="assets_template/dist/js/tabler.min.js?1684106062" defer></script>
+    <script src="assets_template/dist/js/demo.min.js?1684106062" defer></script>
   </body>
 </html>

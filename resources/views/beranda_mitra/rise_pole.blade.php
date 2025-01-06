@@ -36,7 +36,7 @@
                                 <td>{{ $keypoint->penyulang }}</td>
                                 <td>{{ $keypoint->absw }}</td>
                                 <td>
-                                    <a href="/simaster/info_keypoint/{{ $keypoint->id }}">
+                                    <a href="/info_keypoint/{{ $keypoint->id }}">
                                         <i class="fa-solid text-secondary fa-circle-info fa-lg"></i>
                                     </a>
                                     <a href="#" data-bs-target="#{{ $keypoint->id }}" data-bs-toggle="modal">
@@ -45,7 +45,7 @@
                                     <div class="modal fade" id="{{ $keypoint->id }}" tabindex="-1"
                                         aria-labelledby="modalTambahKeypointLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <form action="/simaster/edit_keypoint/{{ $keypoint->id }}" method="post">
+                                            <form action="/edit_keypoint/{{ $keypoint->id }}" method="post">
                                                 @csrf
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -170,7 +170,7 @@
                                         role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                             <div class="modal-content">
-                                                <form action="/simaster/delete_keypoint/{{ $keypoint->id }}" method="post">
+                                                <form action="/delete_keypoint/{{ $keypoint->id }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"

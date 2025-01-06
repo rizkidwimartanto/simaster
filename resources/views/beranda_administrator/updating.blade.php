@@ -31,7 +31,7 @@
                     <div id="collapsePenyulangSection" class="accordion-collapse collapse show"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/simaster/updating/import_excel_penyulangsection"
+                            <form method="post" action="/updating/import_excel_penyulangsection"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Penyulang</div>
@@ -65,7 +65,7 @@
                     </h2>
                     <div id="collapsePelanggan" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/simaster/updating/import_excel" enctype="multipart/form-data">
+                            <form method="post" action="/updating/import_excel" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-label fs-2">Upload File Pelanggan</div>
                                 <input type="file" name="file" class="form-control" required />
@@ -73,7 +73,7 @@
                                     <button type="submit" class="btn btn-primary mt-1 mb-3 col-lg-4"><i
                                             class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import Excel
                                     </button>
-                                    <a href="/simaster/updating/export_excel_pelanggan" class="btn btn-warning mt-1 mb-3 col-lg-4"><i
+                                    <a href="/updating/export_excel_pelanggan" class="btn btn-warning mt-1 mb-3 col-lg-4"><i
                                             class="fa-solid fa-file-export fa-lg" style="margin-right: 5px"></i>Export
                                         Excel
                                     </a>
@@ -82,7 +82,7 @@
                                             style="margin-right: 5px"></i>Template Excel</a>
                                 </div>
                             </form>
-                            <form action="/simaster/updating/hapus_pelanggan" method="post">
+                            <form action="/updating/hapus_pelanggan" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -174,7 +174,7 @@
                                                             <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                                         </a>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/simaster/updating/editpelanggan/{{ $s->id }}">
+                                                            href="/updating/editpelanggan/{{ $s->id }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                         {{-- </form> --}}
@@ -384,7 +384,7 @@
                     </h2>
                     <div id="collapseTrafo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/simaster/updating/import_excel_trafo" enctype="multipart/form-data">
+                            <form method="post" action="/updating/import_excel_trafo" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-label fs-2">Upload File Trafo</div>
                                 <input type="file" name="file" class="form-control" required />
@@ -398,7 +398,7 @@
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/simaster/updating/hapus_trafo" method="post">
+                            <form action="/updating/hapus_trafo" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mt-2 mb-2 button-delete-trafo"
@@ -488,7 +488,7 @@
                                                             <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                                         </a>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/simaster/updating/edittrafo/{{ $s->id }}">
+                                                            href="/updating/edittrafo/{{ $s->id }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                         {{-- </form> --}}
@@ -628,7 +628,7 @@
                             <div class="modal fade" id="modalTambahDataUnit" tabindex="-1"
                                 aria-labelledby="modalTambahDataUnitLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="/simaster/updating/proses_tambah_dataunit" method="post">
+                                    <form action="/updating/proses_tambah_dataunit" method="post">
                                         @csrf
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -682,7 +682,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <form action="/simaster/updating/hapus_dataunit" method="post">
+                            <form action="/updating/hapus_dataunit" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -770,7 +770,7 @@
                                                     <td>{{ $unit->no_tlteknik }}</td>
                                                     <td>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/simaster/updating/editdataunit/{{ $unit->id }}">
+                                                            href="/updating/editdataunit/{{ $unit->id }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                     </td>
@@ -804,7 +804,7 @@
                             <div class="modal fade" id="modalTambahWANotif" tabindex="-1"
                                 aria-labelledby="modalTambahWANotifLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="/simaster/updating/proses_tambah_wanotif" method="post">
+                                    <form action="/updating/proses_tambah_wanotif" method="post">
                                         @csrf
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -850,7 +850,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <form action="/simaster/updating/hapus_wanotif" method="post">
+                            <form action="/updating/hapus_wanotif" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -936,7 +936,7 @@
                                                     <td>{{ $wanotif->idunit }}</td>
                                                     <td>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/simaster/updating/editwanotif/{{ $wanotif->id }}">
+                                                            href="/updating/editwanotif/{{ $wanotif->id }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                     </td>
@@ -962,7 +962,7 @@
                     <div id="collapseDataZone" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/simaster/updating/import_excel_datazone" enctype="multipart/form-data">
+                            <form method="post" action="/updating/import_excel_datazone" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Data Zone</div>
                                 <input type="file" name="file_datazone" id="file_datazone" class="form-control"
@@ -971,13 +971,13 @@
                                     <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-6"><i
                                             class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import
                                         Excel</button>
-                                    <a href="/simaster/file_datazone/template_datazone/data_zone_non_reclose_PWI_edit.xlsx"
+                                    <a href="/file_datazone/template_datazone/data_zone_non_reclose_PWI_edit.xlsx"
                                         class="btn btn-success mt-2 mb-3 col-lg-6"><i class="fa-solid fa-download fa-lg"
                                             style="margin-right: 5px"></i>Template
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/simaster/updating/hapus_datazone" method="post">
+                            <form action="/updating/hapus_datazone" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -1070,7 +1070,7 @@
                                                             target="_blank">{{ $zone->google_maps }}</a></td>
                                                     <td>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/simaster/updating/editdatazone/{{ $zone->id }}">
+                                                            href="/updating/editdatazone/{{ $zone->id }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                     </td>
@@ -1096,7 +1096,7 @@
                     <div id="collapseDataPohon" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form action="/simaster/updating/import_excel_datapohon" enctype="multipart/form-data" method="POST">
+                            <form action="/updating/import_excel_datapohon" enctype="multipart/form-data" method="POST">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Data Pohon</div>
                                 <input type="file" name="file_datapohon" id="file_datapohon" class="form-control"
@@ -1105,13 +1105,13 @@
                                     <button type="submit" id="btn-upload" class="btn btn-primary mt-2 mb-3 col-lg-6">
                                         <i class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import Excel
                                     </button>
-                                    <a href="/simaster/file_datapohon/template_datapohon/data_peta_pohon.xlsx"
+                                    <a href="/file_datapohon/template_datapohon/data_peta_pohon.xlsx"
                                         class="btn btn-success mt-2 mb-3 col-lg-6">
                                         <i class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Template Excel
                                     </a>
                                 </div>
                             </form>
-                            <form action="/simaster/updating/hapus_datapohon" method="post">
+                            <form action="/updating/hapus_datapohon" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -1196,7 +1196,7 @@
                                                     <td>{{ $pohon->rayon }}</td>
                                                     <td>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/simaster/updating/editdatapohon/{{ $pohon->id }}">
+                                                            href="/updating/editdatapohon/{{ $pohon->id }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                     </td>
@@ -1222,7 +1222,7 @@
                     <div id="trafo25kVa50kVa" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/simaster/updating/import_excel_datatrafo" enctype="multipart/form-data">
+                            <form method="post" action="/updating/import_excel_datatrafo" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Data Trafo</div>
                                 <input type="file" name="file_datatrafo" id="file_datatrafo" class="form-control"
@@ -1231,13 +1231,13 @@
                                     <button type="submit" class="btn btn-primary mt-2 mb-3 col-lg-6"><i
                                             class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import
                                         Excel</button>
-                                    <a href="/simaster/file_datapohon/template_datazone/data_zone_non_reclose_PWI_edit.xlsx"
+                                    <a href="/file_datapohon/template_datazone/data_zone_non_reclose_PWI_edit.xlsx"
                                         class="btn btn-success mt-2 mb-3 col-lg-6"><i class="fa-solid fa-download fa-lg"
                                             style="margin-right: 5px"></i>Template
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/simaster/updating/hapus_datapohon" method="post">
+                            <form action="/updating/hapus_datapohon" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"

@@ -4,7 +4,7 @@
         <div class="col-lg-12 mt-2">
             <div class="card border border-info p-3">
                 <h2>Data Jaringan Padam Saat Ini</h2>
-                <form action="/simaster/transaksipadam/edit_status_padam" method="post">
+                <form action="/transaksipadam/edit_status_padam" method="post">
                     @csrf
                     <input type="hidden" value="Menyala" name="status" id="status">
                     <input type="hidden" value="Sedang Mengirim" name="status_wa" id="status_wa">

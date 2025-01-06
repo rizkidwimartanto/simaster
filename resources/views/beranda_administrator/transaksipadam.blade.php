@@ -15,7 +15,7 @@
         @endif
         <div class="card border border-info p-3 mb-3">
             <h2>Jumlah Kali Padam</h2>
-            <a href="/simaster/transaksipadam/export_kali_padam" class="btn btn-warning mb-3 col-lg-2"><i
+            <a href="/transaksipadam/export_kali_padam" class="btn btn-warning mb-3 col-lg-2"><i
                     class="fa-solid fa-download fa-lg" style="margin-right: 5px"></i>Export Excel</a>
             <div style="overflow-y: auto;">
                 <table class="table-bordered table-hover table-warning display" id="tabel_rekap_pelanggan">

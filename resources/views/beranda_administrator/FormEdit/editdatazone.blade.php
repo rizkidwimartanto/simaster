@@ -6,7 +6,7 @@
                 <h3 class="mb-0">Edit Data Zone</h3>
             </div>
             <div class="card-body p-4">
-                <form action="/simaster/updating/edit_datazone/{{ $datazone->id }}" method="post">
+                <form action="/updating/edit_datazone/{{ $datazone->id }}" method="post">
                     @csrf
                     <input type="hidden" id="id" name="id" value="{{ $datazone->id }}">
                     <div class="mb-3">
@@ -47,7 +47,7 @@
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary btn-block" type="submit"><i
                                 class="fa-solid fa-right-to-bracket fa-lg" style="margin-right: 5px;"></i> Submit</button>
-                        <a href="/simaster/updating" class="btn btn-secondary"><i class="fa-solid fa-left-long fa-lg"
+                        <a href="/updating" class="btn btn-secondary"><i class="fa-solid fa-left-long fa-lg"
                                 style="margin-right: 5px;"></i> Kembali</a>
                     </div>
                 </form>

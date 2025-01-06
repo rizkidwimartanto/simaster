@@ -75,7 +75,7 @@
                 </div> --}}
                 <div style="overflow-y: auto;">
                     <h2 class="mt-2">Laporan Kelengkapan Data Asset dan Data Pelanggan</h2>
-                    <form action="/simaster/hapusPelangganAPP" method="post">
+                    <form action="/hapusPelangganAPP" method="post">
                         @csrf
                         @method('delete')
                         <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"

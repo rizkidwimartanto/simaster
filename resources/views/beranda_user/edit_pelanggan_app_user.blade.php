@@ -19,7 +19,7 @@
                 <h3 class="mb-0">Entri Pelanggan APP</h3>
             </div>
             <div class="card-body p-4">
-                <form action="/simaster/proses_edit_pelanggan_app_user/{{ $pelanggan->id }}" method="post">
+                <form action="/proses_edit_pelanggan_app_user/{{ $pelanggan->id }}" method="post">
                     @csrf
                     <div class="col-md-6">
                         {{-- <label class="form-label">Latitude</label> --}}
