@@ -186,7 +186,7 @@
         data_pelanggan_app.forEach(pelangganapp => {
             if (pelangganapp.latitude && pelangganapp.longitude) {
                 const iconpelangganapp = L.icon({
-                    iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
+                    iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [10, 10],
                 });
@@ -272,7 +272,7 @@
 
             // Buat marker baru dengan ikon dan tooltip
             const iconpelanggan = L.icon({
-                iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
+                iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [10, 10],
             });

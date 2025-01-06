@@ -122,7 +122,7 @@
 
         datatrafo.forEach(trafo => {
             const icontrafo = L.icon({
-                iconUrl: '{{ asset('public/assets/img/tree.png') }}',
+                iconUrl: '{{ asset('assets/img/tree.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             });
