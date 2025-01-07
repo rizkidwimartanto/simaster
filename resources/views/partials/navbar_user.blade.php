@@ -12,7 +12,7 @@
                     <a class="nav-link" href="/user">Peta Pelanggan</a>
                 </li> --}}
                 <li class="nav-item {{ $title == 'Entri Data' ? 'active' : '' }}">
-                    <a class="nav-link" href="/entridata_user">Entri Data</a>
+                    <a class="nav-link" href="/entri_usulan_rkap">Entri Data</a>
                 </li>
             </ul>
             <div class="btn-group">

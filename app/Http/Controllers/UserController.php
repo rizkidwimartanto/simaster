@@ -49,7 +49,7 @@ class UserController extends Controller
             $user = Auth::user();
             $request->session()->put('role', $user->role);
             if($user->role == 'user'){
-                return redirect()->intended('entridata_user');
+                return redirect()->intended('entri_usulan_rkap');
             }else if($user->role == 'koordinator'){
                 return redirect()->intended('koordinator');
             }else if($user->role == 'mitra'){

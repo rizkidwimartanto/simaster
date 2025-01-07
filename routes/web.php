@@ -4,7 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\EntriPadamController;
-use App\Http\Controllers\InputPelangganAPPController;
+use App\Http\Controllers\KoordinatorController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\UpdatingController;
 use App\Http\Controllers\UserController;
@@ -37,12 +37,13 @@ Route::controller(UserController::class)->group(function () {
     Route::get('/logout', 'logout')->name('authenticate');
     Route::get('/verify-email/{token}', [UserController::class, 'verifyEmail'])->name('verify.email');
 });
-Route::controller(InputPelangganAPPController::class)->group(function () {
+Route::controller(KoordinatorController::class)->group(function () {
     Route::get('/user', 'user')->middleware('auth')->name('user');
-    Route::get('/entridata_user', 'entridata_user')->middleware('auth')->name('entridata_user');
+    Route::get('/entri_usulan_rkap', 'entri_usulan_rkap')->middleware('auth')->name('entri_usulan_rkap');
     Route::get('/manajemen_aset_jaringan', 'manajemen_aset_jaringan')->middleware('auth')->name('manajemen_aset_jaringan');
     Route::get('/kinerja_up3', 'kinerja_up3')->middleware('auth')->name('kinerja_up3');
     Route::get('/koordinator', 'koordinator')->middleware('auth')->name('koordinator');
+    Route::get('/manajemen_usulan_rkap', 'manajemen_usulan_rkap')->middleware('auth')->name('manajemen_usulan_rkap');
     Route::get('/updating_koordinator', 'updating_koordinator')->middleware('auth')->name('updating_koordinator');
     Route::get('/pelanggan_demak', 'pelanggan_demak')->middleware('auth')->name('pelanggan_demak');
     Route::get('/pelanggan_tegowanu', 'pelanggan_tegowanu')->middleware('auth')->name('pelanggan_tegowanu');
@@ -53,11 +54,11 @@ Route::controller(InputPelangganAPPController::class)->group(function () {
     Route::get('/edit_pelanggan_app_user/{id_pelanggan}', 'edit_pelanggan_app_user')->middleware('auth')->name('edit_pelanggan_app_user');
     Route::post('/proses_edit_pelanggan_app/{id}', 'proses_edit_pelanggan_app');
     Route::post('/proses_edit_pelanggan_app_user/{id}', 'proses_edit_pelanggan_app_user');
-    Route::post('/input_pelanggan_app', 'proses_input_pelangganapp');
+    Route::post('/input_usulan_rkap', 'input_usulan_rkap');
     Route::post('/koordinator/import_excel_purwodadi', 'import_excel_purwodadi');
     Route::post('/koordinator/import_excel_wirosari', 'import_excel_wirosari');
     Route::post('/koordinator/import_excel_data_aset', 'import_excel_data_aset');
-    Route::post('/koordinator/import_excel_data_gi', 'import_excel_data_gi');
+    Route::post('/koordinator/import_excel_data_kinerja', 'import_excel_data_kinerja');
     Route::post('/koordinator/import_excel_kelengkapan_data_aset', 'import_excel_kelengkapan_data_aset');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');

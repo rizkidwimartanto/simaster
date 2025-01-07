@@ -8,19 +8,19 @@
         </button>
         <div class="collapse navbar-collapse" style="margin-right: 40px;" id="navbarSupportedContent">
             <ul style="font-size: 13px;" class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item {{ $title == 'Manajemen Aset Jaringan' ? 'active' : '' }}">
-                    <a class="nav-link" href="/manajemen_aset_jaringan">Manajemen Aset Jaringan</a>
-                </li>
                 <li
                     class="nav-item {{ in_array($title, ['Manajemen Usulan RKAP', 'Kinerja UP3']) ? 'active' : '' }} dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        REN
+                        Perencanaan
                     </a>
                     <ul class="dropdown-menu" style="font-size: 13px;">
-                        <li><a class="dropdown-item" href="/manajemen_aset_jaringan">Manajemen Usulan RKAP</a></li>
+                        <li><a class="dropdown-item" href="/manajemen_usulan_rkap">Manajemen Usulan RKAP</a></li>
                         <li><a class="dropdown-item" href="/kinerja_up3">Kinerja UP3</a></li>
                     </ul>
+                </li>
+                <li class="nav-item {{ $title == 'Manajemen Aset & Pelanggan' ? 'active' : '' }}">
+                    <a class="nav-link" href="/manajemen_aset_jaringan">Manajemen Aset & Pelanggan</a>
                 </li>
                 <li class="nav-item {{ $title == 'Map Aset Pelanggan' ? 'active' : '' }}">
                     <a class="nav-link" href="/koordinator/map_aset_pelanggan">Map Aset Pelanggan</a>

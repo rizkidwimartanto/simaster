@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\APPExport;
 use App\Imports\DataGIImport;
+use App\Imports\DataKinerjaImport;
 use App\Imports\DataPelangganAPPImport;
 use App\Imports\DataPelangganImport;
 use App\Imports\ManajemenAsetImport;
@@ -11,12 +12,13 @@ use App\Models\DataKi;
 use App\Models\DataKinerjaModel;
 use App\Models\ManajemenAset;
 use App\Models\PelangganAPPModel;
+use App\Models\UsulanRKAPModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-class InputPelangganAPPController extends Controller
+class KoordinatorController extends Controller
 {
     public function user()
     {
@@ -29,20 +31,20 @@ class InputPelangganAPPController extends Controller
         ];
         return view('beranda_user/index', $data);
     }
-    public function entridata_user()
+    public function entri_usulan_rkap()
     {
         $data = [
-            'title' => 'Entri Data',
+            'title' => 'Entri Usulan RKAP',
             'auth_unit_ulp' => auth()->user()->unit_ulp,
             'data_pelanggan_app' => PelangganAPPModel::all(),
         ];
-        return view('beranda_user/entridata_user', $data);
+        return view('beranda_user/entri_usulan_rkap', $data);
     }
     public function manajemen_aset_jaringan()
     {
         // Data untuk view
         $data = [
-            'title' => 'Manajemen Aset Jaringan',
+            'title' => 'Manajemen Aset & Pelanggan',
             'data_aset' => ManajemenAset::all(),
             'data_kinerja' => DataKinerjaModel::all(),
             'data_pelanggan_app' => PelangganAPPModel::all(),
@@ -73,7 +75,14 @@ class InputPelangganAPPController extends Controller
         ];
         return view('beranda_koordinator.map_aset', $data);
     }
-
+    public function manajemen_usulan_rkap()
+    {
+        $data = [
+            'title' => 'Manajemen Usulan RKAP',
+            'data_usulan_rkap' => UsulanRKAPModel::all()
+        ];
+        return view('beranda_koordinator/manajemen_usulan_rkap', $data);
+    }
     public function updating_koordinator()
     {
         $data = [
@@ -81,54 +90,37 @@ class InputPelangganAPPController extends Controller
         ];
         return view('beranda_koordinator/updating_koordinator', $data);
     }
-    public function proses_input_pelangganapp(Request $request)
+    public function input_usulan_rkap(Request $request)
     {
         $message = ['required' => ':attribute harus diisi'];
         $validateData = $request->validate([
-            // 'id_pelanggan' => 'required',
-            // 'nama_pelanggan' => 'required',
-            // 'tarif_daya' => 'required',
-            // 'alamat' => 'required',
+            'nama_petugas' => 'required',
+            'nomor_hp' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000', // Validasi file foto
             'latitude' => 'required',
             'longitude' => 'required',
-            'jenis_meter' => 'required',
-            'merk_meter' => 'required',
-            'tahun_meter' => 'required',
-            'nomor_meter' => 'required',
-            'merk_mcb' => 'required',
-            'ukuran_mcb' => 'required',
-            'no_segel' => 'required',
-            'no_gardu' => 'required',
-            'sr_deret' => 'required',
-            'unit_ulp' => 'required',
+            'keterangan' => 'required',
         ], $message);
 
         if ($validateData) {
-            PelangganAPPModel::create([
-                'id_pelanggan' => $request->input('id_pelanggan'),
-                'nama_pelanggan' => $request->input('nama_pelanggan'),
-                'tarif_daya' => $request->input('tarif_daya'),
-                'alamat' => $request->input('alamat'),
+            // Simpan file foto ke dalam folder storage
+            $fotoPath = $request->file('foto')->store('foto', 'public');
+
+            // Simpan data ke database
+            UsulanRKAPModel::create([
+                'nama_petugas' => $request->input('nama_petugas'),
+                'nomor_hp' => $request->input('nomor_hp'),
+                'foto' => $fotoPath, // Simpan path foto
                 'latitude' => $request->input('latitude'),
                 'longitude' => $request->input('longitude'),
-                'jenis_meter' => $request->input('jenis_meter'),
-                'merk_meter' => $request->input('merk_meter'),
-                'tahun_meter' => $request->input('tahun_meter'),
-                'nomor_meter' => $request->input('nomor_meter'),
-                'merk_mcb' => $request->input('merk_mcb'),
-                'ukuran_mcb' => $request->input('ukuran_mcb'),
-                'no_segel' => $request->input('no_segel'),
-                'no_gardu' => $request->input('no_gardu'),
-                'sr_deret' => $request->input('sr_deret'),
-                'catatan' => $request->input('catatan'),
-                'unit_ulp' => $request->input('unit_ulp'),
+                'keterangan' => $request->input('keterangan'),
             ]);
 
-            Session::flash('success_tambah_APP', 'APP berhasil ditambahkan');
-            return redirect('/user');
+            Session::flash('success_tambah_usulan_rkap', 'Data berhasil ditambahkan');
+            return redirect('/entri_usulan_rkap');
         } else {
-            Session::flash('error_tambah_APP', 'APP gagal ditambahkan');
-            return redirect('/entridata_user');
+            Session::flash('error_tambah_usulan_rkap', 'Data gagal ditambahkan');
+            return redirect('/entri_usulan_rkap');
         }
     }
     public function koordinator()
@@ -213,9 +205,9 @@ class InputPelangganAPPController extends Controller
         $file = $request->file('file_data_kinerja');
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move(public_path('simaster/file_data_kinerja/'), $nama_file);
-        Excel::import(new DataGIImport, public_path('simaster/file_data_kinerja/' . $nama_file));
+        Excel::import(new DataKinerjaImport, public_path('simaster/file_data_kinerja/' . $nama_file));
 
-        return redirect('/manajemen_aset_jaringan');
+        return redirect('/kinerja_up3');
     }
     public function import_excel_kelengkapan_data_aset(Request $request)
     {

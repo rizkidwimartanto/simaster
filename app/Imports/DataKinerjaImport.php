@@ -3,13 +3,14 @@
 namespace App\Imports;
 
 use App\Models\DataGIModel;
+use App\Models\DataKinerjaModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithMultipleSheets;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas; // Untuk menangani rumus Excel
 
-class DataGIImport implements ToModel, WithStartRow, WithMultipleSheets, WithCalculatedFormulas
+class DataKinerjaImport implements ToModel, WithStartRow, WithMultipleSheets, WithCalculatedFormulas
 {
     use Importable;
 
@@ -43,7 +44,7 @@ class DataGIImport implements ToModel, WithStartRow, WithMultipleSheets, WithCal
             ? ($dayaTerpakai / $dayaTerpasang) * 100
             : null;
 
-        return new DataGIModel([
+        return new DataKinerjaModel([
             'gi' => $row[10] ?? null,
             'daya_terpasang' => $dayaTerpasang,
             'daya_terpakai' => $dayaTerpakai,
