@@ -5,12 +5,12 @@
             <div class="card-header bg-info text-white text-center rounded-top">
                 <h3 class="mb-0 text-capitalize">{{ auth()->user()->unit_ulp }}</h3>
             </div>
-            @error('latitude')
+            {{-- @error('latitude')
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Anda belum klik lokasi saat ini</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-            @enderror
+            @enderror --}}
             <div class="card-body p-4">
                 <form action="/input_usulan_rkap" method="post" enctype="multipart/form-data">
                     @csrf
@@ -57,31 +57,24 @@
                     </div>
                     <div class="mb-4">
                         <label class="form-label">Keterangan</label>
-                        <textarea required class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" id="keterangan"
+                        <textarea class="form-control @error('keterangan') is-invalid @enderror" name="keterangan" id="keterangan"
                             cols="30" rows="3">{{ old('keterangan') }}</textarea>
-                        @error('keterangan')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <div class="mb-4">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="input-group input-group-flat">
-                                    <input required class="form-control" name="latitude" id="latitude" type="hidden"
-                                        readonly>
+                                    <input class="form-control" name="latitude" id="latitude" type="hidden" readonly>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group input-group-flat">
-                                    <input required class="form-control" name="longitude" id="longitude" type="hidden"
-                                        readonly>
+                                    <input class="form-control" name="longitude" id="longitude" type="hidden" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-4">
+                    <div class="">
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-primary mb-4" style="height: 40px">Save changes</button>
                         </div>
@@ -120,5 +113,25 @@
                     break;
             }
         }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (Session::has('success_tambah_usulan_rkap'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ Session::get('success_tambah_usulan_rkap') }}',
+                confirmButtonText: 'OK'
+            });
+        @endif
+        @if ($errors->any())
+            let errorMessages = 'Data belum terisi atau lokasi belum diklik';
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                html: errorMessages,
+                confirmButtonText: 'OK'
+            });
+        @endif
     </script>
 @endsection

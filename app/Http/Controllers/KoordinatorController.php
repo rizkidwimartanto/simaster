@@ -99,7 +99,6 @@ class KoordinatorController extends Controller
             'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:8000', // Validasi file foto
             'latitude' => 'required',
             'longitude' => 'required',
-            'keterangan' => 'required',
         ], $message);
 
         if ($validateData) {

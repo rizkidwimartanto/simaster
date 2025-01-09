@@ -2,22 +2,6 @@
 @extends('layout/templateberanda')
 @section('content')
     <div class="container-fluid mt-3">
-        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif', 'success_hapus_datazone', 'success_edit_pelanggan', 'success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif', 'success_edit_datazone', 'success_import_data_pohon', 'success_import_keypoint', 'success_edit_datapohon', 'success_edit_datatrafo2'] as $msg)
-            @if (session($msg))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <h3>{{ session($msg) }}</h3>
-                </div>
-            @endif
-        @endforeach
-        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif', 'error_hapus_datazone', 'error_edit_pelanggan', 'error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif', 'error_import_data_pohon', 'error_import_keypoint'] as $msg)
-            @if (session($msg))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    <h3>{{ session($msg) }}</h3>
-                </div>
-            @endif
-        @endforeach
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="card border border-warning">
                 <div class="accordion-item">
@@ -1422,5 +1406,33 @@
                 });
             });
         });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @foreach (['success_import_pelanggan', 'success_import_penyulang', 'success_import_section', 'success_import_trafo', 'success_tambah_dataunit', 'success_tambah_wanotif', 'success_hapus_pelanggan', 'success_hapus_trafo', 'success_hapus_unit', 'success_hapus_wanotif', 'success_hapus_datazone', 'success_edit_pelanggan', 'success_edit_trafo', 'success_edit_unit', 'success_edit_wanotif', 'success_edit_datazone', 'success_import_data_pohon', 'success_import_keypoint', 'success_edit_datapohon', 'success_edit_datatrafo2', 'success_import_data_trafo2'] as $msg)
+            @if (session($msg))
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: '{{ session($msg) }}',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            @endif
+        @endforeach
+
+        @foreach (['error_import_pelanggan', 'error_import_penyulang', 'error_import_section', 'error_import_trafo', 'error_tambah_dataunit', 'error_tambah_wanotif', 'error_hapus_pelanggan', 'error_hapus_trafo', 'error_hapus_unit', 'error_hapus_wanotif', 'error_hapus_datazone', 'error_edit_pelanggan', 'error_edit_trafo', 'error_edit_unit', 'error_edit_wanotif', 'error_import_data_pohon', 'error_import_keypoint'] as $msg)
+            @if (session($msg))
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: '{{ session($msg) }}',
+                    timer: 3000,
+                    timerProgressBar: true,
+                    showConfirmButton: false
+                });
+            @endif
+        @endforeach
     </script>
 @endsection
