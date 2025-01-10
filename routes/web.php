@@ -44,6 +44,7 @@ Route::controller(KoordinatorController::class)->group(function () {
     Route::get('/kinerja_up3', 'kinerja_up3')->middleware('auth')->name('kinerja_up3');
     Route::get('/koordinator', 'koordinator')->middleware('auth')->name('koordinator');
     Route::get('/manajemen_usulan_rkap', 'manajemen_usulan_rkap')->middleware('auth')->name('manajemen_usulan_rkap');
+    Route::get('/manajemen_pelanggan_potensial', 'manajemen_pelanggan_potensial')->middleware('auth')->name('manajemen_pelanggan_potensial');
     Route::get('/updating_koordinator', 'updating_koordinator')->middleware('auth')->name('updating_koordinator');
     Route::get('/pelanggan_demak', 'pelanggan_demak')->middleware('auth')->name('pelanggan_demak');
     Route::get('/pelanggan_tegowanu', 'pelanggan_tegowanu')->middleware('auth')->name('pelanggan_tegowanu');
@@ -60,6 +61,7 @@ Route::controller(KoordinatorController::class)->group(function () {
     Route::post('/koordinator/import_excel_data_aset', 'import_excel_data_aset');
     Route::post('/koordinator/import_excel_data_kinerja', 'import_excel_data_kinerja');
     Route::post('/koordinator/import_excel_kelengkapan_data_aset', 'import_excel_kelengkapan_data_aset');
+    Route::post('/koordinator/import_excel_pelanggan_potensial', 'import_excel_pelanggan_potensial');
     Route::get('/export_excel_app', 'export_excel_app');
     Route::delete('/hapusPelangganAPP', 'hapusPelangganAPP');
     Route::get('/get-pelanggan/{nama_pelanggan}', 'getPelangganData');

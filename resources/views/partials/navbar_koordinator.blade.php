@@ -22,6 +22,9 @@
                 <li class="nav-item {{ $title == 'Manajemen Aset & Pelanggan' ? 'active' : '' }}">
                     <a class="nav-link" href="/manajemen_aset_jaringan">Manajemen Aset & Pelanggan</a>
                 </li>
+                <li class="nav-item {{ $title == 'Manajemen Pelanggan Potensial' ? 'active' : '' }}">
+                    <a class="nav-link" href="/manajemen_pelanggan_potensial">Manajemen Pelanggan Potensial</a>
+                </li>
                 <li class="nav-item {{ $title == 'Map Aset Pelanggan' ? 'active' : '' }}">
                     <a class="nav-link" href="/koordinator/map_aset_pelanggan">Map Aset Pelanggan</a>
                 </li>

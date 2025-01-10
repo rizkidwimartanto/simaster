@@ -8,10 +8,12 @@ use App\Imports\DataKinerjaImport;
 use App\Imports\DataPelangganAPPImport;
 use App\Imports\DataPelangganImport;
 use App\Imports\ManajemenAsetImport;
+use App\Imports\PelangganPotensialImport;
 use App\Models\DataKi;
 use App\Models\DataKinerjaModel;
 use App\Models\ManajemenAset;
 use App\Models\PelangganAPPModel;
+use App\Models\PelangganPotensialModel;
 use App\Models\UsulanRKAPModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -82,6 +84,15 @@ class KoordinatorController extends Controller
             'data_usulan_rkap' => UsulanRKAPModel::all()
         ];
         return view('beranda_koordinator/manajemen_usulan_rkap', $data);
+    }
+    public function manajemen_pelanggan_potensial()
+    {
+        $data = [
+            'title' => 'Manajemen Pelanggan Potensial',
+            'data_pelanggan_potensial' => PelangganPotensialModel::all()
+        ];
+        
+        return view('beranda_koordinator/manajemen_pelanggan_potensial', $data);
     }
     public function updating_koordinator()
     {
@@ -216,6 +227,15 @@ class KoordinatorController extends Controller
         Excel::import(new DataPelangganAPPImport, public_path('simaster/file_kelengkapan_data_aset/' . $nama_file));
 
         return redirect('/manajemen_aset_jaringan');
+    }
+    public function import_excel_pelanggan_potensial(Request $request)
+    {
+        $file = $request->file('file_pelanggan_potensial');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move(public_path('simaster/file_pelanggan_potensial/'), $nama_file);
+        Excel::import(new PelangganPotensialImport, public_path('simaster/file_pelanggan_potensial/' . $nama_file));
+
+        return redirect('/manajemen_pelanggan_potensial');
     }
     public function export_excel_app(Request $request)
     {

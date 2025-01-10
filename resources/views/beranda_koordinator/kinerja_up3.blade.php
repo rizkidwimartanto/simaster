@@ -1,6 +1,6 @@
 @extends('layout/templateberanda_koordinator')
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid mt-2">
         <div class="row mb-3 mt-1">
             <div class="col-md-6">
                 <label for="bulanAset">Pilih Bulan:</label>
