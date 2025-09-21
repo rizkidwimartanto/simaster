@@ -27,7 +27,7 @@
                         <div class="card card-md">
                             <div class="card-body">
                                 <h2 class="h2 text-center mb-4">Login to your account</h2>
-                                <form action="/proseslogin" method="post" autocomplete="off" novalidate>
+                                <form action="{{route('authenticate')}}" method="post" autocomplete="off" novalidate>
                                     @csrf
                                     <div class="mb-3">
                                         <label class="form-label">Username</label>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="text-center text-muted mt-3">
-                            Don't have account yet? <a href="/register_user" tabindex="-1">Sign up</a>
+                            Don't have account yet? <a href="{{route('register_user')}}" tabindex="-1">Sign up</a>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@
                     <div id="collapsePenyulangSection" class="accordion-collapse collapse show"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/updating/import_excel_penyulangsection"
+                            <form method="post" action="{{ route('import_excel_penyulangsection') }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Penyulang</div>
@@ -49,7 +49,7 @@
                     </h2>
                     <div id="collapsePelanggan" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/updating/import_excel" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('import_excel') }}" enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-label fs-2">Upload File Pelanggan</div>
                                 <input type="file" name="file" class="form-control" required />
@@ -57,8 +57,9 @@
                                     <button type="submit" class="btn btn-primary mt-1 mb-3 col-lg-4"><i
                                             class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import Excel
                                     </button>
-                                    <a href="/updating/export_excel_pelanggan" class="btn btn-warning mt-1 mb-3 col-lg-4"><i
-                                            class="fa-solid fa-file-export fa-lg" style="margin-right: 5px"></i>Export
+                                    <a href="{{ route('export_excel_pelanggan') }}"
+                                        class="btn btn-warning mt-1 mb-3 col-lg-4"><i class="fa-solid fa-file-export fa-lg"
+                                            style="margin-right: 5px"></i>Export
                                         Excel
                                     </a>
                                     <a href="file_pelanggan/template_pelanggan/Pelanggan TM.xlsx"
@@ -66,7 +67,7 @@
                                             style="margin-right: 5px"></i>Template Excel</a>
                                 </div>
                             </form>
-                            <form action="/updating/hapus_pelanggan" method="post">
+                            <form action="{{ route('hapus_pelanggan') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -158,7 +159,7 @@
                                                             <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                                         </a>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/updating/editpelanggan/{{ $s->id }}">
+                                                            href="{{ route('edit_pelanggan', ['id' => $s->id]) }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                         {{-- </form> --}}
@@ -368,7 +369,8 @@
                     </h2>
                     <div id="collapseTrafo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/updating/import_excel_trafo" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('import_excel_trafo') }}"
+                                enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-label fs-2">Upload File Trafo</div>
                                 <input type="file" name="file" class="form-control" required />
@@ -382,7 +384,7 @@
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/updating/hapus_trafo" method="post">
+                            <form action="{{ route('hapus_trafo') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mt-2 mb-2 button-delete-trafo"
@@ -472,7 +474,7 @@
                                                             <i class="fa-solid fa-circle-info fa-lg text-primary"></i>
                                                         </a>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/updating/edittrafo/{{ $s->id }}">
+                                                            href="{{ route('edit_trafo', ['id' => $s->id]) }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                         {{-- </form> --}}
@@ -592,7 +594,164 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="card mt-2 border border-secondary">
+            <div class="card mt-2 border border-secondary">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fw-bold bg-secondary text-light fs-3" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseDataTiangTM" aria-expanded="false"
+                            aria-controls="collapseDataTiangTM">
+                            Data Tiang TM
+                        </button>
+                    </h2>
+                    <div id="collapseDataTiangTM" class="accordion-collapse collapse"
+                        data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <form method="post" action="{{ route('import_excel_data_tiang_tm') }}"
+                                enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                <div class="form-label fs-2">Upload File Data Tiang TM</div>
+                                <input type="file" name="file" class="form-control" required />
+                                <div class="row mt-2">
+                                    <button type="submit" class="btn btn-primary mt-2 mb-2 col-lg-6"><i
+                                            class="fa-solid fa-upload fa-lg" style="margin-right: 5px"></i>Import
+                                        Excel</button>
+                                    <a href="file_trafo/template_trafo/Data Trafo.xlsx"
+                                        class="btn btn-success mt-2 mb-2 col-lg-6"><i class="fa-solid fa-download fa-lg"
+                                            style="margin-right: 5px"></i>Template
+                                        Excel</a>
+                                </div>
+                            </form>
+                            <form action="{{ route('hapus_data_tiang_tm') }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#modal-delete-dataunit">
+                                    <i class="fa-solid fa-trash fa-lg" style="margin-right: 5px;"></i> Hapus Data Tiang TM
+                                </a>
+                                <div class="modal modal-blur fade" id="modal-delete-dataunit" tabindex="-1"
+                                    role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                            <div class="modal-status bg-danger"></div>
+                                            <div class="modal-body text-center py-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="icon mb-2 text-danger icon-lg" width="24" height="24"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
+                                                    <path d="M12 9v4" />
+                                                    <path d="M12 17h.01" />
+                                                </svg>
+                                                <h3>Apakah anda yakin?</h3>
+                                                <div class="text-muted">Untuk menghapus data tiang TM tersebut</div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="w-100">
+                                                    <div class="row">
+                                                        <div class="col"><a href="#" class="btn w-100"
+                                                                data-bs-dismiss="modal">
+                                                                Cancel
+                                                            </a></div>
+                                                        <div class="col"><button type="submit"
+                                                                class="btn btn-danger w-100" data-bs-dismiss="modal">
+                                                                Delete
+                                                            </button></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="overflow-y: auto;">
+                                    <table class="table-bordered display" id="tabel_data_tiang_tm">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input mt-2"
+                                                                style="position:relative; left:10px;" type="checkbox"
+                                                                id="checklist-datatiangtm" onclick="checkAllDataTiangTM()">
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>Global ID</th>
+                                                <th>Asset Group</th>
+                                                <th>Asset Type</th>
+                                                <th>Description</th>
+                                                <th>Penyulang</th>
+                                                <th>Parent Lokasi</th>
+                                                <th>Formatted Address</th>
+                                                <th>Street Address</th>
+                                                <th>City</th>
+                                                <th>Latitude</th>
+                                                <th>Longitude</th>
+                                                <th>Kode Konstruksi 1</th>
+                                                <th>Kode Konstruksi 2</th>
+                                                <th>Kode Konstruksi 3</th>
+                                                <th>Kode Konstruksi 4</th>
+                                                <th>Type Pondasi</th>
+                                                <th>Jenis Tiang</th>
+                                                <th>Ukuran Tiang</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @php
+                                                $no = 1;
+                                            @endphp
+                                            @foreach ($data_tiang_tm as $tiang_tm)
+                                                <tr>
+                                                    <td>{{ $no++ }}</td>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    value="{{ $tiang_tm->id }}" id="flexCheckDefault"
+                                                                    name="checkDataUnit[]">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>{{ $tiang_tm->global_id }}</td>
+                                                    <td>{{ $tiang_tm->asset_group }}</td>
+                                                    <td>{{ $tiang_tm->asset_type }}</td>
+                                                    <td>{{ $tiang_tm->description }}</td>
+                                                    <td>{{ $tiang_tm->penyulang }}</td>
+                                                    <td>{{ $tiang_tm->parent_lokasi }}</td>
+                                                    <td>{{ $tiang_tm->formatted_address }}</td>
+                                                    <td>{{ $tiang_tm->street_address }}</td>
+                                                    <td>{{ $tiang_tm->city }}</td>
+                                                    <td>{{ $tiang_tm->latitude }}</td>
+                                                    <td>{{ $tiang_tm->longitude }}</td>
+                                                    <td>{{ $tiang_tm->kode_konstruksi_1 }}</td>
+                                                    <td>{{ $tiang_tm->kode_konstruksi_2 }}</td>
+                                                    <td>{{ $tiang_tm->kode_konstruksi_3 }}</td>
+                                                    <td>{{ $tiang_tm->kode_konstruksi_4 }}</td>
+                                                    <td>{{ $tiang_tm->type_pondasi }}</td>
+                                                    <td>{{ $tiang_tm->jenis_tiang }}</td>
+                                                    <td>{{ $tiang_tm->ukuran_tiang }}</td>
+                                                    <td>
+                                                        <a style="cursor: pointer" class="text-secondary"
+                                                            href="/updating/editdatatiang_tm/{{ $unit->id }}">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card mt-2 border border-secondary d-none">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed fw-bold bg-secondary text-light fs-3" type="button"
@@ -612,7 +771,7 @@
                             <div class="modal fade" id="modalTambahDataUnit" tabindex="-1"
                                 aria-labelledby="modalTambahDataUnitLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="/updating/proses_tambah_dataunit" method="post">
+                                    <form action="{{ route('proses_tambah_dataunit') }}" method="post">
                                         @csrf
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -666,7 +825,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <form action="/updating/hapus_dataunit" method="post">
+                            <form action="{{ route('hapus_dataunit') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -768,7 +927,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-2 border border-danger">
+            <div class="card mt-2 border border-danger d-none">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed fw-bold bg-danger text-light fs-3" type="button"
@@ -788,7 +947,7 @@
                             <div class="modal fade" id="modalTambahWANotif" tabindex="-1"
                                 aria-labelledby="modalTambahWANotifLabel" aria-hidden="true">
                                 <div class="modal-dialog">
-                                    <form action="/updating/proses_tambah_wanotif" method="post">
+                                    <form action="{{ route('proses_tambah_wanotif') }}" method="post">
                                         @csrf
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -834,7 +993,7 @@
                                     </form>
                                 </div>
                             </div>
-                            <form action="/updating/hapus_wanotif" method="post">
+                            <form action="{{ route('hapus_wanotif') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -933,8 +1092,8 @@
                         </div>
                     </div>
                 </div>
-            </div> --}}
-            <div class="card mt-2 border">
+            </div>
+            <div class="card mt-2 border d-none">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed fw-bold bg-primary text-light fs-3" type="button"
@@ -946,7 +1105,8 @@
                     <div id="collapseDataZone" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/updating/import_excel_datazone" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('import_excel_datazone') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Data Zone</div>
                                 <input type="file" name="file_datazone" id="file_datazone" class="form-control"
@@ -961,7 +1121,7 @@
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/updating/hapus_datazone" method="post">
+                            <form action="{{ route('hapus_datazone') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -1054,7 +1214,7 @@
                                                             target="_blank">{{ $zone->google_maps }}</a></td>
                                                     <td>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/updating/editdatazone/{{ $zone->id }}">
+                                                            href="{{ route('edit_datazone', ['id' => $zone->id]) }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                     </td>
@@ -1068,7 +1228,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-2 border">
+            <div class="card mt-2 border d-none">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed fw-bold bg-dark text-light fs-3" type="button"
@@ -1080,7 +1240,8 @@
                     <div id="collapseDataPohon" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form action="/updating/import_excel_datapohon" enctype="multipart/form-data" method="POST">
+                            <form action="{{ route('import_excel_datapohon') }}" enctype="multipart/form-data"
+                                method="POST">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Data Pohon</div>
                                 <input type="file" name="file_datapohon" id="file_datapohon" class="form-control"
@@ -1095,7 +1256,7 @@
                                     </a>
                                 </div>
                             </form>
-                            <form action="/updating/hapus_datapohon" method="post">
+                            <form action="{{ route('hapus_datapohon') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -1180,7 +1341,7 @@
                                                     <td>{{ $pohon->rayon }}</td>
                                                     <td>
                                                         <a style="cursor: pointer" class="text-secondary"
-                                                            href="/updating/editdatapohon/{{ $pohon->id }}">
+                                                            href="{{ route('edit_datapohon', ['id' => $pohon->id]) }}">
                                                             <i class="fa-solid fa-pen-to-square fa-lg"></i>
                                                         </a>
                                                     </td>
@@ -1194,7 +1355,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card mt-2 border">
+            <div class="card mt-2 border d-none">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                         <button class="accordion-button collapsed fw-bold bg-pink text-light fs-3" type="button"
@@ -1206,7 +1367,8 @@
                     <div id="trafo25kVa50kVa" class="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <form method="post" action="/updating/import_excel_datatrafo" enctype="multipart/form-data">
+                            <form method="post" action="{{ route('import_excel_datatrafo') }}"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-label fs-2">Upload File Data Trafo</div>
                                 <input type="file" name="file_datatrafo" id="file_datatrafo" class="form-control"
@@ -1221,7 +1383,7 @@
                                         Excel</a>
                                 </div>
                             </form>
-                            <form action="/updating/hapus_datapohon" method="post">
+                            <form action="{{ route('hapus_datapohon') }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"
@@ -1237,9 +1399,10 @@
                                             <div class="modal-status bg-danger"></div>
                                             <div class="modal-body text-center py-4">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                                    class="icon mb-2 text-danger icon-lg" width="24" height="24"
-                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    class="icon mb-2 text-danger icon-lg" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
                                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                     <path
                                                         d="M10.24 3.957l-8.422 14.06a1.989 1.989 0 0 0 1.7 2.983h16.845a1.989 1.989 0 0 0 1.7 -2.983l-8.423 -14.06a1.989 1.989 0 0 0 -3.4 0z" />
@@ -1337,6 +1500,7 @@
             template_tabel('#tabel_data_pohon');
             template_tabel('#tabel_data_trafo2');
             template_tabel('#tabel_data_wanotif');
+            template_tabel('#tabel_data_tiang_tm');
         });
     </script>
     <script>
@@ -1361,6 +1525,7 @@
             checkboxGroup("checklist-datazone", 'input[name="checkDataZone[]"]');
             checkboxGroup("checklist-datapohon", 'input[name="checkDataPohon[]"]');
             checkboxGroup("checklist-dataunit", 'input[name="checkDataUnit[]"]');
+            checkboxGroup("checklist-datatiangtm", 'input[name="checkDataTiangTM[]"]');
         });
     </script>
     <script>

@@ -15,7 +15,7 @@
                 </div> --}}
                 <div style="overflow-y: auto;">
                     <h2 class="mt-2">Laporan Kelengkapan Data Aset dan Data Pelanggan</h2>
-                    <form action="/hapusPelangganAPP" method="post">
+                    <form action="{{ route('hapusPelangganAPP') }}" method="post">
                         @csrf
                         @method('delete')
                         <a href="#" class="btn btn-danger col-12 mb-2" data-bs-toggle="modal"

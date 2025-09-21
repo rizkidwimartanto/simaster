@@ -7,7 +7,7 @@
                 <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.svg" height="36"
                         alt=""></a>
             </div>
-            <form class="card card-md" action="/store" method="post" autocomplete="on" novalidate>
+            <form class="card card-md" action="{{route('store')}}" method="post" autocomplete="on" novalidate>
                 @csrf
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Create new account</h2>

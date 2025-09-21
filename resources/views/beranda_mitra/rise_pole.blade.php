@@ -45,7 +45,7 @@
                                     <div class="modal fade" id="{{ $keypoint->id }}" tabindex="-1"
                                         aria-labelledby="modalTambahKeypointLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <form action="/edit_keypoint/{{ $keypoint->id }}" method="post">
+                                            <form action="{{ route('edit_keypoint', $keypoint->id) }}" method="post">
                                                 @csrf
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -170,7 +170,7 @@
                                         role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                             <div class="modal-content">
-                                                <form action="/delete_keypoint/{{ $keypoint->id }}" method="post">
+                                                <form action="{{ route('delete_keypoint', $keypoint->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"

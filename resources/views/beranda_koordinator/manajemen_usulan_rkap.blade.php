@@ -1,6 +1,6 @@
 @extends('layout.templateberanda_koordinator')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('public/assets/css/style.css') }}">
     <div class="container">
         <div class="d-flex justify-content-around">
             <div class="mt-3 mb-3 search_customer">
@@ -155,7 +155,7 @@
         data_usulan_rkap.forEach(usulan_rkap => {
             if (usulan_rkap.latitude && usulan_rkap.longitude) {
                 const iconusulan_rkap = L.icon({
-                    iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                    iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [10, 10],
                 });
@@ -239,7 +239,7 @@
 
             // Buat marker baru dengan ikon dan tooltip
             const iconusulan_rkap = L.icon({
-                iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [10, 10],
             });

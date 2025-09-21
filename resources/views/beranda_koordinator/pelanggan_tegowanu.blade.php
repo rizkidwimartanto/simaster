@@ -320,7 +320,7 @@
         function addMarkers(data) {
             data.forEach(function(customer) {
                 var iconMenyala = L.icon({
-                    iconUrl: 'assets/img/lokasi_hijau.png',
+                    iconUrl: 'public/assets/img/lokasi_hijau.png',
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 });
@@ -360,7 +360,7 @@
             map.setView([customer.latitude, customer.longitude], 19);
             currentMarker = L.marker([customer.latitude, customer.longitude], {
                 icon: L.icon({
-                    iconUrl: 'assets/img/lokasi_hijau.png',
+                    iconUrl: 'public/assets/img/lokasi_hijau.png',
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 })

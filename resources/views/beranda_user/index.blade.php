@@ -99,12 +99,12 @@
 
     data_pelanggan_app.forEach(function(customer) {
         var iconPadam = L.icon({
-            iconUrl: 'assets/img/lokasi_merah.png',
+            iconUrl: 'public/assets/img/lokasi_merah.png',
             iconSize: [20, 20],
             iconAnchor: [20, 20],
         });
         var iconMenyala = L.icon({
-            iconUrl: 'assets/img/lokasi_hijau.png',
+            iconUrl: 'public/assets/img/lokasi_hijau.png',
             iconSize: [20, 20],
             iconAnchor: [20, 20],
         });
@@ -170,7 +170,7 @@
         map.setView([customer.latitude, customer.longitude], 19);
         currentMarker = L.marker([customer.latitude, customer.longitude], {
             icon: L.icon({
-                iconUrl: 'assets/img/lokasi_hijau.png',
+                iconUrl: 'public/assets/img/lokasi_hijau.png',
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             })

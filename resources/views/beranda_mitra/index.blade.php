@@ -17,7 +17,7 @@
                 </div>
             @endif
         @endforeach
-        <form method="post" action="/import_excel_recloser_lbs" enctype="multipart/form-data">
+        <form method="post" action="{{ route('import_excel_recloser_lbs') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-label fs-2">Upload File Recloser & LBS</div>
             <input type="file" name="file_recloser_lbs" id="file_recloser_lbs" class="form-control" required />
@@ -38,7 +38,7 @@
         <div class="modal fade" id="modalTambahKeypoint" tabindex="-1" aria-labelledby="modalTambahKeypointLabel"
             aria-hidden="true">
             <div class="modal-dialog">
-                <form action="/keypoint/proses_tambah_keypoint" method="post">
+                <form action="{{ route('proses_tambah_keypoint') }}" method="post">
                     @csrf
                     <div class="modal-content">
                         <div class="modal-header">
@@ -163,7 +163,7 @@
                                     <div class="modal fade" id="{{ $keypoint->id }}" tabindex="-1"
                                         aria-labelledby="modalTambahKeypointLabel" aria-hidden="true">
                                         <div class="modal-dialog">
-                                            <form action="/edit_keypoint/{{ $keypoint->id }}" method="post">
+                                            <form action="{{ route('edit_keypoint', $keypoint->id) }}" method="post">
                                                 @csrf
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -289,7 +289,7 @@
                                         role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
                                             <div class="modal-content">
-                                                <form action="/delete_keypoint/{{ $keypoint->id }}" method="post">
+                                                <form action="{{ route('delete_keypoint', $keypoint->id) }}" method="post">
                                                     @csrf
                                                     @method('delete')
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"

@@ -139,7 +139,7 @@
             // Membuat marker berdasarkan data yang telah difilter
             filteredDataPeta.forEach(function(padam) {
                 var iconPadam = L.icon({
-                    iconUrl: '{{ asset('assets/img/lokasi_merah.png') }}',
+                    iconUrl: '{{ asset('public/assets/img/lokasi_merah.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 });
@@ -156,7 +156,7 @@
         });
         padams.forEach(function(padam) {
             var iconPadam = L.icon({
-                iconUrl: '{{ asset('assets/img/lokasi_merah.png') }}',
+                iconUrl: '{{ asset('public/assets/img/lokasi_merah.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             });

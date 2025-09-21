@@ -1,7 +1,7 @@
 @extends('layout/templateberanda_koordinator')
 @section('content')
     <div class="container-fluid mt-2">
-        <form method="post" action="/koordinator/import_excel_data_aset" enctype="multipart/form-data">
+        <form method="post" action="{{ route('import_excel_data_aset') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-label fs-2">Upload File Excel Manajemen Aset Jaringan</div>
             <input type="file" name="file_data_aset" id="file_data_aset" class="form-control" required />
@@ -15,7 +15,7 @@
                     Excel</a>
             </div>
         </form>
-        <form method="post" action="/koordinator/import_excel_data_kinerja" enctype="multipart/form-data">
+        <form method="post" action="{{ route('import_excel_data_kinerja') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-label fs-2">Upload File Excel Data Kinerja</div>
             <input type="file" name="file_data_kinerja" id="file_data_kinerja" class="form-control" required />
@@ -28,7 +28,7 @@
                     Excel</a>
             </div>
         </form>
-        <form method="post" action="/koordinator/import_excel_kelengkapan_data_aset" enctype="multipart/form-data">
+        <form method="post" action="{{ route('import_excel_kelengkapan_data_aset') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-label fs-2">Upload File Excel Kelengkapan Data Aset</div>
             <input type="file" name="file_kelengkapan_data_aset" id="file_kelengkapan_data_aset" class="form-control" required />
@@ -41,7 +41,7 @@
                     Excel</a>
             </div>
         </form>
-        <form method="post" action="/koordinator/import_excel_pelanggan_potensial" enctype="multipart/form-data">
+        <form method="post" action="{{ route('import_excel_pelanggan_potensial') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-label fs-2">Upload File Excel Pelanggan Potensial</div>
             <input type="file" name="file_pelanggan_potensial" id="file_pelanggan_potensial" class="form-control" required />

@@ -68,7 +68,7 @@
         // Tambahkan semua marker ke cluster
         datapohon.forEach(pohon => {
             const iconpohon = L.icon({
-                iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             });
@@ -89,7 +89,7 @@
 
             filteredDataPeta.forEach(pohon => {
                 const iconpohon = L.icon({
-                    iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                    iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 });
@@ -136,7 +136,7 @@
                 parseFloat(pohon.longitude.replace(',', '.'))
             ], {
                 icon: L.icon({
-                    iconUrl: '{{ asset('assets/img/tree.png') }}',
+                    iconUrl: '{{ asset('public/assets/img/tree.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [10, 20],
                 })

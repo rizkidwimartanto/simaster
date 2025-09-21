@@ -12,7 +12,7 @@
                 </div>
             @enderror --}}
             <div class="card-body p-4">
-                <form action="/input_usulan_rkap" method="post" enctype="multipart/form-data">
+                <form action="{{ route('input_usulan_rkap') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
                         <label class="form-label">Nama Petugas</label>

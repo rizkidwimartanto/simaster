@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Imports\DataPelangganAPPImport;
 use App\Imports\DataPelangganImport;
 use App\Imports\DataPohonImport;
+use App\Imports\DataTiangTMImport;
 use App\Imports\DataTrafoImport;
 use App\Imports\DataZoneImport;
 use App\Imports\PenyulangImport;
@@ -17,6 +18,7 @@ use App\Imports\SectionImport;
 use App\Imports\TrafoImport;
 use App\Models\DataPelangganModel;
 use App\Models\DataPohonModel;
+use App\Models\DataTiangTMModel;
 use App\Models\DataTrafoModel;
 use App\Models\DataZoneModel;
 use App\Models\EntriPadamModel;
@@ -82,6 +84,7 @@ class UpdatingController extends Controller
             'data_wanotif' => WANotifModel::all(),
             'data_zone' => DataZoneModel::all(),
             'data_pohon' => DataPohonModel::all(),
+            'data_tiang_tm' => DataTiangTMModel::all(),
         ];
         return view('beranda_administrator/updating', $data);
     }
@@ -413,6 +416,18 @@ class UpdatingController extends Controller
         } else {
             Session::flash('error_hapus_datazone', 'data gagal dihapus');
         }
+        return redirect('/updating');
+    }
+    public function import_excel_data_tiang_tm(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+        $file = $request->file('file');
+        $nama_file = rand() . $file->getClientOriginalName();
+        $file->move(public_path('simaster/file_data_tiang_tm/'), $nama_file);
+        Excel::import(new DataTiangTMImport, public_path('simaster/file_data_tiang_tm/' . $nama_file));
+        
         return redirect('/updating');
     }
 }

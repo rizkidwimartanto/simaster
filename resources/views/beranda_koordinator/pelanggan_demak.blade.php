@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-12">
                     <h2>Import Excel Data Pelanggan APP</h2>
-                    <form action="/koordinator/import_excel" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('koordinator.import_excel') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" id="file" class="form-control" required>
                         <div class="d-grid gap-2">

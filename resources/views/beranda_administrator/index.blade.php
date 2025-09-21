@@ -141,12 +141,12 @@
 
             filteredDataPeta.forEach(function(customer) {
                 var iconPadam = L.icon({
-                    iconUrl: '{{ asset('assets/img/tree.png') }}',
+                    iconUrl: '{{ asset('public/assets/img/tree.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 });
                 var iconMenyala = L.icon({
-                    iconUrl: '{{ asset('assets/img/lokasi_merah.png') }}',
+                    iconUrl: '{{ asset('public/assets/img/lokasi_merah.png') }}',
                     iconSize: [20, 20],
                     iconAnchor: [20, 20],
                 });
@@ -173,12 +173,12 @@
 
         data_peta.forEach(function(customer) {
             var iconPadam = L.icon({
-                iconUrl: '{{ asset('assets/img/lokasi_merah.png') }}',
+                iconUrl: '{{ asset('public/assets/img/lokasi_merah.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             });
             var iconMenyala = L.icon({
-                iconUrl: '{{ asset('assets/img/lokasi_hijau.png') }}',
+                iconUrl: '{{ asset('public/assets/img/lokasi_hijau.png') }}',
                 iconSize: [20, 20],
                 iconAnchor: [20, 20],
             });
