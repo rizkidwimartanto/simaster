@@ -165,7 +165,7 @@ class UpdatingController extends Controller
         $nama_file = rand() . $file->getClientOriginalName();
         $file->move(public_path('simaster/file_datapohon/'), $nama_file);
         Excel::import(new DataPohonImport, public_path('simaster/file_datapohon/' . $nama_file));
-        
+
         return redirect('/updating');
     }
     public function import_excel_datatrafo(Request $request)
@@ -418,16 +418,21 @@ class UpdatingController extends Controller
         }
         return redirect('/updating');
     }
-    public function import_excel_data_tiang_tm(Request $request)
-    {
-        $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
-        ]);
-        $file = $request->file('file');
-        $nama_file = rand() . $file->getClientOriginalName();
-        $file->move(public_path('simaster/file_data_tiang_tm/'), $nama_file);
-        Excel::import(new DataTiangTMImport, public_path('simaster/file_data_tiang_tm/' . $nama_file));
-        
-        return redirect('/updating');
-    }
+public function import_excel_data_tiang_tm(Request $request)
+{
+    $request->validate([
+        'file' => 'required|mimes:csv,xls,xlsx'
+    ]);
+
+    $file = $request->file('file');
+    $nama_file = rand() . '_' . $file->getClientOriginalName();
+    $file->move(public_path('simaster/file_data_tiang_tm/'), $nama_file);
+
+    $import = new DataTiangTMImport();
+    Excel::import($import, public_path('simaster/file_data_tiang_tm/' . $nama_file));
+
+    Session::flash('success_import_data_tiang_tm', $import->getSummaryMessage());
+
+    return redirect('/updating');
+}
 }
